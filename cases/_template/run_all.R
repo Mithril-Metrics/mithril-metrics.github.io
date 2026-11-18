@@ -10,23 +10,26 @@ stopifnot("Set the working directory to the issue folder first" = file.exists("0
 dir.create("output", showWarnings = FALSE)
 dir.create("data_raw", showWarnings = FALSE)
 
-log_file <- file.path("output", "run_log.txt")
-con <- file(log_file, open = "wt")
-sink(con, split = TRUE)
-sink(con, type = "message")
-on.exit({ sink(type = "message"); sink(); close(con) }, add = TRUE)
+run_case <- function() {
+  log_file <- file.path("output", "run_log.txt")
+  con <- file(log_file, open = "wt")
+  sink(con, split = TRUE)                 # console output -> screen + log
+  sink(con, type = "message")             # messages and warnings -> log
+  on.exit({ sink(type = "message"); sink(); close(con) }, add = TRUE)  # inside a function: runs at the end
 
-cat("Run started:", format(Sys.time()), "\nWorking directory:", getwd(), "\n\n")
-scripts <- c("01_get_data.R", "02_clean.R", "03_analyse.R", "04_figures.R")
-for (s in scripts) {
-  cat("\n==================== ", s, " ====================\n", sep = "")
-  t0 <- Sys.time()
-  local(source(s, echo = FALSE, local = TRUE))
-  cat(sprintf("-- %s finished in %.1f s\n", s, as.numeric(difftime(Sys.time(), t0, units = "secs"))))
+  cat("Run started:", format(Sys.time()), "\nWorking directory:", getwd(), "\n\n")
+  for (s in c("01_get_data.R", "02_clean.R", "03_analyse.R", "04_figures.R")) {
+    cat("\n==================== ", s, " ====================\n", sep = "")
+    t0 <- Sys.time()
+    source(s, echo = FALSE, local = new.env())
+    cat(sprintf("-- %s finished in %.1f s\n", s, as.numeric(difftime(Sys.time(), t0, units = "secs"))))
+  }
+  cat("\nDone:", format(Sys.time()), "\n")
+  up <- list.files("output", recursive = TRUE)
+  up <- up[!grepl("^cache/", up)]
+  cat("Upload these files from output/ to the chat (not the cache/ folder):\n")
+  print(up)
+  cat(sprintf("data_raw/ uses %.1f MB; delete it after uploading if you like.\n",
+              sum(file.size(list.files("data_raw", full.names = TRUE, recursive = TRUE))) / 1e6))
 }
-
-cat("\nDone:", format(Sys.time()), "\n")
-cat("Upload these files from output/ to the chat:\n")
-print(setdiff(list.files("output", recursive = TRUE), list.files("output/cache", recursive = TRUE)))
-cat(sprintf("data_raw/ uses %.1f MB; delete it after uploading if you like.\n",
-            sum(file.size(list.files("data_raw", full.names = TRUE, recursive = TRUE))) / 1e6))
+run_case()

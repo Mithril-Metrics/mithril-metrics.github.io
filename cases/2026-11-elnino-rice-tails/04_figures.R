@@ -43,7 +43,7 @@ p1 <- ggplot(f1, aes(y = group, x = p)) +
   geom_vline(xintercept = f1$p_normal[1], linetype = "dashed", colour = col_norm, linewidth = 0.6) +
   annotate("text", x = f1$p_normal[1], y = 0.55, hjust = -0.05, size = 3.8, colour = col_norm,
            label = paste0("If shocks were normal: ", round(f1$p_normal[1]), "%")) +
-  geom_errorbarh(aes(xmin = lo, xmax = hi), height = 0.18, colour = "grey55", linewidth = 0.6) +
+  geom_errorbar(aes(xmin = lo, xmax = hi), width = 0.18, orientation = "y", colour = "grey55", linewidth = 0.6) +
   geom_point(aes(colour = group == "Other years"), size = 4.5) +
   geom_text(aes(label = paste0(round(p), "%")), vjust = -1.1, size = 4.4, colour = "grey15") +
   scale_colour_manual(values = c(`TRUE` = col_other, `FALSE` = col_en), guide = "none") +

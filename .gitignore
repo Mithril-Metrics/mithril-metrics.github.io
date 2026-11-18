@@ -1,0 +1,50 @@
+# --- Raw data: never committed, recreated by 01_get_data.R ---
+**/data_raw/*
+!**/data_raw/.gitkeep
+
+# --- Output caches (intermediate .rds/.parquet); figures and key_numbers.csv ARE committed ---
+cases/*/output/cache/
+*.parquet
+feasibility_reports/
+
+# --- Climate/spatial downloads ---
+*.nc
+*.grib
+*.tif
+!images/*.tif
+
+# --- R / renv ---
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+renv/library/
+renv/staging/
+renv/local/
+renv/cellar/
+renv/python/
+*.Rcheck/
+acutils_*.tar.gz
+
+# --- Quarto ---
+/.quarto/
+/_site/
+cases/*/report_files/
+cases/*/*.html
+cases/*/*.pdf
+cases/*/*.typ
+
+# --- Secrets ---
+.Renviron
+.env
+*.key
+.cdsapirc
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+**/*.quarto_ipynb
+
+# Rendering happens on GitHub Actions (R + Quarto installed there), so no freeze cache
+/_freeze/

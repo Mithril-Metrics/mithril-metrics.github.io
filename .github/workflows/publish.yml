@@ -1,0 +1,54 @@
+# Render the Quarto blog (HTML + one-page PDF briefs) and publish it to the gh-pages branch.
+# Everything runs on GitHub's servers: R, the acutils package and Quarto are installed here,
+# so nothing needs to be installed on a laptop to publish.
+# The analysis scripts (01-04) are NOT run here: their outputs (output/key_numbers.csv,
+# figures) are committed after running them in a local R session.
+name: Publish blog
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true      # fast binary packages
+
+      - name: Install R packages (acutils dependencies + rendering)
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          working-directory: acutils
+          extra-packages: |
+            any::knitr
+            any::rmarkdown
+            any::yaml
+
+      - name: Install acutils
+        run: R CMD INSTALL acutils
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: release           # bundles Typst for the PDF briefs
+
+      - name: Render and publish to gh-pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

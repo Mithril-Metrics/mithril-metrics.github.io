@@ -1,0 +1,61 @@
+/*-- scss:defaults --*/
+// Light, clean, high-contrast. Accent = palette slot 1 (#2a78d6), darkened for text links.
+$body-bg: #fcfcfb;
+$body-color: #1c1c1a;
+$primary: #1f63b8;
+$secondary: #4a4a46;
+$link-color: #1f63b8;
+$navbar-bg: #fcfcfb;
+$navbar-fg: #1c1c1a;
+$footer-bg: #fcfcfb;
+$headings-font-weight: 700;
+$headings-color: #1c1c1a;
+$border-color: #e4e3df;
+$code-color: #8a3b12;
+
+/*-- scss:rules --*/
+.navbar { border-bottom: 1px solid $border-color; }
+.navbar-title { font-weight: 700; letter-spacing: -0.01em; }
+
+h1.title, .quarto-title h1 { letter-spacing: -0.02em; line-height: 1.2; }
+h2 { margin-top: 2.2rem; font-size: 1.45rem; letter-spacing: -0.01em; }
+h3 { font-size: 1.15rem; }
+
+.positioning {
+  font-size: 1.2rem;
+  line-height: 1.55;
+  border-left: 4px solid #2a78d6;
+  padding: 0.4rem 0 0.4rem 1rem;
+  margin: 1.2rem 0 1.5rem;
+  color: #2b2b28;
+}
+
+// Bottom-line callout used at the top of each case
+.bottom-line {
+  background: #eef4fc;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin: 0.5rem 0 1.8rem;
+  font-size: 1.08rem;
+  p:last-child { margin-bottom: 0; }
+}
+
+// Listing cards
+.quarto-listing-default .listing-title { font-weight: 700; }
+.quarto-listing-default .thumbnail-image { border-radius: 6px; border: 1px solid $border-color; }
+.quarto-listing-category .category { font-size: 0.8rem; }
+.listing-categories .listing-category {
+  border-color: $border-color;
+  color: $secondary;
+}
+
+figure img, .figure img { border-radius: 4px; }
+.figure-caption, figcaption { color: #4a4a46; font-size: 0.9rem; }
+
+.post-footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid $border-color;
+  color: #4a4a46;
+  font-size: 0.92rem;
+}

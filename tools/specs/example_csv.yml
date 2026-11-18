@@ -1,0 +1,8 @@
+# Any local or manually downloaded table (e.g. MPOB, GSO Vietnam). Wide or long layout.
+label: "Local CSV (test fixture)"
+source: csv
+table: tools/specs/fixture_panel.csv
+unit_col: country
+year_col: year
+variables: [yield, fert]
+years: [2010, 2024]

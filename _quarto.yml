@@ -1,0 +1,63 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - about.qmd
+    - cases/*/report.qmd       # folders starting with "_" (the template) are skipped automatically
+  resources:
+    - files/                   # CV PDF
+    - images/
+
+website:
+  title: "AgEcon Practical Experience"
+  description: "Short, reproducible analyses of current agri-food, climate and rural policy questions with public data. By Pietro Sala."
+  site-url: "https://petersala94.github.io/agecon-cases/"
+  repo-url: "https://github.com/PeterSala94/agecon-cases"
+  favicon: images/favicon.png
+  image: images/og-default.png          # fallback preview image (1200x630)
+  open-graph:
+    locale: en_GB
+  twitter-card: true
+  search: true
+  page-navigation: false
+  navbar:
+    background: light
+    left:
+      - text: "Cases"
+        href: index.qmd
+      - text: "About"
+        href: about.qmd
+    right:
+      - icon: rss
+        href: index.xml
+        aria-label: RSS feed
+      - icon: linkedin
+        href: https://www.linkedin.com/in/pietrosala
+        aria-label: LinkedIn
+      - icon: github
+        href: https://github.com/PeterSala94/agecon-cases
+        aria-label: GitHub
+  page-footer:
+    left: "© 2026 Pietro Sala · Text CC BY 4.0 · Code MIT"
+    right: "Views are my own."
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+    mainfont: "Inter, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    fontsize: 1.05rem
+    linestretch: 1.6
+    grid:
+      body-width: 760px
+    toc: false
+    code-tools: false
+    smooth-scroll: true
+    link-external-newwindow: true
+
+execute:
+  freeze: false     # GitHub Actions re-renders everything with R on every push
+  echo: false
+  warning: false
+  message: false

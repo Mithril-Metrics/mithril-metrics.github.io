@@ -1,0 +1,48 @@
+# 00_meta.yml — single source of truth for a case's metadata.
+# Placeholders in {{ }} are filled by new_case.R. Keep every field; use null when unknown.
+# report.qmd reads this file for the hook, the "Data & code" section and the footer.
+
+id: "{{CASE_ID}}"                 # YYYY-MM-slug, equals the folder name
+title: "{{TITLE}}"                # question or finding, also used as blog title
+question: "{{TITLE}}"             # one answerable empirical question
+bottom_line: null                 # 1–2 sentences, written at the WRITE stage (numbers via key_numbers.csv)
+status: draft                     # draft | red-teamed | published
+
+hook:                             # the current debate this case speaks to
+  debate: null                    # one line
+  date: null                      # YYYY-MM-DD of the primary source
+  primary_source:
+    title: null
+    url: null
+
+tags:                             # mirrored in report.qmd `categories:` (Region / Method / Employer)
+  region: ["{{REGION}}"]          # EU | SSA | South Asia | SE Asia | LatAm | Global
+  method: ["{{METHOD}}"]          # SFA | TFP | Eco-eff | Elasticities | Tails/risk | Causal | Descriptive
+  employer_theme: ["{{EMPLOYER}}"]  # WB | FAO | OECD | IFPRI | IIASA | WFP | IFAD | JRC | CGIAR
+  skills: []                      # from 02_profile "Skills to showcase"
+
+dates:
+  created: "{{DATE}}"
+  published: null
+
+hours:
+  planned: 4
+  actual: null                    # fill honestly; goes to 09_portfolio_log.md
+
+sources:                          # one entry per dataset; every number in the post must trace to one
+  - name: null                    # e.g. "USDA ERS International Agricultural Productivity"
+    provider: null                # e.g. "USDA ERS"
+    table: null                   # table / domain / indicator code(s)
+    url: null
+    version: null                 # release or "last updated" date shown by the provider
+    accessed: null                # filled from data_raw/_access_log.csv
+    licence: null
+
+manual_steps: []                  # only if no API exists: exact click-path, file name, date
+
+identification: null              # one sentence: what must hold for a causal reading (or "descriptive")
+
+links:
+  blog: null
+  linkedin: null
+  code: "https://github.com/PeterSala94/agecon-cases/tree/main/cases/{{CASE_ID}}"

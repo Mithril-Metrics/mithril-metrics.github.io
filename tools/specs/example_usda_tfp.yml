@@ -1,0 +1,7 @@
+# Is there a complete TFP panel for Southeast Asian palm-oil and rice producers?
+label: "SE Asia agricultural TFP, 1991-2023"
+source: usda_tfp
+table: international-agricultural-productivity
+units: [VNM, IDN, MYS, THA, KHM, PHL, LAO, MMR]
+years: [1991, 2023]
+variables: [TFP_Index, Outall_Index, Input_Index, Fertilizer_Q, IrrigArea_Q]

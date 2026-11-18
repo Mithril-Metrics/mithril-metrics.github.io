@@ -1,0 +1,6 @@
+Order,FAO,ISO3,Country/territory,Region,Sub-Region,Inc I,Year,Variable,Value
+1,159,NGA,Nigeria,SSA,"SSA, Nigeria",MI-L,1961,TFP_Index,83.9083
+1,159,NGA,Nigeria,SSA,"SSA, Nigeria",MI-L,1961,Outall_Index,19.2616
+1,159,NGA,Nigeria,SSA,"SSA, Nigeria",MI-L,1961,Fertilizer_Q,1.5
+1,159,NGA,Nigeria,SSA,"SSA, Nigeria",MI-L,1962,TFP_Index,85.1
+900,,,World,WLD,World,,1961,TFP_Index,60.2

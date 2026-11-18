@@ -1,0 +1,4 @@
+label: "Fertiliser and grain prices (Pink Sheet)"
+source: pinksheet
+units: ["Urea", "DAP", "Wheat, US HRW", "Maize"]   # matched as substrings of commodity names
+years: [2000, 2026]

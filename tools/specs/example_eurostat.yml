@@ -1,0 +1,12 @@
+# EU farmers' input price indices (fertiliser squeeze)
+# NOTE: dimension codes below are NOT verified (Eurostat was unreachable from the build
+# environment). Confirm first: eurostat::get_eurostat_dic("product"), ("p_adj"), ("unit").
+label: "EU agricultural price indices (2015 = 100)"
+source: eurostat
+table: apri_pi15_inq            # input price indices, quarterly; years from decimal time
+filters:
+  p_adj: NI                     # nominal index
+  unit: I15
+  product: ["200000", "203000"] # goods & services currently consumed; fertilisers & soil improvers
+units: [DE, FR, IT, ES, PL, NL]
+years: [2015, 2026]

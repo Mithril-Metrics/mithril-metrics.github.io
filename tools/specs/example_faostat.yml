@@ -1,0 +1,8 @@
+# Wheat and maize yields in East Africa: enough years for tail (extreme-loss) analysis?
+label: "East Africa cereal yields"
+source: faostat
+table: QCL                      # Production: Crops and livestock products
+items: ["Wheat", "Maize (corn)"]
+elements: ["Yield"]
+units: [ETH, KEN, TZA, UGA, RWA]
+years: [1990, 2024]

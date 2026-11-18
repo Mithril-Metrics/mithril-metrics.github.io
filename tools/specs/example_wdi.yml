@@ -1,0 +1,7 @@
+label: "Agriculture share of GDP and employment, Mekong countries"
+source: wdi
+units: [VNM, KHM, LAO, THA, MMR]
+years: [2000, 2025]
+variables:
+  ag_va_share: NV.AGR.TOTL.ZS     # agriculture value added, % of GDP
+  ag_emp_share: SL.AGR.EMPL.ZS    # employment in agriculture, % of total

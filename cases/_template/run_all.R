@@ -18,7 +18,9 @@ run_case <- function() {
   on.exit({ sink(type = "message"); sink(); close(con) }, add = TRUE)  # inside a function: runs at the end
 
   cat("Run started:", format(Sys.time()), "\nWorking directory:", getwd(), "\n\n")
-  for (s in c("01_get_data.R", "02_clean.R", "03_analyse.R", "04_figures.R")) {
+  # every NN_*.R / NNx_*.R script in order (01, 02, 03, 03b, 04, ...)
+  scripts <- sort(list.files(".", pattern = "^[0-9]{2}[a-z]?_.*\\.R$"))
+  for (s in scripts) {
     cat("\n==================== ", s, " ====================\n", sep = "")
     t0 <- Sys.time()
     source(s, echo = FALSE, local = new.env())

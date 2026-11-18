@@ -64,7 +64,7 @@ oni_annual <- raw$oni |>
 
 panel <- panel |>
   left_join(oni_annual |> select(year, oni_jd, elnino, strong, lanina), by = "year") |>
-  left_join(oni_annual |> transmute(year = year + 1L, elnino_lag = elnino), by = "year")
+  left_join(oni_annual |> transmute(year = year + 1L, elnino_lag = elnino, lanina_lag = lanina), by = "year")
 stopifnot(!anyNA(panel$elnino), !anyNA(panel$elnino_lag))
 
 cat("\nEl Niño onset years in sample:", paste(sort(unique(panel$year[panel$elnino])), collapse = ", "), "\n")
@@ -85,6 +85,12 @@ detrend <- function(d) {
   lo <- stats::loess(y_adj ~ d$year, span = 0.5, family = "symmetric", degree = 1)
   d$shock_loess <- y_adj - fitted(lo)
   d$idn_shift <- shift
+  # Same trend model for harvested area and production (used in the "second look"):
+  # log(production) = log(area) + log(yield), so the three shocks decompose additively (approx.)
+  for (v in c("area", "prod")) {
+    mv <- if (any(brk == 1)) lm(log(d[[v]]) ~ X + brk) else lm(log(d[[v]]) ~ X)
+    d[[paste0("shock_", v)]] <- residuals(mv)
+  }
   d
 }
 panel <- panel |> group_split(iso3) |> lapply(detrend) |> bind_rows()
@@ -108,6 +114,29 @@ panel <- panel |>
 check_panel(panel, id = "iso3", time = "year", vars = c("yield", "area", "prod", "shock"))
 cat("\nShock SD by country (% , robust):\n")
 print(panel |> distinct(iso3, sigma) |> mutate(sigma_pct = round(100 * sigma, 2)))
+
+# --- 4. Flags for the "second look" (added after the main results, see 03b) ------------
+# ENSO phase with neutral years as reference; maritime vs mainland; major armed conflict
+# (UCDP intensity 2 on the country's contested government); 1997-98 Asian financial crisis.
+gw <- list(VNM = c(816, 817), IDN = 850, PHL = 840, THA = 800, MYS = 820, KHM = 811)
+ucdp_cy <- raw$ucdp |>
+  mutate(year = as.integer(year), intensity_level = as.integer(intensity_level)) |>
+  filter(intensity_level == 2) |>
+  tidyr::separate_rows(gwno_loc, sep = ",\\s*") |>
+  mutate(gwno = as.integer(gwno_loc))
+war <- bind_rows(lapply(names(gw), function(i)
+  tibble(iso3 = i, year = unique(ucdp_cy$year[ucdp_cy$gwno %in% gw[[i]]]))))
+panel <- panel |>
+  mutate(enso3 = factor(ifelse(elnino, "El Nino", ifelse(lanina, "La Nina", "Neutral")),
+                        levels = c("Neutral", "El Nino", "La Nina")),
+         region = ifelse(iso3 %in% c("IDN", "PHL", "MYS"), "Maritime", "Mainland"),
+         crisis9798 = year %in% 1997:1998) |>
+  left_join(war |> mutate(major_conflict = TRUE), by = c("iso3", "year")) |>
+  mutate(major_conflict = dplyr::coalesce(major_conflict, FALSE))
+cat("\nENSO phase counts (country-years):\n"); print(table(panel$enso3))
+cat("Major-conflict country-years (UCDP intensity 2):\n")
+print(panel |> filter(major_conflict) |> group_by(iso3) |>
+        summarise(n = n(), years = paste(range(year), collapse = "-"), .groups = "drop"))
 
 saveRDS(panel, "output/cache/panel.rds")
 saveRDS(oni_annual, "output/cache/oni_annual.rds")

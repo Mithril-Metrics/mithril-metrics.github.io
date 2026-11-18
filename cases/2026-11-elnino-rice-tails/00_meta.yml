@@ -10,7 +10,7 @@ question: >
   Thailand, Malaysia, Cambodia; 1961-2024) larger and more frequent in El Niño onset years,
   and more extreme than a normal distribution implies?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: code                      # plan | code | results | red-teamed | published
+status: code-second-look                      # plan | code | results | red-teamed | published
 
 hook:
   debate: >
@@ -52,6 +52,14 @@ sources:
     accessed: null
     licence: "US Government work (public domain)"
 
+  - name: "UCDP/PRIO Armed Conflict Dataset"
+    provider: "Uppsala Conflict Data Program / PRIO"
+    table: "ucdp-prio-acd-261 (country-years with intensity_level 2, via gwno_loc)"
+    url: "https://ucdp.uu.se/downloads/ucdpprio/ucdp-prio-acd-261-csv.zip"
+    version: "26.1 (1946-2025)"
+    accessed: null
+    licence: "CC BY 4.0 (cite Davies et al. 2025 and Gleditsch et al. 2002 per codebook)"
+
 manual_steps: []
 
 identification: >
@@ -71,6 +79,14 @@ decisions:                        # pre-specified before seeing results (P4, 202
   shortfall_threshold: "yield >= 5% below trend (also 10%)"
   robustness: ["R1: exposure in harvest year t+1", "R2: robust LOESS trend (span 0.5)"]
   inference: "year-block bootstrap, 999 draws"
+
+second_look:                      # ADDED AFTER the main results (2026-11-18), exploratory, script 03b
+  why: "Main result null for El Niño; checks chosen on economic grounds before running them"
+  checks:
+    - "S1: El Niño and La Niña vs ENSO-neutral years"
+    - "S2: El Niño effect on yield, harvested area and production, in t and t+1 (distributed lag)"
+    - "S3: maritime (IDN, PHL, MYS) vs mainland (THA, VNM, KHM)"
+    - "S4: drop major-conflict country-years (UCDP intensity 2); drop 1997-98 (Asian crisis)"
 
 links:
   blog: null

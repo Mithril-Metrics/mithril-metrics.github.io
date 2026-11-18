@@ -71,7 +71,24 @@ stopifnot(identical(names(oni), c("SEAS", "YR", "TOTAL", "ANOM")))
 cat("\nONI rows:", nrow(oni), "| from", oni$SEAS[1], oni$YR[1], "to",
     oni$SEAS[nrow(oni)], oni$YR[nrow(oni)], "| latest anomaly:", oni$ANOM[nrow(oni)], "\n")
 
-saveRDS(list(rice = rice, oni = oni, countries = countries,
+# --- UCDP/PRIO Armed Conflict Dataset v26.1 (1946-2025) -----------------------------
+# Used in the "second look" (03b) to flag country-years with major armed conflict
+# (intensity_level 2 = at least 1,000 battle-related deaths in the year).
+# Note: `gwno_loc` codes the country whose GOVERNMENT is contested, not the battlefield.
+ucdp_url <- "https://ucdp.uu.se/downloads/ucdpprio/ucdp-prio-acd-261-csv.zip"
+ucdp_path <- cached_fetch(
+  "ucdp-prio-acd-261", "zip",
+  fetch = function(p) utils::download.file(ucdp_url, p, mode = "wb", quiet = TRUE),
+  source = "UCDP/PRIO Armed Conflict Dataset v26.1", url = ucdp_url, version = "26.1 (1946-2025)"
+)
+ucdp_csv <- utils::unzip(ucdp_path, list = TRUE)$Name
+ucdp_csv <- ucdp_csv[grepl("\\.csv$", ucdp_csv)][1]
+ucdp <- readr::read_csv(unz(ucdp_path, ucdp_csv), show_col_types = FALSE,
+                        col_types = readr::cols(.default = "c"))
+stopifnot(all(c("conflict_id", "location", "gwno_loc", "year", "intensity_level") %in% names(ucdp)))
+cat("\nUCDP rows:", nrow(ucdp), "| years:", paste(range(as.integer(ucdp$year)), collapse = "-"), "\n")
+
+saveRDS(list(rice = rice, oni = oni, countries = countries, ucdp = ucdp,
              fao_version = src_fao$version, fao_accessed = as.character(src_fao$accessed),
              oni_accessed = as.character(attr(oni_path, "accessed"))),
         "output/cache/raw.rds")

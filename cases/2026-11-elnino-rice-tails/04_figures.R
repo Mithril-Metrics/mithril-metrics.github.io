@@ -53,7 +53,7 @@ p1 <- ggplot(f1, aes(y = group, x = p)) +
   labs(title = wrap(title1, 62),
        subtitle = wrap(paste0("Share of country-years with yields at least 5% below trend; ",
                          k("n_countries"), " Southeast Asian countries, ", k("year_start"), "-",
-                         k("year_end"), ". Bars: 95% intervals (year-block bootstrap)."), 95),
+                         k("year_end"), ". Bars: 95% intervals (year-block bootstrap)."), 88),
        x = NULL, y = NULL, caption = cap) +
   theme_ac(grid = "x")
 save_fig(p1, "fig1_hero")
@@ -110,3 +110,51 @@ p3 <- ggplot(f3, aes(x = loss_pct, y = 100 * share, colour = series, linetype = 
 save_fig(p3, "fig3_tail_vs_normal")
 
 message("04_figures.R done: fig1_hero, fig2_country_shocks, fig3_tail_vs_normal in output/.")
+
+# --- Figure 4 (candidate, exploratory "second look"): El Niño footprint by margin ----------
+# Shown only if 03b_second_look.R has run. At most 3 figures go into the post; this one may
+# replace Figure 2 if the margins tell the clearer story.
+if (file.exists("output/tab_second_look.csv")) {
+  sl <- readr::read_csv("output/tab_second_look.csv", show_col_types = FALSE) |>
+    filter(grepl("^s2_|^s3_", stat)) |>
+    mutate(
+      group  = case_when(grepl("^s3_mar", stat) ~ "Maritime (IDN, PHL, MYS)",
+                         grepl("^s3_mai", stat) ~ "Mainland (THA, VNM, KHM)",
+                         TRUE ~ "All six countries"),
+      margin = case_when(grepl("yield", stat) ~ "Yield",
+                         grepl("area", stat)  ~ "Harvested area",
+                         TRUE ~ "Production"),
+      timing = ifelse(grepl("_t1$", stat), "Year after onset (t+1)", "Onset year (t)"),
+      group  = factor(group, levels = c("All six countries", "Maritime (IDN, PHL, MYS)", "Mainland (THA, VNM, KHM)")),
+      margin = factor(margin, levels = rev(c("Yield", "Harvested area", "Production")))
+    )
+  # Title: the pooled production effect (t or t+1) that is clearly different from zero,
+  # largest in size; otherwise say plainly that the footprint is small and imprecise.
+  pr <- sl |> filter(stat %in% c("s2_prod_t", "s2_prod_t1"), hi < 0 | lo > 0) |>
+    arrange(desc(abs(estimate)))
+  title4 <- if (nrow(pr) >= 1) {
+    paste0(ifelse(pr$stat[1] == "s2_prod_t", "In El Niño onset years", "In the year after an El Niño onset"),
+           ", rice production runs ", round(abs(pr$estimate[1]), 1), "% ",
+           ifelse(pr$estimate[1] < 0, "below", "above"), " trend")
+  } else {
+    "El Niño's footprint on rice yields, area and production is small and imprecise"
+  }
+  p4 <- ggplot(sl, aes(x = estimate, y = margin, colour = timing)) +
+    geom_vline(xintercept = 0, colour = "grey40", linewidth = 0.4) +
+    geom_errorbar(aes(xmin = lo, xmax = hi), width = 0.25, orientation = "y", linewidth = 0.6,
+                  position = position_dodge(width = 0.55)) +
+    geom_point(size = 3, position = position_dodge(width = 0.55)) +
+    facet_wrap(~ group, ncol = 1, scales = "free_y") +
+    scale_colour_manual(values = c("Onset year (t)" = col_en, "Year after onset (t+1)" = col_norm)) +
+    scale_x_continuous(labels = function(x) paste0(x, "%")) +
+    labs(title = wrap(title4, 62),
+         subtitle = wrap(paste0("Effect of an El Niño year on the deviation from trend, vs ENSO-neutral years; ",
+                                "country fixed effects, 95% intervals (year-block bootstrap). ",
+                                "Exploratory: added after the main results."), 88),
+         x = NULL, y = NULL,
+         caption = paste(vapply(strsplit(sub("NOAA CPC ONI", "NOAA CPC ONI; UCDP/PRIO ACD v26.1",
+                                              gsub("\n(?!Analysis)", " ", cap, perl = TRUE), fixed = TRUE), "\n")[[1]],
+                                 wrap, "", width = 115), collapse = "\n")) +
+    theme_ac(grid = "x")
+  save_fig(p4, "fig4_second_look_margins", height_px = 1300)
+}

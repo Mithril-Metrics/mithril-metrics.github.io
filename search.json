@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "AgEcon Practical Experience",
+    "section": "",
+    "text": "I quantify how farms and food systems turn inputs and natural resources (land, water, nutrients, climate) into outputs, and how policy, prices and weather shocks shift that relationship, using public data and reproducible code.\nEach case takes one question from a current policy debate, answers it with public data in about four hours, and publishes the code. Methods range from production frontiers and productivity decompositions to panel and causal-ML econometrics. Filter the cases by Region, Method or Theme using the categories on the right.\nAbout me RSS Code on GitHub"
+  },
+  {
+    "objectID": "index.html#cases",
+    "href": "index.html#cases",
+    "title": "AgEcon Practical Experience",
+    "section": "Cases",
+    "text": "Cases\n\n\n    \n      \n      \n    \n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -19,19 +33,5 @@
     "title": "About",
     "section": "Selected publications",
     "text": "Selected publications\n\nSala, P. et al. (2025). Evaluating ponds as nature-based solutions: Effectiveness and eco-efficiency. Journal of Environmental Management 393, 126933. doi:10.1016/j.jenvman.2025.126933\nBremer et al. (2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. Water Resources Management 40, 501. doi:10.1007/s11269-026-04848-0\nDinov et al. (2026). Environmental Kuznets Curve applications for water pollution in the EU. Journal of Environmental Management 398, 127942. doi:10.1016/j.jenvman.2025.127942\nBlicharska et al. (2026). Challenges for assessing and implementing nature-based solutions at landscape scale. Hydrobiologia. doi:10.1007/s10750-026-06212-0\nTwohig et al. (2026). Economic implications of water scarcity in the WEFE nexus: the Upper Main basin. SSRN 7307240.\n\nViews expressed on this site are my own and do not represent TUM or any project consortium."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "AgEcon Practical Experience",
-    "section": "",
-    "text": "I quantify how farms and food systems turn inputs and natural resources (land, water, nutrients, climate) into outputs, and how policy, prices and weather shocks shift that relationship, using public data and reproducible code.\nEach case takes one question from a current policy debate, answers it with public data in about four hours, and publishes the code. Methods range from production frontiers and productivity decompositions to panel and causal-ML econometrics. Filter the cases by Region, Method or Theme using the categories on the right.\nAbout me RSS Code on GitHub"
-  },
-  {
-    "objectID": "index.html#cases",
-    "href": "index.html#cases",
-    "title": "AgEcon Practical Experience",
-    "section": "Cases",
-    "text": "Cases\n\n\n    \n      \n      \n    \n\n\n\n\nNo matching items"
   }
 ]

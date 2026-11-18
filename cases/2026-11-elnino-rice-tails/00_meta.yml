@@ -1,0 +1,78 @@
+# 00_meta.yml — single source of truth for this case's metadata.
+# report.qmd reads this file for the hook, the "Data & code" section and the footer.
+
+id: "2026-11-elnino-rice-tails"
+issue: 1
+local_folder: "Issue 1"
+title: "Do El Niño years bring unusually severe rice shortfalls in Southeast Asia?"
+question: >
+  Are national rice yield shortfalls in Southeast Asia (Viet Nam, Indonesia, Philippines,
+  Thailand, Malaysia, Cambodia; 1961-2024) larger and more frequent in El Niño onset years,
+  and more extreme than a normal distribution implies?
+bottom_line: null                 # written at the WRITE stage from key_numbers.csv
+status: code                      # plan | code | results | red-teamed | published
+
+hook:
+  debate: >
+    A very strong El Niño (NOAA ONI anomaly +2.46 for Aug-Oct 2026) is expected to peak in late
+    2026 and persist into early 2027, threatening rice harvests in Southeast Asia while
+    fertiliser costs are already high.
+  date: "2026-11-18"
+  primary_source:
+    title: "NOAA Climate Prediction Center, Oceanic Niño Index"
+    url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+
+tags:
+  region: ["SE Asia"]
+  method: ["Tails and risk"]
+  employer_theme: ["WFP", "IIASA", "WB", "FAO"]
+  skills: ["Climate risk and fat tails", "Panel econometrics", "Quantile regression"]
+
+dates:
+  created: "2026-11-18"
+  published: null
+
+hours:
+  planned: 4
+  actual: null
+
+sources:
+  - name: "FAOSTAT Production: Crops and livestock products (QCL)"
+    provider: "FAO"
+    table: "QCL; item Rice (27); elements Yield (5412), Area harvested (5312), Production (5510)"
+    url: "https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_(Normalized).zip"
+    version: "2025-12-31 (bulk catalogue DateUpdate), data 1961-2024"
+    accessed: null                # filled from data_raw/_access_log.csv after the run
+    licence: "CC BY 4.0"
+  - name: "NOAA CPC Oceanic Niño Index (ONI, ERSSTv5)"
+    provider: "NOAA Climate Prediction Center"
+    table: "oni.ascii.txt (3-month running mean SST anomaly, Niño 3.4)"
+    url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+    version: "monthly update; latest season at access is recorded in key_numbers.csv"
+    accessed: null
+    licence: "US Government work (public domain)"
+
+manual_steps: []
+
+identification: >
+  El Niño onset is driven by Pacific ocean dynamics that farmers and governments cannot
+  influence, so differences in detrended yield shortfalls between El Niño onset years and
+  other years estimate a reduced-form effect of El Niño years, conditional on the detrending.
+  Few events, coincident shocks (e.g. 1997-98 Asian financial crisis) and national averaging
+  limit precision and external validity.
+
+decisions:                        # pre-specified before seeing results (P4, 2026-11-18)
+  countries: [VNM, IDN, PHL, THA, MYS, KHM]
+  years: [1961, 2024]
+  cambodia_start: 1980            # 1970s values unreliable (conflict years, imputed)
+  trend: "log yield ~ natural spline (4 df) per country + Indonesia 2018 level shift (BPS revision)"
+  elnino_definition: "mean ONI anomaly Jul-Dec (JAS, ASO, SON, OND) >= 0.5; strong >= 1.5"
+  main_timing: "onset year t"
+  shortfall_threshold: "yield >= 5% below trend (also 10%)"
+  robustness: ["R1: exposure in harvest year t+1", "R2: robust LOESS trend (span 0.5)"]
+  inference: "year-block bootstrap, 999 draws"
+
+links:
+  blog: null
+  linkedin: null
+  code: "https://github.com/PeterSala94/agecon-cases/tree/main/cases/2026-11-elnino-rice-tails"

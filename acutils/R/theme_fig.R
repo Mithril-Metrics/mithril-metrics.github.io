@@ -105,7 +105,7 @@ theme_ac <- function(base_size = 14, base_family = "", grid = "y") {
 #'                accessed = "2026-11-18")
 #' @export
 source_caption <- function(source, accessed = NULL, note = NULL,
-                           author = "Pietro Sala · AgEcon Practical Experience") {
+                           author = "Pietro Sala, AgEcon Practical Experience") {
   s <- paste0("Source: ", paste(source, collapse = "; "))
   if (!is.null(accessed)) s <- paste0(s, " (accessed ", format(as.Date(accessed)), ")")
   s <- paste0(s, ".")

@@ -1,0 +1,32 @@
+# run_all.R — run the whole case in one go ------------------------------------------
+# Case: 2026-11-elnino-rice-tails  (local folder: AgEcon/Issue 1/)
+# Usage, in R or RStudio:
+#   setwd("C:/.../AgEcon/Issue 1")   # or Session > Set Working Directory > To Source File Location
+#   source("run_all.R")
+# Runs 01 -> 04 in order, writes the full console log to output/run_log.txt.
+# Downloads go only to data_raw/ inside this folder. Upload the CONTENTS of output/ to the chat.
+
+stopifnot("Set the working directory to the issue folder first" = file.exists("00_meta.yml"))
+dir.create("output", showWarnings = FALSE)
+dir.create("data_raw", showWarnings = FALSE)
+
+log_file <- file.path("output", "run_log.txt")
+con <- file(log_file, open = "wt")
+sink(con, split = TRUE)
+sink(con, type = "message")
+on.exit({ sink(type = "message"); sink(); close(con) }, add = TRUE)
+
+cat("Run started:", format(Sys.time()), "\nWorking directory:", getwd(), "\n\n")
+scripts <- c("01_get_data.R", "02_clean.R", "03_analyse.R", "04_figures.R")
+for (s in scripts) {
+  cat("\n==================== ", s, " ====================\n", sep = "")
+  t0 <- Sys.time()
+  local(source(s, echo = FALSE, local = TRUE))
+  cat(sprintf("-- %s finished in %.1f s\n", s, as.numeric(difftime(Sys.time(), t0, units = "secs"))))
+}
+
+cat("\nDone:", format(Sys.time()), "\n")
+cat("Upload these files from output/ to the chat:\n")
+print(setdiff(list.files("output", recursive = TRUE), list.files("output/cache", recursive = TRUE)))
+cat(sprintf("data_raw/ uses %.1f MB; delete it after uploading if you like.\n",
+            sum(file.size(list.files("data_raw", full.names = TRUE, recursive = TRUE))) / 1e6))

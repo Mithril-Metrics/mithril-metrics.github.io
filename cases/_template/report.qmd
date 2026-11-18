@@ -39,6 +39,14 @@ execute:
 ---
 
 ```{r}
+#| label: guard
+#| include: false
+# Before the analysis has been run there are no results: stop knitting here, so the
+# website build on GitHub does not fail while a case is still in progress.
+if (!file.exists("output/key_numbers.csv")) knitr::knit_exit("*Results pending.*")
+```
+
+```{r}
 #| label: setup
 #| include: false
 suppressPackageStartupMessages({

@@ -3,6 +3,7 @@
 
 CASE     ?=
 SLUG     ?=
+ISSUE    ?=
 TITLE    ?=
 REGION   ?= Global
 METHOD   ?= Descriptive
@@ -14,7 +15,7 @@ SPEC     ?=
 help:
 	@echo "make install                      install acutils from ./acutils"
 	@echo "make test                         run acutils unit tests"
-	@echo "make new SLUG=x TITLE='...' REGION=EU METHOD=SFA EMPLOYER=OECD"
+	@echo "make new SLUG=x ISSUE=N TITLE='...' REGION=EU METHOD=SFA EMPLOYER=OECD"
 	@echo "make check SPEC=tools/specs/x.yml 2-minute feasibility check"
 	@echo "make run CASE=cases/YYYY-MM-slug  scripts 01-04 + render report"
 	@echo "make report CASE=...              render report only (blog + brief + LinkedIn txt)"
@@ -32,7 +33,7 @@ test:
 
 new:
 	@test -n "$(SLUG)" || (echo "SLUG is required" && exit 1)
-	Rscript new_case.R $(SLUG) --title "$(TITLE)" --region "$(REGION)" --method "$(METHOD)" --employer "$(EMPLOYER)"
+	Rscript new_case.R $(SLUG) --issue "$(ISSUE)" --title "$(TITLE)" --region "$(REGION)" --method "$(METHOD)" --employer "$(EMPLOYER)"
 
 check:
 	@test -n "$(SPEC)" || (echo "SPEC is required" && exit 1)

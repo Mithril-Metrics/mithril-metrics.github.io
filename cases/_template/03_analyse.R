@@ -5,6 +5,7 @@
 #         output/tab_*.html|.csv, output/sessionInfo.txt
 
 stopifnot("Run this script from the case folder" = file.exists("00_meta.yml"))
+options(acutils.data_dir = "data_raw")   # downloads can only land inside this folder
 suppressPackageStartupMessages({
   library(acutils)
   library(dplyr)

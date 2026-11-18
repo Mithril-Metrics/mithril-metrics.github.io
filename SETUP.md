@@ -36,19 +36,24 @@ case needs them; each case's `01_get_data.R` lists what it uses.
 
 ## Running a case locally
 
-1. Download the case folder from GitHub. The simplest way is *Code → Download ZIP* and then
-   keep only `cases/YYYY-MM-slug/`. Alternatively, Claude sends the scripts directly in the chat.
-2. In RStudio: *Session → Set Working Directory → To Source File Location* (the case folder),
-   then run the scripts in order, or in the R console:
+Local folders: `AgEcon/Issue N/`, one per case (N = case number in the portfolio log). The matching
+GitHub folder is `cases/YYYY-MM-slug/`; the mapping is in each case's `00_meta.yml` (`issue`, `local_folder`).
+
+1. Claude sends `Issue_N_<slug>.zip` in the chat. Unzip its contents directly into `AgEcon/Issue N/`.
+2. In R or RStudio:
 
 ```r
-setwd("path/to/cases/2026-11-slug")
-for (s in c("01_get_data.R", "02_clean.R", "03_analyse.R", "04_figures.R")) source(s, echo = TRUE)
+setwd("C:/.../AgEcon/Issue N")   # or Session > Set Working Directory > To Source File Location
+source("run_all.R")              # runs 01 -> 04, logs the console to output/run_log.txt
 ```
 
-3. Upload the contents of `output/` (not `data_raw/`) to the chat. `data_raw/` holds the
-   downloaded data (usually a few MB). You can delete it after each case, because
-   `01_get_data.R` downloads it again when needed.
+3. Upload the contents of `output/` to the chat (not `data_raw/`). If a script fails, upload
+   `output/run_log.txt`.
+
+**Where data go:** only into `AgEcon/Issue N/data_raw/` (every script sets
+`options(acutils.data_dir = "data_raw")` and stops unless it runs from the issue folder). Typical size
+5–50 MB. Delete `data_raw/` after uploading; `01_get_data.R` downloads it again if needed. Quick
+feasibility checks in the chat write only to `tempdir()`, which R deletes when the session closes.
 
 Keys (only for ERA5 climate data): `ecmwfr::wf_set_key(key = "<CDS personal access token>")`
 stores the token in your system keyring; it never goes into the repository.

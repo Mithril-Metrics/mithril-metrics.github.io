@@ -30,7 +30,7 @@ p1 <- ggplot(demo, aes(x = reorder(group, value), y = value, fill = group)) +
     title = paste0("Placeholder: X changed by ", k("example_change_pct", unit = TRUE),
                    " since ", k("example_period_start")),
     subtitle = "Template figure: replace with the case's hero chart",
-    x = NULL, y = "Change (%)",
+    x = "Country", y = "Change (%)",              # always label both axes
     caption = source_caption("Placeholder dataset", accessed = Sys.Date())
   ) +
   theme_ac()

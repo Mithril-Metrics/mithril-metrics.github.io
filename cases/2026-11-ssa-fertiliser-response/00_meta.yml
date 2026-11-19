@@ -1,0 +1,116 @@
+# 00_meta.yml — single source of truth for this case's metadata.
+# report.qmd reads this file for the hook, the "Data & code" section and the footer.
+
+id: "2026-11-ssa-fertiliser-response"
+issue: 2
+local_folder: "Issue 2"
+author: "Pietro Sala"
+title: "Expensive fertiliser, smaller maize harvests? Sub-Saharan Africa's response to price spikes, and the role of input subsidies"
+question: >
+  How far is the fertiliser-to-maize price ratio from its historical norm in 2026, how strongly
+  did maize yields and nitrogen use in 14 Sub-Saharan African countries move with that ratio
+  over 1990-2024, and was the response weaker in countries that spend more on input subsidies?
+bottom_line: null                 # written at the WRITE stage from key_numbers.csv
+status: code                      # plan | code | results | red-teamed | draft | published
+
+hook:
+  debate: >
+    Fertiliser prices rose sharply after the Strait of Hormuz closed in February 2026. The OECD
+    Agricultural Policy Monitoring and Evaluation 2026 report (2 Nov 2026) uses its support data
+    to look at past policy responses to fertiliser price rises, but covers only South Africa in
+    Sub-Saharan Africa; its policy brief on fertilisers (19 Oct 2026) stresses import dependence.
+  date: "2026-10-19"
+  primary_source:
+    title: "OECD (2026), Agricultural resilience and food security in an interconnected world: lessons from fertilisers"
+    url: "https://www.oecd.org/en/publications/agricultural-resilience-and-food-security-in-an-interconnected-world_daa053c8-en.html"
+  other_sources:
+    - title: "OECD (2026), Agricultural Policy Monitoring and Evaluation 2026"
+      url: "https://www.oecd.org/en/publications/agricultural-policy-monitoring-and-evaluation-2026_2c7f3be1-en.html"
+    - title: "ICC (Aug 2026), Safeguarding food security amid the Hormuz crisis"
+      url: "https://iccwbo.org/news-publications/policy-paper/safeguarding-food-security-amid-the-hormuz-crisis/"
+
+tags:
+  region: ["SSA"]
+  method: ["Elasticities"]
+  employer_theme: ["WB", "IFPRI", "IFAD", "FAO"]
+  skills: ["Panel econometrics", "Production economics", "Input demand"]
+
+dates:
+  created: "2026-11-19"
+  published: null
+
+hours:
+  planned: 4
+  actual: null
+
+sources:
+  - name: "World Bank Commodity Price Data (The Pink Sheet), monthly"
+    provider: "World Bank"
+    table: "CMO-Historical-Data-Monthly.xlsx, sheet 'Monthly Prices': Urea; Maize ($/mt, nominal)"
+    url: "https://www.worldbank.org/en/research/commodity-markets"
+    version: "Updated on November 03, 2026 (data to October 2026)"
+    accessed: null
+    licence: "CC BY 4.0"
+  - name: "FAOSTAT Fertilizers by Nutrient (RFN)"
+    provider: "FAO"
+    table: "RFN; item Nutrient nitrogen N (total); elements Agricultural Use, Use per area of cropland"
+    url: "https://www.fao.org/faostat/en/#data/RFN"
+    version: "2026-07-30 (bulk catalogue DateUpdate), data to 2024"
+    accessed: null
+    licence: "CC BY 4.0"
+  - name: "FAOSTAT Production: Crops and livestock products (QCL)"
+    provider: "FAO"
+    table: "QCL; item Maize (corn); elements Yield, Area harvested, Production"
+    url: "https://www.fao.org/faostat/en/#data/QCL"
+    version: "2025-12-31 (bulk catalogue DateUpdate), data to 2024"
+    accessed: null
+    licence: "CC BY 4.0"
+  - name: "FAO MAFAP public expenditure on food and agriculture (bulk file)"
+    provider: "FAO MAFAP programme"
+    table: "public-expenditure-dataset_fao-mafap-programme_march2026rev.xlsx; B1. Variable inputs; III. Total expenditures in support of food and agriculture"
+    url: "https://www.fao.org/in-action/mafap/data-hub/en"
+    version: "March 2026 revision"
+    accessed: null
+    licence: "FAO terms of use"
+  - name: "NOAA CPC Oceanic Niño Index (ONI)"
+    provider: "NOAA Climate Prediction Center"
+    table: "oni.ascii.txt"
+    url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+    version: "monthly update"
+    accessed: null
+    licence: "US Government work (public domain)"
+
+manual_steps: []
+
+identification: >
+  The world urea-to-maize price ratio is set on world markets that these 14 countries do not
+  move, so its relation to national maize yields, net of country effects, country trends and
+  ENSO, is a reduced-form association with the whole input-cost shock (oil and freight move
+  with urea). The difference between high- and low-subsidy countries is estimated with year
+  fixed effects, but subsidy intensity is not random, so it is also an association.
+
+decisions:                        # fixed in the PLAN stage (P4, 2026-11-19), before seeing results
+  countries: [MWI, KEN, ETH, TZA, ZMB, ZWE, MOZ, UGA, NGA, GHA, BFA, MLI, BEN, RWA]
+  years: [1990, 2024]
+  ratio: "monthly urea $/t / maize $/t (Pink Sheet); crop year t = mean of Oct(t-1) to Sep(t)"
+  baseline: "median of crop-year ratio 1990-2019; band = interquartile range of monthly ratio 1990-2019"
+  outcomes: ["log maize yield (t/ha), headline", "log N agricultural use per ha of cropland (kg/ha)"]
+  enso_control: "ONI Dec(t-1) to Feb(t) (DJF of year t), the peak of the southern African season"
+  spec_a: "log y ~ log ratio + ONI | country FE + country linear trends; Driscoll-Kraay SE"
+  spec_b: "log y ~ log ratio x high-subsidy | country FE + year FE; Driscoll-Kraay SE"
+  subsidy_groups: >
+    MAFAP B1 (variable inputs) / III (total support to food and agriculture), actual spending,
+    total (national + donor) funding, mean over budget years starting up to 2019; high = above
+    the median of the 14 countries
+  robustness:
+    - "R1: N use on official values only (FAOSTAT flags A or X)"
+    - "R2: ratio lagged one more season, Oct(t-2) to Sep(t-1)"
+    - "R3: leave one country out (spec A yield elasticity and spec B difference)"
+  back_of_envelope: >
+    implied % change = exp(beta * [log ratio 2026 crop year - log baseline median]) - 1;
+    tonnes = implied % x 2024 maize production; 90% intervals from the coefficient's SE
+
+links:
+  blog: "https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html"
+  linkedin: null
+  code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-ssa-fertiliser-response"

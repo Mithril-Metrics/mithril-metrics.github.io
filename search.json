@@ -1,36 +1,57 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "AgEcon Practical Experience",
-    "section": "",
-    "text": "I quantify how farms and food systems turn inputs and natural resources (land, water, nutrients, climate) into outputs, and how policy, prices and weather shocks shift that relationship, using public data and reproducible code.\nEach case takes one question from a current policy debate, answers it with public data in about four hours, and publishes the code. Methods range from production frontiers and productivity decompositions to panel and causal-ML econometrics. Filter the cases by Region, Method or Theme using the categories on the right.\nAbout me RSS Code on GitHub"
-  },
-  {
-    "objectID": "index.html#cases",
-    "href": "index.html#cases",
-    "title": "AgEcon Practical Experience",
-    "section": "Cases",
-    "text": "Cases\n\n\n    \n      \n      \n    \n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About Mithril Metrics",
+    "section": "",
+    "text": "Mithril Metrics publishes short, reproducible case studies on agri-food, climate and rural policy. Each one starts from a current policy debate, asks one narrow empirical question, and answers it with public data in about four hours."
+  },
+  {
+    "objectID": "about.html#how-each-case-is-built",
+    "href": "about.html#how-each-case-is-built",
+    "title": "About Mithril Metrics",
+    "section": "How each case is built",
+    "text": "How each case is built\n\nPublic data only. Every number traces to a named dataset and access date.\nOne question, one answer. The bottom line comes first; caveats are stated plainly.\nMethods from production and resource economics: production frontiers, productivity and efficiency measurement, risk and fat tails, panel and causal-ML econometrics.\nReproducible. All code is on GitHub and runs end to end in R.\nNeutral. Policy implications are written as trade-offs, not recommendations."
+  },
+  {
+    "objectID": "about.html#people",
+    "href": "about.html#people",
+    "title": "About Mithril Metrics",
+    "section": "People",
+    "text": "People\nPietro Sala: applied economist, Chair of Agricultural Production and Resource Economics, Technical University of Munich. Production and efficiency analysis, eco-efficiency, climate risk, water and the WEFE nexus."
+  },
+  {
+    "objectID": "about.html#licence",
+    "href": "about.html#licence",
+    "title": "About Mithril Metrics",
+    "section": "Licence",
+    "text": "Licence\nText and figures: CC BY 4.0. Code: MIT. Views are the authors’ own and do not represent their institutions."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mithril Metrics",
+    "section": "",
+    "text": "We quantify how farms and food systems turn inputs and natural resources (land, water, nutrients, climate) into outputs, and how policy, prices and weather shocks shift that relationship, using public data and reproducible code.\nEach case takes one question from a current policy debate, answers it with public data in about four hours, and publishes the code. Methods range from production frontiers and productivity decompositions to panel and causal-ML econometrics. Filter the cases by Region, Method or Theme using the categories on the right.\nAbout the project RSS Code on GitHub"
+  },
+  {
+    "objectID": "index.html#case-studies",
+    "href": "index.html#case-studies",
+    "title": "Mithril Metrics",
+    "section": "Case Studies",
+    "text": "Case Studies\n\n\n    \n      \n      \n    \n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "people/pietro-sala.html",
+    "href": "people/pietro-sala.html",
+    "title": "Pietro Sala",
     "section": "",
     "text": "I am Pietro Sala, an applied economist working on agricultural, water and resource economics. I am a PhD candidate (expected April 2027) and research associate at the Chair of Agricultural Production and Resource Economics, TUM School of Management, Technical University of Munich.\nMy research measures how efficiently farms and food systems use natural resources, and how to separate weather-driven losses from managerial shortfalls. Methodologically I work with stochastic frontier analysis, productivity and eco-efficiency measurement, panel econometrics and causal machine learning (double/debiased ML, LASSO). I have worked on two EU research projects: PONDERFUL (ponds as nature-based solutions) and RETOUCH NEXUS (water governance and the water–energy–food–ecosystems nexus), and I coordinate my chair’s research partnerships in Southeast Asia (Vietnam, Malaysia, Indonesia, Cambodia)."
   },
   {
-    "objectID": "about.html#about-this-series",
-    "href": "about.html#about-this-series",
-    "title": "About",
-    "section": "About this series",
-    "text": "About this series\nAgEcon Practical Experience is a set of short, reproducible case studies. Each one starts from a current policy debate, asks one narrow empirical question, and answers it with public data in about four hours. Every number traces to a named dataset and access date, and all code is on GitHub."
-  },
-  {
-    "objectID": "about.html#selected-publications",
-    "href": "about.html#selected-publications",
-    "title": "About",
+    "objectID": "people/pietro-sala.html#selected-publications",
+    "href": "people/pietro-sala.html#selected-publications",
+    "title": "Pietro Sala",
     "section": "Selected publications",
     "text": "Selected publications\n\nSala, P. et al. (2025). Evaluating ponds as nature-based solutions: Effectiveness and eco-efficiency. Journal of Environmental Management 393, 126933. doi:10.1016/j.jenvman.2025.126933\nBremer et al. (2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. Water Resources Management 40, 501. doi:10.1007/s11269-026-04848-0\nDinov et al. (2026). Environmental Kuznets Curve applications for water pollution in the EU. Journal of Environmental Management 398, 127942. doi:10.1016/j.jenvman.2025.127942\nBlicharska et al. (2026). Challenges for assessing and implementing nature-based solutions at landscape scale. Hydrobiologia. doi:10.1007/s10750-026-06212-0\nTwohig et al. (2026). Economic implications of water scarcity in the WEFE nexus: the Upper Main basin. SSRN 7307240.\n\nViews expressed on this site are my own and do not represent TUM or any project consortium."
   }

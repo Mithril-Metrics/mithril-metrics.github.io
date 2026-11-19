@@ -1,6 +1,6 @@
 # acutils
 
-Helpers for the AgEcon Practical Experience case studies.
+Helpers for the Mithril Metrics case studies.
 
 ## Install
 
@@ -9,7 +9,7 @@ Helpers for the AgEcon Practical Experience case studies.
 install.packages(c("devtools", "eurostat", "WDI", "countrycode", "ecmwfr", "terra", "svglite"))
 devtools::document("acutils")
 devtools::install_local("acutils", upgrade = "never")
-# or, once pushed: renv::install("PeterSala94/agecon-cases/acutils")
+# or: remotes::install_github("Mithril-Metrics/mithril-metrics.github.io", subdir = "acutils")
 devtools::test("acutils")   # offline unit tests
 ```
 

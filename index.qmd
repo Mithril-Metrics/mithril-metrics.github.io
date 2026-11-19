@@ -1,5 +1,5 @@
 ---
-title: "AgEcon Practical Experience"
+title: "Mithril Metrics"
 subtitle: "Turning public data into policy-relevant answers, one question at a time"
 page-layout: full
 title-block-banner: false
@@ -14,12 +14,12 @@ listing:
   fields: [image, date, title, description, categories, reading-time]
   image-placeholder: images/og-default.png
   feed:
-    title: "AgEcon Practical Experience"
+    title: "Mithril Metrics"
     description: "New case studies on agri-food, climate and rural policy."
 ---
 
 ::: {.positioning}
-I quantify how farms and food systems turn inputs and natural resources (land, water,
+We quantify how farms and food systems turn inputs and natural resources (land, water,
 nutrients, climate) into outputs, and how policy, prices and weather shocks shift that
 relationship, using public data and reproducible code.
 :::
@@ -29,9 +29,9 @@ about four hours, and publishes the code. Methods range from production frontier
 productivity decompositions to panel and causal-ML econometrics. Filter the cases by
 **Region**, **Method** or **Theme** using the categories on the right.
 
-[About me](about.qmd){.btn .btn-outline-primary .btn-sm} [RSS](index.xml){.btn .btn-outline-secondary .btn-sm} [Code on GitHub](https://github.com/PeterSala94/agecon-cases){.btn .btn-outline-secondary .btn-sm}
+[About the project](about.qmd){.btn .btn-outline-primary .btn-sm} [RSS](index.xml){.btn .btn-outline-secondary .btn-sm} [Code on GitHub](https://github.com/Mithril-Metrics/mithril-metrics.github.io){.btn .btn-outline-secondary .btn-sm}
 
-## Cases
+## Case Studies
 
 ::: {#cases}
 :::

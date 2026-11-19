@@ -1,20 +1,20 @@
-# agecon-cases
+# Mithril Metrics
 
 Short, reproducible, data-driven policy case studies in agricultural, production and
-applied microeconomics — the code behind the **AgEcon Practical Experience** series
-by Pietro Sala (TUM, Chair of Agricultural Production and Resource Economics).
+applied microeconomics — the code behind **Mithril Metrics** (https://mithril-metrics.github.io/)
+by Pietro Sala and co-authors.
 
-> I quantify how farms and food systems turn inputs and natural resources (land, water,
+> We quantify how farms and food systems turn inputs and natural resources (land, water,
 > nutrients, climate) into outputs, and how policy, prices and weather shocks shift that
 > relationship, using public data and reproducible code.
 
 Each case answers one narrow policy question with public data in about four hours,
-end to end. Blog: <https://petersala94.github.io/agecon-cases/>
+end to end. Blog: <https://mithril-metrics.github.io/>
 
 ## Repository layout
 
 ```
-agecon-cases/
+mithril-metrics.github.io/
 ├── acutils/                 # helper R package (fetchers, panel check, theme, export, key numbers)
 ├── cases/
 │   ├── _template/           # copied by new_case.R (ignored by the website because of the "_")
@@ -42,7 +42,7 @@ Requirements: R ≥ 4.3 and the packages listed in [SETUP.md](SETUP.md). Nothing
 needed to run the analysis; the blog is rendered by GitHub Actions.
 
 ```r
-remotes::install_github("PeterSala94/agecon-cases", subdir = "acutils")
+remotes::install_github("Mithril-Metrics/mithril-metrics.github.io", subdir = "acutils")
 setwd("cases/2026-11-slug")      # the case folder
 for (s in c("01_get_data.R", "02_clean.R", "03_analyse.R", "04_figures.R")) source(s, echo = TRUE)
 ```
@@ -63,7 +63,7 @@ and the `Makefile` wraps both plus `quarto render`.
 
 - **Code** (R scripts, `acutils`, tooling): [MIT](LICENSE).
 - **Text, figures and briefs** (blog posts, `report.qmd` prose, PNG/SVG/PDF outputs):
-  [CC BY 4.0](LICENSE-CONTENT.md). Please cite as: Sala, P. (year). *Title*. AgEcon Practical Experience.
+  [CC BY 4.0](LICENSE-CONTENT.md). Please cite the case author(s), e.g. Sala, P. (year). *Title*. Mithril Metrics.
 - **Data** remain under their providers' licences (e.g. FAOSTAT CC BY-NC-SA 3.0 IGO, World
   Bank CC BY 4.0, Eurostat reuse policy). Check each case's `00_meta.yml`.
 

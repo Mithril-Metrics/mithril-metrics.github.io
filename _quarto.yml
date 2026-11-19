@@ -4,16 +4,17 @@ project:
   render:
     - index.qmd
     - about.qmd
+    - people/*.qmd
     - cases/*/report.qmd       # folders starting with "_" (the template) are skipped automatically
   resources:
     - files/                   # CV PDF
     - images/
 
 website:
-  title: "AgEcon Practical Experience"
-  description: "Short, reproducible analyses of current agri-food, climate and rural policy questions with public data. By Pietro Sala."
-  site-url: "https://petersala94.github.io/agecon-cases/"
-  repo-url: "https://github.com/PeterSala94/agecon-cases"
+  title: "Mithril Metrics"
+  description: "Short, reproducible analyses of current agri-food, climate and rural policy questions with public data."
+  site-url: "https://mithril-metrics.github.io/"
+  repo-url: "https://github.com/Mithril-Metrics/mithril-metrics.github.io"
   favicon: images/favicon.png
   image: images/og-default.png          # fallback preview image (1200x630)
   open-graph:
@@ -24,23 +25,24 @@ website:
   navbar:
     background: light
     left:
-      - text: "Cases"
+      - text: "Case Studies"
         href: index.qmd
       - text: "About"
-        href: about.qmd
+        menu:
+          - text: "The project"
+            href: about.qmd
+          - text: "Pietro Sala"
+            href: people/pietro-sala.qmd
     right:
       - icon: rss
         href: index.xml
         aria-label: RSS feed
-      - icon: linkedin
-        href: https://www.linkedin.com/in/pietrosala
-        aria-label: LinkedIn
       - icon: github
-        href: https://github.com/PeterSala94/agecon-cases
+        href: https://github.com/Mithril-Metrics/mithril-metrics.github.io
         aria-label: GitHub
   page-footer:
-    left: "© 2026 Pietro Sala · Text CC BY 4.0 · Code MIT"
-    right: "Views are my own."
+    left: "© 2026 Mithril Metrics · Text CC BY 4.0 · Code MIT"
+    right: "Views are the authors' own."
 
 format:
   html:

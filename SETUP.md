@@ -3,7 +3,7 @@
 Each case is a short, reproducible analysis built from public data. The R scripts run on the
 author's own computer; the blog and the PDF briefs are rendered by GitHub Actions on every push.
 
-Blog: <https://petersala94.github.io/agecon-cases/>
+Blog: <https://mithril-metrics.github.io/>
 
 ## Reproduce a case
 
@@ -12,7 +12,7 @@ One-time setup in R (no other software needed):
 ```r
 install.packages(c("remotes", "tidyverse", "yaml", "fixest", "modelsummary", "svglite",
                    "eurostat", "WDI", "countrycode"))
-remotes::install_github("PeterSala94/agecon-cases", subdir = "acutils")
+remotes::install_github("Mithril-Metrics/mithril-metrics.github.io", subdir = "acutils")
 ```
 
 Method packages (`sfaR`, `frontier`, `Benchmarking`, `DoubleML`, ...) are installed only when a

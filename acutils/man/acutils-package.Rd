@@ -4,7 +4,7 @@
 \name{acutils-package}
 \alias{acutils}
 \alias{acutils-package}
-\title{acutils: helpers for the AgEcon Practical Experience case studies}
+\title{acutils: helpers for the Mithril Metrics case studies}
 \description{
 Fetchers cache raw downloads in \code{getOption("acutils.data_dir", "data_raw")} with
 the access date in the file name and log each download in \verb{_access_log.csv}.

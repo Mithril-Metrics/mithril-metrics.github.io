@@ -9,7 +9,7 @@
 .ac_blue_ramp <- c("#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#2a78d6", "#256abf",
                    "#184f95", "#0d366b")
 
-#' AgEcon Practical Experience colours
+#' Mithril Metrics colours
 #'
 #' @param n Number of categorical colours (max 8). Colours are assigned in a fixed
 #'   order; a 9th series should become "Other" or a small multiple, not a new hue.
@@ -105,7 +105,7 @@ theme_ac <- function(base_size = 14, base_family = "", grid = "y") {
 #'                accessed = "2026-11-18")
 #' @export
 source_caption <- function(source, accessed = NULL, note = NULL,
-                           author = "Pietro Sala, AgEcon Practical Experience") {
+                           author = "Mithril Metrics") {
   s <- paste0("Source: ", paste(source, collapse = "; "))
   if (!is.null(accessed)) s <- paste0(s, " (accessed ", format(as.Date(accessed)), ")")
   s <- paste0(s, ".")

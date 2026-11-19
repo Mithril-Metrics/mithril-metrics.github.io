@@ -167,7 +167,7 @@ cat("\nCode to reproduce every number and figure: [GitHub](", code_url, ").\n", 
 ```
 
 ::: {.post-footer}
-Views are my own. Part of my *AgEcon Practical Experience* series: short, reproducible
+Views are my own. Part of *Mithril Metrics*: short, reproducible
 analyses of current agri-food policy questions.
 :::
 
@@ -206,7 +206,7 @@ src_brief <- if (length(src_brief)) paste(src_brief, collapse = "; ") else "[fil
 **Data & code.** `r src_brief`. Code: `r code_url`
 
 ```{=typst}
-#text(size: 9pt, fill: rgb("#4a4a46"))[Pietro Sala · pietro.sala\@tum.de · Views are my own. AgEcon Practical Experience series.]
+#text(size: 9pt, fill: rgb("#4a4a46"))[Pietro Sala · pietro.sala\@tum.de · Views are my own. Mithril Metrics.]
 ```
 
 :::

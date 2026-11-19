@@ -7,7 +7,7 @@ files, one-page briefs) and the figures and tables in `cases/*/output/` are lice
 
 You may share and adapt the material for any purpose, provided you give appropriate credit:
 
-> Sala, P. (year). *Title of the case*. AgEcon Practical Experience. https://petersala94.github.io/agecon-cases/
+> Author, A. (year). *Title of the case*. Mithril Metrics. https://mithril-metrics.github.io/
 
 Source code is licensed separately under the MIT licence (see `LICENSE`).
 Underlying datasets remain under the licences of their providers.

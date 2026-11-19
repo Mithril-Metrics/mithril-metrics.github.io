@@ -9,7 +9,7 @@ options(acutils.data_dir = "data_raw", timeout = 600)
 
 # --- Packages: install only what is missing ---------------------------------------
 if (!requireNamespace("acutils", quietly = TRUE)) {
-  stop("Install acutils first: remotes::install_github('PeterSala94/agecon-cases', subdir = 'acutils')")
+  stop("Install acutils first: remotes::install_github('Mithril-Metrics/mithril-metrics.github.io', subdir = 'acutils')")
 }
 needed  <- c("dplyr", "tidyr", "readr", "ggplot2", "quantreg", "yaml", "svglite")
 missing <- needed[!vapply(needed, requireNamespace, logical(1), quietly = TRUE)]

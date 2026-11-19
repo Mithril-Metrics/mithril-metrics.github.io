@@ -1,4 +1,4 @@
-# Makefile — shortcuts for agecon-cases. Run from the repository root.
+# Makefile — shortcuts for this repository. Run from the repository root.
 # Recipes must be indented with a TAB.
 
 CASE     ?=

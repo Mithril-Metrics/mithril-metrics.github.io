@@ -8,7 +8,7 @@ source_caption(
   source,
   accessed = NULL,
   note = NULL,
-  author = "Pietro Sala <U+00B7> AgEcon Practical Experience"
+  author = "Mithril Metrics"
 )
 }
 \arguments{

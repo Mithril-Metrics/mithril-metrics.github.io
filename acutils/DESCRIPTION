@@ -1,6 +1,6 @@
 Package: acutils
 Type: Package
-Title: Helpers for the AgEcon Practical Experience Case Studies
+Title: Helpers for the Mithril Metrics Case Studies
 Version: 0.1.1
 Authors@R: person("Pietro", "Sala", email = "pietro.sala@tum.de",
     role = c("aut", "cre"), comment = c(ORCID = "0009-0002-0668-8275"))

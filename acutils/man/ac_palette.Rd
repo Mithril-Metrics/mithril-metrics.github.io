@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_fig.R
 \name{ac_palette}
 \alias{ac_palette}
-\title{AgEcon Practical Experience colours}
+\title{Mithril Metrics colours}
 \usage{
 ac_palette(n = 8)
 }
@@ -14,5 +14,5 @@ order; a 9th series should become "Other" or a small multiple, not a new hue.}
 Character vector of hex colours.
 }
 \description{
-AgEcon Practical Experience colours
+Mithril Metrics colours
 }

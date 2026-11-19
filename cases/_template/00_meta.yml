@@ -47,4 +47,4 @@ identification: null              # one sentence: what must hold for a causal re
 links:
   blog: null
   linkedin: null
-  code: "https://github.com/PeterSala94/agecon-cases/tree/main/cases/{{CASE_ID}}"
+  code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/{{CASE_ID}}"

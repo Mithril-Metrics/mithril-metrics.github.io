@@ -11,4 +11,4 @@ Case id (GitHub): cases/2026-11-elnino-rice-tails/
 5. Optional: delete data_raw/ afterwards. 01_get_data.R downloads it again if needed.
 
 If a script stops with an error, upload output/run_log.txt (or paste the error).
-One-time setup: remotes::install_github("PeterSala94/agecon-cases", subdir = "acutils")
+One-time setup: remotes::install_github("Mithril-Metrics/mithril-metrics.github.io", subdir = "acutils")

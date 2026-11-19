@@ -1,4 +1,4 @@
-#' acutils: helpers for the AgEcon Practical Experience case studies
+#' acutils: helpers for the Mithril Metrics case studies
 #'
 #' Fetchers cache raw downloads in `getOption("acutils.data_dir", "data_raw")` with
 #' the access date in the file name and log each download in `_access_log.csv`.

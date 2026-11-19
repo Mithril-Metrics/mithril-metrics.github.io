@@ -46,7 +46,7 @@ ac_data_dir <- function(dir = NULL) {
   h <- curl::new_handle(
     timeout = getOption("acutils.timeout", 300),
     connecttimeout = 30,
-    useragent = "acutils (R; AgEcon Practical Experience)"
+    useragent = "acutils (R; Mithril Metrics)"
   )
   res <- tryCatch(
     curl::curl_download(url, tmp, handle = h, quiet = quiet || getOption("acutils.quiet", FALSE)),

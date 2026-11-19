@@ -57,7 +57,8 @@ p1 <- ggplot(f1, aes(y = group, x = p)) +
        subtitle = wrap(paste0("Share of country-years with yields at least 5% below trend; ",
                          k("n_countries"), " Southeast Asian countries, ", k("year_start"), "-",
                          k("year_end"), ". Bars: 95% intervals (year-block bootstrap)."), 88),
-       x = NULL, y = NULL, caption = cap) +
+       x = "Share of country-years with yield at least 5% below trend", y = "Type of year",
+       caption = cap) +
   theme_ac(grid = "x")
 save_fig(p1, "fig1_hero")
 
@@ -74,7 +75,7 @@ p2 <- ggplot(panel, aes(x = year, y = 100 * (exp(shock) - 1), fill = elnino)) +
   scale_y_continuous(labels = function(x) paste0(x, "%")) +
   labs(title = wrap(title2, 70),
        subtitle = "National rice yield, % deviation from each country's long-run trend",
-       x = NULL, y = NULL, caption = cap) +
+       x = "Year", y = "Yield, % deviation from trend", caption = cap) +
   theme_ac() +
   theme(plot.title = element_text(size = rel(1.05)))
 save_fig(p2, "fig2_country_shocks", height_px = 1300)
@@ -121,7 +122,8 @@ p3 <- ggplot(f3, aes(x = loss_pct, y = 100 * share, colour = series, linetype = 
        subtitle = wrap(paste0("Share of country-years with a shortfall at least this large (log scale). ",
                               "Normal curves use each country's spread in typical years (robust) or in all years (SD); ",
                               k("n_loss10"), " of ", k("n_obs"), " country-years fell 10% or more."), 88),
-       x = "Shortfall below trend", y = NULL, caption = cap) +
+       x = "Yield shortfall below trend (at least this large)",
+       y = "Share of country-years", caption = cap) +
   theme_ac(grid = "xy")
 save_fig(p3, "fig3_tail_vs_normal")
 
@@ -175,7 +177,7 @@ if (file.exists("output/tab_second_look.csv")) {
          subtitle = wrap(paste0("Effect of an El Niño year on the deviation from trend, vs ENSO-neutral years; ",
                                 "country fixed effects, 95% intervals (year-block bootstrap). ",
                                 "Exploratory: added after the main results. ", holm_note), 88),
-         x = NULL, y = NULL,
+         x = "El Niño effect, % deviation from trend vs ENSO-neutral years", y = "Outcome",
          caption = paste(vapply(strsplit(sub("NOAA CPC ONI", "NOAA CPC ONI; UCDP/PRIO ACD v26.1",
                                               gsub("\n(?!Analysis)", " ", cap, perl = TRUE), fixed = TRUE), "\n")[[1]],
                                  wrap, "", width = 115), collapse = "\n")) +

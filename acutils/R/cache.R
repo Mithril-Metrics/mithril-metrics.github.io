@@ -49,7 +49,7 @@ ac_data_dir <- function(dir = NULL) {
     useragent = "acutils (R; AgEcon Practical Experience)"
   )
   res <- tryCatch(
-    curl::curl_download(url, tmp, handle = h, quiet = quiet),
+    curl::curl_download(url, tmp, handle = h, quiet = quiet || getOption("acutils.quiet", FALSE)),
     error = function(e) {
       if (file.exists(tmp)) unlink(tmp)
       stop("Download failed for ", url, "\n  ", conditionMessage(e),

@@ -10,6 +10,10 @@ stopifnot("Set the working directory to the issue folder first" = file.exists("0
 dir.create("output", showWarnings = FALSE)
 dir.create("data_raw", showWarnings = FALSE)
 
+# Keep the log readable: no progress bars or colour codes (they flood run_log.txt)
+options(readr.show_progress = FALSE, readr.show_col_types = FALSE, acutils.quiet = TRUE,
+        cli.num_colors = 1, cli.dynamic = FALSE, crayon.enabled = FALSE)
+
 run_case <- function() {
   log_file <- file.path("output", "run_log.txt")
   con <- file(log_file, open = "wt")

@@ -128,14 +128,16 @@ if (file.exists("output/tab_second_look.csv")) {
       group  = factor(group, levels = c("All six countries", "Maritime (IDN, PHL, MYS)", "Mainland (THA, VNM, KHM)")),
       margin = factor(margin, levels = rev(c("Yield", "Harvested area", "Production")))
     )
-  # Title: the pooled production effect (t or t+1) that is clearly different from zero,
-  # largest in size; otherwise say plainly that the footprint is small and imprecise.
-  pr <- sl |> filter(stat %in% c("s2_prod_t", "s2_prod_t1"), hi < 0 | lo > 0) |>
-    arrange(desc(abs(estimate)))
+  # Title: the production effect (pooled or by region, t or t+1) that is clearly different
+  # from zero and largest in size; otherwise say plainly that the footprint is small.
+  pr <- sl |> filter(margin == "Production", hi < 0 | lo > 0) |> arrange(desc(abs(estimate)))
   title4 <- if (nrow(pr) >= 1) {
-    paste0(ifelse(pr$stat[1] == "s2_prod_t", "In El Niño onset years", "In the year after an El Niño onset"),
-           ", rice production runs ", round(abs(pr$estimate[1]), 1), "% ",
-           ifelse(pr$estimate[1] < 0, "below", "above"), " trend")
+    where <- c("All six countries" = "Across the six countries",
+               "Maritime (IDN, PHL, MYS)" = "In maritime Southeast Asia",
+               "Mainland (THA, VNM, KHM)" = "In mainland Southeast Asia")[[as.character(pr$group[1])]]
+    when <- ifelse(grepl("_t1$", pr$stat[1]), " the year after an El Niño onset", " in El Niño onset years")
+    paste0(where, ", rice production runs ", round(abs(pr$estimate[1]), 1), "% ",
+           ifelse(pr$estimate[1] < 0, "below", "above"), " trend", when)
   } else {
     "El Niño's footprint on rice yields, area and production is small and imprecise"
   }

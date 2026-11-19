@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='576.00pt' height='360.00pt' viewBox='0 0 576.00 360.00'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FCFCFB;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='360.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
+<rect x='0.00' y='0.000000000000057' width='576.00' height='360.00' style='stroke-width: 1.36; stroke: none; fill: #FCFCFB;' />
+<polyline points='36.95,266.12 496.30,266.12 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='36.95,226.78 496.30,226.78 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='36.95,187.44 496.30,187.44 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='36.95,148.10 496.30,148.10 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='36.95,108.76 496.30,108.76 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<rect x='45.79' y='202.96' width='441.68' height='24.94' style='stroke-width: 1.36; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E4E3DF; fill-opacity: 0.80;' />
+<line x1='36.95' y1='215.27' x2='496.30' y2='215.27' style='stroke-width: 1.07; stroke: #737373; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
+<polyline points='45.79,227.19 46.81,226.70 47.73,226.31 48.75,229.36 49.74,231.33 50.76,231.30 51.74,229.48 52.76,225.06 53.78,231.00 54.77,212.58 55.79,209.50 56.78,209.23 57.80,209.92 58.82,210.13 59.74,214.02 60.76,214.94 61.75,214.57 62.77,214.96 63.75,216.52 64.77,218.90 65.79,218.25 66.78,218.60 67.80,216.47 68.79,217.58 69.81,222.03 70.83,224.35 71.78,225.77 72.80,222.61 73.79,223.05 74.81,223.55 75.80,220.20 76.82,217.45 77.84,218.00 78.83,217.76 79.85,221.37 80.83,222.95 81.85,223.31 82.87,223.40 83.79,231.19 84.81,234.44 85.80,233.80 86.82,231.78 87.81,234.66 88.83,234.35 89.85,234.54 90.84,236.20 91.86,238.21 92.84,238.50 93.86,239.68 94.88,238.82 95.81,233.63 96.83,230.15 97.81,228.97 98.83,229.83 99.82,223.28 100.84,230.06 101.86,230.61 102.85,230.24 103.87,229.87 104.86,232.34 105.88,207.44 106.90,200.68 107.82,197.52 108.84,192.33 109.82,210.27 110.84,236.59 111.83,238.24 112.85,238.11 113.87,238.99 114.86,240.99 115.88,241.53 116.87,242.31 117.89,243.44 118.91,244.63 119.86,246.97 120.88,232.98 121.87,233.43 122.89,231.86 123.88,229.42 124.90,226.46 125.92,217.04 126.90,213.12 127.92,208.43 128.91,207.79 129.93,208.47 130.95,214.27 131.87,220.49 132.89,223.43 133.88,228.67 134.90,228.04 135.89,224.41 136.91,230.40 137.93,235.16 138.91,237.53 139.93,235.71 140.92,234.92 141.94,236.52 142.96,239.23 143.88,237.01 144.90,229.39 145.89,230.89 146.91,232.74 147.90,232.45 148.92,227.85 149.94,228.01 150.93,234.98 151.95,237.77 152.93,239.22 153.95,240.07 154.97,239.39 155.89,235.24 156.91,239.15 157.90,238.52 158.92,239.33 159.91,236.71 160.93,235.96 161.95,235.42 162.94,236.13 163.96,235.72 164.94,235.98 165.96,233.48 166.98,228.89 167.94,229.38 168.96,231.70 169.95,228.98 170.97,217.07 171.95,202.54 172.97,196.70 173.99,210.39 174.98,214.70 176.00,222.28 176.99,227.42 178.01,216.12 179.03,221.09 179.95,223.03 180.97,223.52 181.96,226.36 182.98,224.80 183.96,228.58 184.98,228.60 186.00,224.86 186.99,222.46 188.01,223.70 189.00,222.80 190.02,221.60 191.04,222.97 191.96,226.47 192.98,227.86 193.97,228.87 194.99,227.32 195.97,228.57 196.99,228.19 198.02,234.05 199.00,233.02 200.02,232.78 201.01,229.57 202.03,224.59 203.05,217.05 203.97,214.37 204.99,221.89 205.98,219.24 207.00,217.03 207.99,208.08 209.01,210.84 210.03,210.64 211.01,209.91 212.03,210.46 213.02,209.73 214.04,211.52 215.06,223.27 216.02,225.95 217.04,228.28 218.02,224.42 219.04,215.61 220.03,196.67 221.05,191.97 222.07,178.48 223.06,164.58 224.08,171.86 225.06,189.71 226.08,190.71 227.10,188.44 228.03,180.63 229.05,167.22 230.03,160.55 231.05,178.00 232.04,184.91 233.06,185.47 234.08,180.26 235.07,182.92 236.09,169.21 237.08,183.70 238.10,188.63 239.12,187.55 240.04,175.30 241.06,175.71 242.04,184.49 243.06,190.60 244.05,195.20 245.07,195.10 246.09,196.59 247.08,208.24 248.10,211.74 249.09,204.39 250.11,202.86 251.13,199.69 252.05,192.72 253.07,191.15 254.06,194.14 255.08,196.61 256.06,193.90 257.08,198.32 258.10,190.85 259.09,188.54 260.11,182.00 261.10,178.47 262.12,194.44 263.14,207.48 264.09,203.85 265.11,192.28 266.10,163.72 267.12,178.15 268.11,157.31 269.13,134.71 270.15,140.85 271.13,142.58 272.15,197.07 273.14,206.48 274.16,203.79 275.18,198.39 276.10,201.95 277.12,208.78 278.11,214.45 279.13,213.59 280.12,202.85 281.14,201.03 282.16,205.36 283.15,210.88 284.17,210.30 285.15,203.50 286.17,203.45 287.19,193.79 288.11,197.16 289.13,202.56 290.12,209.78 291.14,207.82 292.13,203.82 293.15,207.09 294.17,207.12 295.16,210.65 296.18,205.77 297.16,206.32 298.18,209.91 299.20,226.16 300.13,228.38 301.15,234.85 302.13,236.22 303.15,205.48 304.14,202.85 305.16,205.82 306.18,198.34 307.17,195.47 308.19,197.12 309.18,201.75 310.20,213.05 311.22,213.34 312.17,211.03 313.19,195.14 314.18,191.16 315.20,198.87 316.18,229.80 317.20,220.79 318.22,218.98 319.21,223.37 320.23,219.21 321.22,218.21 322.24,216.80 323.26,212.11 324.18,215.75 325.20,214.73 326.19,218.44 327.21,222.69 328.20,222.13 329.22,214.93 330.24,209.02 331.22,208.21 332.24,205.85 333.23,205.34 334.25,200.59 335.27,199.75 336.19,208.16 337.21,220.13 338.20,218.14 339.22,209.99 340.21,200.44 341.23,196.69 342.25,189.54 343.23,189.54 344.25,196.22 345.24,198.29 346.26,197.44 347.28,197.04 348.20,199.39 349.22,206.69 350.21,203.43 351.23,197.96 352.22,203.96 353.24,199.68 354.26,199.74 355.24,208.60 356.26,203.72 357.25,202.75 358.27,208.97 359.29,218.85 360.25,216.22 361.27,219.15 362.25,219.94 363.27,234.94 364.26,222.11 365.28,217.32 366.30,216.47 367.29,217.69 368.31,212.99 369.30,209.90 370.32,208.63 371.34,219.78 372.26,210.82 373.28,213.83 374.27,221.77 375.29,218.53 376.27,220.91 377.29,215.10 378.31,207.63 379.30,199.27 380.32,192.04 381.31,209.46 382.33,210.67 383.35,210.14 384.27,212.94 385.29,214.46 386.28,217.38 387.30,212.74 388.28,202.65 389.30,203.14 390.32,198.14 391.31,199.86 392.33,191.31 393.32,201.09 394.34,204.76 395.36,207.96 396.28,207.54 397.30,205.83 398.29,209.21 399.31,216.21 400.29,211.39 401.31,203.00 402.33,206.65 403.32,210.32 404.34,213.01 405.33,214.88 406.35,216.80 407.37,216.12 408.32,210.14 409.34,203.19 410.33,210.92 411.35,212.43 412.34,210.85 413.36,200.38 414.38,206.79 415.37,214.49 416.39,215.50 417.37,217.64 418.39,221.66 419.41,212.37 420.33,209.50 421.36,217.99 422.34,223.39 423.36,213.24 424.35,203.73 425.37,197.60 426.39,196.19 427.38,152.01 428.40,123.68 429.38,133.75 430.40,145.74 431.42,166.06 432.35,163.81 433.37,161.61 434.35,185.40 435.37,185.26 436.36,192.92 437.38,185.85 438.40,180.82 439.39,193.27 440.41,193.94 441.40,198.50 442.42,208.46 443.44,218.96 444.36,222.46 445.38,223.77 446.36,217.80 447.38,223.74 448.37,211.82 449.39,193.05 450.41,199.32 451.40,195.97 452.42,194.35 453.41,198.68 454.43,199.68 455.45,193.04 456.40,198.01 457.42,200.45 458.41,209.48 459.43,197.39 460.42,190.17 461.44,187.00 462.46,194.35 463.44,188.64 464.46,197.27 465.45,197.77 466.47,196.30 467.49,188.38 468.41,191.29 469.43,195.33 470.42,190.49 471.44,181.76 472.43,164.49 473.45,158.45 474.47,174.23 475.45,187.80 476.47,186.41 477.46,191.05 478.48,186.21 479.50,177.53 480.42,131.92 481.44,108.60 482.43,125.92 483.45,175.68 484.44,192.38 485.46,197.63 486.48,199.21 487.47,193.17 ' style='stroke-width: 1.49; stroke: #2A78D6; stroke-linecap: butt;' />
+<circle cx='269.13' cy='134.71' r='3.44' style='stroke-width: 0.90; stroke: #EB6834; fill: #EB6834;' />
+<circle cx='428.40' cy='123.68' r='3.44' style='stroke-width: 0.90; stroke: #EB6834; fill: #EB6834;' />
+<circle cx='481.44' cy='108.60' r='3.44' style='stroke-width: 0.90; stroke: #EB6834; fill: #EB6834;' />
+<circle cx='487.47' cy='193.17' r='3.44' style='stroke-width: 0.90; stroke: #EB6834; fill: #EB6834;' />
+<text x='269.13' y='127.75' text-anchor='middle' style='font-size: 10.81px;fill: #262626; font-family: "Arial";' textLength='73.20px' lengthAdjust='spacingAndGlyphs'>Aug 2008: 3.34</text>
+<text x='439.38' y='116.72' text-anchor='end' style='font-size: 10.81px;fill: #262626; font-family: "Arial";' textLength='73.20px' lengthAdjust='spacingAndGlyphs'>Nov 2021: 3.62</text>
+<text x='467.28' y='101.64' style='font-size: 10.81px;fill: #262626; font-family: "Arial";' textLength='70.80px' lengthAdjust='spacingAndGlyphs'>Apr 2026: 4.00</text>
+<text x='495.96' y='197.04' style='font-size: 10.81px;fill: #262626; font-family: "Arial";' textLength='70.80px' lengthAdjust='spacingAndGlyphs'>Oct 2026: 1.85</text>
+<text x='493.01' y='220.46' style='font-size: 9.67px;fill: #595959; font-family: "Arial";' textLength='46.22px' lengthAdjust='spacingAndGlyphs'>1990-2019</text>
+<text x='494.17' y='230.91' style='font-size: 9.67px;fill: #595959; font-family: "Arial";' textLength='55.91px' lengthAdjust='spacingAndGlyphs'>median: 1.29</text>
+<text x='30.68' y='270.12' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='30.68' y='230.79' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='30.68' y='191.45' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='30.68' y='152.11' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='30.68' y='112.77' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='45.79' y='280.41' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='24.88px' lengthAdjust='spacingAndGlyphs'>1990</text>
+<text x='165.96' y='280.41' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='24.88px' lengthAdjust='spacingAndGlyphs'>2000</text>
+<text x='286.17' y='280.41' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='24.88px' lengthAdjust='spacingAndGlyphs'>2010</text>
+<text x='406.35' y='280.41' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='24.88px' lengthAdjust='spacingAndGlyphs'>2020</text>
+<text x='266.63' y='294.76' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Arial";' textLength='33.03px' lengthAdjust='spacingAndGlyphs'>Month</text>
+<text transform='translate(18.47,177.91) rotate(-90)' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Arial";' textLength='180.34px' lengthAdjust='spacingAndGlyphs'>Tonnes of maize per tonne of urea</text>
+<text x='9.96' y='60.58' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='420.61px' lengthAdjust='spacingAndGlyphs'>Tonnes of maize needed to buy one tonne of urea, monthly. Average for</text>
+<text x='9.96' y='74.94' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='376.72px' lengthAdjust='spacingAndGlyphs'>the Oct 2025-Sep 2026 crop year: 2.40 (1.86 times the median).</text>
+<text x='9.96' y='22.50' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='491.38px' lengthAdjust='spacingAndGlyphs'>In April 2026, a tonne of urea cost 4.00 tonnes of maize, the</text>
+<text x='9.96' y='41.40' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='440.64px' lengthAdjust='spacingAndGlyphs'>most since at least 1990. By October 2026 it was 1.85</text>
+<text x='9.96' y='316.23' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='455.75px' lengthAdjust='spacingAndGlyphs'>Source: World Bank Pink Sheet (Updated on November 03, 2026): urea and maize (US Gulf), nominal $/t</text>
+<text x='9.96' y='326.81' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='433.30px' lengthAdjust='spacingAndGlyphs'>(accessed 2026-11-19). Band: middle half of monthly values 1990-2019. World prices, not farm-gate</text>
+<text x='9.96' y='337.39' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='28.88px' lengthAdjust='spacingAndGlyphs'>prices.</text>
+<text x='9.96' y='347.98' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='102.34px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
+</g>
+</g>
+</svg>

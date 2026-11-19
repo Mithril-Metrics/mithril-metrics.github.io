@@ -1,0 +1,15 @@
+iso3,country,b1_share,first_year,last_year,n_years,high,group
+MWI,Malawi,38.5,2006,2019,14,TRUE,High input subsidies
+ZMB,Zambia,28.8,2014,2019,6,TRUE,High input subsidies
+MLI,Mali,24.7,2005,2019,15,TRUE,High input subsidies
+ZWE,Zimbabwe,17.3,2011,2017,7,TRUE,High input subsidies
+RWA,Rwanda,16.5,2012,2019,8,TRUE,High input subsidies
+BFA,Burkina Faso,10.3,2006,2019,14,TRUE,High input subsidies
+GHA,Ghana,5.5,2016,2019,4,TRUE,High input subsidies
+BEN,Benin,4.4,2008,2019,12,FALSE,Low input subsidies
+MOZ,Mozambique,4,2009,2019,11,FALSE,Low input subsidies
+KEN,Kenya,3.4,2007,2018,12,FALSE,Low input subsidies
+TZA,United Republic of Tanzania,3.3,2011,2017,7,FALSE,Low input subsidies
+UGA,Uganda,1.5,2004,2017,14,FALSE,Low input subsidies
+NGA,Nigeria,1.4,2015,2019,5,FALSE,Low input subsidies
+ETH,Ethiopia,0.6,2009,2019,11,FALSE,Low input subsidies

@@ -1,0 +1,15 @@
+In April 2026 a tonne of urea cost 4.00 tonnes of maize on world markets, the most since at least 1990. What does that mean for harvests in Africa?
+
+The OECD's new fertiliser brief and its 2026 policy report look at how countries cope with fertiliser shocks, but their support data cover only one Sub-Saharan African country. We looked at 14 maize-growing countries since 1990.
+
+What we found:
+→ In April 2026 a tonne of urea cost 4.00 tonnes of maize, the most since at least 1990
+→ A 10% higher urea-to-maize ratio goes with 1.2% lower maize yields across 14 countries
+→ Where input subsidies are large, fertiliser use did not fall when prices rose (+3.4% vs -5.0%), but yields fell about as much
+
+What it means: at the 2026 ratio, past responses point to maize yields roughly 6-7% below a typical-price year. Subsidies kept fertiliser flowing; whether they protect harvests, our data cannot confirm.
+
+Method: country trends and fixed effects, 14 countries, 1990-2024; World Bank Pink Sheet, FAOSTAT, FAO MAFAP
+Full analysis and code: link in the first comment
+
+#FoodSecurity #Fertiliser #AgriculturalEconomics #Africa

@@ -5,13 +5,13 @@ id: "2026-11-ssa-fertiliser-response"
 issue: 2
 local_folder: "Issue 2"
 author: "Pietro Sala"
-title: "Expensive fertiliser, smaller maize harvests? Sub-Saharan Africa's response to price spikes, and the role of input subsidies"
+title: "Do fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?"
 question: >
   How far is the fertiliser-to-maize price ratio from its historical norm in 2026, how strongly
   did maize yields and nitrogen use in 14 Sub-Saharan African countries move with that ratio
   over 1990-2024, and was the response weaker in countries that spend more on input subsidies?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: code                      # plan | code | results | red-teamed | draft | published
+status: draft                     # plan | code | results | red-teamed | draft | published
 
 hook:
   debate: >
@@ -49,35 +49,35 @@ sources:
     table: "CMO-Historical-Data-Monthly.xlsx, sheet 'Monthly Prices': Urea; Maize ($/mt, nominal)"
     url: "https://www.worldbank.org/en/research/commodity-markets"
     version: "Updated on November 03, 2026 (data to October 2026)"
-    accessed: null
+    accessed: "2026-11-19"
     licence: "CC BY 4.0"
   - name: "FAOSTAT Fertilizers by Nutrient (RFN)"
     provider: "FAO"
     table: "RFN; item Nutrient nitrogen N (total); elements Agricultural Use, Use per area of cropland"
     url: "https://www.fao.org/faostat/en/#data/RFN"
     version: "2026-07-30 (bulk catalogue DateUpdate), data to 2024"
-    accessed: null
+    accessed: "2026-11-19"
     licence: "CC BY 4.0"
   - name: "FAOSTAT Production: Crops and livestock products (QCL)"
     provider: "FAO"
     table: "QCL; item Maize (corn); elements Yield, Area harvested, Production"
     url: "https://www.fao.org/faostat/en/#data/QCL"
     version: "2025-12-31 (bulk catalogue DateUpdate), data to 2024"
-    accessed: null
+    accessed: "2026-11-19"
     licence: "CC BY 4.0"
   - name: "FAO MAFAP public expenditure on food and agriculture (bulk file)"
     provider: "FAO MAFAP programme"
     table: "public-expenditure-dataset_fao-mafap-programme_march2026rev.xlsx; B1. Variable inputs; III. Total expenditures in support of food and agriculture"
     url: "https://www.fao.org/in-action/mafap/data-hub/en"
     version: "March 2026 revision"
-    accessed: null
+    accessed: "2026-11-19"
     licence: "FAO terms of use"
   - name: "NOAA CPC Oceanic Niño Index (ONI)"
     provider: "NOAA Climate Prediction Center"
     table: "oni.ascii.txt"
     url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
     version: "monthly update"
-    accessed: null
+    accessed: "2026-11-19"
     licence: "US Government work (public domain)"
 
 manual_steps: []

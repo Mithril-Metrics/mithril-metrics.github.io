@@ -1,0 +1,168 @@
+key,value,unit,digits,big_mark,description,source,updated
+n_countries,14,,0,",",Countries in the panel,,2026-11-19 16:56
+year_start,1990,,0,,First year,,2026-11-19 16:56
+year_end,2024,,0,,Last year with yield and N data,,2026-11-19 16:56
+n_obs_yield,487,,0,",","Country-years, yield model",,2026-11-19 16:56
+n_obs_n,484,,0,",","Country-years, N model",,2026-11-19 16:56
+n_imputed_pct,55.16528925619835,%,0,",","Share of N-use values not from official or international sources (FAO flags I, E)","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+ratio_base,1.2924306024674646,t maize per t urea,2,",",Median crop-year urea/maize price ratio 1990-2019,"World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+ratio_now,2.400246424261955,t maize per t urea,2,",","Urea/maize ratio, crop year Oct 2025-Sep 2026","World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+ratio_now_multiple,1.857156910150136,x,2,",",Crop year 2026 ratio relative to 1990-2019 median,"World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+crop_year_now,2026,,0,,Latest complete crop year (Oct-Sep),,2026-11-19 16:56
+ratio_latest,1.854304635761589,t maize per t urea,2,",",Urea/maize ratio in the latest month,"World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+ratio_latest_multiple,1.4347421302323031,x,2,",",Latest month relative to 1990-2019 median,"World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+latest_month,10,,0,",",Latest month in the Pink Sheet (1-12),,2026-11-19 16:56
+latest_year,2026,,0,,Year of the latest month,,2026-11-19 16:56
+ratio_p0708,3.3404255319148937,t maize per t urea,2,",","Peak monthly ratio, episode p0708","World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+ratio_p0708_month,8,,0,",","Month of the peak, episode p0708",,2026-11-19 16:56
+ratio_p0708_year,2008,,0,,"Year of the peak, episode p0708",,2026-11-19 16:56
+ratio_p2122,3.620828307197427,t maize per t urea,2,",","Peak monthly ratio, episode p2122","World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+ratio_p2122_month,11,,0,",","Month of the peak, episode p2122",,2026-11-19 16:56
+ratio_p2122_year,2021,,0,,"Year of the peak, episode p2122",,2026-11-19 16:56
+ratio_p26,4.004205607476635,t maize per t urea,2,",","Peak monthly ratio, episode p26","World Bank Pink Sheet, Updated on November 03, 2026",2026-11-19 16:56
+ratio_p26_month,4,,0,",","Month of the peak, episode p26",,2026-11-19 16:56
+ratio_p26_year,2026,,0,,"Year of the peak, episode p26",,2026-11-19 16:56
+ratio_p26_is_max,1,,0,",",1 if the 2026 episode peak is the highest monthly ratio since 1990,,2026-11-19 16:56
+b_yield,-0.123734319384189,,3,",","Elasticity: maize yield, all countries","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_lo,-0.1816141181408287,,3,",","90% CI low: maize yield, all countries",,2026-11-19 16:56
+b_yield_hi,-0.06585452062754932,,3,",","90% CI high: maize yield, all countries",,2026-11-19 16:56
+b_yield_10pct,-1.1723873707565555,%,1,",","% change for a 10% higher ratio: maize yield, all countries",,2026-11-19 16:56
+b_yield_10pct_lo,-1.7160722517232108,%,1,",","90% CI low, % for +10%: maize yield, all countries",,2026-11-19 16:56
+b_yield_10pct_hi,-0.6256949456617367,%,1,",","90% CI high, % for +10%: maize yield, all countries",,2026-11-19 16:56
+b_n,-0.0911271762474781,,3,",","Elasticity: N use per ha, all countries","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_n_lo,-0.29646530896523315,,3,",","90% CI low: N use per ha, all countries",,2026-11-19 16:56
+b_n_hi,0.11421095647027692,,3,",","90% CI high: N use per ha, all countries",,2026-11-19 16:56
+b_n_10pct,-0.8647738882367029,%,1,",","% change for a 10% higher ratio: N use per ha, all countries",,2026-11-19 16:56
+b_n_10pct_lo,-2.786069015264947,%,1,",","90% CI low, % for +10%: N use per ha, all countries",,2026-11-19 16:56
+b_n_10pct_hi,1.0944929052775,%,1,",","90% CI high, % for +10%: N use per ha, all countries",,2026-11-19 16:56
+b_yield_low,-0.1106986753323406,,3,",","Elasticity: maize yield, low-subsidy countries","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_low_lo,-0.19768600741251863,,3,",","90% CI low: maize yield, low-subsidy countries",,2026-11-19 16:56
+b_yield_low_hi,-0.02371134325216256,,3,",","90% CI high: maize yield, low-subsidy countries",,2026-11-19 16:56
+b_yield_low_10pct,-1.0495247133634256,%,1,",","% change for a 10% higher ratio: maize yield, low-subsidy countries",,2026-11-19 16:56
+b_yield_low_10pct_lo,-1.866509762116897,%,1,",","90% CI low, % for +10%: maize yield, low-subsidy countries",,2026-11-19 16:56
+b_yield_low_10pct_hi,-0.22573806641684735,%,1,",","90% CI high, % for +10%: maize yield, low-subsidy countries",,2026-11-19 16:56
+b_yield_high,-0.13673126345746656,,3,",","Elasticity: maize yield, high-subsidy countries","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_high_lo,-0.2626990550902598,,3,",","90% CI low: maize yield, high-subsidy countries",,2026-11-19 16:56
+b_yield_high_hi,-0.01076347182467327,,3,",","90% CI high: maize yield, high-subsidy countries",,2026-11-19 16:56
+b_yield_high_10pct,-1.294733400844572,%,1,",","% change for a 10% higher ratio: maize yield, high-subsidy countries",,2026-11-19 16:56
+b_yield_high_10pct_lo,-2.472704583598162,%,1,",","90% CI low, % for +10%: maize yield, high-subsidy countries",,2026-11-19 16:56
+b_yield_high_10pct_hi,-0.10253424117977472,%,1,",","90% CI high, % for +10%: maize yield, high-subsidy countries",,2026-11-19 16:56
+b_n_low,-0.5387953431630268,,3,",","Elasticity: N use, low-subsidy countries","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_n_low_lo,-0.7956756173412158,,3,",","90% CI low: N use, low-subsidy countries",,2026-11-19 16:56
+b_n_low_hi,-0.2819150689848377,,3,",","90% CI high: N use, low-subsidy countries",,2026-11-19 16:56
+b_n_low_10pct,-5.005641563951357,%,1,",","% change for a 10% higher ratio: N use, low-subsidy countries",,2026-11-19 16:56
+b_n_low_10pct_lo,-7.303177028409102,%,1,",","90% CI low, % for +10%: N use, low-subsidy countries",,2026-11-19 16:56
+b_n_low_10pct_hi,-2.6511605749198197,%,1,",","90% CI high, % for +10%: N use, low-subsidy countries",,2026-11-19 16:56
+b_n_high,0.3476637240662342,,3,",","Elasticity: N use, high-subsidy countries","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_n_high_lo,0.0484798040726902,,3,",","90% CI low: N use, high-subsidy countries",,2026-11-19 16:56
+b_n_high_hi,0.6468476440597781,,3,",","90% CI high: N use, high-subsidy countries",,2026-11-19 16:56
+b_n_high_10pct,3.369100008866943,%,1,",","% change for a 10% higher ratio: N use, high-subsidy countries",,2026-11-19 16:56
+b_n_high_10pct_lo,0.4631310363096608,%,1,",","90% CI low, % for +10%: N use, high-subsidy countries",,2026-11-19 16:56
+b_n_high_10pct_hi,6.3591262428529305,%,1,",","90% CI high, % for +10%: N use, high-subsidy countries",,2026-11-19 16:56
+theta_yield,0.0405300589696126,,3,",","Elasticity: yield, high minus low subsidy (year FE)","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+theta_yield_lo,-0.10983164793720562,,3,",","90% CI low: yield, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_yield_hi,0.1908917658764308,,3,",","90% CI high: yield, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_yield_10pct,0.387039792769861,%,1,",","% change for a 10% higher ratio: yield, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_yield_10pct_lo,-1.0413474508929266,%,1,",","90% CI low, % for +10%: yield, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_yield_10pct_hi,1.836044638484613,%,1,",","90% CI high, % for +10%: yield, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_n,0.5319134389143118,,3,",","Elasticity: N use, high minus low subsidy (year FE)","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+theta_n_lo,0.03000639546856676,,3,",","90% CI low: N use, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_n_hi,1.0338204823600567,,3,",","90% CI high: N use, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_n_10pct,5.200384105651645,%,1,",","% change for a 10% higher ratio: N use, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_n_10pct_lo,0.28640084055258086,%,1,",","90% CI low, % for +10%: N use, high minus low subsidy (year FE)",,2026-11-19 16:56
+theta_n_10pct_hi,10.355150082337584,%,1,",","90% CI high, % for +10%: N use, high minus low subsidy (year FE)",,2026-11-19 16:56
+b_n_official,0.23006533375577415,,3,",","Elasticity: N use, official values only","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_n_official_lo,0.0467298297914637,,3,",","90% CI low: N use, official values only",,2026-11-19 16:56
+b_n_official_hi,0.4134008377200846,,3,",","90% CI high: N use, official values only",,2026-11-19 16:56
+b_n_official_10pct,2.216974432437846,%,1,",","% change for a 10% higher ratio: N use, official values only",,2026-11-19 16:56
+b_n_official_10pct_lo,0.4463761514916565,%,1,",","90% CI low, % for +10%: N use, official values only",,2026-11-19 16:56
+b_n_official_10pct_hi,4.0187835782514725,%,1,",","90% CI high, % for +10%: N use, official values only",,2026-11-19 16:56
+b_yield_lag,-0.0524697721515841,,3,",","Elasticity: maize yield, ratio lagged one season","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_lag_lo,-0.1206104944789004,,3,",","90% CI low: maize yield, ratio lagged one season",,2026-11-19 16:56
+b_yield_lag_hi,0.01567095017573218,,3,",","90% CI high: maize yield, ratio lagged one season",,2026-11-19 16:56
+b_yield_lag_10pct,-0.49884197191547575,%,1,",","% change for a 10% higher ratio: maize yield, ratio lagged one season",,2026-11-19 16:56
+b_yield_lag_10pct_lo,-1.1429588163222149,%,1,",","90% CI low, % for +10%: maize yield, ratio lagged one season",,2026-11-19 16:56
+b_yield_lag_10pct_hi,0.1494717056584438,%,1,",","90% CI high, % for +10%: maize yield, ratio lagged one season",,2026-11-19 16:56
+b_urea_yield,-0.12637806367881588,,3,",",Elasticity: maize yield on urea price (maize price held fixed),"FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_urea_yield_lo,-0.1787839996360891,,3,",",90% CI low: maize yield on urea price (maize price held fixed),,2026-11-19 16:56
+b_urea_yield_hi,-0.07397212772154266,,3,",",90% CI high: maize yield on urea price (maize price held fixed),,2026-11-19 16:56
+b_urea_yield_10pct,-1.197286394877406,%,1,",",% change for a 10% higher ratio: maize yield on urea price (maize price held fixed),,2026-11-19 16:56
+b_urea_yield_10pct_lo,-1.689557657307894,%,1,",","90% CI low, % for +10%: maize yield on urea price (maize price held fixed)",,2026-11-19 16:56
+b_urea_yield_10pct_hi,-0.7025501756219854,%,1,",","90% CI high, % for +10%: maize yield on urea price (maize price held fixed)",,2026-11-19 16:56
+b_maize_yield,0.17904186647422468,,3,",",Elasticity: maize yield on maize price (urea price held fixed),"FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_maize_yield_lo,0.1191112948530983,,3,",",90% CI low: maize yield on maize price (urea price held fixed),,2026-11-19 16:56
+b_maize_yield_hi,0.23897243809535107,,3,",",90% CI high: maize yield on maize price (urea price held fixed),,2026-11-19 16:56
+b_maize_yield_10pct,1.7210943015424365,%,1,",",% change for a 10% higher ratio: maize yield on maize price (urea price held fixed),,2026-11-19 16:56
+b_maize_yield_10pct_lo,1.1417203317362512,%,1,",","90% CI low, % for +10%: maize yield on maize price (urea price held fixed)",,2026-11-19 16:56
+b_maize_yield_10pct_hi,2.303787121332479,%,1,",","90% CI high, % for +10%: maize yield on maize price (urea price held fixed)",,2026-11-19 16:56
+b_urea_n,-0.09526465103768564,,3,",",Elasticity: N use on urea price (maize price held fixed),"FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_urea_n_lo,-0.27369642272590883,,3,",",90% CI low: N use on urea price (maize price held fixed),,2026-11-19 16:56
+b_urea_n_hi,0.08316712065053751,,3,",",90% CI high: N use on urea price (maize price held fixed),,2026-11-19 16:56
+b_urea_n_10pct,-0.9038595098369462,%,1,",",% change for a 10% higher ratio: N use on urea price (maize price held fixed),,2026-11-19 16:56
+b_urea_n_10pct_lo,-2.5748753444854944,%,1,",","90% CI low, % for +10%: N use on urea price (maize price held fixed)",,2026-11-19 16:56
+b_urea_n_10pct_hi,0.7958172470277081,%,1,",","90% CI high, % for +10%: N use on urea price (maize price held fixed)",,2026-11-19 16:56
+b_maize_n,0.2851437568000523,,3,",",Elasticity: N use on maize price (urea price held fixed),"FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_maize_n_lo,0.00597749975346129,,3,",",90% CI low: N use on maize price (urea price held fixed),,2026-11-19 16:56
+b_maize_n_hi,0.5643100138466433,,3,",",90% CI high: N use on maize price (urea price held fixed),,2026-11-19 16:56
+b_maize_n_10pct,2.7549768519626205,%,1,",",% change for a 10% higher ratio: N use on maize price (urea price held fixed),,2026-11-19 16:56
+b_maize_n_10pct_lo,0.05698788955952327,%,1,",","90% CI low, % for +10%: N use on maize price (urea price held fixed)",,2026-11-19 16:56
+b_maize_n_10pct_hi,5.525715800096664,%,1,",","90% CI high, % for +10%: N use on maize price (urea price held fixed)",,2026-11-19 16:56
+b_yield_nozwe,-0.09525500980659174,,3,",","Elasticity: maize yield, without Zimbabwe 2000-2009","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_nozwe_lo,-0.1535754343454534,,3,",","90% CI low: maize yield, without Zimbabwe 2000-2009",,2026-11-19 16:56
+b_yield_nozwe_hi,-0.03693458526773008,,3,",","90% CI high: maize yield, without Zimbabwe 2000-2009",,2026-11-19 16:56
+b_yield_nozwe_10pct,-0.9037684496114528,%,1,",","% change for a 10% higher ratio: maize yield, without Zimbabwe 2000-2009",,2026-11-19 16:56
+b_yield_nozwe_10pct_lo,-1.4530697720374186,%,1,",","90% CI low, % for +10%: maize yield, without Zimbabwe 2000-2009",,2026-11-19 16:56
+b_yield_nozwe_10pct_hi,-0.35140531752667625,%,1,",","90% CI high, % for +10%: maize yield, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_yield_nozwe,0.08183284124379248,,3,",","Elasticity: yield, high minus low subsidy, without Zimbabwe 2000-2009","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+theta_yield_nozwe_lo,-0.07173997752993119,,3,",","90% CI low: yield, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_yield_nozwe_hi,0.23540566001751617,,3,",","90% CI high: yield, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_yield_nozwe_10pct,0.7829998166215768,%,1,",","% change for a 10% higher ratio: yield, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_yield_nozwe_10pct_lo,-0.6814227298804543,%,1,",","90% CI low, % for +10%: yield, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_yield_nozwe_10pct_hi,2.269014833068806,%,1,",","90% CI high, % for +10%: yield, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_n_nozwe,0.5895848785623954,,3,",","Elasticity: N use, high minus low subsidy, without Zimbabwe 2000-2009","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+theta_n_nozwe_lo,0.04605134081239226,,3,",","90% CI low: N use, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_n_nozwe_hi,1.1331184163123984,,3,",","90% CI high: N use, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_n_nozwe_10pct,5.78022860520786,%,1,",","% change for a 10% higher ratio: N use, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_n_nozwe_10pct_lo,0.4398808050869451,%,1,",","90% CI low, % for +10%: N use, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+theta_n_nozwe_10pct_hi,11.40452053586396,%,1,",","90% CI high, % for +10%: N use, high minus low subsidy, without Zimbabwe 2000-2009",,2026-11-19 16:56
+loo_yield_min,-0.14602953714674677,,3,",","Leave-one-out minimum, yield elasticity",,2026-11-19 16:56
+loo_yield_max,-0.07736515801711431,,3,",","Leave-one-out maximum, yield elasticity",,2026-11-19 16:56
+loo_theta_min,-0.02750748153015104,,3,",","Leave-one-out minimum, high-low yield difference",,2026-11-19 16:56
+loo_theta_max,0.1784192107061822,,3,",","Leave-one-out maximum, high-low yield difference",,2026-11-19 16:56
+b1_share_high,20.228571428571428,%,0,",","Mean B1 share of support, high group","FAO MAFAP public expenditure, March 2026 revision",2026-11-19 16:56
+b1_share_low,2.657142857142857,%,0,",","Mean B1 share of support, low group","FAO MAFAP public expenditure, March 2026 revision",2026-11-19 16:56
+prod_2024_mt,61.75559154,million t,1,",","Maize production 2024, 14 countries","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+boe_yield_pct,-7.37372445669271,%,1,",","Implied yield change at the 2026 ratio, if past responses hold",,2026-11-19 16:56
+boe_yield_pct_lo,-10.633798466368804,%,1,",",90% CI low,,2026-11-19 16:56
+boe_yield_pct_hi,-3.994723130355793,%,1,",",90% CI high,,2026-11-19 16:56
+boe_kt,-4553.687156760234,thousand t,0,",","Implied change in maize output, 14 countries",,2026-11-19 16:56
+boe_kt_lo,-6566.965146077504,thousand t,0,",",90% CI low,,2026-11-19 16:56
+boe_kt_hi,-2466.964899536425,thousand t,0,",",90% CI high,,2026-11-19 16:56
+boe_yield_pct_nozwe,-5.726241010588417,%,1,",","Implied yield change at the 2026 ratio, elasticity without Zimbabwe 2000-2009",,2026-11-19 16:56
+boe_yield_pct_nozwe_lo,-9.069106259104595,%,1,",",90% CI low,,2026-11-19 16:56
+boe_yield_pct_nozwe_hi,-2.2604830068159276,%,1,",",90% CI high,,2026-11-19 16:56
+boe_kt_nozwe,-3536.274009094951,thousand t,0,",","Implied change in maize output, elasticity without Zimbabwe 2000-2009",,2026-11-19 16:56
+b_yield_no0809,-0.09986741377790212,,3,",","Elasticity: maize yield, without crop years 2008-2009","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_no0809_lo,-0.16567472930800148,,3,",","90% CI low: maize yield, without crop years 2008-2009",,2026-11-19 16:56
+b_yield_no0809_hi,-0.03406009824780276,,3,",","90% CI high: maize yield, without crop years 2008-2009",,2026-11-19 16:56
+b_yield_no0809_10pct,-0.94732247593029,%,1,",","% change for a 10% higher ratio: maize yield, without crop years 2008-2009",,2026-11-19 16:56
+b_yield_no0809_10pct_lo,-1.5666472096483974,%,1,",","90% CI low, % for +10%: maize yield, without crop years 2008-2009",,2026-11-19 16:56
+b_yield_no0809_10pct_hi,-0.3241010637498265,%,1,",","90% CI high, % for +10%: maize yield, without crop years 2008-2009",,2026-11-19 16:56
+b_yield_no2122,-0.12885798563097708,,3,",","Elasticity: maize yield, without crop years 2021-2022","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_no2122_lo,-0.18938252141830805,,3,",","90% CI low: maize yield, without crop years 2021-2022",,2026-11-19 16:56
+b_yield_no2122_hi,-0.06833344984364612,,3,",","90% CI high: maize yield, without crop years 2021-2022",,2026-11-19 16:56
+b_yield_no2122_10pct,-1.2206368231341247,%,1,",","% change for a 10% higher ratio: maize yield, without crop years 2021-2022",,2026-11-19 16:56
+b_yield_no2122_10pct_lo,-1.7888155163978017,%,1,",","90% CI low, % for +10%: maize yield, without crop years 2021-2022",,2026-11-19 16:56
+b_yield_no2122_10pct_hi,-0.6491710599794143,%,1,",","90% CI high, % for +10%: maize yield, without crop years 2021-2022",,2026-11-19 16:56
+b_yield_offn,-0.156654652775532,,3,",","Elasticity: maize yield, years with official N data","FAOSTAT QCL (2025-12-31), RFN (2026-07-30)",2026-11-19 16:56
+b_yield_offn_lo,-0.23161543598008943,,3,",","90% CI low: maize yield, years with official N data",,2026-11-19 16:56
+b_yield_offn_hi,-0.08169386957097459,,3,",","90% CI high: maize yield, years with official N data",,2026-11-19 16:56
+b_yield_offn_10pct,-1.481987166532106,%,1,",","% change for a 10% higher ratio: maize yield, years with official N data",,2026-11-19 16:56
+b_yield_offn_10pct_lo,-2.183343232072543,%,1,",","90% CI low, % for +10%: maize yield, years with official N data",,2026-11-19 16:56
+b_yield_offn_10pct_hi,-0.7756023017367886,%,1,",","90% CI high, % for +10%: maize yield, years with official N data",,2026-11-19 16:56
+n_obs_offn,217,,0,",",Country-years with official N data in the yield model,,2026-11-19 16:56
+s08_n,5,,0,",",Countries with MAFAP B1 data for budget years 2007 and 2009,"FAO MAFAP public expenditure, March 2026 revision",2026-11-19 16:56
+s08_share_up,3,,0,",","Of these, B1 share of support higher in 2009","FAO MAFAP public expenditure, March 2026 revision",2026-11-19 16:56
+s08_real_up,3,,0,",","Of these, B1 in constant 2017 USD higher in 2009","FAO MAFAP public expenditure, March 2026 revision",2026-11-19 16:56
+s08_n_real,5,,0,",",Countries with B1 in constant USD for both years,"FAO MAFAP public expenditure, March 2026 revision",2026-11-19 16:56
+s08_share_change_med,4.739443326100454,pp,1,",","Median change in B1 share of support, 2007 to 2009","FAO MAFAP public expenditure, March 2026 revision",2026-11-19 16:56

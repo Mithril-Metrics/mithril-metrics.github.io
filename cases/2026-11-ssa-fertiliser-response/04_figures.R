@@ -46,10 +46,6 @@ title1 <- if (kv("ratio_p26_is_max") == 1) {
   paste0("In ", peak26_lab, ", a tonne of urea cost ", k("ratio_p26"), " tonnes of maize, against a ",
          "1990-2019 median of ", k("ratio_base"), ". By ", month_lab, " it was ", k("ratio_latest"))
 }
-# median label where the line is far below it, so the two do not cross
-low_spot <- d1 |>
-  filter(year <= 2019) |>
-  slice_min(ratio, n = 1, with_ties = FALSE)
 cap1 <- wrap_cap(source_caption(
   paste0("World Bank Pink Sheet (", raw$versions$pink, "): urea and maize (US Gulf), nominal $/t"),
   accessed = raw$accessed,
@@ -65,8 +61,8 @@ p1 <- ggplot(d1, aes(date, ratio)) +
             vjust = -0.9, size = 3.8, colour = "grey15") +
   geom_text(data = last, aes(label = paste0(format(date, "%b %Y"), ": ", sprintf("%.2f", ratio))),
             hjust = -0.12, size = 3.8, colour = "grey15") +
-  annotate("text", x = low_spot$date, y = kv("ratio_base"), hjust = 0.5, vjust = -0.6, size = 3.5,
-           colour = "grey35", label = paste0("1990-2019 median: ", k("ratio_base"))) +
+  annotate("text", x = max(d1$date), y = kv("ratio_base"), hjust = -0.12, vjust = 0.9, size = 3.4,
+           colour = "grey35", lineheight = 0.9, label = paste0("1990-2019\nmedian: ", k("ratio_base"))) +
   scale_x_date(breaks = as.Date(paste0(seq(1990, 2020, 10), "-01-01")), date_labels = "%Y",
                expand = expansion(mult = c(0.02, 0.02))) +
   coord_cartesian(clip = "off") +
@@ -77,7 +73,7 @@ p1 <- ggplot(d1, aes(date, ratio)) +
                               " times the median)."), 72),
        x = "Month", y = "Tonnes of maize per tonne of urea", caption = cap1) +
   theme_ac() +
-  theme(plot.margin = margin(10, 70, 10, 10))
+  theme(plot.margin = margin(10, 80, 10, 10))
 save_fig(p1, "fig1_hero")
 
 # ---- Figure 2: response of yields and N use, by subsidy group ----
@@ -156,7 +152,7 @@ html <- c(
          k("ratio_base"), "). 90% intervals.</caption>"),
   "<thead><tr><th>Countries</th><th>Maize output 2024 (million t)</th><th>Implied yield change</th><th>Implied output change (thousand t)</th></tr></thead>",
   "<tbody>", rows, "</tbody></table>",
-  "<p class=\"small\">Group rows use group-specific elasticities. World prices, national averages; not a forecast.</p>"
+  "<p class=\"small\">Group rows use group-specific elasticities, so they do not add up to the first row. World prices, national averages. A conditional benchmark against a typical price ratio, not a forecast.</p>"
 )
 writeLines(html, "output/tab_1_back_of_envelope.html")
 cat("Figures and table written to output/.\n")

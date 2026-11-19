@@ -121,6 +121,25 @@ after_results:                    # ADDED AFTER the first full run (2026-11-19),
     - "Fig 1: one peak per price episode (2007-09, 2021-22, 2025-26) instead of calendar-year maxima"
     - "Fig 2: subtitle says same crop year, not next season"
 
+red_team:                         # P7, 2026-11-19 (reviewer stance: senior WB agriculture economist)
+  fixes:
+    - "F1: yield model without crop years 2008-2009, and without 2021-2022 (spike episodes)"
+    - "F2: yield model on country-years with official N data (FAO flags A or X)"
+    - "F3: MAFAP B1 share and real B1 (constant 2017 USD), budget year 2007 vs 2009"
+    - "F4: back-of-envelope with the elasticity estimated without Zimbabwe 2000-2009; only the all-country row in the post"
+    - "Fig 1: median label moved to the right margin"
+  caveats:
+    - "Yields fall with the ratio but measured N use does not: channel not identified by these data"
+    - "Urea prices move with energy and freight: read as an energy-linked input-cost shock"
+    - "Subsidy groups are not random; B1 covers seeds, energy and credit; on-budget only"
+    - "National averages, world prices, 14 countries chosen for MAFAP coverage"
+    - "Back-of-envelope is a conditional benchmark against a typical ratio, not a forecast"
+    - "ENSO control covers 1990-2024 only; the 2026/27 El Nino is outside the data"
+    - "D1, R4 and F1-F4 were added after the first results; headline is the pre-specified spec A"
+  do_not_claim:
+    - "agronomic N-response numbers (not in our data)"
+    - "named governments expanding subsidies in 2008 or 2022, beyond what tab_subsidy_2008.csv shows"
+
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html"
   linkedin: null

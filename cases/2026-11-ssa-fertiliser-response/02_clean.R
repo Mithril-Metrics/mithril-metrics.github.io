@@ -119,6 +119,22 @@ cat("\nMAFAP B1 (variable inputs) as % of total support to food and agriculture:
 print(groups, n = 20)
 readr::write_csv(groups |> mutate(b1_share = round(b1_share, 1)), "output/tab_subsidy_groups.csv")
 
+# Year by year, for the 2008 check in 03 (red team F3). Year = first year of the budget year.
+# Real level: B1 in constant 2017 USD, actual spending, national + donor.
+b1_real <- mafap |>
+  filter(`Budgeted/actual` == "Actual", `Donor/national/total` == "Total",
+         `Amounts expressed in` == "USD, constant 2017") |>
+  transmute(key = norm_name(Country),
+            year = as.integer(substr(Year, 1, 4)),
+            b1_usd17 = suppressWarnings(as.numeric(.data[[col_b1]])))
+subsidy_years <- countries |>
+  mutate(key = norm_name(fao_name)) |>
+  inner_join(subsidy, by = "key") |>
+  left_join(b1_real, by = c("key", "year")) |>
+  select(iso3, country = fao_name, year, share, b1_usd17)
+cat("B1 in constant 2017 USD available for", sum(!is.na(subsidy_years$b1_usd17)), "of",
+    nrow(subsidy_years), "country-years\n")
+
 # ---- Panel ----
 panel <- countries |>
   rename(country = fao_name) |>
@@ -140,3 +156,4 @@ cat("\nZero or missing N use (dropped from N models):", sum(is.na(panel$log_n)),
 saveRDS(panel, "output/cache/panel.rds")
 saveRDS(ratio_month, "output/cache/ratio_month.rds")
 saveRDS(ratio_year, "output/cache/ratio_year.rds")
+saveRDS(subsidy_years, "output/cache/subsidy_years.rds")

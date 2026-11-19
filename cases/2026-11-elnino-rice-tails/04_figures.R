@@ -39,7 +39,7 @@ title1 <- if (up) {
   paste0("In El Niño years, the chance of a rice harvest at least 5% below trend rises from ",
          k("p5_other_pct", unit = TRUE), " to ", k("p5_elnino_pct", unit = TRUE))
 } else {
-  paste0("El Niño years did not raise the chance of a rice harvest at least 5% below trend (",
+  paste0("No detectable rise in the chance of a rice harvest at least 5% below trend in the year El Niño begins (",
          k("p5_elnino_pct", unit = TRUE), " vs ", k("p5_other_pct", unit = TRUE), ")")
 }
 p1 <- ggplot(f1, aes(y = group, x = p)) +
@@ -85,9 +85,17 @@ f3 <- readr::read_csv("output/tab_fig3.csv", show_col_types = FALSE) |>
   filter(share >= 1e-4, loss_pct <= 20) |>
   mutate(series = recode(series, observed_all = "Observed, all years",
                          observed_elnino = "Observed, El Niño onset years",
-                         normal = "If shocks were normal"))
+                         normal = "If shocks were normal (typical years)",
+                         normal_sd = "If shocks were normal (all years)"),
+         series = factor(series, levels = c("Observed, all years", "Observed, El Niño onset years",
+                                            "If shocks were normal (typical years)",
+                                            "If shocks were normal (all years)")))
 r10 <- kv("ratio10")
-title3 <- if (r10 >= 1.05) {
+r10_sd <- kv("ratio10_sd")
+title3 <- if (r10 >= 1.05 && r10_sd >= 1.05) {
+  paste0("Harvests 10% or more below trend are ", k("ratio10_sd"), " to ", k("ratio10"),
+         " times as frequent as a normal distribution predicts")
+} else if (r10 >= 1.05) {
   paste0("Harvests 10% or more below trend are ", k("ratio10"), " times as frequent as a normal distribution predicts")
 } else if (r10 <= 0.95) {
   paste0("Harvests 10% or more below trend are rarer than a normal distribution predicts (",
@@ -101,13 +109,18 @@ p3 <- ggplot(f3, aes(x = loss_pct, y = 100 * share, colour = series, linetype = 
   scale_y_log10(labels = function(x) paste0(format(x, scientific = FALSE, drop0trailing = TRUE), "%")) +
   scale_colour_manual(values = c("Observed, all years" = "grey25",
                                  "Observed, El Niño onset years" = col_en,
-                                 "If shocks were normal" = col_norm)) +
+                                 "If shocks were normal (typical years)" = col_norm,
+                                 "If shocks were normal (all years)" = col_norm)) +
   scale_linetype_manual(values = c("Observed, all years" = "solid",
                                    "Observed, El Niño onset years" = "solid",
-                                   "If shocks were normal" = "dashed")) +
+                                   "If shocks were normal (typical years)" = "dashed",
+                                   "If shocks were normal (all years)" = "dotted")) +
   scale_x_continuous(labels = function(x) paste0(x, "%")) +
+  guides(colour = guide_legend(nrow = 2), linetype = guide_legend(nrow = 2)) +
   labs(title = wrap(title3, 62),
-       subtitle = "Share of country-years with a shortfall at least this large (log scale)",
+       subtitle = wrap(paste0("Share of country-years with a shortfall at least this large (log scale). ",
+                              "Normal curves use each country's spread in typical years (robust) or in all years (SD); ",
+                              k("n_loss10"), " of ", k("n_obs"), " country-years fell 10% or more."), 88),
        x = "Shortfall below trend", y = NULL, caption = cap) +
   theme_ac(grid = "xy")
 save_fig(p3, "fig3_tail_vs_normal")
@@ -144,6 +157,12 @@ if (file.exists("output/tab_second_look.csv")) {
   } else {
     "El Niño's footprint on rice yields, area and production is small and imprecise"
   }
+  n_sig <- sum(sl$p_holm < 0.05, na.rm = TRUE)
+  holm_note <- if (n_sig == 1) {
+    "Only the effect named in the title survives a correction for multiple testing (Holm)."
+  } else {
+    paste0(n_sig, " of ", nrow(sl), " effects survive a correction for multiple testing (Holm).")
+  }
   p4 <- ggplot(sl, aes(x = estimate, y = margin, colour = timing)) +
     geom_vline(xintercept = 0, colour = "grey40", linewidth = 0.4) +
     geom_errorbar(aes(xmin = lo, xmax = hi), width = 0.25, orientation = "y", linewidth = 0.6,
@@ -155,7 +174,7 @@ if (file.exists("output/tab_second_look.csv")) {
     labs(title = wrap(title4, 62),
          subtitle = wrap(paste0("Effect of an El Niño year on the deviation from trend, vs ENSO-neutral years; ",
                                 "country fixed effects, 95% intervals (year-block bootstrap). ",
-                                "Exploratory: added after the main results."), 88),
+                                "Exploratory: added after the main results. ", holm_note), 88),
          x = NULL, y = NULL,
          caption = paste(vapply(strsplit(sub("NOAA CPC ONI", "NOAA CPC ONI; UCDP/PRIO ACD v26.1",
                                               gsub("\n(?!Analysis)", " ", cap, perl = TRUE), fixed = TRUE), "\n")[[1]],

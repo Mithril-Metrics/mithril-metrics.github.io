@@ -1,7 +1,8 @@
 # 03b_second_look.R — why doesn't El Niño show up? (ADDED AFTER THE MAIN RESULTS) ----
 # Case: 2026-11-elnino-rice-tails (local folder: AgEcon/Issue 1/)
 # Input:  output/cache/panel.rds  (built by 02_clean.R)
-# Output: output/tab_second_look.csv, key numbers prefixed "sl_" appended to key_numbers.csv
+# Output: output/tab_second_look.csv, output/tab_loo.csv,
+#         key numbers prefixed "sl_" appended to key_numbers.csv
 #
 # The main specification (03_analyse.R) was fixed before seeing results and stays the headline.
 # Everything here is exploratory and labelled as such in the post. Four checks, chosen on
@@ -13,7 +14,9 @@
 #      (irrigated) harvest has high yields: yield may rise while production falls.
 #  S3  Region: maritime (IDN, PHL, MYS) vs mainland (THA, VNM, KHM).
 #  S4  Disruptions: drop major-conflict country-years (UCDP intensity 2); drop 1997-98.
-# Inference: year-block bootstrap (999 draws), as in 03_analyse.R.
+# Inference: year-block bootstrap (999 draws), as in 03_analyse.R. Added after the red team:
+# Holm-adjusted p-values across the 14 margin contrasts (S2, S3), and a leave-one-event-out
+# check of the maritime production effect in t+1.
 
 stopifnot("Run this script from the issue folder (AgEcon/Issue 1)" = file.exists("00_meta.yml"))
 options(acutils.data_dir = "data_raw")
@@ -122,8 +125,30 @@ tab <- tibble(
     "S4: >=10% shortfalls vs normal, without 1997-98"
   )
 )
+# Many contrasts were looked at, so adjust the S2/S3 p-values for multiple testing (Holm).
+# p-values use the bootstrap standard error and a normal approximation.
+se_boot <- apply(boot, 2, stats::sd, na.rm = TRUE)
+tab$p <- 2 * stats::pnorm(-abs(est / se_boot))
+margins <- grepl("^s2_|^s3_", tab$stat)
+tab$p_holm <- NA_real_
+tab$p_holm[margins] <- stats::p.adjust(tab$p[margins], method = "holm")
 print(tab, n = Inf, width = Inf)
 readr::write_csv(tab, "output/tab_second_look.csv")
+
+# Leave one El Niño event out: does the maritime t+1 production effect rest on one episode?
+# Each event removes its onset year and the following year.
+mar_all <- panel[panel$region == "Maritime", ]
+events <- sort(unique(panel$year[panel$elnino]))
+loo <- tibble(
+  event = events,
+  estimate = vapply(events, function(e) {
+    d <- mar_all[!mar_all$year %in% c(e, e + 1), ]
+    pct(s2(d, "shock_prod")[["t1"]])
+  }, numeric(1))
+)
+cat("\nLeave-one-event-out, maritime production t+1 (% vs trend):\n")
+print(loo, n = Inf)
+readr::write_csv(loo, "output/tab_loo.csv")
 
 # --- Key numbers (appended; 03_analyse.R resets the file first) ---------------------------------
 src <- "FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory)"
@@ -136,6 +161,22 @@ for (i in seq_len(nrow(tab))) {
            source = src, file = kn_file)
   }
 }
+holm_of <- function(st) tab$p_holm[tab$stat == st]
+kn_add("sl_holm_mar_prod_t1", holm_of("s3_mar_prod_t1"), unit = "", digits = 3,
+       description = "Holm-adjusted p, maritime production t+1 (14 margin contrasts)", source = src, file = kn_file)
+kn_add("sl_holm_mar_yield_t1", holm_of("s3_mar_yield_t1"), unit = "", digits = 3,
+       description = "Holm-adjusted p, maritime yield t+1 (14 margin contrasts)", source = src, file = kn_file)
+kn_add("sl_n_holm_sig", sum(tab$p_holm < 0.05, na.rm = TRUE), unit = "", digits = 0,
+       description = "Margin contrasts with Holm-adjusted p < 0.05", source = src, file = kn_file)
+kn_add("sl_n_margin_tests", sum(margins), unit = "", digits = 0,
+       description = "Margin contrasts tested (S2, S3)", source = src, file = kn_file)
+kn_add("sl_loo_min", min(loo$estimate), unit = "%", digits = 1,
+       description = "Maritime production t+1, leave-one-event-out: most negative", source = src, file = kn_file)
+kn_add("sl_loo_max", max(loo$estimate), unit = "%", digits = 1,
+       description = "Maritime production t+1, leave-one-event-out: closest to zero", source = src, file = kn_file)
+kn_add("sl_loo_max_event", loo$event[which.max(loo$estimate)], unit = "", digits = 0, big_mark = "",
+       description = "El Niño event whose removal moves the maritime t+1 effect closest to zero",
+       source = src, file = kn_file)
 kn_add("sl_n_conflict_years", sum(panel$major_conflict), unit = "country-years", digits = 0,
        description = "Country-years with major armed conflict (UCDP intensity 2), dropped in S4",
        source = src, file = kn_file)

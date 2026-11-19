@@ -7,7 +7,8 @@
 # Estimands (fixed in PLAN):
 #  E1  Delta P(yield >= 5% below trend | El Niño onset year) - P(... | other years), pp
 #  E2  observed frequency of >= 5% / >= 10% shortfalls  /  frequency implied by a normal
-#      distribution with each country's typical (robust) variability
+#      distribution with each country's typical (robust) variability; a second benchmark
+#      uses the classical SD, which the large losses themselves inflate (lower bound on E2)
 # Inference: year-block bootstrap. El Niño hits all six countries in the same year, so shocks
 # are correlated across countries within a year; resampling whole years keeps that structure.
 
@@ -26,6 +27,14 @@ pct <- function(x) 100 * (exp(x) - 1)          # log points -> % change
 panel <- readRDS("output/cache/panel.rds")
 raw   <- readRDS("output/cache/raw.rds")
 src   <- "FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations"
+
+# Classical SD per country. The MAD ignores the worst years, so a normal curve built on it is
+# narrow; the SD includes them, so its normal curve is wide. The truth lies between the two.
+panel <- panel |>
+  group_by(iso3) |>
+  mutate(sigma_sd = stats::sd(shock)) |>
+  ungroup() |>
+  mutate(pnorm5_sd = pnorm(thr5 / sigma_sd), pnorm10_sd = pnorm(thr10 / sigma_sd))
 
 # --- Estimators --------------------------------------------------------------------------
 lpm <- function(d, y, treat) {
@@ -52,6 +61,9 @@ stats_fun <- function(d) {
     p10_obs   = mean(d$loss10), p10_norm = mean(d$pnorm10),
     ratio5    = mean(d$loss5) / mean(d$pnorm5),
     ratio10   = mean(d$loss10) / mean(d$pnorm10),
+    p10_norm_sd = mean(d$pnorm10_sd),
+    ratio5_sd   = mean(d$loss5) / mean(d$pnorm5_sd),
+    ratio10_sd  = mean(d$loss10) / mean(d$pnorm10_sd),
     qr10      = q[1], qr50 = q[2],
     r1_diff5  = lpm(d, "loss5", "elnino_lag"),        # R1: exposure in harvest year t+1
     r2_diff5  = lpm(d, "loss5_loess", "elnino")       # R2: LOESS trend
@@ -153,7 +165,8 @@ tab_fig3 <- bind_rows(lapply(grid, function(x) {
   tibble(loss_pct = 100 * x,
          observed_all    = mean(panel$shock <= thr),
          observed_elnino = mean(panel$shock[panel$elnino] <= thr),
-         normal          = mean(pnorm(thr / panel$sigma)))
+         normal          = mean(pnorm(thr / panel$sigma)),
+         normal_sd       = mean(pnorm(thr / panel$sigma_sd)))
 }))
 readr::write_csv(tab_fig3, "output/tab_fig3.csv")
 
@@ -189,6 +202,13 @@ add("p10_normal_pct", 100 * est[["p10_norm"]], "%", 2, "Share implied by normal 
 add("ratio10", est[["ratio10"]], "x", 1, "Observed / normal-implied frequency, >=10% shortfalls")
 add("ratio10_lo", ci[1, "ratio10"], "x", 1, "95% CI lower")
 add("ratio10_hi", ci[2, "ratio10"], "x", 1, "95% CI upper")
+add("n_loss10", sum(panel$loss10), "country-years", 0, "Country-years with yields at least 10% below trend")
+add("median_sd_pct", 100 * median(unique(panel$sigma_sd)), "%", 1, "Median country SD of yield shocks (classical)")
+add("p10_normal_sd_pct", 100 * est[["p10_norm_sd"]], "%", 2, "Share implied by normal shocks with the classical SD, >=10%")
+add("ratio5_sd", est[["ratio5_sd"]], "x", 1, "Observed / normal-implied frequency (classical SD), >=5% shortfalls")
+add("ratio10_sd", est[["ratio10_sd"]], "x", 1, "Observed / normal-implied frequency (classical SD), >=10% shortfalls")
+add("ratio10_sd_lo", ci[1, "ratio10_sd"], "x", 1, "95% CI lower")
+add("ratio10_sd_hi", ci[2, "ratio10_sd"], "x", 1, "95% CI upper")
 
 add("qr10_elnino_pct", pct(est[["qr10"]]), "%", 1, "El Niño shift of the 10th percentile of yield shocks")
 add("qr10_lo_pct", pct(ci[1, "qr10"]), "%", 1, "95% CI lower")

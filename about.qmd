@@ -11,12 +11,16 @@ answers it with public data in about four hours.
 - **Public data only.** Every number traces to a named dataset and access date.
 - **One question, one answer.** The bottom line comes first; caveats are stated plainly.
 - **Methods from production and resource economics:** production frontiers, productivity and
-  efficiency measurement, risk and fat tails, panel and causal-ML econometrics.
+  efficiency measurement, water economics and governance, risk and fat tails, panel and causal-ML econometrics.
 - **Reproducible.** All code is on [GitHub](https://github.com/Mithril-Metrics/mithril-metrics.github.io)
   and runs end to end in R.
 - **Neutral.** Policy implications are written as trade-offs, not recommendations.
 
 ## People
+
+[**Juan Pablo Henao**](people/juan-pablo-henao.qmd): applied environmental economist, Chair of
+Agricultural Production and Resource Economics, Technical University of Munich; formerly FAO.
+Water pricing and governance, sustainable productivity, optimisation and efficiency analysis.
 
 [**Pietro Sala**](people/pietro-sala.qmd): applied economist, Chair of Agricultural Production
 and Resource Economics, Technical University of Munich. Production and efficiency analysis,

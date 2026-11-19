@@ -1,8 +1,10 @@
 ---
 title: "Pietro Sala"
-# image: ../images/people/pietro-sala.jpg   # square photo, at least 600 x 600 px
+image: ../images/people/pietro-sala.jpg
 about:
   template: solana
+  image-shape: round
+  image-width: 14em
   links:
     - icon: file-earmark-pdf
       text: CV (PDF)

@@ -2,7 +2,7 @@
 
 Short, reproducible, data-driven policy case studies in agricultural, production and
 applied microeconomics — the code behind **Mithril Metrics** (https://mithril-metrics.github.io/)
-by Pietro Sala and co-authors.
+by Juan Pablo Henao and Pietro Sala.
 
 > We quantify how farms and food systems turn inputs and natural resources (land, water,
 > nutrients, climate) into outputs, and how policy, prices and weather shocks shift that

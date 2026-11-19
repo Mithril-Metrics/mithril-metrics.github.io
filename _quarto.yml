@@ -31,6 +31,8 @@ website:
         menu:
           - text: "The project"
             href: about.qmd
+          - text: "Juan Pablo Henao"
+            href: people/juan-pablo-henao.qmd
           - text: "Pietro Sala"
             href: people/pietro-sala.qmd
     right:

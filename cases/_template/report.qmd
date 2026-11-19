@@ -251,11 +251,12 @@ li <- paste0(
   "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
   "What it means: ", implications[1], "\n\n",
   method_tag, "\n",
-  "Full analysis + code: ", blog_url, "\n\n",
+  "Full analysis and code: link in the first comment\n\n",
   hashtags
 )
 dir.create("output", showWarnings = FALSE)
 writeLines(li, "output/linkedin_post.txt", useBytes = TRUE)
+writeLines(paste0("Full analysis and code: ", blog_url), "output/linkedin_first_comment.txt", useBytes = TRUE)
 
 n_total <- nchar(li, type = "chars")
 n_hook  <- nchar(hook, type = "chars")

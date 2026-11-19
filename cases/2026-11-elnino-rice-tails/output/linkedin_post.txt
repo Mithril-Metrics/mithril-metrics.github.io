@@ -12,6 +12,6 @@ What it means: if you are timing early action or imports, watch the 2027 harvest
 National averages hide local losses, so this is a floor, not a full picture.
 
 Method: detrended FAOSTAT rice yields, 6 countries, 1961-2024; country fixed effects; intervals from resampling whole years
-Full analysis + code: https://mithril-metrics.github.io/cases/2026-11-elnino-rice-tails/report.html
+Full analysis and code: link in the first comment
 
 #FoodSecurity #ElNino #AgriculturalEconomics #SoutheastAsia

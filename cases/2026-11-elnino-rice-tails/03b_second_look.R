@@ -49,12 +49,18 @@ main_diff5 <- function(d) {   # same estimand as the headline (El Niño vs all o
 ratio10 <- function(d) mean(d$loss10) / mean(d$pnorm10)
 
 stats_fun <- function(d) {
-  mar <- d[d$region == "Maritime", ]; mai <- d[d$region == "Mainland", ]
-  noc <- d[!d$major_conflict, ];      nocr <- d[!d$crisis9798, ]
+  mar <- d[d$region == "Maritime", ]
+  mai <- d[d$region == "Mainland", ]
+  noc <- d[!d$major_conflict, ]
+  nocr <- d[!d$crisis9798, ]
   a <- s1(d)
-  y <- s2(d, "shock"); ar <- s2(d, "shock_area"); pr <- s2(d, "shock_prod")
-  pm <- s2(mar, "shock_prod"); pn <- s2(mai, "shock_prod")
-  ym <- s2(mar, "shock");      yn <- s2(mai, "shock")
+  y <- s2(d, "shock")
+  ar <- s2(d, "shock_area")
+  pr <- s2(d, "shock_prod")
+  pm <- s2(mar, "shock_prod")
+  pn <- s2(mai, "shock_prod")
+  ym <- s2(mar, "shock")
+  yn <- s2(mai, "shock")
   c(
     s1_el_vs_neutral = a[["el"]], s1_la_vs_neutral = a[["la"]],
     s2_yield_t = y[["t"]], s2_yield_t1 = y[["t1"]],
@@ -70,7 +76,8 @@ stats_fun <- function(d) {
 }
 
 # --- Descriptives --------------------------------------------------------------------------
-cat("ENSO phase counts:\n"); print(table(panel$enso3, panel$region))
+cat("ENSO phase counts:\n")
+print(table(panel$enso3, panel$region))
 cat("\nMajor-conflict country-years dropped in S4:", sum(panel$major_conflict), "\n")
 print(panel |> filter(major_conflict) |> count(iso3))
 cat("\nShare of >=5% shortfalls by ENSO phase:\n")
@@ -121,7 +128,7 @@ readr::write_csv(tab, "output/tab_second_look.csv")
 # --- Key numbers (appended; 03_analyse.R resets the file first) ---------------------------------
 src <- "FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory)"
 for (i in seq_len(nrow(tab))) {
-  u <- tab$unit[i]; u <- ifelse(u == "% vs trend", "%", u)
+  u <- ifelse(tab$unit[i] == "% vs trend", "%", tab$unit[i])
   for (part in c("estimate", "lo", "hi")) {
     key <- paste0("sl_", tab$stat[i], if (part == "estimate") "" else paste0("_", part))
     kn_add(key, tab[[part]][i], unit = u, digits = 1,

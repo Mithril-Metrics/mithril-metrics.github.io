@@ -40,7 +40,8 @@ panel <- rice |>
 
 # Unit cross-check: reported yield vs production / area (should agree within ~1%)
 xchk <- with(panel, summary(yield / (prod / area)))
-cat("Reported yield / (production/area):\n"); print(xchk)
+cat("Reported yield / (production/area):\n")
+print(xchk)
 stopifnot("Yield unit conversion looks wrong" = abs(median(panel$yield / (panel$prod / panel$area), na.rm = TRUE) - 1) < 0.02)
 
 # Pre-registered sample rule: Cambodia from 1980 (1970s values unreliable / imputed)
@@ -133,7 +134,8 @@ panel <- panel |>
          crisis9798 = year %in% 1997:1998) |>
   left_join(war |> mutate(major_conflict = TRUE), by = c("iso3", "year")) |>
   mutate(major_conflict = dplyr::coalesce(major_conflict, FALSE))
-cat("\nENSO phase counts (country-years):\n"); print(table(panel$enso3))
+cat("\nENSO phase counts (country-years):\n")
+print(table(panel$enso3))
 cat("Major-conflict country-years (UCDP intensity 2):\n")
 print(panel |> filter(major_conflict) |> group_by(iso3) |>
         summarise(n = n(), years = paste(range(year), collapse = "-"), .groups = "drop"))

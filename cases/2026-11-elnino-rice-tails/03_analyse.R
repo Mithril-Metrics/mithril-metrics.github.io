@@ -80,7 +80,8 @@ print(res, n = Inf)
 # z = loss / country sigma. For normal shocks the GPD shape xi is ~0 (thin, Gumbel-type tail);
 # xi > 0 indicates a heavy tail. Simple MLE, standard errors from the Hessian.
 gpd_nll <- function(par, y) {
-  s <- exp(par[1]); xi <- par[2]
+  s <- exp(par[1])
+  xi <- par[2]
   if (abs(xi) < 1e-8) return(length(y) * log(s) + sum(y) / s)
   t <- 1 + xi * y / s
   if (any(t <= 0)) return(1e10)
@@ -215,6 +216,7 @@ add("oni_latest", oni_last$ANOM, "°C", 2,
     paste0("Latest ONI anomaly at access: ", oni_last$SEAS, " ", oni_last$YR))
 add("oni_latest_year", oni_last$YR, "", 0, paste("Year of latest ONI season", oni_last$SEAS), big_mark = "")
 
-cat("\nKey numbers:\n"); print(kn_read(kn_file), n = Inf, width = Inf)
+cat("\nKey numbers:\n")
+print(kn_read(kn_file), n = Inf, width = Inf)
 write_session_info("output")
 message("03_analyse.R done.")

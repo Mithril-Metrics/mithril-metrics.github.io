@@ -127,7 +127,8 @@ source_caption <- function(source, accessed = NULL, note = NULL,
 save_fig <- function(plot, name, dir = "output", width_px = 1600, height_px = 1000,
                      dpi = 200, svg = TRUE) {
   dir.create(dir, recursive = TRUE, showWarnings = FALSE)
-  w <- width_px / dpi; h <- height_px / dpi
+  w <- width_px / dpi
+  h <- height_px / dpi
   png <- file.path(dir, paste0(name, ".png"))
   ggplot2::ggsave(png, plot, width = w, height = h, units = "in", dpi = dpi, bg = .ac_surface)
   paths <- png

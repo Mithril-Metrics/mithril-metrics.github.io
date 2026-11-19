@@ -12,7 +12,10 @@ suppressPackageStartupMessages({
 })
 kn_file <- "output/key_numbers.csv"
 k  <- function(key, ...) kn(key, file = kn_file, ...)
-kv <- function(key) { x <- kn_read(kn_file); x$value[x$key == key] }
+kv <- function(key) {
+  x <- kn_read(kn_file)
+  x$value[x$key == key]
+}
 raw <- readRDS("output/cache/raw.rds")
 panel <- readRDS("output/cache/panel.rds")
 wrap <- function(x, width) paste(strwrap(x, width), collapse = "\n")   # keep titles inside the frame

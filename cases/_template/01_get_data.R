@@ -26,7 +26,9 @@ options(acutils.data_dir = "data_raw")   # all acutils fetchers cache here
 # t2m  <- get_era5_monthly("2m_temperature", bbox = c(5, 35, 19, 48), years = 2000:2024)
 
 # --- Sanity checks: rows, year range, NA share, units --------------------------
-# print(nrow(tfp)); print(range(tfp$year)); print(mean(is.na(tfp$value)))
+# print(nrow(tfp))
+# print(range(tfp$year))
+# print(mean(is.na(tfp$value)))
 
 # --- Record access dates for 00_meta.yml -----------------------------------------
 log <- access_log()

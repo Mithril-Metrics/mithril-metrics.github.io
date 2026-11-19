@@ -18,14 +18,18 @@ test_that("key numbers round-trip and format", {
 })
 
 test_that("cache names carry the access date and the newest copy is reused", {
-  d <- tempfile(); dir.create(d)
+  d <- tempfile()
+  dir.create(d)
   writeLines("old", file.path(d, "src_2026-01-01.txt"))
   writeLines("new", file.path(d, "src_2026-06-01.txt"))
   hit <- acutils:::.latest_cache("src", "txt", d)
   expect_equal(basename(hit), "src_2026-06-01.txt")
   calls <- 0
-  p <- cached_fetch("other", "txt", function(path) { calls <<- calls + 1; writeLines("x", path) },
-                    dir = d)
+  fetch_one <- function(path) {
+    calls <<- calls + 1
+    writeLines("x", path)
+  }
+  p <- cached_fetch("other", "txt", fetch_one, dir = d)
   expect_equal(calls, 1)
   expect_match(basename(p), paste0("other_", Sys.Date(), ".txt"))
   p2 <- suppressMessages(cached_fetch("other", "txt", function(path) calls <<- calls + 1, dir = d))
@@ -99,7 +103,8 @@ test_that("theme, palette, caption and save_fig work", {
   expect_match(cap, "FAOSTAT QCL; WDI \\(accessed 2026-11-18\\)")
   p <- ggplot2::ggplot(data.frame(x = 1:3, y = 1:3), ggplot2::aes(x, y)) +
     ggplot2::geom_line() + theme_ac()
-  d <- tempfile(); paths <- suppressMessages(save_fig(p, "t", dir = d))
+  d <- tempfile()
+  paths <- suppressMessages(save_fig(p, "t", dir = d))
   expect_true(all(file.exists(paths)))
   dims <- dim(png::readPNG(paths[1]))
   expect_equal(dims[1:2], c(1000, 1600))

@@ -14,7 +14,8 @@
 args <- commandArgs(trailingOnly = TRUE)
 usage <- 'Usage: Rscript new_case.R <slug> --issue N [--title "..."] [--region R] [--method M] [--employer E] [--date YYYY-MM]'
 if (length(args) == 0 || args[1] %in% c("-h", "--help")) {
-  cat(usage, "\n"); quit(status = if (length(args) == 0) 1 else 0)
+  cat(usage, "\n")
+  quit(status = if (length(args) == 0) 1 else 0)
 }
 
 slug <- tolower(args[1])

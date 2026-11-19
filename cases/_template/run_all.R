@@ -19,7 +19,12 @@ run_case <- function() {
   con <- file(log_file, open = "wt")
   sink(con, split = TRUE)                 # console output -> screen + log
   sink(con, type = "message")             # messages and warnings -> log
-  on.exit({ sink(type = "message"); sink(); close(con) }, add = TRUE)  # inside a function: runs at the end
+  # inside a function, so this runs when the run ends
+  on.exit({
+    sink(type = "message")
+    sink()
+    close(con)
+  }, add = TRUE)
 
   cat("Run started:", format(Sys.time()), "\nWorking directory:", getwd(), "\n\n")
   # every NN_*.R / NNx_*.R script in order (01, 02, 03, 03b, 04, ...)

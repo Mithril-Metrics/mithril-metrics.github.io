@@ -105,7 +105,8 @@ fetch_long <- function(spec) {
     },
     csv = {
       d <- readr::read_csv(spec$table, show_col_types = FALSE, progress = FALSE)
-      uc <- spec$unit_col %||% "unit"; yc <- spec$year_col %||% "year"
+      uc <- spec$unit_col %||% "unit"
+      yc <- spec$year_col %||% "year"
       if (!is.null(spec$variable_col)) {
         d <- transmute(d, unit = as.character(.data[[uc]]), year = as.integer(.data[[yc]]),
                        variable = as.character(.data[[spec$variable_col]]),
@@ -127,17 +128,26 @@ fetch_long <- function(spec) {
 `%||%` <- function(a, b) if (is.null(a) || length(a) == 0) b else a
 
 # ---- Fetch under a time budget ------------------------------------------------------------------
-reachable <- TRUE; err <- NULL
+reachable <- TRUE
+err <- NULL
 long <- tryCatch({
   setTimeLimit(elapsed = RULES$budget_seconds, transient = TRUE)
   on.exit(setTimeLimit(elapsed = Inf), add = TRUE)
   fetch_long(spec)
-}, error = function(e) { reachable <<- FALSE; err <<- conditionMessage(e); NULL })
+}, error = function(e) {
+  reachable <<- FALSE
+  err <<- conditionMessage(e)
+  NULL
+})
 setTimeLimit(elapsed = Inf)
 
 line <- function(...) cat(..., "\n", sep = "")
 md <- character()
-say <- function(...) { txt <- paste0(...); md <<- c(md, txt); line(txt) }
+say <- function(...) {
+  txt <- paste0(...)
+  md <<- c(md, txt)
+  line(txt)
+}
 spec_name <- tools::file_path_sans_ext(basename(spec_file))
 say("# Feasibility check: ", spec$label %||% spec_name)
 say("")
@@ -147,7 +157,8 @@ say("- Reachable: **", if (reachable) "Y" else "N", "**", if (!reachable) paste0
 
 if (!reachable || is.null(long) || nrow(long) == 0) {
   if (reachable) say("- The query returned **no rows**: check unit codes, variable names and years.")
-  say(""); say("## Verdict: **RED**")
+  say("")
+  say("## Verdict: **RED**")
   say("- Data could not be retrieved (budget ", RULES$budget_seconds, " s). Fix access or the spec before planning.")
   dir.create(out_dir, showWarnings = FALSE)
   writeLines(md, file.path(out_dir, paste0(spec_name, "_", Sys.Date(), ".md")))
@@ -234,7 +245,8 @@ g <- c(
         sprintf("only %d years with data", years_with))
 )
 if (RULES$red_if_variable_absent && length(absent)) {
-  g <- c(g, 1); reasons <- c(reasons, "requested variable(s) absent")
+  g <- c(g, 1)
+  reasons <- c(reasons, "requested variable(s) absent")
 }
 verdict <- c("RED", "AMBER", "GREEN")[min(g)]
 say("")

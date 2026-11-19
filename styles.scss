@@ -268,3 +268,17 @@ figure img, .figure img, .quarto-figure img {
   object-fit: contain !important;
   background: #fafbfc;
 }
+
+// ---- Justified body text ----
+main.content p,
+main.content li,
+.bottom-line,
+.method-note {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.kf-label, .card-text, .person-role, .post-footer p, .hero-sub, figcaption, .figure-caption {
+  text-align: left;
+  hyphens: manual;
+}

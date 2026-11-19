@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='576.00pt' height='360.00pt' viewBox='0 0 576.00 360.00'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FCFCFB;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='360.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
+<rect x='0.00' y='0.00' width='576.00' height='360.00' style='stroke-width: 1.36; stroke: none; fill: #FCFCFB;' />
+</g>
+<defs>
+  <clipPath id='cpNTcuMDR8NTU2LjA3fDE3OS40NnwyNzQuNzE='>
+    <rect x='57.04' y='179.46' width='499.03' height='95.25' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTcuMDR8NTU2LjA3fDE3OS40NnwyNzQuNzE=)'>
+<polyline points='57.04,271.43 556.07,271.43 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='57.04,247.79 556.07,247.79 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='57.04,224.15 556.07,224.15 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='57.04,200.51 556.07,200.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='79.73,274.71 79.73,179.46 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='202.34,274.71 202.34,179.46 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='324.95,274.71 324.95,179.46 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='447.56,274.71 447.56,179.46 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='79.73,184.24 91.99,185.27 104.25,186.34 116.51,188.29 128.77,189.95 141.03,191.13 153.30,192.98 165.56,193.82 177.82,195.23 190.08,197.07 202.34,197.27 214.60,199.57 226.86,200.65 239.12,202.52 251.38,204.39 263.65,205.70 275.91,206.68 288.17,207.21 300.43,209.64 312.69,211.93 324.95,212.82 337.21,212.82 349.47,213.80 361.74,213.80 374.00,213.80 386.26,213.80 398.52,216.09 410.78,220.92 423.04,223.21 435.30,226.16 447.56,230.32 459.82,237.44 472.09,237.44 484.35,237.44 496.61,237.44 508.87,237.44 ' style='stroke-width: 2.13; stroke: #404040; stroke-linecap: butt;' />
+<polyline points='79.73,183.79 91.99,184.98 104.25,186.56 116.51,188.73 128.77,190.36 141.03,192.31 153.30,194.71 165.56,194.71 177.82,196.47 190.08,198.60 202.34,199.42 214.60,204.96 226.86,204.96 239.12,204.96 251.38,204.96 263.65,204.96 275.91,204.96 288.17,204.96 300.43,206.54 312.69,213.66 324.95,213.66 337.21,213.66 349.47,213.66 361.74,213.66 374.00,213.66 386.26,213.66 398.52,213.66 410.78,217.82 423.04,224.94 435.30,224.94 447.56,224.94 ' style='stroke-width: 2.13; stroke: #EB6834; stroke-linecap: butt;' />
+<polyline points='79.73,183.98 91.99,185.15 104.25,186.44 116.51,187.88 128.77,189.45 141.03,191.16 153.30,193.02 165.56,195.03 177.82,197.19 190.08,199.51 202.34,201.97 214.60,204.58 226.86,207.34 239.12,210.24 251.38,213.29 263.65,216.48 275.91,219.81 288.17,223.28 300.43,226.89 312.69,230.63 324.95,234.50 337.21,238.51 349.47,242.65 361.74,246.92 374.00,251.33 386.26,255.88 398.52,260.57 410.78,265.40 423.04,270.38 ' style='stroke-width: 2.13; stroke: #2A78D6; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+<polyline points='79.73,183.98 91.99,184.83 104.25,185.75 116.51,186.74 128.77,187.81 141.03,188.96 153.30,190.19 165.56,191.50 177.82,192.89 190.08,194.36 202.34,195.91 214.60,197.55 226.86,199.28 239.12,201.08 251.38,202.98 263.65,204.95 275.91,207.01 288.17,209.15 300.43,211.37 312.69,213.68 324.95,216.07 337.21,218.54 349.47,221.09 361.74,223.73 374.00,226.45 386.26,229.26 398.52,232.15 410.78,235.12 423.04,238.18 435.30,241.33 447.56,244.57 459.82,247.90 472.09,251.33 484.35,254.84 496.61,258.45 508.87,262.16 521.13,265.96 533.39,269.86 ' style='stroke-width: 2.13; stroke: #2A78D6; stroke-dasharray: 2.85,8.54; stroke-linecap: butt;' />
+<line x1='324.95' y1='274.71' x2='324.95' y2='179.46' style='stroke-width: 0.64; stroke: #999999; stroke-dasharray: 1.00,3.00; stroke-linecap: butt;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
+<text x='50.77' y='275.44' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='34.83px' lengthAdjust='spacingAndGlyphs'> 0.01%</text>
+<text x='50.77' y='251.79' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='28.61px' lengthAdjust='spacingAndGlyphs'> 0.1%</text>
+<text x='50.77' y='228.15' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='19.28px' lengthAdjust='spacingAndGlyphs'> 1%</text>
+<text x='50.77' y='204.51' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='22.39px' lengthAdjust='spacingAndGlyphs'>10%</text>
+<text x='79.73' y='289.00' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='16.17px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='202.34' y='289.00' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='16.17px' lengthAdjust='spacingAndGlyphs'>5%</text>
+<text x='324.95' y='289.00' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='22.39px' lengthAdjust='spacingAndGlyphs'>10%</text>
+<text x='447.56' y='289.00' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='22.39px' lengthAdjust='spacingAndGlyphs'>15%</text>
+<text x='306.56' y='303.35' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Arial";' textLength='108.33px' lengthAdjust='spacingAndGlyphs'>Shortfall below trend</text>
+<line x1='65.75' y1='125.65' x2='79.57' y2='125.65' style='stroke-width: 2.13; stroke: #404040; stroke-linecap: butt;' />
+<line x1='65.75' y1='149.90' x2='79.57' y2='149.90' style='stroke-width: 2.13; stroke: #EB6834; stroke-linecap: butt;' />
+<line x1='248.66' y1='125.65' x2='262.49' y2='125.65' style='stroke-width: 2.13; stroke: #2A78D6; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+<line x1='248.66' y1='149.90' x2='262.49' y2='149.90' style='stroke-width: 2.13; stroke: #2A78D6; stroke-dasharray: 2.85,8.54; stroke-linecap: butt;' />
+<text x='88.27' y='129.66' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='96.34px' lengthAdjust='spacingAndGlyphs'>Observed, all years</text>
+<text x='88.27' y='153.91' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='151.69px' lengthAdjust='spacingAndGlyphs'>Observed, El Niño onset years</text>
+<text x='271.19' y='129.66' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='181.47px' lengthAdjust='spacingAndGlyphs'>If shocks were normal (typical years)</text>
+<text x='271.19' y='153.91' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='160.95px' lengthAdjust='spacingAndGlyphs'>If shocks were normal (all years)</text>
+<text x='15.94' y='66.56' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='485.30px' lengthAdjust='spacingAndGlyphs'>Share of country-years with a shortfall at least this large (log scale). Normal curves</text>
+<text x='15.94' y='80.92' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='471.36px' lengthAdjust='spacingAndGlyphs'>use each country's spread in typical years (robust) or in all years (SD); 11 of 365</text>
+<text x='15.94' y='95.29' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='184.66px' lengthAdjust='spacingAndGlyphs'>country-years fell 10% or more.</text>
+<text x='15.94' y='28.48' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='472.70px' lengthAdjust='spacingAndGlyphs'>Harvests 10% or more below trend are 1.4 to 8.3 times as</text>
+<text x='15.94' y='47.38' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='346.14px' lengthAdjust='spacingAndGlyphs'>frequent as a normal distribution predicts</text>
+<text x='15.94' y='324.82' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='502.75px' lengthAdjust='spacingAndGlyphs'>Source: FAOSTAT QCL rice yields (release 2025-12-31); NOAA CPC ONI (accessed 2026-11-19). Shortfall: national</text>
+<text x='15.94' y='335.40' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='275.62px' lengthAdjust='spacingAndGlyphs'>yield at least 5% below its long-run trend. Cambodia from 1980.</text>
+<text x='15.94' y='345.99' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='102.34px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
+</g>
+</g>
+</svg>

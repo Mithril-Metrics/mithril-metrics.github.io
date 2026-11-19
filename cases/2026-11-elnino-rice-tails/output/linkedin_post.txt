@@ -1,0 +1,17 @@
+This El Niño is among the strongest on record. In Southeast Asian rice data since 1961, the national damage arrives a year later than most people expect.
+
+FAO and WFP have launched their first joint anticipatory action appeal for this event. So I asked: when do El Niño's rice losses show up, and how deep can they go?
+
+What I found:
+→ In the year El Niño begins, no detectable rise in shortfalls: 11% of country-years vs 15% in other years
+→ The year after, rice production in Indonesia, the Philippines and Malaysia runs 4.9% below trend. No effect on the mainland
+→ Harvests 10% or more below trend come 8.3 times as often as calm-year variation predicts
+
+What it means: if you are timing early action or imports, watch the 2027 harvests in the maritime countries, and size buffers for the bad years, not the typical ones.
+
+National averages hide local losses, so this is a floor, not a full picture.
+
+Method: detrended FAOSTAT rice yields, 6 countries, 1961-2024; country fixed effects; intervals from resampling whole years
+Full analysis + code: https://mithril-metrics.github.io/cases/2026-11-elnino-rice-tails/report.html
+
+#FoodSecurity #ElNino #AgriculturalEconomics #SoutheastAsia

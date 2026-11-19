@@ -11,17 +11,20 @@ question: >
   Thailand, Malaysia, Cambodia; 1961-2024) larger and more frequent in El Niño onset years,
   and more extreme than a normal distribution implies?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: code-second-look                      # plan | code | results | red-teamed | published
+status: draft                     # plan | code | results | red-teamed | draft | published
 
 hook:
   debate: >
-    A very strong El Niño (NOAA ONI anomaly +2.46 for Aug-Oct 2026) is expected to peak in late
-    2026 and persist into early 2027, threatening rice harvests in Southeast Asia while
-    fertiliser costs are already high.
-  date: "2026-11-18"
+    A strong to very strong El Niño is under way (NOAA CPC, 12 Nov 2026: likely through
+    Jan-Mar 2027; ONI +2.46 for Aug-Oct 2026). FAO and WFP launched their first joint
+    anticipatory action appeal (Aug 2026). Rice in Southeast Asia is among the most exposed crops.
+  date: "2026-11-19"
   primary_source:
-    title: "NOAA Climate Prediction Center, Oceanic Niño Index"
-    url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+    title: "NOAA Climate Prediction Center, ENSO Diagnostic Discussion"
+    url: "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+  other_sources:
+    - title: "FAO-WFP Joint Anticipatory Action Appeal, June 2026-March 2027"
+      url: "https://www.wfp.org/publications/el-nino-fao-wfp-joint-anticipatory-action-appeal-june-2026-march-2027"
 
 tags:
   region: ["SE Asia"]
@@ -43,14 +46,14 @@ sources:
     table: "QCL; item Rice (27); elements Yield (5412), Area harvested (5312), Production (5510)"
     url: "https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_(Normalized).zip"
     version: "2025-12-31 (bulk catalogue DateUpdate), data 1961-2024"
-    accessed: null                # filled from data_raw/_access_log.csv after the run
+    accessed: "2026-11-19"
     licence: "CC BY 4.0"
   - name: "NOAA CPC Oceanic Niño Index (ONI, ERSSTv5)"
     provider: "NOAA Climate Prediction Center"
     table: "oni.ascii.txt (3-month running mean SST anomaly, Niño 3.4)"
     url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
     version: "monthly update; latest season at access is recorded in key_numbers.csv"
-    accessed: null
+    accessed: "2026-11-19"
     licence: "US Government work (public domain)"
 
   - name: "UCDP/PRIO Armed Conflict Dataset"
@@ -58,8 +61,15 @@ sources:
     table: "ucdp-prio-acd-261 (country-years with intensity_level 2, via gwno_loc)"
     url: "https://ucdp.uu.se/downloads/ucdpprio/ucdp-prio-acd-261-csv.zip"
     version: "26.1 (1946-2025)"
-    accessed: null
+    accessed: "2026-11-19"
     licence: "CC BY 4.0 (cite Davies et al. 2025 and Gleditsch et al. 2002 per codebook)"
+
+red_team:                         # P7, 2026-11-19
+  fixes:
+    - "Figure 1 retitled: no detectable rise in the onset year (null is not evidence of no effect)"
+    - "Second normal benchmark with the classical SD (ratio10_sd) next to the robust one"
+    - "Holm adjustment across the 14 margin contrasts; leave-one-event-out for maritime t+1 production"
+  caveats: ["national aggregation hides local losses", "calendar-year timing", "exploratory maritime result"]
 
 manual_steps: []
 
@@ -90,6 +100,6 @@ second_look:                      # ADDED AFTER the main results (2026-11-18), e
     - "S4: drop major-conflict country-years (UCDP intensity 2); drop 1997-98 (Asian crisis)"
 
 links:
-  blog: null
+  blog: "https://mithril-metrics.github.io/cases/2026-11-elnino-rice-tails/report.html"
   linkedin: null
   code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-elnino-rice-tails"

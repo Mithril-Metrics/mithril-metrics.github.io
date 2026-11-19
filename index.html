@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Short, reproducible case studies on agri-food, water and climate policy, built from public data.">
 
 <title>Mithril Metrics</title>
 <style>
@@ -49,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cc98149616e80931b9c0cf109acc3b59.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0f2ba78bc58723b53035558cd3dda4e3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -87,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-date','listing-author','listing-title','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-categories"],
     };
@@ -133,14 +134,14 @@ window.Quarto = {
 </script>
 
 <link rel="alternate" type="application/rss+xml" title="Mithril Metrics" href="index.xml" data-external="1"><meta property="og:title" content="Mithril Metrics">
-<meta property="og:description" content="Turning public data into policy-relevant answers, one question at a time">
+<meta property="og:description" content="Short, reproducible case studies on agri-food, water and climate policy, built from public data.">
 <meta property="og:image" content="https://mithril-metrics.github.io/images/og-default.png">
 <meta property="og:site_name" content="Mithril Metrics">
 <meta property="og:locale" content="en_GB">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="Mithril Metrics">
-<meta name="twitter:description" content="Turning public data into policy-relevant answers, one question at a time">
+<meta name="twitter:description" content="Short, reproducible case studies on agri-food, water and climate policy, built from public data.">
 <meta name="twitter:image" content="https://mithril-metrics.github.io/images/og-default.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -152,6 +153,10 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo-mark.svg" alt="Mithril Metrics logo" class="navbar-logo light-content">
+    <img src="./images/logo-mark.svg" alt="Mithril Metrics logo" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Mithril Metrics</span>
     </a>
@@ -211,43 +216,43 @@ window.Quarto = {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content" tabindex="-1">
+<main class="content column-page-left" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Mithril Metrics</h1>
-<p class="subtitle lead">Turning public data into policy-relevant answers, one question at a time</p>
+
+
+
+<div class="hero">
+<p><img src="images/logo-mark.svg" class="img-fluid" alt="Mithril Metrics logo"></p>
+<div>
+<p><span class="hero-title">Mithril Metrics</span></p>
+<p><span class="hero-sub">Public data, policy-relevant answers, one question at a time.</span></p>
 </div>
-
-
-
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+</div>
 <div class="positioning">
-<p>We quantify how farms and food systems turn inputs and natural resources (land, water, nutrients, climate) into outputs, and how policy, prices and weather shocks shift that relationship, using public data and reproducible code.</p>
+<p>We quantify how farms, food systems and water users turn inputs and natural resources (land, water, nutrients, climate) into outputs, and how policy, prices and weather shocks shift that relationship.</p>
 </div>
-<p>Each case takes one question from a current policy debate, answers it with public data in about four hours, and publishes the code. Methods range from production frontiers and productivity decompositions to panel and causal-ML econometrics. Filter the cases by <strong>Region</strong>, <strong>Method</strong> or <strong>Theme</strong> using the categories on the right.</p>
-<p><a href="./about.html" class="btn btn-outline-primary btn-sm">About the project</a> <a href="index.xml" class="btn btn-outline-secondary btn-sm">RSS</a> <a href="https://github.com/Mithril-Metrics/mithril-metrics.github.io" class="btn btn-outline-secondary btn-sm">Code on GitHub</a></p>
+<div class="pillars">
+<div class="pillar">
+<p><strong>One question</strong> Each case starts from a current policy debate and asks one narrow, answerable question.</p>
+</div>
+<div class="pillar">
+<p><strong>Public data</strong> Every number traces to a named dataset and access date, so anyone can check it.</p>
+</div>
+<div class="pillar">
+<p><strong>Open code</strong> Production frontiers, productivity, water pricing, climate risk: all in R, all on GitHub.</p>
+</div>
+</div>
+<p><a href="./about.html" class="btn btn-primary btn-sm">About the project</a> <a href="https://github.com/Mithril-Metrics/mithril-metrics.github.io" class="btn btn-outline-secondary btn-sm">Code on GitHub</a> <a href="index.xml" class="btn btn-outline-secondary btn-sm">RSS</a></p>
 <section id="case-studies" class="level2">
 <h2 class="anchored" data-anchor-id="case-studies">Case Studies</h2>
-<div id="listing-cases" class="quarto-listing quarto-listing-container-default">
+<div id="listing-cases" class="quarto-listing quarto-listing-container-grid">
 <div class="listing-actions-group">
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
-<div class="list quarto-listing-default">
+<div class="list grid quarto-listing-cols-2">
 
 </div>
 <div class="listing-no-matching d-none">No matching items</div>

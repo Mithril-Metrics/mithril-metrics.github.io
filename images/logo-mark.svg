@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Mithril Metrics">
+  <defs>
+    <linearGradient id="mm-silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f7f9"/>
+      <stop offset="1" stop-color="#b9c4ce"/>
+    </linearGradient>
+  </defs>
+  <path d="M60 4 L108.5 32 L108.5 88 L60 116 L11.5 88 L11.5 32 Z" fill="#17222d"/>
+  <rect x="30" y="38" width="15" height="48" rx="3" fill="url(#mm-silver)"/>
+  <rect x="52.5" y="56" width="15" height="30" rx="3" fill="#3fa7a3"/>
+  <rect x="75" y="38" width="15" height="48" rx="3" fill="url(#mm-silver)"/>
+</svg>

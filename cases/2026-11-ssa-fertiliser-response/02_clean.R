@@ -67,15 +67,21 @@ cat("Maize: median of reported yield / (production / area) =", round(xchk, 3), "
 stopifnot("Yield unit conversion looks wrong" = abs(xchk - 1) < 0.02)
 
 # ---- Nitrogen use per ha of cropland ----
-# Flags: A official, X from international organisations, I imputed by FAO, E estimated.
+# The per-hectare series is a derived indicator (flag E everywhere), so data quality is read
+# from the flag of total agricultural use: A official, X international organisations, I imputed.
+n_flags <- raw$rfn |>
+  filter(!is_aggregate, element == "Agricultural Use") |>
+  left_join(countries, by = c("area" = "fao_name")) |>
+  select(iso3, year, n_flag = flag)
 nuse <- raw$rfn |>
   filter(!is_aggregate, element == "Use per area of cropland") |>
   left_join(countries, by = c("area" = "fao_name")) |>
-  transmute(iso3, year, n_ha = value, n_unit = unit, n_flag = flag,
-            n_official = flag %in% c("A", "X"))
+  transmute(iso3, year, n_ha = value, n_unit = unit) |>
+  left_join(n_flags, by = c("iso3", "year")) |>
+  mutate(n_official = n_flag %in% c("A", "X"))
 cat("N use unit:", paste(unique(nuse$n_unit), collapse = ", "), "\n")
 stopifnot("N use per area expected in kg/ha" = all(nuse$n_unit == "kg/ha"))
-cat("N use flags (share):\n")
+cat("N use flags, from total agricultural use (share):\n")
 print(round(prop.table(table(nuse$n_flag, useNA = "ifany")), 2))
 
 # ---- MAFAP: input-subsidy intensity, fixed on budget years up to 2019 ----

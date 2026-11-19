@@ -117,7 +117,7 @@ hashtags   <- "#AgriculturalEconomics #FoodPolicy #[Topic] #[Region]"
 ::: {.content-visible when-format="html"}
 
 ::: {.bottom-line}
-**Bottom line.** `r bottom_line`
+**Short answer.** `r bottom_line`
 :::
 
 ```{r}
@@ -205,7 +205,7 @@ cat('<div class="post-footer">',
 
 **Question.** `r question`
 
-**Answer.** `r bottom_line`
+**Short answer.** `r bottom_line`
 
 ![](output/fig1_hero.png){width="88%"}
 

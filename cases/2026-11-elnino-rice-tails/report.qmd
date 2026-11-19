@@ -146,7 +146,7 @@ author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||
 ::: {.content-visible when-format="html"}
 
 ::: {.bottom-line}
-**Bottom line.** `r bottom_line`
+**Short answer.** `r bottom_line`
 :::
 
 ```{r}
@@ -272,7 +272,7 @@ cat('<div class="post-footer">',
 
 **Question.** Does El Niño bring unusually severe rice shortfalls in Southeast Asia?
 
-**Answer.** `r bottom_line`
+**Short answer.** `r bottom_line`
 
 ![](output/fig3_tail_vs_normal.png){width="66%"}
 

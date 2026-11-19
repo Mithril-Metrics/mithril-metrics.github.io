@@ -48,3 +48,6 @@ Thumbs.db
 
 # Rendering happens on GitHub Actions (R + Quarto installed there), so no freeze cache
 /_freeze/
+
+# local run logs contain machine paths
+cases/*/output/run_log.txt

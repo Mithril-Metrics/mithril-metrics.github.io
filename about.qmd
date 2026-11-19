@@ -1,30 +1,39 @@
 ---
 title: "About Mithril Metrics"
+description: "Short, reproducible case studies on agri-food, water and climate policy."
 ---
 
-*Mithril Metrics* publishes short, reproducible case studies on agri-food, climate and rural
-policy. Each one starts from a current policy debate, asks one narrow empirical question, and
-answers it with public data in about four hours.
+*Mithril Metrics* publishes short, reproducible case studies on agri-food, water, climate and
+rural policy. Each one starts from a current policy debate, asks one narrow empirical question,
+and answers it with public data in about four hours.
+
+## People
+
+```{=html}
+<div class="people-cards">
+  <a href="people/juan-pablo-henao.html"><div class="person">
+    <img src="images/people/juan-pablo-henao.jpg" alt="Juan Pablo Henao">
+    <div><div class="person-name">Juan Pablo Henao</div>
+    <div class="person-role">Applied environmental economist, TUM; formerly FAO. Water pricing and governance, sustainable productivity, optimisation and efficiency analysis.</div></div>
+  </div></a>
+  <a href="people/pietro-sala.html"><div class="person">
+    <img src="images/people/pietro-sala.jpg" alt="Pietro Sala">
+    <div><div class="person-name">Pietro Sala</div>
+    <div class="person-role">Applied economist, TUM. Production and efficiency analysis, eco-efficiency, climate risk, water and the WEFE nexus.</div></div>
+  </div></a>
+</div>
+```
 
 ## How each case is built
 
 - **Public data only.** Every number traces to a named dataset and access date.
 - **One question, one answer.** The bottom line comes first; caveats are stated plainly.
 - **Methods from production and resource economics:** production frontiers, productivity and
-  efficiency measurement, water economics and governance, risk and fat tails, panel and causal-ML econometrics.
+  efficiency measurement, water economics and governance, risk and fat tails, panel and
+  causal-ML econometrics.
 - **Reproducible.** All code is on [GitHub](https://github.com/Mithril-Metrics/mithril-metrics.github.io)
   and runs end to end in R.
 - **Neutral.** Policy implications are written as trade-offs, not recommendations.
-
-## People
-
-[**Juan Pablo Henao**](people/juan-pablo-henao.qmd): applied environmental economist, Chair of
-Agricultural Production and Resource Economics, Technical University of Munich; formerly FAO.
-Water pricing and governance, sustainable productivity, optimisation and efficiency analysis.
-
-[**Pietro Sala**](people/pietro-sala.qmd): applied economist, Chair of Agricultural Production
-and Resource Economics, Technical University of Munich. Production and efficiency analysis,
-eco-efficiency, climate risk, water and the WEFE nexus.
 
 ## Licence
 

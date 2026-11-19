@@ -3,7 +3,7 @@
 #
 # Usage (from the repository root):
 #   Rscript new_case.R <slug> --issue N [--title "..."] [--region EU] [--method SFA] [--employer OECD]
-#                             [--date 2026-11]
+#                             [--author "Pietro Sala"] [--date 2026-11]
 # Example:
 #   Rscript new_case.R fertiliser-squeeze --title "How much did the fertiliser shock cost EU cereal farms?" \
 #     --region EU --method SFA --employer OECD
@@ -12,7 +12,7 @@
 # (00_meta.yml, R stubs, report.qmd front matter and categories).
 
 args <- commandArgs(trailingOnly = TRUE)
-usage <- 'Usage: Rscript new_case.R <slug> --issue N [--title "..."] [--region R] [--method M] [--employer E] [--date YYYY-MM]'
+usage <- 'Usage: Rscript new_case.R <slug> --issue N [--title "..."] [--region R] [--method M] [--employer E] [--author "Name"] [--date YYYY-MM]'
 if (length(args) == 0 || args[1] %in% c("-h", "--help")) {
   cat(usage, "\n")
   quit(status = if (length(args) == 0) 1 else 0)
@@ -25,7 +25,7 @@ if (!grepl("^[a-z0-9]+(-[a-z0-9]+)*$", slug)) {
 
 # --- Parse --key value pairs ---------------------------------------------------
 opts <- list(issue = NULL, title = NULL, region = "Global", method = "Descriptive",
-             employer = "WB", date = format(Sys.Date(), "%Y-%m"))
+             employer = "WB", author = "Pietro Sala", date = format(Sys.Date(), "%Y-%m"))
 rest <- args[-1]
 if (length(rest) %% 2 != 0) stop("Options must come in --key value pairs.\n", usage)
 for (i in seq(1, length(rest), by = 2)) {
@@ -65,6 +65,7 @@ subs <- c(
   "{{REGION}}"   = opts$region,
   "{{METHOD}}"   = opts$method,
   "{{EMPLOYER}}" = opts$employer,
+  "{{AUTHOR}}"   = opts$author,
   "{{DATE}}"     = format(Sys.Date(), "%Y-%m-%d")
 )
 text_ext <- "\\.(R|yml|yaml|qmd|md|csv|txt)$"

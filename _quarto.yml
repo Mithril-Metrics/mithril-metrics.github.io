@@ -24,6 +24,8 @@ website:
   page-navigation: false
   navbar:
     background: light
+    logo: images/logo-mark.svg
+    logo-alt: "Mithril Metrics logo"
     left:
       - text: "Case Studies"
         href: index.qmd
@@ -50,11 +52,11 @@ format:
   html:
     theme:
       light: [cosmo, styles.scss]
-    mainfont: "Inter, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
     fontsize: 1.05rem
     linestretch: 1.6
     grid:
       body-width: 760px
+      margin-width: 260px
     toc: false
     code-tools: false
     smooth-scroll: true

@@ -5,6 +5,7 @@
 id: "{{CASE_ID}}"                 # YYYY-MM-slug, equals the repository folder name
 issue: {{ISSUE}}                       # case number in 09_portfolio_log.md
 local_folder: "Issue {{ISSUE}}"        # local folder: AgEcon/Issue N/ (unzip Issue_N_<slug>.zip there)
+author: "{{AUTHOR}}"                 # case author (must match a page in people/)
 title: "{{TITLE}}"                # question or finding, also used as blog title
 question: "{{TITLE}}"             # one answerable empirical question
 bottom_line: null                 # 1–2 sentences, written at the WRITE stage (numbers via key_numbers.csv)

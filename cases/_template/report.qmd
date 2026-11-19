@@ -6,12 +6,12 @@
 # Every number comes from output/key_numbers.csv through kn(); an unknown key stops the render.
 title: "{{TITLE}}"
 description: "One-sentence teaser shown in the listing and in LinkedIn link previews."
-author: "Pietro Sala"
+author: "{{AUTHOR}}"
 date: "{{DATE}}"
-date-modified: last-modified
 categories: ["Region: {{REGION}}", "Method: {{METHOD}}", "Theme: {{EMPLOYER}}"]
 image: output/fig1_hero.png           # listing thumbnail + open-graph image
 draft: true                           # set to false to publish
+title-block-banner: true
 params:
   linkedin_max_chars: 1300
   linkedin_hook_max_chars: 210        # approx. text visible before "...see more" on mobile
@@ -19,10 +19,7 @@ params:
 format:
   html:
     toc: false
-    format-links:                     # link to the brief in the right margin
-      - text: "One-page brief (PDF)"
-        href: brief.pdf
-        icon: file-pdf
+    format-links: false
   typst:
     output-file: brief                # -> brief.pdf
     papersize: a4
@@ -106,6 +103,13 @@ caveats <- c(                                    # 3 honest, specific caveats
   "Caveat 3 (external validity or data vintage)."
 )
 
+key_figures <- list(                             # 2-4 headline numbers shown as tiles under the bottom line
+  c(value = k("example_change_pct", unit = TRUE), label = "Placeholder: what this number measures"),
+  c(value = k("example_n_units"), label = "Placeholder: units covered")
+)
+
+author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
+
 method_tag <- "Method: [e.g. stochastic frontier on a FAOSTAT country panel, 1995-2023]"
 hashtags   <- "#AgriculturalEconomics #FoodPolicy #[Topic] #[Region]"
 ```
@@ -116,13 +120,26 @@ hashtags   <- "#AgriculturalEconomics #FoodPolicy #[Topic] #[Region]"
 **Bottom line.** `r bottom_line`
 :::
 
+```{r}
+#| label: key-figures
+#| results: asis
+cat('<div class="key-figures">\n')
+for (f in key_figures) {
+  cat('<div class="kf"><div class="kf-value">', f[["value"]], '</div><div class="kf-label">',
+      f[["label"]], '</div></div>\n', sep = "")
+}
+cat('</div>\n')
+```
+
 ## Why this matters now
 
 `r why_now` [Primary source](`r meta$hook$primary_source$url %||% "#"`).
 
 ## What I did
 
+::: {.method-note}
 `r method_plain`
+:::
 
 ## What the data show
 
@@ -142,13 +159,16 @@ Two or three sentences interpreting the figure. Separate **what the data show** 
 bullets(implications)
 ```
 
+::: {.caveats}
 ## Caveats
 
 ```{r}
 #| results: asis
 bullets(caveats)
 ```
+:::
 
+::: {.data-code}
 ## Data & code
 
 ```{r}
@@ -163,13 +183,21 @@ if (length(src)) {
 } else {
   cat("- *Fill `sources` in 00_meta.yml.*\n")
 }
-cat("\nCode to reproduce every number and figure: [GitHub](", code_url, ").\n", sep = "")
+cat("\nCode to reproduce every number and figure: [GitHub](", code_url, "). ",
+    "One-page brief: [PDF](brief.pdf).\n", sep = "")
 ```
-
-::: {.post-footer}
-Views are my own. Part of *Mithril Metrics*: short, reproducible
-analyses of current agri-food policy questions.
 :::
+
+```{r}
+#| label: post-footer
+#| results: asis
+photo <- file.path("..", "..", "images", "people", paste0(author_slug, ".jpg"))
+cat('<div class="post-footer">',
+    if (nzchar(author_slug)) paste0('<img src="', photo, '" alt="">') else "",
+    '<p>Written by <a href="../../people/', author_slug, '.html">', rmarkdown::metadata$author,
+    '</a>. Views are my own. Part of <em>Mithril Metrics</em>: short, reproducible analyses ',
+    'of current agri-food, water and climate policy questions.</p></div>\n', sep = "")
+```
 
 :::
 
@@ -206,7 +234,7 @@ src_brief <- if (length(src_brief)) paste(src_brief, collapse = "; ") else "[fil
 **Data & code.** `r src_brief`. Code: `r code_url`
 
 ```{=typst}
-#text(size: 9pt, fill: rgb("#4a4a46"))[Pietro Sala · pietro.sala\@tum.de · Views are my own. Mithril Metrics.]
+#text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are my own. Mithril Metrics · mithril-metrics.github.io]
 ```
 
 :::

@@ -4,6 +4,7 @@
 id: "2026-11-elnino-rice-tails"
 issue: 1
 local_folder: "Issue 1"
+author: "Pietro Sala"                 # case author (must match a page in people/)
 title: "Do El Niño years bring unusually severe rice shortfalls in Southeast Asia?"
 question: >
   Are national rice yield shortfalls in Southeast Asia (Viet Nam, Indonesia, Philippines,

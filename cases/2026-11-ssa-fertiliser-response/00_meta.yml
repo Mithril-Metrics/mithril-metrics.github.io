@@ -110,6 +110,17 @@ decisions:                        # fixed in the PLAN stage (P4, 2026-11-19), be
     implied % change = exp(beta * [log ratio 2026 crop year - log baseline median]) - 1;
     tonnes = implied % x 2024 maize production; 90% intervals from the coefficient's SE
 
+after_results:                    # ADDED AFTER the first full run (2026-11-19), reported as such
+  why: >
+    Yields fell with the ratio while measured N use did not, and leaving Zimbabwe out moved the
+    subsidy comparison. Both checks were chosen on economic grounds before running them.
+  checks:
+    - "D1 (diagnostic): urea and maize prices entered separately (nominal $/t, crop-year means)"
+    - "R4 (exploratory): main and split models without Zimbabwe 2000-2009 (economic collapse coinciding with the 2008 spike)"
+  figure_fixes:
+    - "Fig 1: one peak per price episode (2007-09, 2021-22, 2025-26) instead of calendar-year maxima"
+    - "Fig 2: subtitle says same crop year, not next season"
+
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html"
   linkedin: null

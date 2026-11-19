@@ -47,7 +47,20 @@ r1_n <- feols(log_n ~ log_ratio + oni | iso3[t], data = filter(panel, n_official
 r2_y <- feols(log_yield ~ log_ratio_lag + oni | iso3[t], data = panel)
 r2_n <- feols(log_n ~ log_ratio_lag + oni | iso3[t], data = panel)
 
-etable(a_y, a_n, a_y_lo, a_y_hi, b_y, b_n, r1_n, r2_y)
+# ---- Added after the first results (2026-11-19), see 00_meta.yml -> after_results ----
+# D1: the two prices separately. Nominal $/t, so common inflation sits in both; the country
+# trends absorb its smooth part. If yields follow maize prices but not urea, the ratio
+# result is not about fertiliser cost.
+d1_y <- feols(log_yield ~ log_urea + log_maize + oni | iso3[t], data = panel)
+d1_n <- feols(log_n ~ log_urea + log_maize + oni | iso3[t], data = panel)
+# R4 (exploratory): without Zimbabwe 2000-2009, the economic collapse that peaked with the
+# 2008 price spike
+no_zwe <- filter(panel, !(iso3 == "ZWE" & year %in% 2000:2009))
+r4_y <- feols(log_yield ~ log_ratio + oni | iso3[t], data = no_zwe)
+r4_by <- feols(log_yield ~ ratio_high | iso3 + year, data = no_zwe)
+r4_bn <- feols(log_n ~ ratio_high | iso3 + year, data = no_zwe)
+
+etable(a_y, a_n, a_y_lo, a_y_hi, b_y, b_n, r1_n, r2_y, d1_y, d1_n, r4_y, r4_by)
 
 models <- bind_rows(
   grab(a_y, "log_ratio", "Maize yield", "A"),
@@ -60,7 +73,14 @@ models <- bind_rows(
   grab(b_n, "ratio_high", "N use per ha", "B: high minus low"),
   grab(r1_n, "log_ratio", "N use per ha", "R1: official N values only"),
   grab(r2_y, "log_ratio_lag", "Maize yield", "R2: ratio lagged one season"),
-  grab(r2_n, "log_ratio_lag", "N use per ha", "R2: ratio lagged one season")
+  grab(r2_n, "log_ratio_lag", "N use per ha", "R2: ratio lagged one season"),
+  grab(d1_y, "log_urea", "Maize yield", "D1: urea price"),
+  grab(d1_y, "log_maize", "Maize yield", "D1: maize price"),
+  grab(d1_n, "log_urea", "N use per ha", "D1: urea price"),
+  grab(d1_n, "log_maize", "N use per ha", "D1: maize price"),
+  grab(r4_y, "log_ratio", "Maize yield", "R4: without Zimbabwe 2000-2009"),
+  grab(r4_by, "ratio_high", "Maize yield", "R4: high minus low, without Zimbabwe 2000-2009"),
+  grab(r4_bn, "ratio_high", "N use per ha", "R4: high minus low, without Zimbabwe 2000-2009")
 )
 readr::write_csv(models |> mutate(across(where(is.double), ~ round(.x, 4))), "output/tab_models.csv")
 print(models)
@@ -132,10 +152,23 @@ kn_add("ratio_latest", last$ratio, "t maize per t urea", 2, "Urea/maize ratio in
 kn_add("ratio_latest_multiple", last$ratio / base, "x", 2, "Latest month relative to 1990-2019 median", src_pink)
 kn_add("latest_month", last$month, "", 0, "Latest month in the Pink Sheet (1-12)")
 kn_add("latest_year", last$year, "", 0, "Year of the latest month", big_mark = "")
-kn_add("ratio_peak_2008", max(ratio_month$ratio[ratio_month$year == 2008]), "t maize per t urea", 2,
-       "Highest monthly ratio in 2008", src_pink)
-kn_add("ratio_peak_2022", max(ratio_month$ratio[ratio_month$year == 2022]), "t maize per t urea", 2,
-       "Highest monthly ratio in 2022", src_pink)
+# One peak per price episode, so a spike that straddles a calendar year is not cut in two
+episodes <- list(p0708 = c("2007-01-01", "2009-06-01"),
+                 p2122 = c("2021-01-01", "2022-12-01"),
+                 p26 = c("2025-07-01", "2026-12-01"))
+for (e in names(episodes)) {
+  w <- as.Date(episodes[[e]])
+  pk <- ratio_month |>
+    filter(date >= w[1], date <= w[2]) |>
+    slice_max(ratio, n = 1, with_ties = FALSE)
+  kn_add(paste0("ratio_", e), pk$ratio, "t maize per t urea", 2, paste("Peak monthly ratio, episode", e), src_pink)
+  kn_add(paste0("ratio_", e, "_month"), pk$month, "", 0, paste("Month of the peak, episode", e))
+  kn_add(paste0("ratio_", e, "_year"), pk$year, "", 0, paste("Year of the peak, episode", e), big_mark = "")
+}
+since90 <- filter(ratio_month, year >= 1990)
+p26_is_max <- max(since90$ratio) == max(since90$ratio[since90$year >= 2025])
+kn_add("ratio_p26_is_max", as.numeric(p26_is_max),
+       "", 0, "1 if the 2026 episode peak is the highest monthly ratio since 1990")
 
 add_b <- function(key, row, what) {
   kn_add(key, row$est, "", 3, paste("Elasticity:", what), src_fao)
@@ -155,6 +188,15 @@ add_b("theta_yield", m("Maize yield", "B: high minus low"), "yield, high minus l
 add_b("theta_n", m("N use per ha", "B: high minus low"), "N use, high minus low subsidy (year FE)")
 add_b("b_n_official", m("N use per ha", "R1: official N values only"), "N use, official values only")
 add_b("b_yield_lag", m("Maize yield", "R2: ratio lagged one season"), "maize yield, ratio lagged one season")
+add_b("b_urea_yield", m("Maize yield", "D1: urea price"), "maize yield on urea price (maize price held fixed)")
+add_b("b_maize_yield", m("Maize yield", "D1: maize price"), "maize yield on maize price (urea price held fixed)")
+add_b("b_urea_n", m("N use per ha", "D1: urea price"), "N use on urea price (maize price held fixed)")
+add_b("b_maize_n", m("N use per ha", "D1: maize price"), "N use on maize price (urea price held fixed)")
+add_b("b_yield_nozwe", m("Maize yield", "R4: without Zimbabwe 2000-2009"), "maize yield, without Zimbabwe 2000-2009")
+add_b("theta_yield_nozwe", m("Maize yield", "R4: high minus low, without Zimbabwe 2000-2009"),
+      "yield, high minus low subsidy, without Zimbabwe 2000-2009")
+add_b("theta_n_nozwe", m("N use per ha", "R4: high minus low, without Zimbabwe 2000-2009"),
+      "N use, high minus low subsidy, without Zimbabwe 2000-2009")
 
 loo_a <- filter(loo, model == "A")
 loo_b <- filter(loo, model == "B: high minus low")

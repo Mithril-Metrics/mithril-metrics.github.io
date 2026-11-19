@@ -29,9 +29,11 @@ ratio_month <- raw$pink |>
 # and western Africa (May-Jul) for a harvest that FAOSTAT records in year t.
 ratio_year <- ratio_month |>
   group_by(crop_year) |>
-  summarise(ratio = mean(ratio), n_months = n(), .groups = "drop") |>
+  summarise(ratio = mean(ratio), urea = mean(Urea), maize = mean(Maize),
+            n_months = n(), .groups = "drop") |>
   filter(n_months == 12) |>
-  transmute(year = crop_year, ratio, log_ratio = log(ratio)) |>
+  transmute(year = crop_year, ratio, log_ratio = log(ratio),
+            log_urea = log(urea), log_maize = log(maize)) |>
   mutate(log_ratio_lag = lag(log_ratio))
 stopifnot(all(diff(ratio_year$year) == 1))
 

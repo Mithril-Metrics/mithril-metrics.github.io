@@ -28,19 +28,28 @@ col_hi <- ac_palette(2)[2]
 d1 <- filter(ratio_month, year >= 1990)
 band <- quantile(d1$ratio[d1$year <= 2019], c(0.25, 0.75))
 last <- tail(d1, 1)
-peaks <- d1 |>
-  filter(year %in% c(2008, 2022)) |>
-  group_by(year) |>
-  slice_max(ratio, n = 1) |>
-  ungroup()
+peaks <- tibble::tibble(
+  date = as.Date(sprintf("%d-%02d-01", kv("ratio_p0708_year"), kv("ratio_p0708_month"))),
+  ratio = kv("ratio_p0708")
+) |>
+  bind_rows(tibble::tibble(date = as.Date(sprintf("%d-%02d-01", kv("ratio_p2122_year"), kv("ratio_p2122_month"))),
+                           ratio = kv("ratio_p2122"))) |>
+  bind_rows(tibble::tibble(date = as.Date(sprintf("%d-%02d-01", kv("ratio_p26_year"), kv("ratio_p26_month"))),
+                           ratio = kv("ratio_p26"))) |>
+  mutate(hj = c(0.5, 0.85, 0.2))      # nudge the two recent labels apart
+peak26_lab <- paste(month.name[kv("ratio_p26_month")], kv("ratio_p26_year"))
 month_lab <- paste(month.name[kv("latest_month")], kv("latest_year"))
-title1 <- if (kv("ratio_latest_multiple") >= 1) {
-  paste0("In ", month_lab, ", a tonne of urea cost ", k("ratio_latest"), " tonnes of maize, ",
-         k("ratio_latest_multiple"), " times the 1990-2019 median")
+title1 <- if (kv("ratio_p26_is_max") == 1) {
+  paste0("In ", peak26_lab, ", a tonne of urea cost ", k("ratio_p26"),
+         " tonnes of maize, the most since at least 1990. By ", month_lab, " it was ", k("ratio_latest"))
 } else {
-  paste0("In ", month_lab, ", a tonne of urea cost ", k("ratio_latest"),
-         " tonnes of maize, below the 1990-2019 median of ", k("ratio_base"))
+  paste0("In ", peak26_lab, ", a tonne of urea cost ", k("ratio_p26"), " tonnes of maize, against a ",
+         "1990-2019 median of ", k("ratio_base"), ". By ", month_lab, " it was ", k("ratio_latest"))
 }
+# median label where the line is far below it, so the two do not cross
+low_spot <- d1 |>
+  filter(year <= 2019) |>
+  slice_min(ratio, n = 1, with_ties = FALSE)
 cap1 <- wrap_cap(source_caption(
   paste0("World Bank Pink Sheet (", raw$versions$pink, "): urea and maize (US Gulf), nominal $/t"),
   accessed = raw$accessed,
@@ -52,19 +61,23 @@ p1 <- ggplot(d1, aes(date, ratio)) +
   geom_hline(yintercept = kv("ratio_base"), linetype = "dashed", colour = "grey45", linewidth = 0.5) +
   geom_line(colour = col_line, linewidth = 0.7) +
   geom_point(data = bind_rows(peaks, last), colour = col_hi, size = 2.8) +
-  geom_text(data = peaks, aes(label = paste0(format(date, "%b %Y"), ": ", round(ratio, 1))),
+  geom_text(data = peaks, aes(label = paste0(format(date, "%b %Y"), ": ", sprintf("%.2f", ratio)), hjust = hj),
             vjust = -0.9, size = 3.8, colour = "grey15") +
-  geom_text(data = last, aes(label = paste0(format(date, "%b %Y"), ": ", round(ratio, 1))),
-            vjust = 2, hjust = 0.9, size = 3.8, colour = "grey15") +
-  annotate("text", x = min(d1$date), y = kv("ratio_base"), hjust = 0, vjust = -0.5, size = 3.5,
+  geom_text(data = last, aes(label = paste0(format(date, "%b %Y"), ": ", sprintf("%.2f", ratio))),
+            hjust = -0.12, size = 3.8, colour = "grey15") +
+  annotate("text", x = low_spot$date, y = kv("ratio_base"), hjust = 0.5, vjust = -0.6, size = 3.5,
            colour = "grey35", label = paste0("1990-2019 median: ", k("ratio_base"))) +
+  scale_x_date(breaks = as.Date(paste0(seq(1990, 2020, 10), "-01-01")), date_labels = "%Y",
+               expand = expansion(mult = c(0.02, 0.02))) +
+  coord_cartesian(clip = "off") +
   scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.12))) +
   labs(title = wrap(title1, 62),
        subtitle = wrap(paste0("Tonnes of maize needed to buy one tonne of urea, monthly. Average for the ",
                               "Oct 2025-Sep 2026 crop year: ", k("ratio_now"), " (", k("ratio_now_multiple"),
                               " times the median)."), 72),
        x = "Month", y = "Tonnes of maize per tonne of urea", caption = cap1) +
-  theme_ac()
+  theme_ac() +
+  theme(plot.margin = margin(10, 70, 10, 10))
 save_fig(p1, "fig1_hero")
 
 # ---- Figure 2: response of yields and N use, by subsidy group ----
@@ -120,8 +133,8 @@ p2 <- ggplot(d2, aes(y = sample, x = est)) +
   facet_wrap(~outcome, scales = "free_x") +
   labs(title = wrap(paste0(part1, part2), 62),
        subtitle = wrap(paste0(k("n_countries"), " Sub-Saharan African countries, ", k("year_start"), "-",
-                              k("year_end"), ". Change in the next season's outcome when the urea-to-maize ",
-                              "price ratio is 10% higher."), 72),
+                              k("year_end"), ". Change in the harvest and in N use when the urea-to-maize ",
+                              "price ratio is 10% higher, in the same crop year."), 72),
        x = "% change for a 10% higher urea-to-maize price ratio", y = "Countries", caption = cap2) +
   theme_ac(grid = "x") +
   theme(panel.spacing.x = unit(2, "lines"))

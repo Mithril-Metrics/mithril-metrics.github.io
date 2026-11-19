@@ -35,6 +35,13 @@
     "text": "How each case is built\n\nPublic data only. Every number traces to a named dataset and access date.\nOne question, one answer. The bottom line comes first; caveats are stated plainly.\nMethods from production and resource economics: production frontiers, productivity and efficiency measurement, water economics and governance, risk and fat tails, panel and causal-ML econometrics.\nReproducible. All code is on GitHub and runs end to end in R.\nNeutral. Policy implications are written as trade-offs, not recommendations."
   },
   {
+    "objectID": "about.html#use-of-ai-tools",
+    "href": "about.html#use-of-ai-tools",
+    "title": "About Mithril Metrics",
+    "section": "Use of AI tools",
+    "text": "Use of AI tools\nWe use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online."
+  },
+  {
     "objectID": "about.html#licence",
     "href": "about.html#licence",
     "title": "About Mithril Metrics",

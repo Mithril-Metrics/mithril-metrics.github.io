@@ -82,7 +82,7 @@ why_now <- paste0(
 )
 
 method_plain <- paste0(
-  "Placeholder: I estimate a production frontier, which measures how far each country is ",
+  "Placeholder: we estimate a production frontier, which measures how far each country is ",
   "from the best practice of comparable countries, using ... data for ... ."
 )
 
@@ -135,7 +135,7 @@ cat('</div>\n')
 
 `r why_now` [Primary source](`r meta$hook$primary_source$url %||% "#"`).
 
-## What I did
+## What we did
 
 ::: {.method-note}
 `r method_plain`
@@ -148,7 +148,7 @@ cat('</div>\n')
 ![](output/fig1_hero.png){fig-alt="ALT TEXT: describe what the hero chart shows and its main number, for screen readers." width="100%"}
 
 Two or three sentences interpreting the figure. Separate **what the data show** from
-**what I infer** and **what remains uncertain**.
+**what we infer** and **what remains uncertain**.
 
 <!-- ### Section 2 ... (max 3 figures in total) -->
 
@@ -195,7 +195,7 @@ photo <- file.path("..", "..", "images", "people", paste0(author_slug, ".jpg"))
 cat('<div class="post-footer">',
     if (nzchar(author_slug)) paste0('<img src="', photo, '" alt="">') else "",
     '<p>Written by <a href="../../people/', author_slug, '.html">', rmarkdown::metadata$author,
-    '</a>. Views are my own. Part of <em>Mithril Metrics</em>: short, reproducible analyses ',
+    '</a>. Views are the authors\' own. Part of <em>Mithril Metrics</em>: short, reproducible analyses ',
     'of current agri-food, water and climate policy questions.</p></div>\n', sep = "")
 ```
 
@@ -234,7 +234,7 @@ src_brief <- if (length(src_brief)) paste(src_brief, collapse = "; ") else "[fil
 **Data & code.** `r src_brief`. Code: `r code_url`
 
 ```{=typst}
-#text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are my own. Mithril Metrics · mithril-metrics.github.io]
+#text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are the authors' own. Mithril Metrics · mithril-metrics.github.io]
 ```
 
 :::
@@ -248,7 +248,7 @@ hook <- paste0("Placeholder hook with the surprising number: ",
 li <- paste0(
   hook, "\n\n",
   why_now, "\n\n",
-  "What I found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
+  "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
   "What it means: ", implications[1], "\n\n",
   method_tag, "\n",
   "Full analysis + code: ", blog_url, "\n\n",

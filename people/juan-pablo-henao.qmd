@@ -14,20 +14,20 @@ about:
       href: mailto:juanpabloh27@gmail.com
 ---
 
-I am **Juan Pablo Henao**, an applied environmental economist working on water economics and
-water governance. I am a doctoral candidate and research associate at the Chair of Agricultural
+**Juan Pablo Henao** is an applied environmental economist working on water economics and
+water governance. He is a doctoral candidate and research associate at the Chair of Agricultural
 Production and Resource Economics, Technical University of Munich.
 
-My research covers water pricing and cost recovery under the EU Water Framework Directive,
+His research covers water pricing and cost recovery under the EU Water Framework Directive,
 environmentally sustainable productivity growth in EU agriculture, and the efficiency of
-irrigation water management. I combine optimisation, stochastic frontier analysis, data
-envelopment analysis and econometrics in R. In the Horizon Europe project RETOUCH NEXUS I lead
+irrigation water management. He combines optimisation, stochastic frontier analysis, data
+envelopment analysis and econometrics in R. In the Horizon Europe project RETOUCH NEXUS he leads
 the work on water governance indicators, building on the OECD Principles on Water Governance.
 
-Before TUM I worked for three years at FAO in Rome, designing environment and climate projects
+Before TUM he worked for three years at FAO in Rome, designing environment and climate projects
 for Global Environment Facility funding in Latin America and the Caribbean and in Eastern Europe
-and Central Asia. Earlier, at CEDE, Universidad de los Andes, I valued ecosystem services and
-coastal nature-based solutions and studied artisanal fisheries in marine protected areas. I hold
+and Central Asia. Earlier, at CEDE, Universidad de los Andes, he valued ecosystem services and
+coastal nature-based solutions and studied artisanal fisheries in marine protected areas. He holds
 an M.Sc. in Applied Economics and a B.Sc. in Mathematics from Universidad de los Andes.
 
 ## Selected publications

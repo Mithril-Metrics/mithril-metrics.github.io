@@ -23,17 +23,17 @@ about:
       href: https://github.com/PeterSala94
 ---
 
-I am **Pietro Sala**, an applied economist working on agricultural, water and resource
-economics. I am a PhD candidate (expected April 2027) and research associate at the
+**Pietro Sala** is an applied economist working on agricultural, water and resource
+economics. He is a PhD candidate (expected April 2027) and research associate at the
 Chair of Agricultural Production and Resource Economics, TUM School of Management,
 Technical University of Munich.
 
-My research measures how efficiently farms and food systems use natural resources, and how
-to separate weather-driven losses from managerial shortfalls. Methodologically I work with
+His research measures how efficiently farms and food systems use natural resources, and how
+to separate weather-driven losses from managerial shortfalls. Methodologically he works with
 stochastic frontier analysis, productivity and eco-efficiency measurement, panel
-econometrics and causal machine learning (double/debiased ML, LASSO). I have worked on two
+econometrics and causal machine learning (double/debiased ML, LASSO). He has worked on two
 EU research projects: PONDERFUL (ponds as nature-based solutions) and RETOUCH NEXUS (water
-governance and the water–energy–food–ecosystems nexus), and I coordinate my chair's research
+governance and the water–energy–food–ecosystems nexus), and coordinates the chair's research
 partnerships in Southeast Asia (Vietnam, Malaysia, Indonesia, Cambodia).
 
 ## Selected publications
@@ -44,4 +44,4 @@ partnerships in Southeast Asia (Vietnam, Malaysia, Indonesia, Cambodia).
 - Blicharska et al. (2026). Challenges for assessing and implementing nature-based solutions at landscape scale. *Hydrobiologia*. [doi:10.1007/s10750-026-06212-0](https://doi.org/10.1007/s10750-026-06212-0)
 - Twohig et al. (2026). Economic implications of water scarcity in the WEFE nexus: the Upper Main basin. SSRN 7307240.
 
-*Views expressed on this site are my own and do not represent TUM or any project consortium.*
+*Views expressed on this site are the authors' own and do not represent TUM or any project consortium.*

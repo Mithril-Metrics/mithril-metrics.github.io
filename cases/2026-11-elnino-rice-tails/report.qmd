@@ -91,12 +91,12 @@ why_now <- paste0(
 )
 
 method_plain <- paste0(
-  "I use FAOSTAT national rice yields, harvested area and production for Viet Nam, Indonesia, ",
+  "We use FAOSTAT national rice yields, harvested area and production for Viet Nam, Indonesia, ",
   "the Philippines, Thailand, Malaysia and Cambodia, ", k("year_start"), " to ", k("year_end"),
-  " (", k("n_obs", unit = TRUE), "). For each country I fit a smooth long-run trend and treat ",
+  " (", k("n_obs", unit = TRUE), "). For each country we fit a smooth long-run trend and treat ",
   "the deviation from it as that year's shock. A year counts as an El Niño onset year when ",
   "NOAA's Oceanic Niño Index averages at least 0.5°C from July to December (",
-  k("n_elnino_years", unit = TRUE), "). I then compare how often harvests fall at least 5% ",
+  k("n_elnino_years", unit = TRUE), "). We then compare how often harvests fall at least 5% ",
   "below trend in El Niño years and in other years, within each country, and build confidence ",
   "intervals by resampling whole years, because a single El Niño hits all six countries at once."
 )
@@ -165,7 +165,7 @@ cat('</div>\n')
 `r why_now` Sources: [NOAA CPC ENSO discussion](`r cpc_url`) and the
 [FAO-WFP joint appeal](`r appeal_url`).
 
-## What I did
+## What we did
 
 ::: {.method-note}
 `r method_plain`
@@ -182,11 +182,11 @@ In a typical year, national rice yields in these countries move about
 predicts a harvest 10% or more below trend in `r k("p10_normal_pct", unit = TRUE)` of
 country-years. It happened in `r k("p10_obs_pct", unit = TRUE)`: `r k("n_loss10")` of
 `r k("n_obs")` country-years, or `r k("ratio10")` times as often (95% interval
-`r k("ratio10_lo")` to `r k("ratio10_hi")`). The gap holds when I drop the major conflict
+`r k("ratio10_lo")` to `r k("ratio10_hi")`). The gap holds when we drop the major conflict
 years (`r k("sl_s4_noconflict_ratio10")` times) or the 1997-98 Asian crisis
 (`r k("sl_s4_nocrisis_ratio10")` times).
 
-What I infer is a mix of long calm stretches and a few sharp breaks, rather than a smoothly
+Our reading is a mix of long calm stretches and a few sharp breaks, rather than a smoothly
 fat tail. A bell curve stretched to cover all years, bad ones included, fits the 10% threshold
 much better (`r k("ratio10_sd")` times, interval `r k("ratio10_sd_lo")` to
 `r k("ratio10_sd_hi")`), and a formal estimate of the tail shape is close to zero. The practical
@@ -210,11 +210,11 @@ years, which make up `r k("share_obs_elnino_pct", unit = TRUE)` of all years.
 ![](output/fig4_second_look_margins.png){fig-alt="Dot chart of El Niño effects on rice yield, harvested area and production, in the onset year and the year after, for all six countries, maritime and mainland Southeast Asia. Maritime production the year after onset is 4.9% below trend; mainland effects are close to zero." width="100%"}
 
 A July to December El Niño often hits a harvest that FAO records in the following calendar
-year, so I also looked at the year after onset, and at yield, area and production separately.
+year, so we also looked at the year after onset, and at yield, area and production separately.
 This check was added after the main results and is exploratory. In Indonesia, the Philippines
 and Malaysia, rice production runs `r k("sl_s3_mar_prod_t1", unit = TRUE, abs = TRUE)` below
 trend the year after an onset (95% interval `r k("sl_s3_mar_prod_t1_lo", unit = TRUE)` to
-`r k("sl_s3_mar_prod_t1_hi", unit = TRUE)`). Of the `r k("sl_n_margin_tests")` effects I
+`r k("sl_s3_mar_prod_t1_hi", unit = TRUE)`). Of the `r k("sl_n_margin_tests")` effects we
 tested, it is the only one that survives a correction for multiple testing (adjusted p =
 `r k("sl_holm_mar_prod_t1")`), and dropping any single El Niño event leaves it between
 `r k("sl_loo_min", unit = TRUE)` and `r k("sl_loo_max", unit = TRUE)`. On the mainland the
@@ -262,7 +262,7 @@ photo <- file.path("..", "..", "images", "people", paste0(author_slug, ".jpg"))
 cat('<div class="post-footer">',
     if (nzchar(author_slug)) paste0('<img src="', photo, '" alt="">') else "",
     '<p>Written by <a href="../../people/', author_slug, '.html">', rmarkdown::metadata$author,
-    '</a>. Views are my own. Part of <em>Mithril Metrics</em>: short, reproducible analyses ',
+    '</a>. Views are the authors\' own. Part of <em>Mithril Metrics</em>: short, reproducible analyses ',
     'of current agri-food, water and climate policy questions.</p></div>\n', sep = "")
 ```
 
@@ -301,7 +301,7 @@ src_brief <- paste(src_brief, collapse = "; ")
 **Data & code.** `r src_brief`. Code: [GitHub, Mithril-Metrics](`r code_url`).
 
 ```{=typst}
-#text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are my own. Mithril Metrics · mithril-metrics.github.io]
+#text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are the authors' own. Mithril Metrics · mithril-metrics.github.io]
 ```
 
 :::
@@ -312,11 +312,11 @@ src_brief <- paste(src_brief, collapse = "; ")
 hook <- paste0("This El Niño is among the strongest on record. In Southeast Asian rice data since ",
                k("year_start"), ", the national damage arrives a year later than most people expect.")
 li_why <- paste0("FAO and WFP have launched their first joint anticipatory action appeal for this ",
-                 "event. So I asked: when do El Niño's rice losses show up, and how deep can they go?")
+                 "event. So we asked: when do El Niño's rice losses show up, and how deep can they go?")
 li <- paste0(
   hook, "\n\n",
   li_why, "\n\n",
-  "What I found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
+  "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
   "What it means: if you are timing early action or imports, watch the 2027 harvests in the ",
   "maritime countries, and size buffers for the bad years, not the typical ones.\n\n",
   "National averages hide local losses, so this is a floor, not a full picture.\n\n",

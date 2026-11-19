@@ -253,6 +253,8 @@ bullets(vapply(src, function(s) paste0(
 cat("\nCode to reproduce every number and figure: [GitHub](", code_url, "). ",
     "One-page brief: [PDF](brief.pdf).\n", sep = "")
 ```
+
+**Use of AI tools.** We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
 :::
 
 ```{r}
@@ -274,7 +276,7 @@ cat('<div class="post-footer">',
 
 **Short answer.** `r bottom_line`
 
-![](output/fig3_tail_vs_normal.png){width="66%"}
+![](output/fig3_tail_vs_normal.png){width="60%"}
 
 **What this means for policy**
 
@@ -302,6 +304,10 @@ src_brief <- paste(src_brief, collapse = "; ")
 
 ```{=typst}
 #text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are the authors' own. Mithril Metrics · mithril-metrics.github.io]
+```
+
+```{=typst}
+#text(size: 8pt, fill: rgb("#5b6876"))[*Use of AI tools.* We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.]
 ```
 
 :::

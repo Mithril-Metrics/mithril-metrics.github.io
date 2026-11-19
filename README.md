@@ -59,6 +59,10 @@ Tooling for a full local setup (optional): `new_case.R` scaffolds a case from
 `cases/_template/`, `tools/feasibility_check.R` runs a 2-minute data check from a YAML spec,
 and the `Makefile` wraps both plus `quarto render`.
 
+## Use of AI tools
+
+We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
+
 ## Licence
 
 - **Code** (R scripts, `acutils`, tooling): [MIT](LICENSE).

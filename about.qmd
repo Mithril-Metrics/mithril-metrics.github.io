@@ -35,6 +35,10 @@ and answers it with public data in about four hours.
   and runs end to end in R.
 - **Neutral.** Policy implications are written as trade-offs, not recommendations.
 
+## Use of AI tools
+
+We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
+
 ## Licence
 
 Text and figures: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code: MIT.

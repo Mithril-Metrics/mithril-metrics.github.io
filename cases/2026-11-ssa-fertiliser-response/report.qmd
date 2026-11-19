@@ -186,6 +186,8 @@ if (length(src)) {
 cat("\nCode to reproduce every number and figure: [GitHub](", code_url, "). ",
     "One-page brief: [PDF](brief.pdf).\n", sep = "")
 ```
+
+**Use of AI tools.** We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
 :::
 
 ```{r}
@@ -235,6 +237,10 @@ src_brief <- if (length(src_brief)) paste(src_brief, collapse = "; ") else "[fil
 
 ```{=typst}
 #text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are the authors' own. Mithril Metrics · mithril-metrics.github.io]
+```
+
+```{=typst}
+#text(size: 8pt, fill: rgb("#5b6876"))[*Use of AI tools.* We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.]
 ```
 
 :::

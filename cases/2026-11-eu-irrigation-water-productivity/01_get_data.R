@@ -89,8 +89,8 @@ wei <- wei_all |>
   select(geo, time, values)
 show(wei, "WEI+ (%)")
 
-# Crop output. aact_eaa01 also has an indicator dimension (production value at basic
-# prices vs other valuations); keep basic prices.
+# Crop output. The item dimension is found by its code (10000 = crop output) rather than
+# by name: the bulk table does not call it itm_newa. Valuation: basic prices.
 eaa <- tryCatch(get_eurostat("aact_eaa01", labels = FALSE), error = function(e) {
   message("aact_eaa01 failed: ", conditionMessage(e))
   NULL
@@ -99,15 +99,23 @@ crop <- NULL
 crop_version <- NA_character_
 if (!is.null(eaa)) {
   crop_version <- version_of(eaa)
-  eaa <- filter(eaa, geo %in% eu$geo, itm_newa == "10000", unit == "MIO_EUR", time %in% yrs)
-  if ("indic_ag" %in% names(eaa)) {
-    cat("aact_eaa01 indic_ag values:", paste(unique(eaa$indic_ag), collapse = ", "), "\n")
-    eaa <- filter(eaa, indic_ag == "PROD_BP")
+  dims <- setdiff(names(eaa), c("geo", "time", "values", "freq", "flags"))
+  cat("aact_eaa01 dimensions:", paste(dims, collapse = ", "), "\n")
+  item_col <- dims[vapply(dims, function(v) "10000" %in% eaa[[v]], logical(1))]
+  stopifnot("No aact_eaa01 dimension holds code 10000 (crop output)" = length(item_col) == 1)
+  eaa <- eaa[eaa[[item_col]] == "10000" & eaa$geo %in% eu$geo & eaa$time %in% yrs, ]
+  for (v in setdiff(dims, item_col)) {
+    vals <- unique(eaa[[v]])
+    cat("  ", v, ":", paste(utils::head(vals, 12), collapse = ", "), "\n")
+    keep <- intersect(c("MIO_EUR", "PROD_BP"), vals)
+    if (length(vals) > 1 && length(keep) == 1) eaa <- eaa[eaa[[v]] == keep, ]
   }
   crop <- eaa |>
     transmute(geo, time, values, measure = "EUR million, basic prices", source = "eaa")
-  stopifnot("More than one crop-output value per country-year" =
-              !anyDuplicated(crop[c("geo", "time")]))
+  if (anyDuplicated(crop[c("geo", "time")])) {
+    message("aact_eaa01: more than one crop-output value per country-year (see above).")
+    crop <- NULL
+  }
 }
 if (is.null(crop) || n_distinct(crop$geo[!is.na(crop$values)]) < 20) {
   message("Crop output from aact_eaa01 incomplete: switching to FAOSTAT QV.")

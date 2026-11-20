@@ -18,13 +18,15 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: false      # queue runs, so an hourly check never cancels a build
-
 jobs:
-  build-deploy:
+  release:
+    # Hourly check for scheduled posts; own concurrency group, so it never cancels a queued build.
     runs-on: ubuntu-latest
+    concurrency:
+      group: release
+      cancel-in-progress: false
+    outputs:
+      changed: ${{ steps.release.outputs.changed }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -47,14 +49,26 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
+  build-deploy:
+    needs: release
+    # On push or manual runs always build; on the hourly schedule only if a post was released.
+    if: github.event_name != 'schedule' || needs.release.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
       - name: Set up R
-        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true      # fast binary packages
 
       - name: Install R packages (acutils dependencies + rendering)
-        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           working-directory: acutils
@@ -64,17 +78,14 @@ jobs:
             any::yaml
 
       - name: Install acutils
-        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         run: R CMD INSTALL acutils
 
       - name: Set up Quarto
-        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: release           # bundles Typst for the PDF briefs
 
       - name: Render and publish to gh-pages
-        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages

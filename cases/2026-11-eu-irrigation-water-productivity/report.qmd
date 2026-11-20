@@ -145,6 +145,78 @@ key_figures <- list(
     label = "Frontier 'saving potential' under two common models")
 )
 
+# ---- Technical note (PDF) only: more detail than the blog ----
+method_detail <- paste0(
+  "*Data.* Eurostat irrigation water abstraction (env_wat_abs, mean ", k("year_start"), "-", k("year_end"),
+  "), irrigated area from the Eurostat farm structure surveys (2016 and 2023, interpolated to 2021), ",
+  "FAOSTAT cropland and crop gross production value (constant international dollars), and the Eurostat ",
+  "water exploitation index (WEI+). *Sample.* The ", k("n_all"), " member states where at least ",
+  k("irr_threshold"), "% of farmland is irrigated; the headline uses the ", k("n_main"), " with Eurostat ",
+  "irrigation data. The ", k("n_filled"), " others (Italy, Portugal, France, Austria) have AQUASTAT-based ",
+  "estimates, scaled by the median Eurostat/AQUASTAT ratio and shown but not used. *Step 1.* Water ",
+  "abstracted per irrigated hectare, Mediterranean-climate member states (Cyprus, Greece, Spain, Italy, ",
+  "Malta, Portugal) against the rest, with an exact rank-sum test. *Step 2.* Water-directional data ",
+  "envelopment analysis: how much water each country could drop while keeping its land and crop value, ",
+  "if it matched the best observed combination. The saving share is the sum of these reductions over ",
+  "total sample water, under four specifications: variable or constant returns to scale, and total ",
+  "cropland or rainfed plus irrigated land. *Design history.* The case set out to rank countries; after ",
+  "two model runs the question and the climate grouping were changed, so the comparison is not ",
+  "pre-specified. *Identification.* Descriptive: we do not estimate efficiency net of climate, and no ",
+  "country is called inefficient."
+)
+note_tbl <- data.frame(
+  Estimate = c("Water per irrigated ha, Mediterranean / other (ratio of medians)",
+               "Median water per irrigated ha, Mediterranean vs other (m³/ha)",
+               "Rank-sum test, all Mediterranean above all others",
+               "Rank correlation, water per ha with WEI+",
+               "Saving share, model A (variable returns, cropland + water)",
+               "Saving share, model B (constant returns, rainfed + irrigated land + water)",
+               "Effect of returns to scale on the saving share (average)",
+               "Effect of splitting land into rainfed and irrigated",
+               "Rank correlation, model A with model B",
+               "Rank correlation, model B with crop value per m³",
+               "Largest single-country shift, leave one frontier country out (A / B)"),
+  Value = c(paste0(k("m3ha_ratio"), "×"), paste0(k("m3ha_med"), " vs ", k("m3ha_other")),
+            paste0("p = ", k("p_ranksum")), k("rho_m3ha_wei"),
+            paste0(k("share_a"), "%"), paste0(k("share_b"), "%"),
+            paste0(k("d_rts"), " points"), paste0(k("d_land"), " points"),
+            k("rho_ab"), k("rho_b_ppm"),
+            paste0(k("loo_shift_a"), " / ", k("loo_shift_b"), " points")),
+  Detail = c(paste0("range ", ratio_rng, " over samples and survey years"),
+             paste0(k("n_main_med"), " vs ", k("n_main_other"), " countries"),
+             paste0("all ", k("n_all"), " countries: p = ", k("p_ranksum_all")),
+             paste0(k("n_main"), " countries"),
+             paste0(k("nfront_a"), " countries on the frontier"),
+             paste0(k("nfront_b"), " countries on the frontier"),
+             "2 × 2 specifications", "2 × 2 specifications",
+             "1 = same order", "-1 = exact reverse",
+             paste0(k("loo_infeasible"), " infeasible runs")),
+  check.names = FALSE
+)
+note_caption <- paste0(
+  "**The per-hectare gap is large and stable across samples; the frontier 'saving' depends almost ",
+  "entirely on one modelling choice.** Headline sample: ", k("n_main"), " member states with Eurostat ",
+  "irrigation data, ", k("year_start"), "-", k("year_end"), ". Hollow bars in the figure are estimates, ",
+  "not used in medians or models."
+)
+robustness <- c(
+  paste0("Ratio of medians across samples (Eurostat-only or all ", k("n_all"), " countries) and survey years ",
+         "for irrigated area (2016, 2023 or interpolated): ", ratio_rng, "."),
+  paste0("Model A with constant returns gives ", k("share_a_crs"), "%; model B with variable returns ",
+         k("share_b_vrs"), "%. With the ", k("n_filled"), " estimated countries included: A ", k("share_a_all"),
+         "%, B ", k("share_b_all"), "%."),
+  paste0("Leave-one-out: dropping one frontier country moves a single country's saving share by up to ",
+         k("loo_shift_a"), " points (A) and ", k("loo_shift_b"), " points (B); ", k("loo_infeasible"),
+         " runs were infeasible."),
+  "Not tested: a frontier that adjusts for crop water requirements (for example with growing-season water deficit as a fixed input); this is a possible follow-up."
+)
+references <- paste0(
+  "Note by France and Portugal to the AGRIFISH Council (22 October 2026); European Commission, Water ",
+  "Resilience Strategy (June 2025); European Commission, proposal for a European Climate Resilience Law ",
+  "(27 October 2026); INSEE (2020) irrigation statistics for France; Eurostat env_wat_abs and farm ",
+  "structure surveys; FAOSTAT RL and QV."
+)
+
 author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
 
 method_tag <- paste0("Method: water per irrigated hectare and water-directional DEA (2 × 2 ",
@@ -252,7 +324,7 @@ if (length(src)) {
   cat("- *Fill `sources` in 00_meta.yml.*\n")
 }
 cat("\nCode to reproduce every number and figure: [GitHub](", code_url, "). ",
-    "One-page brief: [PDF](brief.pdf).\n", sep = "")
+    "Technical note with more detail (PDF, 2-3 pages): [brief.pdf](brief.pdf).\n", sep = "")
 ```
 
 **Use of AI tools.** We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
@@ -277,21 +349,44 @@ cat('<div class="post-footer">',
 
 **Short answer.** `r bottom_line`
 
-![](output/fig1_hero.png){width="88%"}
+**1. Data and method**
 
-**What this means for policy**
+`r method_detail`
+
+**2. Results**
+
+![](output/fig1_hero.png){width="62%"}
+
+```{r}
+#| label: note-table
+#| results: asis
+if (exists("note_tbl")) print(knitr::kable(note_tbl, format = "pipe", row.names = FALSE))
+```
+
+`r note_caption`
+
+**3. Robustness and exploratory checks**
+
+```{r}
+#| results: asis
+bullets(robustness)
+```
+
+**4. What this means for policy**
 
 ```{r}
 #| results: asis
 bullets(implications)
 ```
 
-**Caveats**
+**5. Caveats**
 
 ```{r}
 #| results: asis
 bullets(caveats)
 ```
+
+**References.** `r references`
 
 ```{r}
 #| label: brief-sources

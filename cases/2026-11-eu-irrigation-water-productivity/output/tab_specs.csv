@@ -1,0 +1,5 @@
+spec,land,rts,label,saving_share_eurostat,saving_share_all,n_frontier_eurostat,frontier_eurostat
+A,total,vrs,"A: VRS, cropland + water",6.140173172540722,23.256593876968548,5,"Germany, Greece, Spain, Malta, Netherlands"
+A_crs,total,crs,"CRS, cropland + water",93.66403611673023,92.6193460520157,2,"Germany, Netherlands"
+B_vrs,split,vrs,"VRS, rainfed + irrigated land + water",6.140173172540721,8.543103363649436,5,"Germany, Greece, Spain, Malta, Netherlands"
+B,split,crs,"B: CRS, rainfed + irrigated land + water",93.34703541865173,92.05642961897692,2,"Germany, Netherlands"

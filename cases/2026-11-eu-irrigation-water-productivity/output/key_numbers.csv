@@ -1,26 +1,38 @@
 key,value,unit,digits,big_mark,description,source,updated
-n_countries,14,countries,0,",",Member states in the sample,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-n_med,6,countries,0,",",Mediterranean-climate member states in the sample,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-n_filled,4,countries,0,",",Water filled from AQUASTAT (scaled),"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-irr_threshold,2,%,0,",","Minimum irrigated area, % of UAA (latest survey year)",Eurostat ef_fsi_irri,2026-11-20 15:02
-fill_ratio,56.33902721957905,%,0,",",Median Eurostat irrigation abstraction as % of AQUASTAT agricultural withdrawal,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-year_start,2020,,0,,First year of the averaging window,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-year_end,2022,,0,,Last year of the averaging window,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-m3ha_med,6290.104490300571,m3/ha,0,",","Median water per irrigated ha, Mediterranean climate","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-m3ha_other,1227.440510148955,m3/ha,0,",","Median water per irrigated ha, other member states","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-m3ha_ratio,5.124569735389653,x,1,",",Mediterranean median / other median,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-m3ha_max,8680.054483994121,m3/ha,0,",",Highest water per irrigated ha: Greece,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-m3ha_min,580.510221797821,m3/ha,0,",",Lowest water per irrigated ha: Germany,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-rho_m3ha_wei,0.7538461538461538,,2,",","Spearman, water per ha vs WEI+","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-p_m3ha_wei,0.00184472528925722,,3,",",p-value of that Spearman test,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-saving_share_a,23.256593876968548,%,0,",","Spec A (VRS, cropland + water): saving as % of sample water","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-saving_share_b,92.05642961897692,%,0,",","Spec B (CRS, rainfed + irrigated land + water): saving as % of sample water","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-n_frontier_a,6,countries,0,",","Spec A frontier: Germany, Spain, France, Italy, Malta, Netherlands","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-n_frontier_b,3,countries,0,",","Spec B frontier: Austria, Germany, Netherlands","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-rho_ab,0.3722220514994059,,2,",","Spearman, saving shares spec A vs spec B","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-rho_b_m3ha,0.9205387730875254,,2,",","Spearman, spec B saving share vs water per ha","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-rho_a_m3ha,0.28365558674044006,,2,",","Spearman, spec A saving share vs water per ha","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-loo_shift_b,96.34461998844624,pp,0,",","Spec B: largest change in a saving share, leave-one-out","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-r1_ratio,5.46072669905111,x,1,",","R1: Med/other ratio, Eurostat-only countries","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-r2_ratio_2016,3.801937380354579,x,1,",",R2: Med/other ratio with 2016 irrigated area,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
-r2_ratio_2023,5.3886880995534705,x,1,",",R2: Med/other ratio with 2023 irrigated area,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:02
+n_main,10,countries,0,",",Member states with Eurostat irrigation data (headline),"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+n_main_med,4,countries,0,",","Mediterranean-climate, headline sample: Cyprus, Greece, Spain, Malta","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+n_main_other,6,countries,0,",","Other, headline sample","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+n_all,14,countries,0,",",All member states incl. AQUASTAT fills,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+n_filled,4,countries,0,",","Filled from AQUASTAT (scaled): Austria, France, Italy, Portugal","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+irr_threshold,2,%,0,",","Minimum irrigated area, % of UAA (latest survey year)",Eurostat ef_fsi_irri,2026-11-20 15:20
+fill_ratio,56.33902721957905,%,0,",",Median Eurostat irrigation abstraction as % of AQUASTAT agricultural withdrawal,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+year_start,2020,,0,,First year of the averaging window,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+year_end,2022,,0,,Last year of the averaging window,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+m3ha_med,6561.43106677433,m3/ha,0,",","Median abstraction per irrigated ha, Mediterranean (headline)","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+m3ha_other,1201.5673789194552,m3/ha,0,",","Median abstraction per irrigated ha, other (headline)","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+m3ha_ratio,5.46072669905111,x,1,",",Mediterranean median / other median (headline),"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+ratio_min,3.801937380354579,x,1,",",Lowest ratio over samples and survey years,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+ratio_max,6.024127735913572,x,1,",",Highest ratio over samples and survey years,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+p_ranksum,0.00952380952380952,,3,",","Exact Wilcoxon rank-sum p, headline sample","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+p_ranksum_all,0.00133200133200133,,4,",","Exact Wilcoxon rank-sum p, all 14","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+m3ha_max,8680.054483994121,m3/ha,0,",","Highest, headline sample: Greece","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+m3ha_min,580.510221797821,m3/ha,0,",","Lowest, headline sample: Germany","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+rho_m3ha_wei,0.7454545454545454,,2,",","Spearman, water per ha vs WEI+ (partly mechanical: shared numerator)","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+share_a,6.140173172540722,%,0,",","Saving share of sample water, A: VRS, cropland + water (headline sample)","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+nfront_a,5,countries,0,",","Frontier, A: VRS, cropland + water: Germany, Greece, Spain, Malta, Netherlands","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+share_a_crs,93.66403611673024,%,0,",","Saving share of sample water, CRS, cropland + water (headline sample)","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+nfront_a_crs,2,countries,0,",","Frontier, CRS, cropland + water: Germany, Netherlands","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+share_b_vrs,6.140173172540721,%,0,",","Saving share of sample water, VRS, rainfed + irrigated land + water (headline sample)","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+nfront_b_vrs,5,countries,0,",","Frontier, VRS, rainfed + irrigated land + water: Germany, Greece, Spain, Malta, Netherlands","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+share_b,93.34703541865171,%,0,",","Saving share of sample water, B: CRS, rainfed + irrigated land + water (headline sample)","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+nfront_b,2,countries,0,",","Frontier, B: CRS, rainfed + irrigated land + water: Germany, Netherlands","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+share_b_all,92.05642961897692,%,0,",","Model B saving share, all 14","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+share_a_all,23.256593876968548,%,0,",","Model A saving share, all 14","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+d_rts,87.36536259515026,pp,0,",",Average change in saving share from VRS to CRS,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+d_land,0,pp,0,",",Average change in saving share from total to split land,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+rho_ab,0.18805811245074375,,2,",","Spearman, saving shares A vs B","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+rho_b_m3ha,0.9483326481409008,,2,",","Spearman, B saving share vs water per ha","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+rho_b_ppm,-0.996965091635306,,3,",","Spearman, B saving share vs crop value per m3","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+loo_shift_a,88.19415753281977,pp,0,",","Model A: largest change in a saving share, leave-one-out","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+loo_shift_b,96.34461998844624,pp,0,",","Model B: largest change in a saving share, leave-one-out","Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20
+loo_infeasible,0,runs,0,",",Leave-one-out runs with no feasible peer,"Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank",2026-11-20 15:20

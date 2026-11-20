@@ -11,7 +11,7 @@ question: >
   it mostly reflect climate? (Reframed 2026-11-20 from "Which EU countries could save the most
   irrigation water by matching the best performers?" after two frontier runs; see reframe.)
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: results                   # plan | code | results | red-teamed | draft | published
+status: red-teamed                # plan | code | results | red-teamed | draft | published
 
 hook:
   debate: >
@@ -151,6 +151,30 @@ reframe:                          # 2026-11-20, chosen by JPH at P6 after second
   result: "Mediterranean median 6,290 vs 1,227 m3/ha (5.1x; R1 5.5x, R2 3.8x-5.4x); water per ha vs WEI+ Spearman 0.75; frontier savings 23% (A) or 92% (B) of sample water, Spearman A vs B 0.37, B vs water per ha 0.92; leave-one-out moves single B shares by up to 96 pp"
   not_claimed: "No country is called inefficient; the case does not estimate efficiency net of climate"
   follow_up: "Q020: climate-adjusted frontier with growing-season water deficit (ERA5) as a non-discretionary input"
+
+red_team:                         # P7, 2026-11-20: two independent reviews (EC JRC policy analyst; field-journal econometrician)
+  verdicts: {jrc_policy: REVISE, econometrics: REVISE}
+  fixes_applied:                  # all chosen by JPH (option 2); outputs rerun 2026-11-20 on JPH's cached data_raw
+    - "F1 headline sample = 10 countries with Eurostat irrigation data; 4 AQUASTAT fills shown hollow, outside medians and models (France's 1,080 m3/ha vs about 1,900 in INSEE 2020: https://www.insee.fr/fr/statistiques/7728881)"
+    - "F2 'abstract' instead of 'apply' in titles and text"
+    - "F3 Fig 2 retitled ('neither estimates saveable water'); crop value per m3 dropped from the main table; leave-one-out in the caption"
+    - "F4 2 x 2 specifications: returns to scale moves the share by 87 pp on average, splitting land by 0 pp"
+    - "F5 ratio reported as a range over samples and survey years (3.8-6.0) with an exact rank-sum test (p = 0.010, headline sample)"
+    - "F6 leave-one-out for models A and B with infeasible runs counted (0 of 63)"
+  results_after_fixes: "Mediterranean median 6,561 vs other 1,202 m3/ha (5.5x; range 3.8-6.0); model A 6%, model B 93% of sample water; Spearman A vs B 0.19; B vs crop value per m3 -0.997"
+  caveats_for_post:
+    - "C1 (both): The gap mixes climate, crop mix, irrigation infrastructure and how countries report the data; we do not separate them."
+    - "C2 (econometrics): Model B's 'saving potential' is almost exactly each country's crop value per cubic metre of irrigation water compared with Germany's or the Netherlands'; because most crop output there is rainfed, the model mostly measures how far farming relies on rain."
+    - "C3 (JRC): Current EU texts ask each member state to improve on its own baseline, so they avoid this problem. The comparison matters if a per-hectare indicator were used to compare countries or allocate EU funds."
+    - "C4 (JRC): National annual averages hide basin and seasonal stress, where abstraction decisions are made. A common per-hectare threshold would put most of the adjustment cost on Mediterranean irrigators; whether that is justified depends on basin-level scarcity, which this post does not measure."
+    - "C5 (both): The correlation with WEI+ is partly mechanical, because abstraction enters both measures; it is not used as evidence."
+    - "C6 (econometrics): The climate grouping and this framing were chosen after the first two model runs."
+  proposed_headline: >
+    Across EU member states with Eurostat irrigation data, Mediterranean ones abstract 3.8-6.0 times
+    more irrigation water per irrigated hectare than the rest. Because that gap mixes climate, crop
+    mix and infrastructure, comparing countries on a per-hectare indicator would mostly show where a
+    country is, not how well it irrigates; current EU texts avoid this by measuring each country
+    against its own baseline.
 
 links:
   blog: null

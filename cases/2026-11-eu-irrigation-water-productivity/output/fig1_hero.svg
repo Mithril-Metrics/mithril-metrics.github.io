@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='576.00pt' height='468.00pt' viewBox='0 0 576.00 468.00'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='576.00pt' height='486.00pt' viewBox='0 0 576.00 486.00'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -16,84 +16,86 @@
 </defs>
 <rect width='100%' height='100%' style='stroke: none; fill: #FCFCFB;'/>
 <defs>
-  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHw0NjguMDA='>
-    <rect x='0.00' y='0.00' width='576.00' height='468.00' />
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHw0ODYuMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='486.00' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0NjguMDA=)'>
-<rect x='0.00' y='-0.00000000000011' width='576.00' height='468.00' style='stroke-width: 1.36; stroke: none; fill: #FCFCFB;' />
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0ODYuMDA=)'>
+<rect x='0.00' y='0.00000000000011' width='576.00' height='486.00' style='stroke-width: 1.36; stroke: none; fill: #FCFCFB;' />
 </g>
 <defs>
-  <clipPath id='cpODYuNTN8NTU2LjA3fDEyMS40MXwzNTAuMzg='>
-    <rect x='86.53' y='121.41' width='469.54' height='228.97' />
+  <clipPath id='cpODYuNTN8NTU2LjA3fDEyMS40MXwzNDcuMjE='>
+    <rect x='86.53' y='121.41' width='469.54' height='225.80' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpODYuNTN8NTU2LjA3fDEyMS40MXwzNTAuMzg=)'>
-<polyline points='86.53,350.38 86.53,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='207.28,350.38 207.28,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='328.03,350.38 328.03,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='448.77,350.38 448.77,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<rect x='86.53' y='254.44' width='71.84' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<rect x='86.53' y='157.69' width='311.86' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
-<rect x='86.53' y='335.06' width='28.04' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<rect x='86.53' y='270.56' width='66.32' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<rect x='86.53' y='125.44' width='419.23' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
-<rect x='86.53' y='173.82' width='295.74' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
-<rect x='86.53' y='286.69' width='52.25' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<rect x='86.53' y='238.31' width='95.31' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<rect x='86.53' y='189.94' width='199.23' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
-<rect x='86.53' y='141.57' width='321.95' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
-<rect x='86.53' y='318.94' width='28.67' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<rect x='86.53' y='222.19' width='167.01' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
-<rect x='86.53' y='206.06' width='168.75' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<rect x='86.53' y='302.81' width='49.75' height='11.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
-<text x='161.02' y='263.81' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.52px' lengthAdjust='spacingAndGlyphs'>1,490</text>
-<text x='401.27' y='167.06' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.71px' lengthAdjust='spacingAndGlyphs'>6,460</text>
-<text x='116.47' y='344.43' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='19.01px' lengthAdjust='spacingAndGlyphs'>580</text>
-<text x='155.42' y='279.93' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='25.68px' lengthAdjust='spacingAndGlyphs'>1,370</text>
-<text x='508.61' y='134.81' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.41px' lengthAdjust='spacingAndGlyphs'>8,680</text>
-<text x='384.89' y='183.18' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.16px' lengthAdjust='spacingAndGlyphs'>6,120</text>
-<text x='141.42' y='296.05' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.36px' lengthAdjust='spacingAndGlyphs'>1,080</text>
-<text x='184.41' y='247.68' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='25.70px' lengthAdjust='spacingAndGlyphs'>1,970</text>
-<text x='288.41' y='199.31' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.42px' lengthAdjust='spacingAndGlyphs'>4,120</text>
-<text x='411.27' y='150.93' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='27.89px' lengthAdjust='spacingAndGlyphs'>6,670</text>
-<text x='117.11' y='328.30' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='19.02px' lengthAdjust='spacingAndGlyphs'>590</text>
-<text x='256.41' y='231.56' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.68px' lengthAdjust='spacingAndGlyphs'>3,460</text>
-<text x='258.15' y='215.43' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.68px' lengthAdjust='spacingAndGlyphs'>3,490</text>
-<text x='138.92' y='312.18' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.35px' lengthAdjust='spacingAndGlyphs'>1,030</text>
+<g clip-path='url(#cpODYuNTN8NTU2LjA3fDEyMS40MXwzNDcuMjE=)'>
+<polyline points='86.53,347.21 86.53,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='207.28,347.21 207.28,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='328.03,347.21 328.03,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='448.77,347.21 448.77,121.41 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<rect x='86.53' y='252.60' width='71.84' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<rect x='86.53' y='157.19' width='311.86' height='11.13' style='stroke-width: 1.28; stroke: #2A78D6; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
+<rect x='86.53' y='332.11' width='28.04' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
+<rect x='86.53' y='268.50' width='66.32' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
+<rect x='86.53' y='125.39' width='419.23' height='11.13' style='stroke-width: 1.28; stroke: #2A78D6; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
+<rect x='86.53' y='173.09' width='295.74' height='11.13' style='stroke-width: 1.28; stroke: #2A78D6; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
+<rect x='86.53' y='284.40' width='52.25' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<rect x='86.53' y='236.70' width='95.31' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
+<rect x='86.53' y='188.99' width='199.23' height='11.13' style='stroke-width: 1.28; stroke: #2A78D6; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<rect x='86.53' y='141.29' width='321.95' height='11.13' style='stroke-width: 1.28; stroke: #2A78D6; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
+<rect x='86.53' y='316.21' width='28.67' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
+<rect x='86.53' y='220.80' width='167.01' height='11.13' style='stroke-width: 1.28; stroke: #2A78D6; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<rect x='86.53' y='204.89' width='168.75' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
+<rect x='86.53' y='300.30' width='49.75' height='11.13' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
+<text x='161.02' y='261.89' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.52px' lengthAdjust='spacingAndGlyphs'>1,490</text>
+<text x='401.27' y='166.48' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.71px' lengthAdjust='spacingAndGlyphs'>6,460</text>
+<text x='116.47' y='341.39' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='19.01px' lengthAdjust='spacingAndGlyphs'>580</text>
+<text x='155.42' y='277.79' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='25.68px' lengthAdjust='spacingAndGlyphs'>1,370</text>
+<text x='508.61' y='134.67' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.41px' lengthAdjust='spacingAndGlyphs'>8,680</text>
+<text x='384.89' y='182.38' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.16px' lengthAdjust='spacingAndGlyphs'>6,120</text>
+<text x='141.42' y='293.69' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.36px' lengthAdjust='spacingAndGlyphs'>1,080</text>
+<text x='184.41' y='245.98' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='25.70px' lengthAdjust='spacingAndGlyphs'>1,970</text>
+<text x='288.41' y='198.28' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.42px' lengthAdjust='spacingAndGlyphs'>4,120</text>
+<text x='411.27' y='150.58' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='27.89px' lengthAdjust='spacingAndGlyphs'>6,670</text>
+<text x='117.11' y='325.49' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='19.02px' lengthAdjust='spacingAndGlyphs'>590</text>
+<text x='256.41' y='230.08' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.68px' lengthAdjust='spacingAndGlyphs'>3,460</text>
+<text x='258.15' y='214.18' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='28.68px' lengthAdjust='spacingAndGlyphs'>3,490</text>
+<text x='138.92' y='309.59' style='font-size: 10.24px;fill: #333333; font-family: "Liberation Sans";' textLength='26.35px' lengthAdjust='spacingAndGlyphs'>1,030</text>
 </g>
-<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0NjguMDA=)'>
-<text x='80.26' y='344.77' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='48.06px' lengthAdjust='spacingAndGlyphs'>Germany</text>
-<text x='80.26' y='328.65' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='64.32px' lengthAdjust='spacingAndGlyphs'>Netherlands</text>
-<text x='80.26' y='312.53' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='42.84px' lengthAdjust='spacingAndGlyphs'>Sweden</text>
-<text x='80.26' y='296.40' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='42.23px' lengthAdjust='spacingAndGlyphs'>France*</text>
-<text x='80.26' y='280.28' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='47.64px' lengthAdjust='spacingAndGlyphs'>Denmark</text>
-<text x='80.26' y='264.15' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='42.70px' lengthAdjust='spacingAndGlyphs'>Austria*</text>
-<text x='80.26' y='248.03' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='45.19px' lengthAdjust='spacingAndGlyphs'>Hungary</text>
-<text x='80.26' y='231.90' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='49.80px' lengthAdjust='spacingAndGlyphs'>Portugal*</text>
-<text x='80.26' y='215.78' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='45.60px' lengthAdjust='spacingAndGlyphs'>Romania</text>
-<text x='80.26' y='199.65' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='27.54px' lengthAdjust='spacingAndGlyphs'>Italy*</text>
-<text x='80.26' y='183.53' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='29.63px' lengthAdjust='spacingAndGlyphs'>Spain</text>
-<text x='80.26' y='167.40' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='38.04px' lengthAdjust='spacingAndGlyphs'>Cyprus</text>
-<text x='80.26' y='151.28' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='29.04px' lengthAdjust='spacingAndGlyphs'>Malta</text>
-<text x='80.26' y='135.15' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='38.52px' lengthAdjust='spacingAndGlyphs'>Greece</text>
-<text x='86.53' y='364.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='7.06px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='207.28' y='364.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='30.97px' lengthAdjust='spacingAndGlyphs'>2,500</text>
-<text x='328.03' y='364.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='31.20px' lengthAdjust='spacingAndGlyphs'>5,000</text>
-<text x='448.77' y='364.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='30.47px' lengthAdjust='spacingAndGlyphs'>7,500</text>
-<text x='321.30' y='379.35' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='245.73px' lengthAdjust='spacingAndGlyphs'>Irrigation water per irrigated hectare, m3/ha</text>
-<rect x='101.19' y='83.92' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
-<rect x='250.74' y='83.92' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0ODYuMDA=)'>
+<text x='80.26' y='341.74' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='48.06px' lengthAdjust='spacingAndGlyphs'>Germany</text>
+<text x='80.26' y='325.84' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='64.32px' lengthAdjust='spacingAndGlyphs'>Netherlands</text>
+<text x='80.26' y='309.94' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='42.84px' lengthAdjust='spacingAndGlyphs'>Sweden</text>
+<text x='80.26' y='294.04' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='42.23px' lengthAdjust='spacingAndGlyphs'>France*</text>
+<text x='80.26' y='278.13' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='47.64px' lengthAdjust='spacingAndGlyphs'>Denmark</text>
+<text x='80.26' y='262.23' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='42.70px' lengthAdjust='spacingAndGlyphs'>Austria*</text>
+<text x='80.26' y='246.33' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='45.19px' lengthAdjust='spacingAndGlyphs'>Hungary</text>
+<text x='80.26' y='230.43' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='49.80px' lengthAdjust='spacingAndGlyphs'>Portugal*</text>
+<text x='80.26' y='214.53' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='45.60px' lengthAdjust='spacingAndGlyphs'>Romania</text>
+<text x='80.26' y='198.63' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='27.54px' lengthAdjust='spacingAndGlyphs'>Italy*</text>
+<text x='80.26' y='182.72' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='29.63px' lengthAdjust='spacingAndGlyphs'>Spain</text>
+<text x='80.26' y='166.82' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='38.04px' lengthAdjust='spacingAndGlyphs'>Cyprus</text>
+<text x='80.26' y='150.92' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='29.04px' lengthAdjust='spacingAndGlyphs'>Malta</text>
+<text x='80.26' y='135.02' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='38.52px' lengthAdjust='spacingAndGlyphs'>Greece</text>
+<text x='86.53' y='361.63' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='7.06px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='207.28' y='361.63' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='30.97px' lengthAdjust='spacingAndGlyphs'>2,500</text>
+<text x='328.03' y='361.63' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='31.20px' lengthAdjust='spacingAndGlyphs'>5,000</text>
+<text x='448.77' y='361.63' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='30.47px' lengthAdjust='spacingAndGlyphs'>7,500</text>
+<text x='321.30' y='376.19' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='277.01px' lengthAdjust='spacingAndGlyphs'>Irrigation abstraction per irrigated hectare, m3/ha</text>
+<rect x='101.33' y='84.06' width='15.58' height='15.58' style='stroke-width: 1.28; stroke: #2A78D6; stroke-linecap: butt; stroke-linejoin: miter; fill: #2A78D6;' />
+<rect x='250.88' y='84.06' width='15.58' height='15.58' style='stroke-width: 1.28; stroke: #EB6834; stroke-linecap: butt; stroke-linejoin: miter; fill: #EB6834;' />
 <text x='124.74' y='95.92' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='118.32px' lengthAdjust='spacingAndGlyphs'>Mediterranean climate</text>
 <text x='274.29' y='95.92' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='29.56px' lengthAdjust='spacingAndGlyphs'>Other</text>
-<text x='15.94' y='28.68' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='520.53px' lengthAdjust='spacingAndGlyphs'>Mediterranean member states apply 5.1 times more irrigation</text>
-<text x='15.94' y='47.58' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='513.40px' lengthAdjust='spacingAndGlyphs'>water per hectare than the rest of the sample (median 6,290</text>
-<text x='15.94' y='66.48' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='135.91px' lengthAdjust='spacingAndGlyphs'>vs 1,227 m3/ha)</text>
-<text x='15.94' y='401.01' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='530.50px' lengthAdjust='spacingAndGlyphs'>Source: Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV (constant 2014-2016 int. $); FAOSTAT RL; FAO</text>
-<text x='15.94' y='411.59' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='520.06px' lengthAdjust='spacingAndGlyphs'>AQUASTAT via World Bank (accessed 2026-11-20). Irrigation abstraction, mean 2020-2022, divided by irrigated</text>
-<text x='15.94' y='422.18' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='475.98px' lengthAdjust='spacingAndGlyphs'>area interpolated to 2021 from the 2016 and 2023 farm surveys. Countries with irrigated area &gt;= 2% of</text>
-<text x='15.94' y='432.76' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='470.80px' lengthAdjust='spacingAndGlyphs'>farmland. * Water filled from AQUASTAT agricultural withdrawals, scaled by 56% (Eurostat irrigation /</text>
-<text x='15.94' y='443.34' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='112.87px' lengthAdjust='spacingAndGlyphs'>AQUASTAT agriculture).</text>
-<text x='15.94' y='453.93' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='110.24px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
+<text x='15.94' y='28.68' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='503.68px' lengthAdjust='spacingAndGlyphs'>Mediterranean member states abstract 3.8-6.0 times more</text>
+<text x='15.94' y='47.58' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='496.73px' lengthAdjust='spacingAndGlyphs'>irrigation water per irrigated hectare than the rest (median</text>
+<text x='15.94' y='66.48' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='188.99px' lengthAdjust='spacingAndGlyphs'>6,561 vs 1,202 m3/ha)</text>
+<text x='15.94' y='397.84' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='530.50px' lengthAdjust='spacingAndGlyphs'>Source: Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV (constant 2014-2016 int. $); FAOSTAT RL; FAO</text>
+<text x='15.94' y='408.42' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='511.42px' lengthAdjust='spacingAndGlyphs'>AQUASTAT via World Bank (accessed 2026-11-20). Irrigation abstraction (not water applied at the field), mean</text>
+<text x='15.94' y='419.01' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='511.98px' lengthAdjust='spacingAndGlyphs'>2020-2022, divided by irrigated area interpolated to 2021 from the 2016 and 2023 farm surveys. Medians over</text>
+<text x='15.94' y='429.59' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='502.82px' lengthAdjust='spacingAndGlyphs'>the 10 countries with Eurostat irrigation data; ratio 3.8-6.0 across samples and survey years; exact rank-sum</text>
+<text x='15.94' y='440.18' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='469.38px' lengthAdjust='spacingAndGlyphs'>p = 0.010. The gap mixes climate, crop mix, infrastructure and reporting. * No Eurostat irrigation data:</text>
+<text x='15.94' y='450.76' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='520.96px' lengthAdjust='spacingAndGlyphs'>AQUASTAT agricultural withdrawal scaled by 56% (hollow bars; not in the headline medians or models; France's</text>
+<text x='15.94' y='461.34' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='241.24px' lengthAdjust='spacingAndGlyphs'>national statistics give about 1,900 m3/ha for 2020).</text>
+<text x='15.94' y='471.93' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='110.24px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
 </g>
 </svg>

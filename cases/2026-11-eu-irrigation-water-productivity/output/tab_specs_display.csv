@@ -1,0 +1,5 @@
+Model,Returns to scale,Land input,"Saving potential, % of sample water",Countries on the frontier
+"A: VRS, cropland + water",VRS,cropland,6,"5 (Germany, Greece, Spain, Malta, Netherlands)"
+"CRS, cropland + water",CRS,cropland,94,"2 (Germany, Netherlands)"
+"VRS, rainfed + irrigated land + water",VRS,rainfed + irrigated,6,"5 (Germany, Greece, Spain, Malta, Netherlands)"
+"B: CRS, rainfed + irrigated land + water",CRS,rainfed + irrigated,93,"2 (Germany, Netherlands)"

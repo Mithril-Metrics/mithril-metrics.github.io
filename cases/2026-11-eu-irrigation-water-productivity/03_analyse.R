@@ -1,14 +1,16 @@
 # 03_analyse.R — can one EU benchmark rank irrigation efficiency? ----------------------
-# Reframed after two runs (2026-11-20, JPH): the case now tests the assumption behind an
-# EU-wide water-efficiency benchmark instead of ranking countries.
-#   Step 1: water per irrigated hectare, Mediterranean-climate member states vs the rest.
-#   Step 2: water-directional DEA under two reasonable specifications
-#           A = VRS, inputs cropland + water (the planned model, first run)
-#           B = CRS, inputs rainfed cropland + irrigated area + water (second run)
-#           and how far the "saving potential" follows water per hectare.
-# Robustness: R1 Eurostat-only countries; R2 irrigated area from the 2016 or 2023 survey.
+# Reframed after two runs (2026-11-20, JPH): the case tests the assumption behind
+# comparing countries on irrigation water per hectare instead of ranking countries.
+#   Step 1: irrigation abstraction per irrigated hectare, Mediterranean-climate member
+#           states vs the rest; headline sample = countries with Eurostat irrigation data.
+#   Step 2: water-directional DEA, 2 x 2 specifications (returns to scale x land inputs),
+#           how far the "saving potential" follows water per hectare and crop value per m3.
+# Red-team fixes (2026-11-20): Eurostat-only headline sample, 2 x 2 specifications,
+# ratio range and exact rank-sum test, leave-one-out for both headline models with counts
+# of infeasible runs.
 # Input: output/cache/panel.rds. Output: output/key_numbers.csv, output/tab_results.csv,
-# output/tab_robustness.csv, output/cache/results.rds, output/sessionInfo.txt
+# output/tab_specs.csv, output/tab_robustness.csv, output/cache/results.rds,
+# output/sessionInfo.txt
 
 stopifnot("Run this script from the issue folder (AgEcon/Issue 3)" = file.exists("00_meta.yml"))
 options(acutils.data_dir = "data_raw")
@@ -21,36 +23,56 @@ set.seed(20261120)
 panel <- readRDS("output/cache/panel.rds")
 src <- "Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV, RL; AQUASTAT via World Bank"
 
-# Mediterranean climate, fixed before looking at water use: member states whose farmland
-# lies mainly in the Mediterranean climate zone. France is mixed and stays in "other".
+# Mediterranean climate: member states whose farmland lies mainly in the Mediterranean
+# climate zone. France is mixed and stays in "Other". (Grouping chosen after the first two
+# model runs; disclosed in the post.)
 med <- c("CY", "EL", "ES", "IT", "MT", "PT")
 
 # Sub-vector DEA: contract water only, holding land and crop output fixed.
-# beta = share of water a country could save while staying inside the frontier.
-water_dea <- function(d, spec, ref = d) {
-  land <- function(z) if (spec == "A") cbind(z$cropland) else cbind(z$rainfed, z$irrigated)
-  x <- cbind(land(d), d$water)
-  xr <- cbind(land(ref), ref$water)
+# land = "total" (cropland) or "split" (rainfed cropland + irrigated area).
+water_dea <- function(d, land, rts, ref = d) {
+  lx <- function(z) if (land == "total") cbind(z$cropland) else cbind(z$rainfed, z$irrigated)
+  x <- cbind(lx(d), d$water)
+  xr <- cbind(lx(ref), ref$water)
   dir <- cbind(matrix(0, nrow(d), ncol(x) - 1), d$water)
-  e <- dea.direct(x, cbind(d$output), DIRECT = dir, RTS = if (spec == "A") "vrs" else "crs",
-                  ORIENTATION = "in", XREF = xr, YREF = cbind(ref$output))
-  e$objval
+  e <- dea.direct(x, cbind(d$output), DIRECT = dir, RTS = rts, ORIENTATION = "in",
+                  XREF = xr, YREF = cbind(ref$output))
+  100 * e$objval
 }
+specs <- tibble::tribble(
+  ~spec, ~land, ~rts, ~label,
+  "A", "total", "vrs", "A: VRS, cropland + water",
+  "A_crs", "total", "crs", "CRS, cropland + water",
+  "B_vrs", "split", "vrs", "VRS, rainfed + irrigated land + water",
+  "B", "split", "crs", "B: CRS, rainfed + irrigated land + water"
+)
+run_specs <- function(d) {
+  for (i in seq_len(nrow(specs))) {
+    d[[paste0("saving_", specs$spec[i])]] <- water_dea(d, specs$land[i], specs$rts[i])
+  }
+  d
+}
+share <- function(d, col) 100 * sum(d[[col]] / 100 * d$water) / sum(d$water)
 
 res <- panel |>
   mutate(group = if_else(geo %in% med, "Mediterranean climate", "Other"),
          m3_per_ha = water / irrigated * 1000,           # million m3 / 1000 ha -> m3/ha
-         out_per_m3 = output / water,                    # int. $ per m3 (million / million)
-         saving_a = 100 * water_dea(panel, "A"),
-         saving_b = 100 * water_dea(panel, "B"),
-         frontier_a = saving_a < 1e-4,
-         frontier_b = saving_b < 1e-4)
-stopifnot("DEA returned missing or negative values" =
-            all(!is.na(c(res$saving_a, res$saving_b)) & c(res$saving_a, res$saving_b) > -1e-4))
-print(as.data.frame(res |>
+         m3_per_ha_2016 = water / irrigated_2016 * 1000,
+         m3_per_ha_2023 = water / irrigated_2023 * 1000,
+         out_per_m3 = output / water)                    # int. $ per m3 (million / million)
+stopifnot("Water per ha outside 100-20,000 m3/ha: check units" =
+            all(res$m3_per_ha > 100 & res$m3_per_ha < 20000))
+main <- run_specs(filter(res, !filled))                  # headline: Eurostat irrigation data
+full <- run_specs(res)                                    # context: incl. 4 AQUASTAT fills
+for (d in list(main, full)) {
+  v <- unlist(d[paste0("saving_", specs$spec)])
+  stopifnot("DEA returned missing or negative values" = all(!is.na(v) & v > -1e-4))
+}
+cat("Headline sample (Eurostat irrigation data):", paste(main$name, collapse = ", "), "\n")
+print(as.data.frame(full |>
                       arrange(desc(m3_per_ha)) |>
-                      select(name, group, filled, water, irrigated, m3_per_ha, out_per_m3, wei,
-                             saving_a, saving_b)), digits = 3)
+                      select(name, group, filled, m3_per_ha, out_per_m3, wei,
+                             starts_with("saving_"))), digits = 3)
 
 # ---- Step 1: water per irrigated hectare by climate group ----
 gap <- function(d, col = "m3_per_ha") {
@@ -58,89 +80,126 @@ gap <- function(d, col = "m3_per_ha") {
   o <- median(d[[col]][d$group == "Other"])
   c(med = m, other = o, ratio = m / o)
 }
-g <- gap(res)
-st <- filter(res, !is.na(wei))
+g <- gap(main)
+variants <- c(main = g["ratio"], main_2016 = gap(main, "m3_per_ha_2016")["ratio"],
+              main_2023 = gap(main, "m3_per_ha_2023")["ratio"], all = gap(full)["ratio"],
+              all_2016 = gap(full, "m3_per_ha_2016")["ratio"],
+              all_2023 = gap(full, "m3_per_ha_2023")["ratio"])
+print(round(variants, 2))
+rs_main <- wilcox.test(m3_per_ha ~ group, data = main, exact = TRUE)
+rs_all <- wilcox.test(m3_per_ha ~ group, data = full, exact = TRUE)
+st <- filter(main, !is.na(wei))
 sp_wei <- suppressWarnings(cor.test(st$m3_per_ha, st$wei, method = "spearman", exact = FALSE))
-cat("m3/ha: Mediterranean median", round(g["med"]), "| other", round(g["other"]),
-    "| ratio", round(g["ratio"], 1), "| Spearman with WEI+", round(sp_wei$estimate, 2), "\n")
+cat("m3/ha (Eurostat-only): Mediterranean median", round(g["med"]), "| other", round(g["other"]),
+    "| ratio", round(g["ratio"], 1), "| range over variants", round(min(variants), 1), "-",
+    round(max(variants), 1), "| exact rank-sum p", signif(rs_main$p.value, 2), "\n")
 
 # ---- Step 2: what the frontier picks up ----
-share <- function(s) 100 * sum(s / 100 * res$water) / sum(res$water)
-rho_ab <- cor(res$saving_a, res$saving_b, method = "spearman")
-rho_b_m3 <- cor(res$saving_b, res$m3_per_ha, method = "spearman")
-rho_a_m3 <- cor(res$saving_a, res$m3_per_ha, method = "spearman")
-cat("Saving share of sample water: A", round(share(res$saving_a)), "% | B",
-    round(share(res$saving_b)), "% | Spearman A vs B", round(rho_ab, 2),
-    "| B vs m3/ha", round(rho_b_m3, 2), "\n")
-cat("Frontier A:", paste(res$name[res$frontier_a], collapse = ", "),
-    "| Frontier B:", paste(res$name[res$frontier_b], collapse = ", "), "\n")
+sh <- sapply(paste0("saving_", specs$spec), function(s) share(main, s))
+sh_all <- sapply(paste0("saving_", specs$spec), function(s) share(full, s))
+tab_specs <- specs |>
+  mutate(saving_share_eurostat = sh, saving_share_all = sh_all,
+         n_frontier_eurostat = sapply(paste0("saving_", spec), function(s) sum(main[[s]] < 1e-4)),
+         frontier_eurostat = sapply(paste0("saving_", spec),
+                                    function(s) paste(main$name[main[[s]] < 1e-4], collapse = ", ")))
+print(as.data.frame(tab_specs), digits = 3)
+rho_ab <- cor(main$saving_A, main$saving_B, method = "spearman")
+rho_b_m3 <- cor(main$saving_B, main$m3_per_ha, method = "spearman")
+rho_b_ppm <- cor(main$saving_B, main$out_per_m3, method = "spearman")
+# Which choice drives the A-B gap? Change one dimension at a time.
+d_rts <- mean(c(sh["saving_A_crs"] - sh["saving_A"], sh["saving_B"] - sh["saving_B_vrs"]))
+d_land <- mean(c(sh["saving_B_vrs"] - sh["saving_A"], sh["saving_B"] - sh["saving_A_crs"]))
+z0 <- function(x) if (round(x) == 0) 0 else x                 # avoid printing "-0"
+d_rts <- z0(d_rts)
+d_land <- z0(d_land)
+cat("Average change in the saving share: returns to scale", round(d_rts), "pp | land split",
+    round(d_land), "pp\n")
 
-# Leave one frontier country out (spec B): how stable are single shares?
-front_b <- res$geo[res$frontier_b]
-loo <- lapply(front_b, function(gg) {
-  tibble::tibble(geo = res$geo, dropped = gg,
-                 saving = 100 * water_dea(res, "B", ref = filter(res, geo != gg)))
-}) |>
-  bind_rows() |>
-  filter(geo != dropped) |>
-  mutate(saving = if_else(is.finite(saving), saving, NA_real_))
+# Leave one frontier country out, models A and B (headline sample).
+loo_one <- function(d, spec_id) {
+  sp <- specs[specs$spec == spec_id, ]
+  col <- paste0("saving_", spec_id)
+  front <- d$geo[d[[col]] < 1e-4]
+  lapply(front, function(gg) {
+    tibble::tibble(spec = spec_id, geo = d$geo, dropped = gg,
+                   saving = water_dea(d, sp$land, sp$rts, ref = filter(d, geo != gg)))
+  }) |>
+    bind_rows() |>
+    filter(geo != dropped)
+}
+loo <- bind_rows(loo_one(main, "A"), loo_one(main, "B")) |>
+  mutate(infeasible = !is.finite(saving), saving = if_else(infeasible, NA_real_, saving))
 loo_rng <- loo |>
-  group_by(geo) |>
-  summarise(loo_min = min(saving, na.rm = TRUE), loo_max = max(saving, na.rm = TRUE),
-            .groups = "drop")
-loo_shift <- max(abs(loo_rng$loo_min - res$saving_b[match(loo_rng$geo, res$geo)]))
-cat("Spec B leave-one-out over", length(front_b), "frontier countries | largest change",
-    round(loo_shift), "pp\n")
+  group_by(spec, geo) |>
+  summarise(loo_min = suppressWarnings(min(saving, na.rm = TRUE)),
+            loo_max = suppressWarnings(max(saving, na.rm = TRUE)),
+            n_infeasible = sum(infeasible), .groups = "drop") |>
+  mutate(across(c(loo_min, loo_max), ~ if_else(is.finite(.x), .x, NA_real_)))
+shift <- function(s) {
+  r <- filter(loo_rng, spec == s)
+  max(abs(r$loo_min - main[[paste0("saving_", s)]][match(r$geo, main$geo)]), na.rm = TRUE)
+}
+cat("Leave-one-out: largest change A", round(shift("A")), "pp | B", round(shift("B")),
+    "pp | infeasible runs", sum(loo$infeasible), "of", nrow(loo), "\n")
 
-# ---- R1: Eurostat-only countries ----
-g_r1 <- gap(filter(res, !filled))
-# ---- R2: irrigated area from one survey instead of the 2021 interpolation ----
-g_16 <- gap(mutate(res, m3 = water / irrigated_2016 * 1000), "m3")
-g_23 <- gap(mutate(res, m3 = water / irrigated_2023 * 1000), "m3")
-cat("Med/other ratio: R1 Eurostat-only", round(g_r1["ratio"], 1), "| R2 2016 survey",
-    round(g_16["ratio"], 1), "| 2023 survey", round(g_23["ratio"], 1), "\n")
-
-res <- left_join(res, loo_rng, by = "geo")
+out <- full |>
+  select(-starts_with("saving_")) |>
+  left_join(select(main, geo, starts_with("saving_")), by = "geo") |>
+  left_join(select(full, geo, saving_B_all = saving_B), by = "geo") |>
+  left_join(filter(loo_rng, spec == "B") |> select(geo, loo_min_B = loo_min, loo_max_B = loo_max),
+            by = "geo") |>
+  left_join(filter(loo_rng, spec == "A") |> select(geo, loo_min_A = loo_min, loo_max_A = loo_max),
+            by = "geo")
 
 # ---- Key numbers ----
 kn_reset()
-hi <- slice_max(res, m3_per_ha, n = 1, with_ties = FALSE)
-lo <- slice_min(res, m3_per_ha, n = 1, with_ties = FALSE)
-kn_add("n_countries", nrow(res), "countries", 0, "Member states in the sample", src)
-kn_add("n_med", sum(res$group == "Mediterranean climate"), "countries", 0,
-       "Mediterranean-climate member states in the sample", src)
-kn_add("n_filled", sum(res$filled), "countries", 0, "Water filled from AQUASTAT (scaled)", src)
+hi <- slice_max(main, m3_per_ha, n = 1, with_ties = FALSE)
+lo <- slice_min(main, m3_per_ha, n = 1, with_ties = FALSE)
+kn_add("n_main", nrow(main), "countries", 0, "Member states with Eurostat irrigation data (headline)", src)
+kn_add("n_main_med", sum(main$group == "Mediterranean climate"), "countries", 0,
+       paste("Mediterranean-climate, headline sample:",
+             paste(main$name[main$group == "Mediterranean climate"], collapse = ", ")), src)
+kn_add("n_main_other", sum(main$group == "Other"), "countries", 0, "Other, headline sample", src)
+kn_add("n_all", nrow(full), "countries", 0, "All member states incl. AQUASTAT fills", src)
+kn_add("n_filled", sum(full$filled), "countries", 0,
+       paste("Filled from AQUASTAT (scaled):", paste(full$name[full$filled], collapse = ", ")), src)
 kn_add("irr_threshold", attr(panel, "threshold"), "%", 0,
        "Minimum irrigated area, % of UAA (latest survey year)", "Eurostat ef_fsi_irri")
 kn_add("fill_ratio", 100 * attr(panel, "fill_ratio"), "%", 0,
        "Median Eurostat irrigation abstraction as % of AQUASTAT agricultural withdrawal", src)
 kn_add("year_start", 2020, "", 0, "First year of the averaging window", src, big_mark = "")
 kn_add("year_end", 2022, "", 0, "Last year of the averaging window", src, big_mark = "")
-kn_add("m3ha_med", g["med"], "m3/ha", 0, "Median water per irrigated ha, Mediterranean climate", src)
-kn_add("m3ha_other", g["other"], "m3/ha", 0, "Median water per irrigated ha, other member states", src)
-kn_add("m3ha_ratio", g["ratio"], "x", 1, "Mediterranean median / other median", src)
-kn_add("m3ha_max", hi$m3_per_ha, "m3/ha", 0, paste("Highest water per irrigated ha:", hi$name), src)
-kn_add("m3ha_min", lo$m3_per_ha, "m3/ha", 0, paste("Lowest water per irrigated ha:", lo$name), src)
-kn_add("rho_m3ha_wei", unname(sp_wei$estimate), "", 2, "Spearman, water per ha vs WEI+", src)
-kn_add("p_m3ha_wei", sp_wei$p.value, "", 3, "p-value of that Spearman test", src)
-kn_add("saving_share_a", share(res$saving_a), "%", 0,
-       "Spec A (VRS, cropland + water): saving as % of sample water", src)
-kn_add("saving_share_b", share(res$saving_b), "%", 0,
-       "Spec B (CRS, rainfed + irrigated land + water): saving as % of sample water", src)
-kn_add("n_frontier_a", sum(res$frontier_a), "countries", 0,
-       paste("Spec A frontier:", paste(res$name[res$frontier_a], collapse = ", ")), src)
-kn_add("n_frontier_b", sum(res$frontier_b), "countries", 0,
-       paste("Spec B frontier:", paste(res$name[res$frontier_b], collapse = ", ")), src)
-kn_add("rho_ab", rho_ab, "", 2, "Spearman, saving shares spec A vs spec B", src)
-kn_add("rho_b_m3ha", rho_b_m3, "", 2, "Spearman, spec B saving share vs water per ha", src)
-kn_add("rho_a_m3ha", rho_a_m3, "", 2, "Spearman, spec A saving share vs water per ha", src)
-kn_add("loo_shift_b", loo_shift, "pp", 0, "Spec B: largest change in a saving share, leave-one-out", src)
-kn_add("r1_ratio", g_r1["ratio"], "x", 1, "R1: Med/other ratio, Eurostat-only countries", src)
-kn_add("r2_ratio_2016", g_16["ratio"], "x", 1, "R2: Med/other ratio with 2016 irrigated area", src)
-kn_add("r2_ratio_2023", g_23["ratio"], "x", 1, "R2: Med/other ratio with 2023 irrigated area", src)
+kn_add("m3ha_med", g["med"], "m3/ha", 0, "Median abstraction per irrigated ha, Mediterranean (headline)", src)
+kn_add("m3ha_other", g["other"], "m3/ha", 0, "Median abstraction per irrigated ha, other (headline)", src)
+kn_add("m3ha_ratio", g["ratio"], "x", 1, "Mediterranean median / other median (headline)", src)
+kn_add("ratio_min", min(variants), "x", 1, "Lowest ratio over samples and survey years", src)
+kn_add("ratio_max", max(variants), "x", 1, "Highest ratio over samples and survey years", src)
+kn_add("p_ranksum", rs_main$p.value, "", 3, "Exact Wilcoxon rank-sum p, headline sample", src)
+kn_add("p_ranksum_all", rs_all$p.value, "", 4, "Exact Wilcoxon rank-sum p, all 14", src)
+kn_add("m3ha_max", hi$m3_per_ha, "m3/ha", 0, paste("Highest, headline sample:", hi$name), src)
+kn_add("m3ha_min", lo$m3_per_ha, "m3/ha", 0, paste("Lowest, headline sample:", lo$name), src)
+kn_add("rho_m3ha_wei", unname(sp_wei$estimate), "", 2,
+       "Spearman, water per ha vs WEI+ (partly mechanical: shared numerator)", src)
+for (i in seq_len(nrow(specs))) {
+  kn_add(paste0("share_", tolower(specs$spec[i])), sh[i], "%", 0,
+         paste0("Saving share of sample water, ", specs$label[i], " (headline sample)"), src)
+  kn_add(paste0("nfront_", tolower(specs$spec[i])), tab_specs$n_frontier_eurostat[i], "countries", 0,
+         paste0("Frontier, ", specs$label[i], ": ", tab_specs$frontier_eurostat[i]), src)
+}
+kn_add("share_b_all", sh_all["saving_B"], "%", 0, "Model B saving share, all 14", src)
+kn_add("share_a_all", sh_all["saving_A"], "%", 0, "Model A saving share, all 14", src)
+kn_add("d_rts", d_rts, "pp", 0, "Average change in saving share from VRS to CRS", src)
+kn_add("d_land", d_land, "pp", 0, "Average change in saving share from total to split land", src)
+kn_add("rho_ab", rho_ab, "", 2, "Spearman, saving shares A vs B", src)
+kn_add("rho_b_m3ha", rho_b_m3, "", 2, "Spearman, B saving share vs water per ha", src)
+kn_add("rho_b_ppm", rho_b_ppm, "", 3, "Spearman, B saving share vs crop value per m3", src)
+kn_add("loo_shift_a", shift("A"), "pp", 0, "Model A: largest change in a saving share, leave-one-out", src)
+kn_add("loo_shift_b", shift("B"), "pp", 0, "Model B: largest change in a saving share, leave-one-out", src)
+kn_add("loo_infeasible", sum(loo$infeasible), "runs", 0, "Leave-one-out runs with no feasible peer", src)
 
-readr::write_csv(res, "output/tab_results.csv")
+readr::write_csv(out, "output/tab_results.csv")
+readr::write_csv(tab_specs, "output/tab_specs.csv")
 readr::write_csv(loo, "output/tab_robustness.csv")
-saveRDS(list(res = res), "output/cache/results.rds")
+saveRDS(list(res = out, main = main, specs = tab_specs), "output/cache/results.rds")
 write_session_info()
-print(kn_read())
+print(kn_read(), n = 60)

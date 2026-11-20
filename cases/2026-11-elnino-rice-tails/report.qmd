@@ -301,7 +301,9 @@ their output, so that Indonesia counts most, gives `r k("sl_w3_mar_prod_t1", uni
 (interval `r k("sl_w3_mar_prod_t1_lo", unit = TRUE)` to `r k("sl_w3_mar_prod_t1_hi", unit = TRUE)`).
 At `r k("sl_t3_year")` trend output, the unweighted estimate is
 `r k("sl_t3_mar_kt", sign = TRUE)` thousand tonnes (interval `r k("sl_t3_mar_lo_kt", sign = TRUE)` to
-`r k("sl_t3_mar_hi_kt", sign = TRUE)`), of which Indonesia `r k("sl_t3_idn_kt", sign = TRUE)`. In contrast, `r mai_txt`. `r diff_txt`
+`r k("sl_t3_mar_hi_kt", sign = TRUE)`), of which Indonesia `r k("sl_t3_idn_kt", sign = TRUE)`. These are gaps
+against each country's long-run trend, not falls from the previous year, so they are not comparable
+with the year-on-year changes usually reported. In contrast, `r mai_txt`. `r diff_txt`
 
 `r if (c24_fits) paste0("The latest case points the same way: in ", k("sl_t3_year"), ", the harvest year after the 2023 onset, maritime production was ", k("sl_c24_mar_prod_pct", unit = TRUE, abs = TRUE), " below trend (Indonesia ", k("sl_c24_idn_prod_pct", unit = TRUE, sign = TRUE), "). That year is part of the sample, so it illustrates the estimate rather than testing it.") else paste0("The latest case does not follow the pattern: in ", k("sl_t3_year"), " maritime production was ", k("sl_c24_mar_prod_pct", unit = TRUE, sign = TRUE), " against trend.")`
 

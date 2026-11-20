@@ -89,38 +89,57 @@ wei <- wei_all |>
   select(geo, time, values)
 show(wei, "WEI+ (%)")
 
-# Crop output. The item dimension is found by its code (10000 = crop output) rather than
-# by name: the bulk table does not call it itm_newa. Valuation: basic prices.
+# Crop output. The bulk table's dimension names and codes differ from the database
+# browser (e.g. am_item, indic_agr), so codes are matched on their Eurostat labels.
 eaa <- tryCatch(get_eurostat("aact_eaa01", labels = FALSE), error = function(e) {
   message("aact_eaa01 failed: ", conditionMessage(e))
   NULL
 })
+code_for <- function(d, v, pattern) {
+  dic <- tryCatch(eurostat::get_eurostat_dic(v), error = function(e) NULL)
+  hit <- if (is.null(dic)) character() else dic$code_name[grepl(pattern, dic$full_name, ignore.case = TRUE)]
+  intersect(hit, unique(d[[v]]))
+}
 crop <- NULL
 crop_version <- NA_character_
 if (!is.null(eaa)) {
   crop_version <- version_of(eaa)
   dims <- setdiff(names(eaa), c("geo", "time", "values", "freq", "flags"))
-  cat("aact_eaa01 dimensions:", paste(dims, collapse = ", "), "\n")
-  item_col <- dims[vapply(dims, function(v) "10000" %in% eaa[[v]], logical(1))]
-  stopifnot("No aact_eaa01 dimension holds code 10000 (crop output)" = length(item_col) == 1)
-  eaa <- eaa[eaa[[item_col]] == "10000" & eaa$geo %in% eu$geo & eaa$time %in% yrs, ]
-  for (v in setdiff(dims, item_col)) {
-    vals <- unique(eaa[[v]])
-    cat("  ", v, ":", paste(utils::head(vals, 12), collapse = ", "), "\n")
-    keep <- intersect(c("MIO_EUR", "PROD_BP"), vals)
-    if (length(vals) > 1 && length(keep) == 1) eaa <- eaa[eaa[[v]] == keep, ]
+  for (v in dims) cat("aact_eaa01", v, ":", paste(utils::head(unique(eaa[[v]]), 15), collapse = ", "), "\n")
+  item <- lapply(dims, function(v) code_for(eaa, v, "^crop output$"))
+  item_dim <- dims[lengths(item) == 1]
+  if (length(item_dim) != 1) {
+    item <- lapply(dims, function(v) unique(grep("10000$", eaa[[v]], value = TRUE)))
+    item_dim <- dims[lengths(item) == 1]
   }
-  crop <- eaa |>
-    transmute(geo, time, values, measure = "EUR million, basic prices", source = "eaa")
-  if (anyDuplicated(crop[c("geo", "time")])) {
-    message("aact_eaa01: more than one crop-output value per country-year (see above).")
-    crop <- NULL
+  if (length(item_dim) == 1) {
+    item_code <- item[[match(item_dim, dims)]]
+    cat("Crop output:", item_dim, "=", item_code, "\n")
+    eaa <- eaa[eaa[[item_dim]] == item_code & eaa$geo %in% eu$geo & eaa$time %in% yrs, ]
+    for (v in setdiff(dims, item_dim)) {
+      vals <- unique(eaa[[v]])
+      keep <- intersect(c("MIO_EUR", "PROD_BP"), vals)
+      if (length(keep) != 1) keep <- code_for(eaa, v, "basic price|^million euro$")
+      if (length(vals) > 1 && length(keep) == 1) {
+        cat("  keeping", v, "=", keep, "\n")
+        eaa <- eaa[eaa[[v]] == keep, ]
+      }
+    }
+    crop <- eaa |>
+      transmute(geo, time, values, measure = "EUR million, basic prices", source = "eaa")
+    if (anyDuplicated(crop[c("geo", "time")])) {
+      message("aact_eaa01: more than one crop-output value per country-year (see above).")
+      crop <- NULL
+    }
+  } else {
+    message("aact_eaa01: crop output (code 10000) not identified.")
   }
 }
 if (is.null(crop) || n_distinct(crop$geo[!is.na(crop$values)]) < 20) {
   message("Crop output from aact_eaa01 incomplete: switching to FAOSTAT QV.")
   qv <- get_faostat("QV", areas = eu$iso3, years = yrs)
   qv_item <- unique(qv$item[grepl("^crops", qv$item, ignore.case = TRUE)])
+  if ("Crops" %in% qv_item) qv_item <- "Crops"
   qv_el <- unique(qv$element[grepl("constant 2014-2016 thousand I\\$", qv$element)])
   cat("QV items found:", paste(qv_item, collapse = " | "), "\nQV elements found:",
       paste(qv_el, collapse = " | "), "\n")

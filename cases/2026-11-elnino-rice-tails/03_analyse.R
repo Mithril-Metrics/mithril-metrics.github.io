@@ -9,8 +9,11 @@
 #  E2  observed frequency of >= 5% / >= 10% shortfalls  /  frequency implied by a normal
 #      distribution with each country's typical (robust) variability; a second benchmark
 #      uses the classical SD, which the large losses themselves inflate (lower bound on E2)
-# Inference: year-block bootstrap. El Niño hits all six countries in the same year, so shocks
-# are correlated across countries within a year; resampling whole years keeps that structure.
+# Inference: moving-block bootstrap over years (blocks of 3 consecutive years). El Niño hits all
+# six countries in the same year, so shocks are correlated across countries within a year, and
+# detrended shocks are autocorrelated over time; resampling blocks of whole years keeps both.
+# Each country's spread (MAD and SD) is re-estimated in every draw, so the normal benchmark
+# carries its own sampling error. The trend itself is treated as known.
 
 stopifnot("Run this script from the issue folder (AgEcon/Issue 1)" = file.exists("00_meta.yml"))
 options(acutils.data_dir = "data_raw")
@@ -21,6 +24,7 @@ suppressPackageStartupMessages({
 })
 set.seed(20261118)
 B <- 999
+block_len <- 3
 kn_file <- "output/key_numbers.csv"
 pct <- function(x) 100 * (exp(x) - 1)          # log points -> % change
 
@@ -49,7 +53,17 @@ qr_eff <- function(d, taus = c(0.1, 0.5)) {
   cf <- coef(fit)
   unname(cf["elninoTRUE", ])
 }
+# Normal benchmark from the data at hand: each country's robust (MAD) and classical SD
+add_benchmark <- function(d) {
+  d |>
+    group_by(iso3) |>
+    mutate(sigma = stats::mad(shock), sigma_sd = stats::sd(shock)) |>
+    ungroup() |>
+    mutate(pnorm5 = pnorm(thr5 / sigma), pnorm10 = pnorm(thr10 / sigma),
+           pnorm5_sd = pnorm(thr5 / sigma_sd), pnorm10_sd = pnorm(thr10 / sigma_sd))
+}
 stats_fun <- function(d) {
+  d <- add_benchmark(d)
   q <- qr_eff(d)
   c(
     p5_other  = mean(d$loss5[!d$elnino]),
@@ -74,11 +88,17 @@ stats_fun <- function(d) {
 est <- stats_fun(panel)
 print(round(est, 4))
 
-# --- Year-block bootstrap --------------------------------------------------------------------
-by_year <- split(panel, panel$year)
-yrs <- names(by_year)
+# --- Moving-block bootstrap over years ---------------------------------------------------------
+yrs <- as.character(sort(unique(panel$year)))
+by_year <- split(panel, panel$year)[yrs]
+draw_years <- function(yrs, l) {
+  n <- length(yrs)
+  starts <- sample(seq_len(n - l + 1), ceiling(n / l), replace = TRUE)
+  idx <- unlist(lapply(starts, function(s) s:(s + l - 1)))
+  yrs[idx[seq_len(n)]]
+}
 boot <- t(vapply(seq_len(B), function(b) {
-  d <- bind_rows(by_year[sample(yrs, length(yrs), replace = TRUE)])
+  d <- bind_rows(by_year[draw_years(yrs, block_len)])
   tryCatch(stats_fun(d), error = function(e) rep(NA_real_, length(est)))
 }, numeric(length(est))))
 colnames(boot) <- names(est)
@@ -141,7 +161,7 @@ print(tab_country, width = Inf)
 readr::write_csv(tab_country, "output/tab_country.csv")
 
 tab_results <- bind_rows(
-  res |> mutate(type = "bootstrap (year blocks)"),
+  res |> mutate(type = paste0("moving-block bootstrap (", block_len, "-year blocks)")),
   gpd |> transmute(stat = paste0("gpd_xi_q", threshold_q), estimate = xi, lo = xi_lo, hi = xi_hi,
                    type = paste0("GPD MLE, n_exc = ", n_exc)),
   tibble(stat = "diff5_noE", estimate = diff5_noE, lo = NA, hi = NA, type = "sanity: drop E flags")
@@ -188,8 +208,8 @@ add("p5_other_pct", 100 * est[["p5_other"]], "%", 0, "P(yield >= 5% below trend)
 add("p5_elnino_pct", 100 * est[["p5_elnino"]], "%", 0, "P(yield >= 5% below trend), El Niño onset years")
 add("p5_strong_pct", 100 * est[["p5_strong"]], "%", 0, "P(yield >= 5% below trend), strong El Niño years")
 add("diff5_pp", 100 * est[["diff5"]], "pp", 1, "Change in P(>=5% shortfall), El Niño vs other (LPM, country FE)")
-add("diff5_lo_pp", 100 * ci[1, "diff5"], "pp", 1, "95% CI lower, year-block bootstrap")
-add("diff5_hi_pp", 100 * ci[2, "diff5"], "pp", 1, "95% CI upper, year-block bootstrap")
+add("diff5_lo_pp", 100 * ci[1, "diff5"], "pp", 1, "95% CI lower, moving-block bootstrap")
+add("diff5_hi_pp", 100 * ci[2, "diff5"], "pp", 1, "95% CI upper, moving-block bootstrap")
 add("diff10_pp", 100 * est[["diff10"]], "pp", 1, "Change in P(>=10% shortfall), El Niño vs other")
 add("diff10_lo_pp", 100 * ci[1, "diff10"], "pp", 1, "95% CI lower")
 add("diff10_hi_pp", 100 * ci[2, "diff10"], "pp", 1, "95% CI upper")
@@ -200,9 +220,12 @@ add("ratio5", est[["ratio5"]], "x", 1, "Observed / normal-implied frequency, >=5
 add("p10_obs_pct", 100 * est[["p10_obs"]], "%", 1, "Observed share of >=10% shortfalls, all years")
 add("p10_normal_pct", 100 * est[["p10_norm"]], "%", 2, "Share implied by normal shocks, >=10%")
 add("ratio10", est[["ratio10"]], "x", 1, "Observed / normal-implied frequency, >=10% shortfalls")
-add("ratio10_lo", ci[1, "ratio10"], "x", 1, "95% CI lower")
+add("ratio10_lo", ci[1, "ratio10"], "x", 1, "95% CI lower (sigma re-estimated in each draw)")
 add("ratio10_hi", ci[2, "ratio10"], "x", 1, "95% CI upper")
 add("n_loss10", sum(panel$loss10), "country-years", 0, "Country-years with yields at least 10% below trend")
+add("n_loss10_pre1980", sum(panel$loss10 & panel$year < 1980), "country-years", 0,
+    "Country-years with yields at least 10% below trend, before 1980")
+add("block_len", block_len, "years", 0, "Block length of the moving-block bootstrap")
 add("median_sd_pct", 100 * median(unique(panel$sigma_sd)), "%", 1, "Median country SD of yield shocks (classical)")
 add("p10_normal_sd_pct", 100 * est[["p10_norm_sd"]], "%", 2, "Share implied by normal shocks with the classical SD, >=10%")
 add("ratio5_sd", est[["ratio5_sd"]], "x", 1, "Observed / normal-implied frequency (classical SD), >=5% shortfalls")

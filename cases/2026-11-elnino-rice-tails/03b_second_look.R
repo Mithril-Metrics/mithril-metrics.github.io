@@ -14,9 +14,14 @@
 #      (irrigated) harvest has high yields: yield may rise while production falls.
 #  S3  Region: maritime (IDN, PHL, MYS) vs mainland (THA, VNM, KHM).
 #  S4  Disruptions: drop major-conflict country-years (UCDP intensity 2); drop 1997-98.
-# Inference: year-block bootstrap (999 draws), as in 03_analyse.R. Added after the red team:
-# Holm-adjusted p-values across the 14 margin contrasts (S2, S3), and a leave-one-event-out
-# check of the maritime production effect in t+1.
+# Inference: moving-block bootstrap over years (3-year blocks, 999 draws), as in 03_analyse.R.
+# Added after the first red team: Holm-adjusted p-values across the 14 margin contrasts (S2, S3),
+# and a leave-one-event-out check of the maritime production effect in t+1.
+# Added after the second red team (2026-11-20), outside the Holm family:
+#  D3  maritime minus mainland difference in the t+1 effect (production, yield): the direct test
+#  W3  maritime production t+1 weighted by each country's mean production (Indonesia dominates)
+#  T3  the maritime t+1 effect in tonnes, at each country's 2024 trend production
+#  C24 2024, the harvest year after the 2023 onset: observed maritime production vs trend
 
 stopifnot("Run this script from the issue folder (AgEcon/Issue 1)" = file.exists("00_meta.yml"))
 options(acutils.data_dir = "data_raw")
@@ -26,10 +31,17 @@ suppressPackageStartupMessages({
 })
 set.seed(20261119)
 B <- 999
+block_len <- 3
 kn_file <- "output/key_numbers.csv"
 pct <- function(x) 100 * (exp(x) - 1)
 panel <- readRDS("output/cache/panel.rds")
 stopifnot(all(c("shock_area", "shock_prod", "enso3", "major_conflict") %in% names(panel)))
+# Production weights (country mean over the sample), and trend production in each year
+panel <- panel |>
+  group_by(iso3) |>
+  mutate(w_prod = mean(prod)) |>
+  ungroup() |>
+  mutate(prod_trend = prod / exp(shock_prod))
 
 coef_of <- function(fit, term) {
   cf <- coef(fit)
@@ -41,15 +53,20 @@ s1 <- function(d) {
   c(el = coef_of(f, "elninoTRUE"), la = coef_of(f, "laninaTRUE"))
 }
 # Distributed-lag shock regression: ENSO in t and t-1, neutral reference, country FE
-s2 <- function(d, y) {
+s2 <- function(d, y, w = NULL) {
+  d$w_ <- if (is.null(w)) 1 else d[[w]]
   f <- lm(stats::as.formula(paste(y, "~ elnino + elnino_lag + lanina + lanina_lag + factor(iso3)")),
-          data = d)
+          data = d, weights = w_)
   c(t = coef_of(f, "elninoTRUE"), t1 = coef_of(f, "elnino_lagTRUE"))
 }
 main_diff5 <- function(d) {   # same estimand as the headline (El Niño vs all other years)
   coef_of(lm(as.numeric(loss5) ~ elnino + factor(iso3), data = d), "elninoTRUE")
 }
-ratio10 <- function(d) mean(d$loss10) / mean(d$pnorm10)
+ratio10 <- function(d) {
+  # normal benchmark re-estimated on the data at hand, as in 03_analyse.R
+  s <- stats::ave(d$shock, d$iso3, FUN = stats::mad)
+  mean(d$loss10) / mean(pnorm(d$thr10 / s))
+}
 
 stats_fun <- function(d) {
   mar <- d[d$region == "Maritime", ]
@@ -64,6 +81,7 @@ stats_fun <- function(d) {
   pn <- s2(mai, "shock_prod")
   ym <- s2(mar, "shock")
   yn <- s2(mai, "shock")
+  pw <- s2(mar, "shock_prod", w = "w_prod")
   c(
     s1_el_vs_neutral = a[["el"]], s1_la_vs_neutral = a[["la"]],
     s2_yield_t = y[["t"]], s2_yield_t1 = y[["t1"]],
@@ -74,7 +92,10 @@ stats_fun <- function(d) {
     s3_mar_prod_t = pm[["t"]],  s3_mar_prod_t1 = pm[["t1"]],
     s3_mai_prod_t = pn[["t"]],  s3_mai_prod_t1 = pn[["t1"]],
     s4_noconflict_diff5 = main_diff5(noc), s4_noconflict_ratio10 = ratio10(noc),
-    s4_nocrisis_diff5 = main_diff5(nocr),  s4_nocrisis_ratio10 = ratio10(nocr)
+    s4_nocrisis_diff5 = main_diff5(nocr),  s4_nocrisis_ratio10 = ratio10(nocr),
+    d3_prod_t1  = pct(pm[["t1"]]) - pct(pn[["t1"]]),
+    d3_yield_t1 = pct(ym[["t1"]]) - pct(yn[["t1"]]),
+    w3_mar_prod_t1 = pw[["t1"]]
   )
 }
 
@@ -89,12 +110,18 @@ print(panel |> group_by(enso3) |> summarise(n = n(), p5 = mean(loss5), p10 = mea
 cat("\nCheck: production shock ~ area shock + yield shock (correlation):",
     round(cor(panel$shock_prod, panel$shock_area + panel$shock), 3), "\n")
 
-# --- Estimates + year-block bootstrap ----------------------------------------------------------
+# --- Estimates + moving-block bootstrap over years ---------------------------------------------
 est <- stats_fun(panel)
-by_year <- split(panel, panel$year)
-yrs <- names(by_year)
+yrs <- as.character(sort(unique(panel$year)))
+by_year <- split(panel, panel$year)[yrs]
+draw_years <- function(yrs, l) {
+  n <- length(yrs)
+  starts <- sample(seq_len(n - l + 1), ceiling(n / l), replace = TRUE)
+  idx <- unlist(lapply(starts, function(s) s:(s + l - 1)))
+  yrs[idx[seq_len(n)]]
+}
 boot <- t(vapply(seq_len(B), function(b) {
-  d <- bind_rows(by_year[sample(yrs, length(yrs), replace = TRUE)])
+  d <- bind_rows(by_year[draw_years(yrs, block_len)])
   tryCatch(stats_fun(d), error = function(e) rep(NA_real_, length(est)))
 }, numeric(length(est))))
 colnames(boot) <- names(est)
@@ -102,13 +129,17 @@ ci <- apply(boot, 2, stats::quantile, probs = c(0.025, 0.975), na.rm = TRUE)
 
 is_ratio <- grepl("ratio", names(est))
 is_prob  <- grepl("^s1_|diff5", names(est))
-to_unit  <- function(x, nm) ifelse(grepl("ratio", nm), x, ifelse(grepl("^s1_|diff5", nm), 100 * x, pct(x)))
+is_diff  <- grepl("^d3_", names(est))           # already a difference of % effects
+to_unit  <- function(x, nm) {
+  ifelse(grepl("ratio", nm) | grepl("^d3_", nm), x,
+         ifelse(grepl("^s1_|diff5", nm), 100 * x, pct(x)))
+}
 tab <- tibble(
   stat = names(est),
   estimate = to_unit(est, names(est)),
   lo = to_unit(ci[1, ], names(est)),
   hi = to_unit(ci[2, ], names(est)),
-  unit = ifelse(is_ratio, "x", ifelse(is_prob, "pp", "% vs trend")),
+  unit = ifelse(is_ratio, "x", ifelse(is_prob | is_diff, "pp", "% vs trend")),
   description = c(
     "S1: P(>=5% yield shortfall), El Niño vs neutral years",
     "S1: P(>=5% yield shortfall), La Niña vs neutral years",
@@ -122,13 +153,17 @@ tab <- tibble(
     "S4: headline estimate without major-conflict country-years",
     "S4: >=10% shortfalls vs normal, without major-conflict years",
     "S4: headline estimate without 1997-98",
-    "S4: >=10% shortfalls vs normal, without 1997-98"
+    "S4: >=10% shortfalls vs normal, without 1997-98",
+    "D3: maritime minus mainland, production effect t+1 (pp)",
+    "D3: maritime minus mainland, yield effect t+1 (pp)",
+    "W3: maritime production t+1, weighted by mean production"
   )
 )
 # Many contrasts were looked at, so adjust the S2/S3 p-values for multiple testing (Holm).
 # p-values use the bootstrap standard error and a normal approximation.
 se_boot <- apply(boot, 2, stats::sd, na.rm = TRUE)
 tab$p <- 2 * stats::pnorm(-abs(est / se_boot))
+tab$p[is_diff] <- 2 * stats::pnorm(-abs(est[is_diff] / se_boot[is_diff]))
 margins <- grepl("^s2_|^s3_", tab$stat)
 tab$p_holm <- NA_real_
 tab$p_holm[margins] <- stats::p.adjust(tab$p[margins], method = "holm")
@@ -136,7 +171,8 @@ print(tab, n = Inf, width = Inf)
 readr::write_csv(tab, "output/tab_second_look.csv")
 
 # Leave one El Niño event out: does the maritime t+1 production effect rest on one episode?
-# Each event removes its onset year and the following year.
+# Each event removes its onset year and the following year; for back-to-back events
+# (e.g. 1986-87) that also removes the next onset.
 mar_all <- panel[panel$region == "Maritime", ]
 events <- sort(unique(panel$year[panel$elnino]))
 loo <- tibble(
@@ -166,6 +202,8 @@ kn_add("sl_holm_mar_prod_t1", holm_of("s3_mar_prod_t1"), unit = "", digits = 3,
        description = "Holm-adjusted p, maritime production t+1 (14 margin contrasts)", source = src, file = kn_file)
 kn_add("sl_holm_mar_yield_t1", holm_of("s3_mar_yield_t1"), unit = "", digits = 3,
        description = "Holm-adjusted p, maritime yield t+1 (14 margin contrasts)", source = src, file = kn_file)
+kn_add("sl_holm_area_t", holm_of("s2_area_t"), unit = "", digits = 3,
+       description = "Holm-adjusted p, harvested area in the onset year (14 margin contrasts)", source = src, file = kn_file)
 kn_add("sl_n_holm_sig", sum(tab$p_holm < 0.05, na.rm = TRUE), unit = "", digits = 0,
        description = "Margin contrasts with Holm-adjusted p < 0.05", source = src, file = kn_file)
 kn_add("sl_n_margin_tests", sum(margins), unit = "", digits = 0,
@@ -185,4 +223,39 @@ for (ph in c("Neutral", "El Nino", "La Nina")) {
   kn_add(key, 100 * mean(panel$loss5[panel$enso3 == ph]), unit = "%", digits = 0,
          description = paste("Share of >=5% yield shortfalls,", ph, "years"), source = src, file = kn_file)
 }
+# --- Tonnes and the 2024 check (T3, C24) ------------------------------------------------------------
+last_year <- max(panel$year)
+mar_last <- panel |> filter(region == "Maritime", year == last_year)
+eff <- exp(c(est = est[["s3_mar_prod_t1"]], lo = ci[1, "s3_mar_prod_t1"], hi = ci[2, "s3_mar_prod_t1"])) - 1
+tonnes <- mar_last |>
+  transmute(iso3, prod_trend_kt = prod_trend / 1e3,
+            gap_kt = prod_trend_kt * eff[["est"]],
+            gap_lo_kt = prod_trend_kt * eff[["lo"]],
+            gap_hi_kt = prod_trend_kt * eff[["hi"]],
+            obs_vs_trend_pct = 100 * (prod / prod_trend - 1))
+cat("\nMaritime t+1 effect in tonnes at", last_year, "trend production (kt):\n")
+print(tonnes, width = Inf)
+readr::write_csv(tonnes, "output/tab_tonnes.csv")
+onset_prev <- any(panel$year == last_year - 1 & panel$elnino)
+mar_obs_last <- 100 * (sum(mar_last$prod) / sum(mar_last$prod_trend) - 1)
+cat("Previous year an El Niño onset:", onset_prev, "; maritime production", last_year,
+    "vs trend:", round(mar_obs_last, 1), "%\n")
+
+add_t <- function(key, value, unit, digits, description, big_mark = ",")
+  kn_add(key, value, unit = unit, digits = digits, description = description, source = src,
+         big_mark = big_mark, file = kn_file)
+add_t("sl_t3_mar_kt", sum(tonnes$gap_kt), "thousand t", 0,
+      paste("T3: maritime t+1 effect in tonnes at", last_year, "trend production (IDN+PHL+MYS)"))
+add_t("sl_t3_mar_lo_kt", sum(tonnes$gap_lo_kt), "thousand t", 0, "T3: 95% CI lower")
+add_t("sl_t3_mar_hi_kt", sum(tonnes$gap_hi_kt), "thousand t", 0, "T3: 95% CI upper")
+add_t("sl_t3_idn_kt", tonnes$gap_kt[tonnes$iso3 == "IDN"], "thousand t", 0,
+      "T3: of which Indonesia")
+add_t("sl_t3_year", last_year, "", 0, "Year of trend production used for tonnes", big_mark = "")
+add_t("sl_c24_onset_prev", as.numeric(onset_prev), "", 0, "1 if the year before the last year is an El Niño onset")
+add_t("sl_c24_mar_prod_pct", mar_obs_last, "%", 1,
+      paste("C24: observed maritime production vs trend in", last_year, "(production-weighted)"))
+add_t("sl_c24_idn_prod_pct", tonnes$obs_vs_trend_pct[tonnes$iso3 == "IDN"], "%", 1,
+      paste("C24: observed Indonesian production vs trend in", last_year))
+add_t("sl_p_d3_prod_t1", tab$p[tab$stat == "d3_prod_t1"], "", 3,
+      "D3: p-value, maritime minus mainland production t+1 (bootstrap SE)")
 message("03b_second_look.R done.")

@@ -172,7 +172,7 @@ implications <- c(
          sprintf("%+.0f%%", mwi$real_change_pct), " in real terms). If the aim is to protect harvests, these data ",
          "show no consistent yield difference. The trade-off is the budget share such programmes take against a ",
          "yield gain the data cannot confirm."),
-  paste0("If the aim is to plan food needs, the benchmark below is a scale check for seasons planted at ",
+  paste0("If the aim is to plan food needs, the scale check is a guide for seasons planted at ",
          "2026 prices, not an estimate of 2026 losses: most southern African 2026 harvests were planted ",
          "before the spike.")
 )
@@ -197,6 +197,83 @@ caveats <- c(
 method_tag <- paste0("Method: country trends and fixed effects, ", k("n_countries"), " countries, ",
                      k("year_start"), "-", k("year_end"), "; World Bank Pink Sheet, FAOSTAT, FAO MAFAP")
 hashtags <- "#FoodSecurity #Fertiliser #AgriculturalEconomics #Africa"
+
+# ---- Technical note (PDF) only: more detail than the blog ----
+rng <- function(lo, hi, ...) paste0(k(lo, ...), " to ", k(hi, ...))
+row10 <- function(key) c(k(paste0(key, "_10pct"), unit = TRUE, sign = TRUE),
+                         rng(paste0(key, "_10pct_lo"), paste0(key, "_10pct_hi"), unit = TRUE, sign = TRUE))
+method_detail <- paste0(
+  "*Data.* World Bank Pink Sheet monthly prices of urea (Middle East) and maize (US Gulf), averaged ",
+  "into one ratio per crop year (October to September); FAOSTAT maize yield (QCL) and nitrogen use per ",
+  "hectare of cropland (RFN) for ", k("n_countries"), " Sub-Saharan African countries, ", k("year_start"), "-",
+  k("year_end"), " (", k("n_obs_yield"), " country-years for yield, ", k("n_obs_n"), " for nitrogen); NOAA's ",
+  "December-February ONI; FAO MAFAP public expenditure. *Planned model (A).* Log yield, or log nitrogen ",
+  "use, on the log ratio and the ONI, with country fixed effects and country-specific linear trends; the ",
+  "coefficient is an elasticity, reported as the % change for a 10% higher ratio. *Subsidy comparison (B).* ",
+  "The log ratio interacted with a high-subsidy indicator, with country and year fixed effects, so the ",
+  "difference between groups is identified net of everything common to all countries in a year; groups are a ",
+  "median split of MAFAP variable-input spending as a share of all public support to agriculture. ",
+  "*Inference.* Driscoll-Kraay standard errors, robust to correlation across countries within a year and ",
+  "over time; 90% intervals. Because the ratio is one world series, the effective sample is ",
+  k("n_years_ratio"), " crop years; a regression of the yearly cross-country averages with Newey-West ",
+  "errors and t critical values checks this. *Identification.* None for a causal effect: high-ratio years ",
+  "can differ in other ways, so all estimates are associations."
+)
+note_tbl <- data.frame(
+  Estimate = c("Yield, ratio in the same crop year (headline)",
+               "Yield, ratio in the six months before planting",
+               "Yield, previous crop year's ratio",
+               "Yield, 35 yearly means (Newey-West, t values)",
+               "Nitrogen use per ha, all countries",
+               "Nitrogen use per ha, official figures only",
+               "Yield, high minus low subsidy (B)",
+               "Yield, high minus low, group trends, 2005-2024",
+               "Nitrogen, high minus low subsidy (B)",
+               "Nitrogen, high minus low, group trends, 2005-2024"),
+  rbind(row10("b_yield"), row10("b_yield_plant"), row10("b_yield_lag"), row10("b_yield_ts"),
+        row10("b_n"), row10("b_n_official"), row10("theta_yield"), row10("theta_yield_b2"),
+        row10("theta_n"), row10("theta_n_b2")),
+  Type = c("planned", "added", "planned", "added", "planned", "planned", "planned", "added", "planned", "added"),
+  check.names = FALSE
+)
+names(note_tbl)[2:3] <- c("% for a 10% higher ratio", "90% interval")
+note_caption <- paste0(
+  "**The headline association is the planned same-season estimate; the link weakens once prices after ",
+  "planting are left out, and the subsidy yield comparison changes sign across specifications.** ",
+  "'Added' marks checks run after the first results. The figure shows model A by subsidy group."
+)
+robustness <- c(
+  paste0("Headline yield elasticity, planned checks: leaving out one country at a time gives ",
+         pct10(val("loo_yield_min")), " to ", pct10(val("loo_yield_max")), " for a 10% higher ratio. ",
+         "Added: without the 2008-09 crop years ", k("b_yield_no0809_10pct", unit = TRUE), ", without 2021-22 ",
+         k("b_yield_no2122_10pct", unit = TRUE), ", in the ", k("n_obs_offn"), " country-years with official ",
+         "nitrogen figures ", k("b_yield_offn_10pct", unit = TRUE), ", without Zimbabwe 2000-09 ",
+         k("b_yield_nozwe_10pct", unit = TRUE), "."),
+  paste0("Prices entered separately (added diagnostic): ", k("b_urea_yield_10pct", unit = TRUE),
+         " for a 10% higher urea price and ", k("b_maize_yield_10pct", unit = TRUE, sign = TRUE),
+         " for a 10% higher maize price. Equal and opposite effects are what the ratio assumes, so this ",
+         "does not separate a fertiliser channel from market conditions; it uses log average prices and ",
+         "does not decompose the ratio exactly."),
+  paste0("Subsidy yield difference (planned B): ", k("theta_yield_10pct", unit = TRUE, sign = TRUE),
+         ". Leave-one-out, most extreme run, dropping ",
+         if (val("loo_theta_max_is_zwe") == 1) "Zimbabwe entirely" else "one country", ": ",
+         k("loo_theta_max_10pct", unit = TRUE, sign = TRUE), " (",
+         rng("loo_theta_max_10pct_lo", "loo_theta_max_10pct_hi", unit = TRUE, sign = TRUE),
+         "); dropping only Zimbabwe 2000-09 (added): ", k("theta_yield_nozwe_10pct", unit = TRUE, sign = TRUE),
+         " (", rng("theta_yield_nozwe_10pct_lo", "theta_yield_nozwe_10pct_hi", unit = TRUE, sign = TRUE), "). ",
+         "The group-trend model on 2005-2024 has 20 years and Driscoll-Kraay errors; its narrow interval ",
+         "should be read with care."),
+  paste0("Scale check: at the 2026 crop-year ratio (", k("ratio_now"), ", ", k("ratio_now_multiple"),
+         " times the 1990-2019 median), yields ", f1(boe_plant), "% (before-planting estimate) to ",
+         k("boe_yield_pct", abs = TRUE, unit = TRUE), " (same season) below a median year, about ",
+         mt_pct(boe_plant), " to ", mt("boe_kt"), " million t of maize on 2024 output; constant elasticity, ",
+         "coefficient uncertainty only.")
+)
+references <- paste0(
+  "OECD (2026), fertiliser market disruptions and food security policy brief; OECD (2026), Agricultural ",
+  "Policy Monitoring and Evaluation 2026; ICC (2026) on the Strait of Hormuz closure; World Bank ",
+  "Commodity Price Data (Pink Sheet); FAOSTAT QCL and RFN; FAO MAFAP public expenditure database."
+)
 
 author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
 ```
@@ -345,7 +422,7 @@ bullets(vapply(src, function(s) paste0(
   if (!is.null(s$url)) paste0(". [Link](", s$url, ")") else ""), ""))
 cat("\nChecks added after the first results (price split, Zimbabwe, spike years, official nitrogen ",
     "data, 2008 subsidy spending) are listed in `00_meta.yml`. Code to reproduce every number and ",
-    "figure: [GitHub](", code_url, "). One-page brief: [PDF](brief.pdf).\n", sep = "")
+    "figure: [GitHub](", code_url, "). Technical note with more detail (PDF, 2-3 pages): [brief.pdf](brief.pdf).\n", sep = "")
 ```
 
 **Use of AI tools.** We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
@@ -366,25 +443,48 @@ cat('<div class="post-footer">',
 
 ::: {.content-visible when-format="typst"}
 
-**Question.** Do fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?
+**Question.** `r question`
 
 **Short answer.** `r bottom_line`
 
-![](output/fig2_response.png){width="52%"}
+**1. Data and method**
 
-**What this means for policy**
+`r method_detail`
+
+**2. Results**
+
+![](output/fig2_response.png){width="70%"}
+
+```{r}
+#| label: note-table
+#| results: asis
+if (exists("note_tbl")) print(knitr::kable(note_tbl, format = "pipe", row.names = FALSE))
+```
+
+`r note_caption`
+
+**3. Robustness and exploratory checks**
 
 ```{r}
 #| results: asis
-bullets(implications[2:3])
+bullets(robustness)
 ```
 
-**Caveats**
+**4. What this means for policy**
 
 ```{r}
 #| results: asis
-bullets(caveats[1:2])
+bullets(implications)
 ```
+
+**5. Caveats**
+
+```{r}
+#| results: asis
+bullets(caveats)
+```
+
+**References.** `r references`
 
 ```{r}
 #| label: brief-sources

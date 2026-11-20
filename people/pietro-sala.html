@@ -42,11 +42,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-88e49b6148060dffb1c08ccd9d437051.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0efe66ca918c10128e048cd2452c7646.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -159,42 +160,41 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-solana column-body">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Pietro Sala</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
-</header> <div class="about-links">
-  <a href="/../files/Sala_Pietro_CV.pdf" class="about-link" rel="" target="">
-    <i class="bi bi-file-earmark-pdf"></i>
-     <span class="about-link-text">CV (PDF)</span>
-  </a>
-  <a href="https://www.linkedin.com/in/pietrosala" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://orcid.org/0009-0002-0668-8275" class="about-link" rel="" target="">
-    <i class="bi bi-person-badge"></i>
-     <span class="about-link-text">ORCID</span>
-  </a>
-  <a href="mailto:pietro.sala@tum.de" class="about-link" rel="" target="">
-    <i class="bi bi-envelope"></i>
-     <span class="about-link-text">Email</span>
-  </a>
-  <a href="https://github.com/PeterSala94" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">GitHub</span>
-  </a>
+  
+
+
+</header>
+
+
+<div class="person-aside">
+<p><img src="../images/people/pietro-sala.jpg" class="person-photo img-fluid" alt="Portrait of Pietro Sala"></p>
+<div class="person-links">
+<a class="person-link" href="../files/Sala_Pietro_CV.pdf"><i class="bi bi-file-earmark-pdf"></i> CV (PDF)</a>
+<a class="person-link" href="https://www.linkedin.com/in/pietrosala"><i class="bi bi-linkedin"></i> LinkedIn</a>
+<a class="person-link" href="https://orcid.org/0009-0002-0668-8275"><i class="bi bi-person-badge"></i> ORCID</a>
+<a class="person-link" href="mailto:pietro.sala@tum.de"><i class="bi bi-envelope"></i> Email</a>
+<a class="person-link" href="https://github.com/PeterSala94"><i class="bi bi-github"></i> GitHub</a>
 </div>
-      <div class="about-contents"><main class="content" id="quarto-document-content" tabindex="-1">
+</div>
 <p><strong>Pietro Sala</strong> is an applied economist working on agricultural, water and resource economics. He is a PhD candidate (expected April 2027) and research associate at the Chair of Agricultural Production and Resource Economics, TUM School of Management, Technical University of Munich.</p>
 <p>His research measures how efficiently farms and food systems use natural resources, and how to separate weather-driven losses from managerial shortfalls. Methodologically he works with stochastic frontier analysis, productivity and eco-efficiency measurement, panel econometrics and causal machine learning (double/debiased ML, LASSO). He has worked on two EU research projects: PONDERFUL (ponds as nature-based solutions) and RETOUCH NEXUS (water governance and the water–energy–food–ecosystems nexus), and coordinates the chair’s research partnerships in Southeast Asia (Vietnam, Malaysia, Indonesia, Cambodia).</p>
 <section id="selected-publications" class="level2">
-<h2 data-anchor-id="selected-publications">Selected publications</h2>
+<h2 class="anchored" data-anchor-id="selected-publications">Selected publications</h2>
 <ul>
 <li>Sala, P. et al.&nbsp;(2025). Evaluating ponds as nature-based solutions: Effectiveness and eco-efficiency. <em>Journal of Environmental Management</em> 393, 126933. <a href="https://doi.org/10.1016/j.jenvman.2025.126933">doi:10.1016/j.jenvman.2025.126933</a></li>
 <li>Bremer et al.&nbsp;(2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. <em>Water Resources Management</em> 40, 501. <a href="https://doi.org/10.1007/s11269-026-04848-0">doi:10.1007/s11269-026-04848-0</a></li>
@@ -206,15 +206,17 @@ ul.task-list li input[type="checkbox"] {
 
 
 </section>
-</main></div>
-    </div>
-    <img src="../images/people/pietro-sala.jpg" class="about-image
-  round " style="height: 14em; width: 14em;">
-  </div>
-</div>
- <!-- /main -->
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     

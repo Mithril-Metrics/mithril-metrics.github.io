@@ -92,6 +92,15 @@ detrend <- function(d) {
     mv <- if (any(brk == 1)) lm(log(d[[v]]) ~ X + brk) else lm(log(d[[v]]) ~ X)
     d[[paste0("shock_", v)]] <- residuals(mv)
   }
+  # Alternative production trends (third review): a more flexible 6 df spline, and robust LOESS
+  # after removing the same Indonesian level shift
+  X6 <- splines::ns(d$year, df = 6)
+  m6 <- if (any(brk == 1)) lm(log(d$prod) ~ X6 + brk) else lm(log(d$prod) ~ X6)
+  d$shock_prod_ns6 <- residuals(m6)
+  mp <- if (any(brk == 1)) lm(log(d$prod) ~ X + brk) else lm(log(d$prod) ~ X)
+  p_adj <- log(d$prod) - (if (any(brk == 1)) coef(mp)[["brk"]] else 0) * brk
+  lo_p <- stats::loess(p_adj ~ d$year, span = 0.5, family = "symmetric", degree = 1)
+  d$shock_prod_loess <- p_adj - fitted(lo_p)
   d
 }
 panel <- panel |> group_split(iso3) |> lapply(detrend) |> bind_rows()

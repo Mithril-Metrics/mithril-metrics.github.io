@@ -33,7 +33,8 @@ raw   <- readRDS("output/cache/raw.rds")
 src   <- "FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations"
 
 # Classical SD per country. The MAD ignores the worst years, so a normal curve built on it is
-# narrow; the SD includes them, so its normal curve is wide. The truth lies between the two.
+# narrow; the SD includes them, so its normal curve is wide. The two bracket the choice of
+# benchmark; neither is the "true" spread.
 panel <- panel |>
   group_by(iso3) |>
   mutate(sigma_sd = stats::sd(shock)) |>

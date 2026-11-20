@@ -93,7 +93,11 @@ f3 <- readr::read_csv("output/tab_fig3.csv", show_col_types = FALSE) |>
                                             "If shocks were normal (all years)")))
 r10 <- kv("ratio10")
 r10_sd <- kv("ratio10_sd")
-title3 <- if (r10 >= 1.05 && r10_sd >= 1.05) {
+old_note <- paste0("; ", k("n_loss10_pre1980"), " of ", k("n_loss10"), " came before 1980")
+title3 <- if (r10 >= 1.05 && kv("ratio10_sd_lo") <= 1) {
+  paste0("Harvests 10% or more below trend: ", k("ratio10"), " times a normal curve for typical years, ",
+         "but not clearly above one for all years (", k("ratio10_sd"), "x)", old_note)
+} else if (r10 >= 1.05 && r10_sd >= 1.05) {
   paste0("Harvests 10% or more below trend are ", k("ratio10_sd"), " to ", k("ratio10"),
          " times as frequent as a normal distribution predicts")
 } else if (r10 >= 1.05) {
@@ -104,6 +108,12 @@ title3 <- if (r10 >= 1.05 && r10_sd >= 1.05) {
 } else {
   "Harvests 10% or more below trend occur about as often as a normal distribution predicts"
 }
+cap3 <- source_caption(
+  c(paste0("FAOSTAT QCL rice yields (release ", substr(raw$fao_version, 1, 10), ")"), "NOAA CPC ONI"),
+  accessed = raw$fao_accessed,
+  note = "Shortfall: national yield below its long-run trend by at least the amount on the horizontal axis. Cambodia from 1980."
+)
+cap3 <- paste(vapply(strsplit(cap3, "\n")[[1]], wrap, "", width = 115), collapse = "\n")
 p3 <- ggplot(f3, aes(x = loss_pct, y = 100 * share, colour = series, linetype = series)) +
   geom_line(linewidth = 1) +
   geom_vline(xintercept = 10, colour = "grey60", linewidth = 0.3, linetype = "dotted") +
@@ -118,12 +128,12 @@ p3 <- ggplot(f3, aes(x = loss_pct, y = 100 * share, colour = series, linetype = 
                                    "If shocks were normal (all years)" = "dotted")) +
   scale_x_continuous(labels = function(x) paste0(x, "%")) +
   guides(colour = guide_legend(nrow = 2), linetype = guide_legend(nrow = 2)) +
-  labs(title = wrap(title3, 62),
+  labs(title = wrap(title3, 66),
        subtitle = wrap(paste0("Share of country-years with a shortfall at least this large (log scale). ",
                               "Normal curves use each country's spread in typical years (robust) or in all years (SD); ",
                               k("n_loss10"), " of ", k("n_obs"), " country-years fell 10% or more."), 88),
        x = "Yield shortfall below trend (at least this large)",
-       y = "Share of country-years", caption = cap) +
+       y = "Share of country-years", caption = cap3) +
   theme_ac(grid = "xy")
 save_fig(p3, "fig3_tail_vs_normal")
 
@@ -154,7 +164,8 @@ if (file.exists("output/tab_second_look.csv")) {
                "Maritime (IDN, PHL, MYS)" = "In maritime Southeast Asia",
                "Mainland (THA, VNM, KHM)" = "In mainland Southeast Asia")[[as.character(pr$group[1])]]
     when <- ifelse(grepl("_t1$", pr$stat[1]), " the year after an El Niño onset", " in El Niño onset years")
-    paste0(where, ", rice production runs ", round(abs(pr$estimate[1]), 1), "% ",
+    paste0("Exploratory: ", tolower(substr(where, 1, 1)), substr(where, 2, nchar(where)),
+           ", rice production runs ", round(abs(pr$estimate[1]), 1), "% ",
            ifelse(pr$estimate[1] < 0, "below", "above"), " trend", when)
   } else {
     "El Niño's footprint on rice yields, area and production is small and imprecise"

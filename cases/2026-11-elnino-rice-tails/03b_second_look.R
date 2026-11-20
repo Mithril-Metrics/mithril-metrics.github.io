@@ -22,6 +22,11 @@
 #  W3  maritime production t+1 weighted by each country's mean production (Indonesia dominates)
 #  T3  the maritime t+1 effect in tonnes, at each country's 2024 trend production
 #  C24 2024, the harvest year after the 2023 onset: observed maritime production vs trend
+# Added after the third review (2026-11-20):
+#  R3  maritime production t+1 with a 6 df spline and a LOESS production trend
+#  T3  tonnes now use the production-weighted estimate (W3); FAOSTAT rice is paddy
+#  P3  placebo: shift the ENSO years against the panel by each possible offset (rank p-value)
+#  B5  maritime production t+1 with 5-year blocks
 
 stopifnot("Run this script from the issue folder (AgEcon/Issue 1)" = file.exists("00_meta.yml"))
 options(acutils.data_dir = "data_raw")
@@ -95,7 +100,9 @@ stats_fun <- function(d) {
     s4_nocrisis_diff5 = main_diff5(nocr),  s4_nocrisis_ratio10 = ratio10(nocr),
     d3_prod_t1  = pct(pm[["t1"]]) - pct(pn[["t1"]]),
     d3_yield_t1 = pct(ym[["t1"]]) - pct(yn[["t1"]]),
-    w3_mar_prod_t1 = pw[["t1"]]
+    w3_mar_prod_t1 = pw[["t1"]],
+    r3_mar_prod_t1_ns6 = s2(mar, "shock_prod_ns6")[["t1"]],
+    r3_mar_prod_t1_loess = s2(mar, "shock_prod_loess")[["t1"]]
   )
 }
 
@@ -156,7 +163,9 @@ tab <- tibble(
     "S4: >=10% shortfalls vs normal, without 1997-98",
     "D3: maritime minus mainland, production effect t+1 (pp)",
     "D3: maritime minus mainland, yield effect t+1 (pp)",
-    "W3: maritime production t+1, weighted by mean production"
+    "W3: maritime production t+1, weighted by mean production",
+    "R3: maritime production t+1, 6 df spline production trend",
+    "R3: maritime production t+1, LOESS production trend"
   )
 )
 # Many contrasts were looked at, so adjust the S2/S3 p-values for multiple testing (Holm).
@@ -226,14 +235,15 @@ for (ph in c("Neutral", "El Nino", "La Nina")) {
 # --- Tonnes and the 2024 check (T3, C24) ------------------------------------------------------------
 last_year <- max(panel$year)
 mar_last <- panel |> filter(region == "Maritime", year == last_year)
-eff <- exp(c(est = est[["s3_mar_prod_t1"]], lo = ci[1, "s3_mar_prod_t1"], hi = ci[2, "s3_mar_prod_t1"])) - 1
+# Production-weighted effect, because the tonnes are dominated by Indonesia. FAOSTAT rice = paddy.
+eff <- exp(c(est = est[["w3_mar_prod_t1"]], lo = ci[1, "w3_mar_prod_t1"], hi = ci[2, "w3_mar_prod_t1"])) - 1
 tonnes <- mar_last |>
   transmute(iso3, prod_trend_kt = prod_trend / 1e3,
             gap_kt = prod_trend_kt * eff[["est"]],
             gap_lo_kt = prod_trend_kt * eff[["lo"]],
             gap_hi_kt = prod_trend_kt * eff[["hi"]],
             obs_vs_trend_pct = 100 * (prod / prod_trend - 1))
-cat("\nMaritime t+1 effect in tonnes at", last_year, "trend production (kt):\n")
+cat("\nMaritime t+1 effect (weighted) in thousand tonnes of paddy at", last_year, "trend production:\n")
 print(tonnes, width = Inf)
 readr::write_csv(tonnes, "output/tab_tonnes.csv")
 onset_prev <- any(panel$year == last_year - 1 & panel$elnino)
@@ -245,7 +255,7 @@ add_t <- function(key, value, unit, digits, description, big_mark = ",")
   kn_add(key, value, unit = unit, digits = digits, description = description, source = src,
          big_mark = big_mark, file = kn_file)
 add_t("sl_t3_mar_kt", sum(tonnes$gap_kt), "thousand t", 0,
-      paste("T3: maritime t+1 effect in tonnes at", last_year, "trend production (IDN+PHL+MYS)"))
+      paste("T3: maritime t+1 effect (weighted), thousand t of paddy at", last_year, "trend production (IDN+PHL+MYS)"))
 add_t("sl_t3_mar_lo_kt", sum(tonnes$gap_lo_kt), "thousand t", 0, "T3: 95% CI lower")
 add_t("sl_t3_mar_hi_kt", sum(tonnes$gap_hi_kt), "thousand t", 0, "T3: 95% CI upper")
 add_t("sl_t3_idn_kt", tonnes$gap_kt[tonnes$iso3 == "IDN"], "thousand t", 0,
@@ -258,4 +268,43 @@ add_t("sl_c24_idn_prod_pct", tonnes$obs_vs_trend_pct[tonnes$iso3 == "IDN"], "%",
       paste("C24: observed Indonesian production vs trend in", last_year))
 add_t("sl_p_d3_prod_t1", tab$p[tab$stat == "d3_prod_t1"], "", 3,
       "D3: p-value, maritime minus mainland production t+1 (bootstrap SE)")
+
+# --- P3: placebo, ENSO years shifted against the panel --------------------------------------------
+# Rotate the year-level El Nino / La Nina indicators by s = 1..(n-1) years (wrapping around), rebuild
+# the lags, and re-estimate the maritime t+1 production effect. Rank p-value, two-sided.
+yt <- panel |> distinct(year, elnino, lanina) |> arrange(year)
+stopifnot(!anyDuplicated(yt$year))
+n_y <- nrow(yt)
+rot_effect <- function(s) {
+  idx <- ((seq_len(n_y) - 1 + s) %% n_y) + 1
+  r <- tibble(year = yt$year, elnino = yt$elnino[idx], lanina = yt$lanina[idx])
+  r$elnino_lag <- r$elnino[c(n_y, seq_len(n_y - 1))]
+  r$lanina_lag <- r$lanina[c(n_y, seq_len(n_y - 1))]
+  d <- panel |>
+    filter(region == "Maritime") |>
+    select(-elnino, -lanina, -elnino_lag, -lanina_lag) |>
+    left_join(r, by = "year")
+  pct(s2(d, "shock_prod")[["t1"]])
+}
+plac <- vapply(seq_len(n_y - 1), rot_effect, numeric(1))
+obs_p3 <- pct(est[["s3_mar_prod_t1"]])
+n_as_large <- sum(abs(plac) >= abs(obs_p3))
+p_rank <- (1 + n_as_large) / (length(plac) + 1)
+cat("\nPlacebo shifts:", length(plac), "| as large as observed:", n_as_large, "| rank p =", round(p_rank, 3), "\n")
+readr::write_csv(tibble(shift = seq_len(n_y - 1), estimate = plac), "output/tab_placebo.csv")
+add_t("sl_p3_n_shifts", length(plac), "", 0, "P3: number of placebo shifts of the ENSO years")
+add_t("sl_p3_n_as_large", n_as_large, "", 0, "P3: placebo shifts with a maritime t+1 effect at least as large (absolute)")
+add_t("sl_p3_p_rank", p_rank, "", 3, "P3: rank p-value, maritime production t+1")
+add_t("sl_p3_min_p", 1 / (length(plac) + 1), "", 3, "P3: smallest attainable rank p-value")
+
+# --- B5: 5-year blocks for the maritime t+1 production effect --------------------------------------
+mar_only <- panel[panel$region == "Maritime", ]
+by_year_m <- split(mar_only, mar_only$year)[yrs]
+b5 <- vapply(seq_len(B), function(b) {
+  d <- bind_rows(by_year_m[draw_years(yrs, 5)])
+  tryCatch(s2(d, "shock_prod")[["t1"]], error = function(e) NA_real_)
+}, numeric(1))
+ci5 <- pct(stats::quantile(b5, c(0.025, 0.975), na.rm = TRUE))
+add_t("sl_b5_mar_prod_t1_lo", ci5[[1]], "%", 1, "B5: 95% CI lower, maritime production t+1, 5-year blocks")
+add_t("sl_b5_mar_prod_t1_hi", ci5[[2]], "%", 1, "B5: 95% CI upper, maritime production t+1, 5-year blocks")
 message("03b_second_look.R done.")

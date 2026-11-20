@@ -1,143 +1,155 @@
 key,value,unit,digits,big_mark,description,source,updated
-n_countries,6,countries,0,",",Countries in the pooled panel,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:28
-n_obs,365,country-years,0,",",Country-year observations,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:28
-year_start,1961,,0,,First year,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:28
-year_end,2024,,0,,Last year,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:28
-n_elnino_years,19,years,0,",",El Niño onset years (Jul-Dec ONI >= 0.5),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-n_strong_years,6,years,0,",",Strong El Niño years (Jul-Dec ONI >= 1.5),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-median_sigma_pct,3.684968163725816,%,1,",",Median country SD of yield shocks (robust),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p5_other_pct,14.785992217898832,%,0,",","P(yield >= 5% below trend), other years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p5_elnino_pct,11.11111111111111,%,0,",","P(yield >= 5% below trend), El Niño onset years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p5_strong_pct,11.76470588235294,%,0,",","P(yield >= 5% below trend), strong El Niño years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-diff5_pp,-3.687231448545441,pp,1,",","Change in P(>=5% shortfall), El Niño vs other (LPM, country FE)","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-diff5_lo_pp,-10.953100952320307,pp,1,",","95% CI lower, moving-block bootstrap","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-diff5_hi_pp,3.5939901699518577,pp,1,",","95% CI upper, moving-block bootstrap","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-diff10_pp,-0.3283120014246603,pp,1,",","Change in P(>=10% shortfall), El Niño vs other","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-diff10_lo_pp,-4.053548833215165,pp,1,",",95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-diff10_hi_pp,2.948448160019971,pp,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p5_obs_pct,13.6986301369863,%,1,",","Observed share of >=5% shortfalls, all years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p5_normal_pct,8.67409639590362,%,1,",",Share implied by normal shocks with each country's sigma,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio5,1.579257309551637,x,1,",","Observed / normal-implied frequency, >=5% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p10_obs_pct,3.0136986301369864,%,1,",","Observed share of >=10% shortfalls, all years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p10_normal_pct,0.36475595454587256,%,2,",","Share implied by normal shocks, >=10%","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio10,8.262232850699018,x,1,",","Observed / normal-implied frequency, >=10% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio10_lo,1.3193752701327524,x,1,",",95% CI lower (sigma re-estimated in each draw),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio10_hi,25.018130045981938,x,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-n_loss10,11,country-years,0,",",Country-years with yields at least 10% below trend,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-n_loss10_pre1980,8,country-years,0,",","Country-years with yields at least 10% below trend, before 1980","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-block_len,3,years,0,",",Block length of the moving-block bootstrap,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-median_sd_pct,5.326047156720209,%,1,",",Median country SD of yield shocks (classical),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-p10_normal_sd_pct,2.196290513269667,%,2,",","Share implied by normal shocks with the classical SD, >=10%","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio5_sd,0.8759274323986863,x,1,",","Observed / normal-implied frequency (classical SD), >=5% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio10_sd,1.372176682423686,x,1,",","Observed / normal-implied frequency (classical SD), >=10% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio10_sd_lo,0.8157495647585009,x,1,",",95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-ratio10_sd_hi,2.195313867519113,x,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-qr10_elnino_pct,0.9454995921123864,%,1,",",El Niño shift of the 10th percentile of yield shocks,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-qr10_lo_pct,-1.5124542744940683,%,1,",",95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-qr10_hi_pct,3.4309923351428573,%,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-qr50_elnino_pct,-0.22688652135054443,%,1,",",El Niño shift of the median yield shock,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-gpd_xi,0.08107781802517985,,2,",",GPD shape of standardised losses (85th pct threshold); >0 = heavy tail,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-gpd_xi_lo,-0.3155222713585373,,2,",",95% CI lower (Hessian),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-gpd_xi_hi,0.47767790740889704,,2,",",95% CI upper (Hessian),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-gpd_n_exc,55,exceedances,0,",",Exceedances above the threshold,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-share_worst_elnino_pct,18.91891891891892,%,0,",",Share of the worst 10% of harvests that fell in El Niño onset years,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-share_obs_elnino_pct,29.589041095890412,%,0,",",Share of all country-years that are El Niño onset years,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-r1_diff5_pp,5.518290037854044,pp,1,",","R1: change in P(>=5% shortfall), exposure in t+1","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-r1_lo_pp,-2.659211771019249,pp,1,",",R1 95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-r1_hi_pp,14.761126866799124,pp,1,",",R1 95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-r2_diff5_pp,-2.0940734889200483,pp,1,",","R2: change in P(>=5% shortfall), LOESS trend","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-r2_lo_pp,-8.562638097811725,pp,1,",",R2 95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-r2_hi_pp,4.206407555250043,pp,1,",",R2 95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-noe_diff5_pp,-4.122711980655271,pp,1,",",Sanity: main estimate without FAO-estimated (E) values,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-oni_latest,2.46,°C,2,",",Latest ONI anomaly at access: ASO 2026,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-oni_latest_year,2026,,0,,Year of latest ONI season ASO,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 11:29
-sl_s1_el_vs_neutral,-3.675289524152941,pp,1,",","S1: P(>=5% yield shortfall), El Niño vs neutral years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s1_el_vs_neutral_lo,-13.27143581406774,pp,1,",","S1: P(>=5% yield shortfall), El Niño vs neutral years (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s1_el_vs_neutral_hi,4.709057460993289,pp,1,",","S1: P(>=5% yield shortfall), El Niño vs neutral years (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s1_la_vs_neutral,0.0284141795507752,pp,1,",","S1: P(>=5% yield shortfall), La Niña vs neutral years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s1_la_vs_neutral_lo,-13.663018801406832,pp,1,",","S1: P(>=5% yield shortfall), La Niña vs neutral years (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s1_la_vs_neutral_hi,12.479797463891067,pp,1,",","S1: P(>=5% yield shortfall), La Niña vs neutral years (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_yield_t,-0.07301637387953086,%,1,",","S2: El Niño effect on yield, onset year t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_yield_t_lo,-1.435702070028788,%,1,",","S2: El Niño effect on yield, onset year t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_yield_t_hi,1.851434753896597,%,1,",","S2: El Niño effect on yield, onset year t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_yield_t1,-1.162726472369846,%,1,",","S2: El Niño effect on yield, year t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_yield_t1_lo,-2.7584000641008743,%,1,",","S2: El Niño effect on yield, year t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_yield_t1_hi,0.9199803264763552,%,1,",","S2: El Niño effect on yield, year t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_area_t,-1.3489104643798155,%,1,",","S2: El Niño effect on harvested area, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_area_t_lo,-2.4944070662679674,%,1,",","S2: El Niño effect on harvested area, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_area_t_hi,-0.16061508010739578,%,1,",","S2: El Niño effect on harvested area, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_area_t1,-0.9652250404072138,%,1,",","S2: El Niño effect on harvested area, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_area_t1_lo,-2.1911982224663618,%,1,",","S2: El Niño effect on harvested area, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_area_t1_hi,0.1787068950543924,%,1,",","S2: El Niño effect on harvested area, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_prod_t,-1.4211097941250084,%,1,",","S2: El Niño effect on production, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_prod_t_lo,-3.3675807090455367,%,1,",","S2: El Niño effect on production, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_prod_t_hi,1.18658201074493,%,1,",","S2: El Niño effect on production, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_prod_t1,-2.1166979988833323,%,1,",","S2: El Niño effect on production, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_prod_t1_lo,-3.989722024198805,%,1,",","S2: El Niño effect on production, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s2_prod_t1_hi,0.3271112921382713,%,1,",","S2: El Niño effect on production, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_yield_t,-0.9533533881418754,%,1,",","S3: maritime, yield, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_yield_t_lo,-2.9204582962582104,%,1,",","S3: maritime, yield, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_yield_t_hi,2.0408481828532388,%,1,",","S3: maritime, yield, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_yield_t1,-2.987492289854965,%,1,",","S3: maritime, yield, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_yield_t1_lo,-4.440854248426662,%,1,",","S3: maritime, yield, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_yield_t1_hi,-0.3473942164573529,%,1,",","S3: maritime, yield, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_yield_t,1.1234374844282913,%,1,",","S3: mainland, yield, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_yield_t_lo,-0.6182997660957867,%,1,",","S3: mainland, yield, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_yield_t_hi,3.0330128747132257,%,1,",","S3: mainland, yield, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_yield_t1,0.9951189079459466,%,1,",","S3: mainland, yield, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_yield_t1_lo,-2.0739579841707156,%,1,",","S3: mainland, yield, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_yield_t1_hi,3.4479946140999695,%,1,",","S3: mainland, yield, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_prod_t,-1.369243013950017,%,1,",","S3: maritime, production, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_prod_t_lo,-3.620777573121914,%,1,",","S3: maritime, production, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_prod_t_hi,1.6570533500218645,%,1,",","S3: maritime, production, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_prod_t1,-4.9099352449715745,%,1,",","S3: maritime, production, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_prod_t1_lo,-6.487893745243289,%,1,",","S3: maritime, production, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mar_prod_t1_hi,-2.3307903745012015,%,1,",","S3: maritime, production, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_prod_t,-1.305850534851749,%,1,",","S3: mainland, production, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_prod_t_lo,-3.977099444085286,%,1,",","S3: mainland, production, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_prod_t_hi,1.7168170570348362,%,1,",","S3: mainland, production, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_prod_t1,1.1129767446330874,%,1,",","S3: mainland, production, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_prod_t1_lo,-2.1497562488050903,%,1,",","S3: mainland, production, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s3_mai_prod_t1_hi,4.457841276595809,%,1,",","S3: mainland, production, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_noconflict_diff5,-3.882577606480292,pp,1,",",S4: headline estimate without major-conflict country-years,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_noconflict_diff5_lo,-11.755977183711453,pp,1,",",S4: headline estimate without major-conflict country-years (95% CI lo),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_noconflict_diff5_hi,3.1541925637673924,pp,1,",",S4: headline estimate without major-conflict country-years (95% CI hi),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_noconflict_ratio10,7.083530471738839,x,1,",","S4: >=10% shortfalls vs normal, without major-conflict years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_noconflict_ratio10_lo,1.2715781219557476,x,1,",","S4: >=10% shortfalls vs normal, without major-conflict years (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_noconflict_ratio10_hi,29.49069815153877,x,1,",","S4: >=10% shortfalls vs normal, without major-conflict years (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_nocrisis_diff5,-3.169480304534906,pp,1,",",S4: headline estimate without 1997-98,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_nocrisis_diff5_lo,-10.804083613730487,pp,1,",",S4: headline estimate without 1997-98 (95% CI lo),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_nocrisis_diff5_hi,3.7057257682685822,pp,1,",",S4: headline estimate without 1997-98 (95% CI hi),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_nocrisis_ratio10,6.617580425670867,x,1,",","S4: >=10% shortfalls vs normal, without 1997-98",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_nocrisis_ratio10_lo,1.0956232925019191,x,1,",","S4: >=10% shortfalls vs normal, without 1997-98 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_s4_nocrisis_ratio10_hi,25.07370844306243,x,1,",","S4: >=10% shortfalls vs normal, without 1997-98 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_d3_prod_t1,-6.022911989604662,pp,1,",","D3: maritime minus mainland, production effect t+1 (pp)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_d3_prod_t1_lo,-8.97364590112173,pp,1,",","D3: maritime minus mainland, production effect t+1 (pp) (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_d3_prod_t1_hi,-2.671112070181492,pp,1,",","D3: maritime minus mainland, production effect t+1 (pp) (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_d3_yield_t1,-3.982611197800912,pp,1,",","D3: maritime minus mainland, yield effect t+1 (pp)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_d3_yield_t1_lo,-6.49146423166471,pp,1,",","D3: maritime minus mainland, yield effect t+1 (pp) (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_d3_yield_t1_hi,-0.2766621739677071,pp,1,",","D3: maritime minus mainland, yield effect t+1 (pp) (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_w3_mar_prod_t1,-4.0964113752066655,%,1,",","W3: maritime production t+1, weighted by mean production",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_w3_mar_prod_t1_lo,-5.795232852588395,%,1,",","W3: maritime production t+1, weighted by mean production (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_w3_mar_prod_t1_hi,-1.4052549048828469,%,1,",","W3: maritime production t+1, weighted by mean production (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_holm_mar_prod_t1,8.879522868889845e-5,,3,",","Holm-adjusted p, maritime production t+1 (14 margin contrasts)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_holm_mar_yield_t1,0.06797072217549278,,3,",","Holm-adjusted p, maritime yield t+1 (14 margin contrasts)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_holm_area_t,0.29815902552092155,,3,",","Holm-adjusted p, harvested area in the onset year (14 margin contrasts)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_n_holm_sig,1,,0,",",Margin contrasts with Holm-adjusted p < 0.05,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_n_margin_tests,14,,0,",","Margin contrasts tested (S2, S3)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_loo_min,-5.28636347434187,%,1,",","Maritime production t+1, leave-one-event-out: most negative",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_loo_max,-4.462814451023977,%,1,",","Maritime production t+1, leave-one-event-out: closest to zero",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_loo_max_event,1965,,0,,El Niño event whose removal moves the maritime t+1 effect closest to zero,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_n_conflict_years,34,country-years,0,",","Country-years with major armed conflict (UCDP intensity 2), dropped in S4",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_p5_neutral_pct,14.76510067114094,%,0,",","Share of >=5% yield shortfalls, Neutral years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_p5_elnino_pct,11.11111111111111,%,0,",","Share of >=5% yield shortfalls, El Nino years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_p5_lanina_pct,14.814814814814811,%,0,",","Share of >=5% yield shortfalls, La Nina years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_t3_mar_kt,-3825.831714397945,thousand t,0,",",T3: maritime t+1 effect in tonnes at 2024 trend production (IDN+PHL+MYS),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_t3_mar_lo_kt,-5055.38024673878,thousand t,0,",",T3: 95% CI lower,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_t3_mar_hi_kt,-1816.1566883214125,thousand t,0,",",T3: 95% CI upper,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_t3_idn_kt,-2725.3809834885906,thousand t,0,",",T3: of which Indonesia,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_t3_year,2024,,0,,Year of trend production used for tonnes,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_c24_onset_prev,1,,0,",",1 if the year before the last year is an El Niño onset,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_c24_mar_prod_pct,-4.603920937305417,%,1,",",C24: observed maritime production vs trend in 2024 (production-weighted),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_c24_idn_prod_pct,-4.260230077188809,%,1,",",C24: observed Indonesian production vs trend in 2024,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
-sl_p_d3_prod_t1,2.198167646234793e-4,,3,",","D3: p-value, maritime minus mainland production t+1 (bootstrap SE)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 11:29
+n_countries,6,countries,0,",",Countries in the pooled panel,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+n_obs,365,country-years,0,",",Country-year observations,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+year_start,1961,,0,,First year,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+year_end,2024,,0,,Last year,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+n_elnino_years,19,years,0,",",El Niño onset years (Jul-Dec ONI >= 0.5),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+n_strong_years,6,years,0,",",Strong El Niño years (Jul-Dec ONI >= 1.5),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+median_sigma_pct,3.684968163725816,%,1,",",Median country SD of yield shocks (robust),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p5_other_pct,14.785992217898832,%,0,",","P(yield >= 5% below trend), other years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p5_elnino_pct,11.11111111111111,%,0,",","P(yield >= 5% below trend), El Niño onset years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p5_strong_pct,11.76470588235294,%,0,",","P(yield >= 5% below trend), strong El Niño years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+diff5_pp,-3.687231448545441,pp,1,",","Change in P(>=5% shortfall), El Niño vs other (LPM, country FE)","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+diff5_lo_pp,-10.953100952320307,pp,1,",","95% CI lower, moving-block bootstrap","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+diff5_hi_pp,3.5939901699518577,pp,1,",","95% CI upper, moving-block bootstrap","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+diff10_pp,-0.3283120014246603,pp,1,",","Change in P(>=10% shortfall), El Niño vs other","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+diff10_lo_pp,-4.053548833215165,pp,1,",",95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+diff10_hi_pp,2.948448160019971,pp,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p5_obs_pct,13.6986301369863,%,1,",","Observed share of >=5% shortfalls, all years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p5_normal_pct,8.67409639590362,%,1,",",Share implied by normal shocks with each country's sigma,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio5,1.579257309551637,x,1,",","Observed / normal-implied frequency, >=5% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p10_obs_pct,3.0136986301369864,%,1,",","Observed share of >=10% shortfalls, all years","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p10_normal_pct,0.36475595454587256,%,2,",","Share implied by normal shocks, >=10%","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio10,8.262232850699018,x,1,",","Observed / normal-implied frequency, >=10% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio10_lo,1.3193752701327524,x,1,",",95% CI lower (sigma re-estimated in each draw),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio10_hi,25.018130045981938,x,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+n_loss10,11,country-years,0,",",Country-years with yields at least 10% below trend,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+n_loss10_pre1980,8,country-years,0,",","Country-years with yields at least 10% below trend, before 1980","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+block_len,3,years,0,",",Block length of the moving-block bootstrap,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+median_sd_pct,5.326047156720209,%,1,",",Median country SD of yield shocks (classical),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+p10_normal_sd_pct,2.196290513269667,%,2,",","Share implied by normal shocks with the classical SD, >=10%","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio5_sd,0.8759274323986863,x,1,",","Observed / normal-implied frequency (classical SD), >=5% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio10_sd,1.372176682423686,x,1,",","Observed / normal-implied frequency (classical SD), >=10% shortfalls","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio10_sd_lo,0.8157495647585009,x,1,",",95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+ratio10_sd_hi,2.195313867519113,x,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+qr10_elnino_pct,0.9454995921123864,%,1,",",El Niño shift of the 10th percentile of yield shocks,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+qr10_lo_pct,-1.5124542744940683,%,1,",",95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+qr10_hi_pct,3.4309923351428573,%,1,",",95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+qr50_elnino_pct,-0.22688652135054443,%,1,",",El Niño shift of the median yield shock,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+gpd_xi,0.08107781802517985,,2,",",GPD shape of standardised losses (85th pct threshold); >0 = heavy tail,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+gpd_xi_lo,-0.3155222713585373,,2,",",95% CI lower (Hessian),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+gpd_xi_hi,0.47767790740889704,,2,",",95% CI upper (Hessian),"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+gpd_n_exc,55,exceedances,0,",",Exceedances above the threshold,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+share_worst_elnino_pct,18.91891891891892,%,0,",",Share of the worst 10% of harvests that fell in El Niño onset years,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+share_obs_elnino_pct,29.589041095890412,%,0,",",Share of all country-years that are El Niño onset years,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+r1_diff5_pp,5.518290037854044,pp,1,",","R1: change in P(>=5% shortfall), exposure in t+1","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+r1_lo_pp,-2.659211771019249,pp,1,",",R1 95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+r1_hi_pp,14.761126866799124,pp,1,",",R1 95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+r2_diff5_pp,-2.0940734889200483,pp,1,",","R2: change in P(>=5% shortfall), LOESS trend","FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+r2_lo_pp,-8.562638097811725,pp,1,",",R2 95% CI lower,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+r2_hi_pp,4.206407555250043,pp,1,",",R2 95% CI upper,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+noe_diff5_pp,-4.122711980655271,pp,1,",",Sanity: main estimate without FAO-estimated (E) values,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+oni_latest,2.46,°C,2,",",Latest ONI anomaly at access: ASO 2026,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+oni_latest_year,2026,,0,,Year of latest ONI season ASO,"FAOSTAT QCL (rice, 1961-2024) and NOAA CPC ONI; author's calculations",2026-11-20 12:02
+sl_s1_el_vs_neutral,-3.675289524152941,pp,1,",","S1: P(>=5% yield shortfall), El Niño vs neutral years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s1_el_vs_neutral_lo,-13.27143581406774,pp,1,",","S1: P(>=5% yield shortfall), El Niño vs neutral years (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s1_el_vs_neutral_hi,4.709057460993289,pp,1,",","S1: P(>=5% yield shortfall), El Niño vs neutral years (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s1_la_vs_neutral,0.0284141795507752,pp,1,",","S1: P(>=5% yield shortfall), La Niña vs neutral years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s1_la_vs_neutral_lo,-13.663018801406832,pp,1,",","S1: P(>=5% yield shortfall), La Niña vs neutral years (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s1_la_vs_neutral_hi,12.479797463891067,pp,1,",","S1: P(>=5% yield shortfall), La Niña vs neutral years (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_yield_t,-0.07301637387953086,%,1,",","S2: El Niño effect on yield, onset year t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_yield_t_lo,-1.435702070028788,%,1,",","S2: El Niño effect on yield, onset year t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_yield_t_hi,1.851434753896597,%,1,",","S2: El Niño effect on yield, onset year t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_yield_t1,-1.162726472369846,%,1,",","S2: El Niño effect on yield, year t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_yield_t1_lo,-2.7584000641008743,%,1,",","S2: El Niño effect on yield, year t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_yield_t1_hi,0.9199803264763552,%,1,",","S2: El Niño effect on yield, year t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_area_t,-1.3489104643798155,%,1,",","S2: El Niño effect on harvested area, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_area_t_lo,-2.4944070662679674,%,1,",","S2: El Niño effect on harvested area, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_area_t_hi,-0.16061508010739578,%,1,",","S2: El Niño effect on harvested area, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_area_t1,-0.9652250404072138,%,1,",","S2: El Niño effect on harvested area, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_area_t1_lo,-2.1911982224663618,%,1,",","S2: El Niño effect on harvested area, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_area_t1_hi,0.1787068950543924,%,1,",","S2: El Niño effect on harvested area, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_prod_t,-1.4211097941250084,%,1,",","S2: El Niño effect on production, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_prod_t_lo,-3.3675807090455367,%,1,",","S2: El Niño effect on production, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_prod_t_hi,1.18658201074493,%,1,",","S2: El Niño effect on production, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_prod_t1,-2.1166979988833323,%,1,",","S2: El Niño effect on production, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_prod_t1_lo,-3.989722024198805,%,1,",","S2: El Niño effect on production, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s2_prod_t1_hi,0.3271112921382713,%,1,",","S2: El Niño effect on production, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_yield_t,-0.9533533881418754,%,1,",","S3: maritime, yield, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_yield_t_lo,-2.9204582962582104,%,1,",","S3: maritime, yield, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_yield_t_hi,2.0408481828532388,%,1,",","S3: maritime, yield, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_yield_t1,-2.987492289854965,%,1,",","S3: maritime, yield, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_yield_t1_lo,-4.440854248426662,%,1,",","S3: maritime, yield, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_yield_t1_hi,-0.3473942164573529,%,1,",","S3: maritime, yield, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_yield_t,1.1234374844282913,%,1,",","S3: mainland, yield, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_yield_t_lo,-0.6182997660957867,%,1,",","S3: mainland, yield, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_yield_t_hi,3.0330128747132257,%,1,",","S3: mainland, yield, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_yield_t1,0.9951189079459466,%,1,",","S3: mainland, yield, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_yield_t1_lo,-2.0739579841707156,%,1,",","S3: mainland, yield, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_yield_t1_hi,3.4479946140999695,%,1,",","S3: mainland, yield, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_prod_t,-1.369243013950017,%,1,",","S3: maritime, production, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_prod_t_lo,-3.620777573121914,%,1,",","S3: maritime, production, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_prod_t_hi,1.6570533500218645,%,1,",","S3: maritime, production, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_prod_t1,-4.9099352449715745,%,1,",","S3: maritime, production, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_prod_t1_lo,-6.487893745243289,%,1,",","S3: maritime, production, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mar_prod_t1_hi,-2.3307903745012015,%,1,",","S3: maritime, production, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_prod_t,-1.305850534851749,%,1,",","S3: mainland, production, t",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_prod_t_lo,-3.977099444085286,%,1,",","S3: mainland, production, t (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_prod_t_hi,1.7168170570348362,%,1,",","S3: mainland, production, t (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_prod_t1,1.1129767446330874,%,1,",","S3: mainland, production, t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_prod_t1_lo,-2.1497562488050903,%,1,",","S3: mainland, production, t+1 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s3_mai_prod_t1_hi,4.457841276595809,%,1,",","S3: mainland, production, t+1 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_noconflict_diff5,-3.882577606480292,pp,1,",",S4: headline estimate without major-conflict country-years,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_noconflict_diff5_lo,-11.755977183711453,pp,1,",",S4: headline estimate without major-conflict country-years (95% CI lo),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_noconflict_diff5_hi,3.1541925637673924,pp,1,",",S4: headline estimate without major-conflict country-years (95% CI hi),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_noconflict_ratio10,7.083530471738839,x,1,",","S4: >=10% shortfalls vs normal, without major-conflict years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_noconflict_ratio10_lo,1.2715781219557476,x,1,",","S4: >=10% shortfalls vs normal, without major-conflict years (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_noconflict_ratio10_hi,29.49069815153877,x,1,",","S4: >=10% shortfalls vs normal, without major-conflict years (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_nocrisis_diff5,-3.169480304534906,pp,1,",",S4: headline estimate without 1997-98,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_nocrisis_diff5_lo,-10.804083613730487,pp,1,",",S4: headline estimate without 1997-98 (95% CI lo),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_nocrisis_diff5_hi,3.7057257682685822,pp,1,",",S4: headline estimate without 1997-98 (95% CI hi),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_nocrisis_ratio10,6.617580425670867,x,1,",","S4: >=10% shortfalls vs normal, without 1997-98",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_nocrisis_ratio10_lo,1.0956232925019191,x,1,",","S4: >=10% shortfalls vs normal, without 1997-98 (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_s4_nocrisis_ratio10_hi,25.07370844306243,x,1,",","S4: >=10% shortfalls vs normal, without 1997-98 (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_d3_prod_t1,-6.022911989604662,pp,1,",","D3: maritime minus mainland, production effect t+1 (pp)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_d3_prod_t1_lo,-8.97364590112173,pp,1,",","D3: maritime minus mainland, production effect t+1 (pp) (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_d3_prod_t1_hi,-2.671112070181492,pp,1,",","D3: maritime minus mainland, production effect t+1 (pp) (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_d3_yield_t1,-3.982611197800912,pp,1,",","D3: maritime minus mainland, yield effect t+1 (pp)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_d3_yield_t1_lo,-6.49146423166471,pp,1,",","D3: maritime minus mainland, yield effect t+1 (pp) (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_d3_yield_t1_hi,-0.2766621739677071,pp,1,",","D3: maritime minus mainland, yield effect t+1 (pp) (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_w3_mar_prod_t1,-4.0964113752066655,%,1,",","W3: maritime production t+1, weighted by mean production",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_w3_mar_prod_t1_lo,-5.795232852588395,%,1,",","W3: maritime production t+1, weighted by mean production (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_w3_mar_prod_t1_hi,-1.4052549048828469,%,1,",","W3: maritime production t+1, weighted by mean production (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_r3_mar_prod_t1_ns6,-4.094686356448429,%,1,",","R3: maritime production t+1, 6 df spline production trend",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_r3_mar_prod_t1_ns6_lo,-6.11501915966195,%,1,",","R3: maritime production t+1, 6 df spline production trend (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_r3_mar_prod_t1_ns6_hi,-1.6761390520048547,%,1,",","R3: maritime production t+1, 6 df spline production trend (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_r3_mar_prod_t1_loess,-4.566647442122818,%,1,",","R3: maritime production t+1, LOESS production trend",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_r3_mar_prod_t1_loess_lo,-6.798089478433534,%,1,",","R3: maritime production t+1, LOESS production trend (95% CI lo)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_r3_mar_prod_t1_loess_hi,-1.682200869675532,%,1,",","R3: maritime production t+1, LOESS production trend (95% CI hi)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_holm_mar_prod_t1,8.879522868889845e-5,,3,",","Holm-adjusted p, maritime production t+1 (14 margin contrasts)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_holm_mar_yield_t1,0.06797072217549278,,3,",","Holm-adjusted p, maritime yield t+1 (14 margin contrasts)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_holm_area_t,0.29815902552092155,,3,",","Holm-adjusted p, harvested area in the onset year (14 margin contrasts)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_n_holm_sig,1,,0,",",Margin contrasts with Holm-adjusted p < 0.05,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_n_margin_tests,14,,0,",","Margin contrasts tested (S2, S3)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_loo_min,-5.28636347434187,%,1,",","Maritime production t+1, leave-one-event-out: most negative",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_loo_max,-4.462814451023977,%,1,",","Maritime production t+1, leave-one-event-out: closest to zero",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_loo_max_event,1965,,0,,El Niño event whose removal moves the maritime t+1 effect closest to zero,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_n_conflict_years,34,country-years,0,",","Country-years with major armed conflict (UCDP intensity 2), dropped in S4",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p5_neutral_pct,14.76510067114094,%,0,",","Share of >=5% yield shortfalls, Neutral years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p5_elnino_pct,11.11111111111111,%,0,",","Share of >=5% yield shortfalls, El Nino years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p5_lanina_pct,14.814814814814811,%,0,",","Share of >=5% yield shortfalls, La Nina years",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_t3_mar_kt,-3191.932229765464,thousand t,0,",","T3: maritime t+1 effect (weighted), thousand t of paddy at 2024 trend production (IDN+PHL+MYS)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_t3_mar_lo_kt,-4515.657444252486,thousand t,0,",",T3: 95% CI lower,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_t3_mar_hi_kt,-1094.977533037747,thousand t,0,",",T3: 95% CI upper,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_t3_idn_kt,-2273.814440621859,thousand t,0,",",T3: of which Indonesia,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_t3_year,2024,,0,,Year of trend production used for tonnes,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_c24_onset_prev,1,,0,",",1 if the year before the last year is an El Niño onset,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_c24_mar_prod_pct,-4.603920937305417,%,1,",",C24: observed maritime production vs trend in 2024 (production-weighted),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_c24_idn_prod_pct,-4.260230077188809,%,1,",",C24: observed Indonesian production vs trend in 2024,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p_d3_prod_t1,2.198167646234793e-4,,3,",","D3: p-value, maritime minus mainland production t+1 (bootstrap SE)",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p3_n_shifts,63,,0,",",P3: number of placebo shifts of the ENSO years,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p3_n_as_large,0,,0,",",P3: placebo shifts with a maritime t+1 effect at least as large (absolute),FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p3_p_rank,0.015625,,3,",","P3: rank p-value, maritime production t+1",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_p3_min_p,0.015625,,3,",",P3: smallest attainable rank p-value,FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_b5_mar_prod_t1_lo,-6.155059512376127,%,1,",","B5: 95% CI lower, maritime production t+1, 5-year blocks",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03
+sl_b5_mar_prod_t1_hi,-2.0967876386040474,%,1,",","B5: 95% CI upper, maritime production t+1, 5-year blocks",FAOSTAT QCL rice; NOAA CPC ONI; UCDP/PRIO ACD v26.1; author's calculations (exploratory),2026-11-20 12:03

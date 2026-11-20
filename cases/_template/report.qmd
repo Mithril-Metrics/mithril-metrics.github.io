@@ -2,7 +2,7 @@
 # ONE source file -> three outputs (07_report_and_post_templates.md):
 #   (1) blog post            report.html   (format: html, sections A1-A8)
 #   (2) LinkedIn post        output/linkedin_post.txt + output/linkedin_check.txt (section B)
-#   (3) one-page A4 brief    report.pdf    (format: typst, section C)
+#   (3) technical note, 2-3 pages A4, brief.pdf (format: typst, section C): the place for more detail
 # Every number comes from output/key_numbers.csv through kn(); an unknown key stops the render.
 title: "{{TITLE}}"
 description: "One-sentence teaser shown in the listing and in LinkedIn link previews."
@@ -56,15 +56,22 @@ k <- function(key, ...) acutils::kn(key, file = kn_file, ...)   # formatted key 
 kn_tbl  <- acutils::kn_read(kn_file)
 `%||%` <- function(a, b) if (is.null(a) || identical(a, "")) b else a
 bullets  <- function(x) cat(paste0("- ", x), sep = "\n")
-blog_url <- meta$links$blog %||% "[blog link]"
-code_url <- meta$links$code %||% "[GitHub link]"
+site_url <- "https://mithril-metrics.github.io"   # same for both authors
+case_id  <- meta$id %||% basename(getwd())
+blog_url <- meta$links$blog %||% paste0(site_url, "/cases/", case_id, "/report.html")
+code_url <- meta$links$code %||% paste0("https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/", case_id)
 ```
 
 ```{r}
 #| label: shared-text
 #| include: false
 # ---------------------------------------------------------------------------------
-# WRITE HERE ONCE. These strings feed the blog, the brief and the LinkedIn post.
+# WRITE HERE ONCE. These strings feed the blog, the technical note (PDF) and the LinkedIn post.
+# Note-only strings (more detail than the blog): method_detail, robustness, references.
+method_detail <- "PLACEHOLDER: data sources and sample; the estimating equation in words; what identifies the estimate and its main threat; how intervals are computed. One paragraph, 120-200 words."
+robustness <- c("PLACEHOLDER: each planned robustness check with its estimate and interval (from kn()).",
+                "PLACEHOLDER: checks added after the first results, labelled exploratory.")
+references <- "PLACEHOLDER: literature and policy sources cited, author-year with links."
 # Use k("key") for every number (k("key", unit = TRUE) adds the unit, abs = TRUE drops sign).
 # ---------------------------------------------------------------------------------
 question <- meta$question
@@ -188,7 +195,7 @@ if (length(src)) {
   cat("- *Fill `sources` in 00_meta.yml.*\n")
 }
 cat("\nCode to reproduce every number and figure: [GitHub](", code_url, "). ",
-    "One-page brief: [PDF](brief.pdf).\n", sep = "")
+    "Technical note with more detail (PDF, 2-3 pages): [brief.pdf](brief.pdf).\n", sep = "")
 ```
 
 **Use of AI tools.** We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
@@ -209,25 +216,54 @@ cat('<div class="post-footer">',
 
 ::: {.content-visible when-format="typst"}
 
+<!-- TECHNICAL NOTE (2-3 pages A4, never more). The blog and LinkedIn stay concise; extra
+     detail goes here: specification, identification, inference, the full results and robustness
+     table, exploratory checks labelled as such, references. Same style rules: concise, every
+     result from kn(), untested mechanisms labelled, one bolded key sentence per section. -->
+
 **Question.** `r question`
 
 **Short answer.** `r bottom_line`
 
-![](output/fig1_hero.png){width="88%"}
+**1. Data and method**
 
-**What this means for policy**
+`r method_detail`
+
+**2. Results**
+
+![](output/fig1_hero.png){width="80%"}
+
+```{r}
+#| label: note-table
+#| results: asis
+# Main estimates with intervals; one row per estimate, planned and exploratory rows labelled.
+if (file.exists("output/tab_note.csv")) {
+  print(knitr::kable(read.csv("output/tab_note.csv", check.names = FALSE), format = "pipe"))
+}
+```
+
+**3. Robustness and exploratory checks**
+
+```{r}
+#| results: asis
+bullets(robustness)
+```
+
+**4. What this means for policy**
 
 ```{r}
 #| results: asis
 bullets(implications)
 ```
 
-**Caveats**
+**5. Caveats**
 
 ```{r}
 #| results: asis
 bullets(caveats)
 ```
+
+**References.** `r references`
 
 ```{r}
 #| label: brief-sources

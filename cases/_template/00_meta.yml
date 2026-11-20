@@ -46,6 +46,6 @@ manual_steps: []                  # only if no API exists: exact click-path, fil
 identification: null              # one sentence: what must hold for a causal reading (or "descriptive")
 
 links:
-  blog: null
+  blog: "https://mithril-metrics.github.io/cases/{{CASE_ID}}/report.html"
   linkedin: null
   code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/{{CASE_ID}}"

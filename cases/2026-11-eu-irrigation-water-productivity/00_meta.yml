@@ -177,6 +177,6 @@ red_team:                         # P7, 2026-11-20: two independent reviews (EC 
     against its own baseline.
 
 links:
-  blog: null
+  blog: "https://mithril-metrics.github.io/cases/2026-11-eu-irrigation-water-productivity/report.html"
   linkedin: null
   code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-eu-irrigation-water-productivity"

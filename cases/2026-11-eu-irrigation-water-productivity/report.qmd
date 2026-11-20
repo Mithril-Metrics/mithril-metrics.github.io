@@ -53,8 +53,10 @@ k <- function(key, ...) acutils::kn(key, file = kn_file, ...)   # formatted key 
 kn_tbl  <- acutils::kn_read(kn_file)
 `%||%` <- function(a, b) if (is.null(a) || identical(a, "")) b else a
 bullets  <- function(x) cat(paste0("- ", x), sep = "\n")
-blog_url <- meta$links$blog %||% "[blog link]"
-code_url <- meta$links$code %||% "[GitHub link]"
+site_url <- "https://mithril-metrics.github.io"   # same for both authors
+case_id  <- meta$id %||% basename(getwd())
+blog_url <- meta$links$blog %||% paste0(site_url, "/cases/", case_id, "/report.html")
+code_url <- meta$links$code %||% paste0("https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/", case_id)
 ```
 
 ```{r}

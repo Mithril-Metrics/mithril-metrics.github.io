@@ -273,6 +273,89 @@ method_tag <- paste0("Method: detrended FAOSTAT rice data, ", k("n_countries"), 
                      k("year_start"), "-", k("year_end"), "; fixed effects, block bootstrap")
 hashtags <- "#FoodSecurity #ElNino #AgriculturalEconomics #SoutheastAsia"
 
+# ---- Technical note (PDF) only: more detail than the blog ----
+rng <- function(lo, hi, ...) paste0(k(lo, ...), " to ", k(hi, ...))
+method_detail <- paste0(
+  "*Data.* FAOSTAT QCL national rice (paddy) yield, harvested area and production for Viet Nam, ",
+  "Indonesia, the Philippines, Thailand, Malaysia and Cambodia, ", k("year_start"), "-", k("year_end"),
+  " (", k("n_obs", unit = TRUE), "; Cambodia from 1980), and NOAA's Oceanic Niño Index (ONI). ",
+  "*Shocks.* For each country and outcome, the shock is the log deviation from a natural cubic spline ",
+  "trend with 4 degrees of freedom, with a level shift for Indonesia from 2018 (series break). ",
+  "*Exposure.* An onset year has a July-December ONI mean of at least 0.5°C (",
+  k("n_elnino_years", unit = TRUE), "); strong onsets at least 1.5°C (", k("n_strong_years", unit = TRUE), "). ",
+  "*Planned estimate.* A linear probability model of a yield shortfall of at least 5% below trend on an ",
+  "onset indicator with country fixed effects. Tail frequency compares observed shortfalls of 10% or more ",
+  "with normal benchmarks built from each country's robust (median absolute deviation) or classical ",
+  "standard deviation. *Exploratory second look* (added after the planned estimate came back null): ",
+  "yield, area and production shocks regressed on El Niño and La Niña indicators for the onset year and ",
+  "the year after, by region (maritime: Indonesia, the Philippines, Malaysia; mainland: the rest), against ",
+  "years with neither in the same or previous year; Holm correction over ", k("sl_n_margin_tests"),
+  " contrasts and a rotation placebo of the ENSO calendar. *Inference.* Moving-block bootstrap ",
+  "(999 draws) resampling whole years in blocks of ", k("block_len"), ", which keeps the correlation ",
+  "across countries within a year and persistence across years; country spreads are re-estimated in each ",
+  "draw, the trend is treated as known. *Identification* rests on ENSO timing being unrelated to other ",
+  "drivers of detrended national rice output; estimates include policy and farmer responses."
+)
+note_tbl <- data.frame(
+  Estimate = c("P(yield >= 5% below trend), onset vs other years (pp)",
+               "P(yield >= 10% below trend), onset vs other years (pp)",
+               ">= 10% shortfalls, observed / normal (typical-year spread)",
+               ">= 10% shortfalls, observed / normal (all-year spread)",
+               "Maritime production, year after onset (% vs trend)",
+               "  same, weighted by output",
+               "Mainland production, year after onset (% vs trend)",
+               "Maritime minus mainland, year after (pp)",
+               "Maritime gap at 2024 trend output (million t paddy)"),
+  Value = c(k("diff5_pp"), k("diff10_pp"), k("ratio10"), k("ratio10_sd"),
+            k("sl_s3_mar_prod_t1", unit = TRUE), k("sl_w3_mar_prod_t1", unit = TRUE),
+            k("sl_s3_mai_prod_t1", unit = TRUE, sign = TRUE), k("sl_d3_prod_t1"), mt_paddy("sl_t3_mar_kt")),
+  `95% interval` = c(rng("diff5_lo_pp", "diff5_hi_pp"), rng("diff10_lo_pp", "diff10_hi_pp"),
+                     rng("ratio10_lo", "ratio10_hi"), rng("ratio10_sd_lo", "ratio10_sd_hi"),
+                     rng("sl_s3_mar_prod_t1_lo", "sl_s3_mar_prod_t1_hi", unit = TRUE),
+                     rng("sl_w3_mar_prod_t1_lo", "sl_w3_mar_prod_t1_hi", unit = TRUE),
+                     rng("sl_s3_mai_prod_t1_lo", "sl_s3_mai_prod_t1_hi", unit = TRUE),
+                     rng("sl_d3_prod_t1_lo", "sl_d3_prod_t1_hi"),
+                     paste0(mt_paddy("sl_t3_mar_hi_kt"), " to ", mt_paddy("sl_t3_mar_lo_kt"))),
+  Type = c("planned", "planned", "planned", "planned", "exploratory", "exploratory", "exploratory", "exploratory", "exploratory"),
+  check.names = FALSE
+)
+note_caption <- paste0(
+  "**The planned estimates show no rise in onset-year shortfalls; the exploratory rows show a ",
+  "maritime production gap the year after.** Moving-block bootstrap intervals (blocks of ", k("block_len"),
+  " years). Tonnes use the weighted estimate at 2024 trend output (Indonesia ", mt_paddy("sl_t3_idn_kt"),
+  " million t, in proportion to trend output). The figure shows the exploratory margins."
+)
+robustness <- c(
+  paste0("**The planned null holds across checks.** Exposure in the year after onset: ", k("r1_diff5_pp"),
+         " pp (", rng("r1_lo_pp", "r1_hi_pp"), "). LOESS trend: ", k("r2_diff5_pp"), " pp (", rng("r2_lo_pp", "r2_hi_pp"),
+         "). Without FAO-estimated values: ", k("noe_diff5_pp"), " pp. Without major-conflict country-years (",
+         k("sl_n_conflict_years"), "): ", k("sl_s4_noconflict_diff5"), " pp; without 1997-98: ",
+         k("sl_s4_nocrisis_diff5"), " pp. Shift of the 10th percentile of shocks in onset years: ",
+         k("qr10_elnino_pct", unit = TRUE, sign = TRUE), " (", rng("qr10_lo_pct", "qr10_hi_pct", unit = TRUE), ")."),
+  paste0("Tail shape: generalised Pareto shape ", k("gpd_xi"), " (", rng("gpd_xi_lo", "gpd_xi_hi"), "; ",
+         k("gpd_n_exc"), " exceedances), consistent with thin and heavy tails. The typical-year ratio is ",
+         k("sl_s4_noconflict_ratio10"), " without conflict years and ", k("sl_s4_nocrisis_ratio10"), " without 1997-98."),
+  paste0("Exploratory maritime effect (year after onset): Holm-adjusted ", pv("sl_holm_mar_prod_t1"),
+         ", the only one of ", k("sl_n_margin_tests"), " contrasts below 0.05; rotation placebo over ",
+         k("sl_p3_n_shifts"), " shifts of more than two years: rank p = ", k("sl_p3_p_rank"),
+         ", family-wise across all contrasts ", k("sl_p3_fw_p_rank"),
+         " (the placebo does not cover the choice of the maritime/mainland split). Leave-one-event-out: ",
+         rng("sl_loo_min", "sl_loo_max", unit = TRUE), ". Six-df spline trend: ", k("sl_r3_mar_prod_t1_ns6", unit = TRUE),
+         "; LOESS trend: ", k("sl_r3_mar_prod_t1_loess", unit = TRUE), "; five-year blocks: interval ",
+         rng("sl_b5_mar_prod_t1_lo", "sl_b5_mar_prod_t1_hi", unit = TRUE), "."),
+  paste0("Exploratory, strong onsets: maritime production the year after ", k("sl_x3_mar_prod_t1_strong_total", unit = TRUE),
+         " (", rng("sl_x3_mar_prod_t1_strong_total_lo", "sl_x3_mar_prod_t1_strong_total_hi", unit = TRUE),
+         "); extra effect over moderate onsets ", k("sl_x3_mar_prod_t1_strong_extra", unit = TRUE), " (",
+         rng("sl_x3_mar_prod_t1_strong_extra_lo", "sl_x3_mar_prod_t1_strong_extra_hi", unit = TRUE),
+         "), from ", k("sl_n_strong_onsets"), " events. Not tested: a rebound above trend two years after onset.")
+)
+references <- paste0(
+  "Naylor, R. et al. (2001), Climatic Change, [doi:10.1023/A:1010662115348](https://doi.org/10.1023/A:1010662115348); ",
+  "Naylor, R. et al. (2007), PNAS, [PMC1876519](https://pmc.ncbi.nlm.nih.gov/articles/PMC1876519); ",
+  "NOAA CPC ENSO diagnostic discussion, 12 November 2026; FAO-WFP joint anticipatory action appeal (2026); ",
+  "CGIAR on India's 2023 rice export restrictions; Statistics Indonesia rice imports 2024, via CNBC Indonesia."
+)
+
 author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
 ```
 
@@ -405,7 +488,7 @@ bullets(vapply(src, function(s) paste0(
   if (!is.null(s$accessed)) paste0(", accessed ", s$accessed) else "",
   if (!is.null(s$url)) paste0(". [Link](", s$url, ")") else ""), ""))
 cat("\nCode to reproduce every number and figure: [GitHub](", code_url, "). ",
-    "One-page brief: [PDF](brief.pdf).\n", sep = "")
+    "Technical note with more detail (PDF, 2-3 pages): [brief.pdf](brief.pdf).\n", sep = "")
 ```
 
 **Use of AI tools.** We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.
@@ -426,25 +509,48 @@ cat('<div class="post-footer">',
 
 ::: {.content-visible when-format="typst"}
 
-**Question.** Does El Niño bring unusually severe rice shortfalls in Southeast Asia?
+**Question.** `r question`
 
 **Short answer.** `r bottom_line`
 
-![](output/fig3_tail_vs_normal.png){width="60%"}
+**1. Data and method**
 
-**What this means for policy**
+`r method_detail`
+
+**2. Results**
+
+![](output/fig4_second_look_margins.png){width="52%"}
+
+```{r}
+#| label: note-table
+#| results: asis
+if (exists("note_tbl")) print(knitr::kable(note_tbl, format = "pipe", row.names = FALSE))
+```
+
+`r note_caption`
+
+**3. Robustness and exploratory checks**
 
 ```{r}
 #| results: asis
-bullets(implications[1:2])
+bullets(robustness)
 ```
 
-**Caveats**
+**4. What this means for policy**
 
 ```{r}
 #| results: asis
-bullets(caveats[c(1, 3)])
+bullets(implications)
 ```
+
+**5. Caveats**
+
+```{r}
+#| results: asis
+bullets(caveats)
+```
+
+**References.** `r references`
 
 ```{r}
 #| label: brief-sources

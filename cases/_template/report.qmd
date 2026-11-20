@@ -72,6 +72,7 @@ method_detail <- "PLACEHOLDER: data sources and sample; the estimating equation 
 robustness <- c("PLACEHOLDER: each planned robustness check with its estimate and interval (from kn()).",
                 "PLACEHOLDER: checks added after the first results, labelled exploratory.")
 references <- "PLACEHOLDER: literature and policy sources cited, author-year with links."
+note_tbl <- data.frame(Estimate = "PLACEHOLDER", Value = "", Interval = "", Type = "planned", check.names = FALSE)
 # Use k("key") for every number (k("key", unit = TRUE) adds the unit, abs = TRUE drops sign).
 # ---------------------------------------------------------------------------------
 question <- meta$question
@@ -236,10 +237,9 @@ cat('<div class="post-footer">',
 ```{r}
 #| label: note-table
 #| results: asis
-# Main estimates with intervals; one row per estimate, planned and exploratory rows labelled.
-if (file.exists("output/tab_note.csv")) {
-  print(knitr::kable(read.csv("output/tab_note.csv", check.names = FALSE), format = "pipe"))
-}
+# Main estimates with intervals, built from kn() in the shared-text chunk as `note_tbl`
+# (columns: Estimate, Value, 95% interval or 90% interval, Type = planned / robustness / exploratory).
+if (exists("note_tbl")) print(knitr::kable(note_tbl, format = "pipe", row.names = FALSE))
 ```
 
 **3. Robustness and exploratory checks**

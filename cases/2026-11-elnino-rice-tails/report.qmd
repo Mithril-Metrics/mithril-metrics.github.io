@@ -6,7 +6,7 @@ description: "No detectable rise in deep shortfalls in the year it begins. An ex
 author: "Pietro Sala"
 date: "2026-11-19"
 categories: ["Region: SE Asia", "Method: Tails and risk", "Theme: Food security"]
-image: output/fig3_tail_vs_normal.png
+image: output/fig4_second_look_margins.png
 draft: true                           # set to false to publish
 title-block-banner: true
 params:
@@ -97,12 +97,8 @@ diff_txt <- if (diff_sig) {
 c24_fits <- val("sl_c24_onset_prev") == 1 && val("sl_c24_mar_prod_pct") < 0
 sd_ok <- val("ratio10_sd_lo") <= 1        # a bell curve fitted to all years is not rejected
 tail_txt <- paste0(
-  "Harvests 10% or more below trend have come ", k("ratio10"), " times as often as variation in ",
-  "typical years implies, ",
-  if (sd_ok) paste0("but not clearly more often than a bell curve fitted to all years predicts (",
-                    k("ratio10_sd"), " times, interval ", k("ratio10_sd_lo"), " to ", k("ratio10_sd_hi"), ")")
-  else paste0("and ", k("ratio10_sd"), " times as often as a bell curve fitted to all years"),
-  ", and ", old_txt
+  "Harvests 10% or more below trend are rare (", k("n_loss10"), " of ", k("n_obs"), " country-years), and ",
+  k("n_loss10_pre1980"), " of the ", k("n_loss10"), " came before 1980"
 )
 mt_paddy <- function(key) sprintf("%.1f", abs(val(key)) / 1e3)      # million t of paddy
 w_vals <- sort(abs(c(val("sl_w3_mar_prod_t1"), val("sl_s3_mar_prod_t1"))))
@@ -111,7 +107,7 @@ w_range <- if (round(w_vals[1], 1) == round(w_vals[2], 1)) sprintf("%.1f%%", w_v
 p3_clear <- val("sl_p3_p_rank") < 0.05
 p3_txt <- paste0(
   "As a placebo test, we shifted the El Niño years against the harvest data by each of the ",
-  k("sl_p3_n_shifts"), " possible offsets; ",
+  k("sl_p3_n_shifts"), " offsets of more than two years (shorter shifts would partly re-align the real events); ",
   if (val("sl_p3_n_as_large") == 0) "none gave" else paste(k("sl_p3_n_as_large"), if (val("sl_p3_n_as_large") == 1) "gave" else "gave"),
   " a maritime effect as large as the real one (rank p = ", k("sl_p3_p_rank"), ", the smallest attainable being ",
   k("sl_p3_min_p"), ")."
@@ -130,12 +126,13 @@ fw_txt <- paste0(
 )
 strong_clear <- excl0("sl_x3_mar_prod_t1_strong_extra")
 strong_txt <- paste0(
-  "Among the ", k("sl_n_strong_onsets"), " strong onsets since ", k("year_start"),
-  ", maritime production the year after ran ", k("sl_x3_mar_prod_t1_strong_total", unit = TRUE, sign = TRUE),
-  " against trend, ", k("sl_x3_mar_prod_t1_strong_extra", sign = TRUE), " points relative to moderate onsets (interval ",
-  k("sl_x3_mar_prod_t1_strong_extra_lo"), " to ", k("sl_x3_mar_prod_t1_strong_extra_hi"), "); ",
-  if (strong_clear) "strong events have gone with a different-sized gap, but on very few cases."
-  else "with so few strong events, the data cannot say whether a strong event brings a larger gap."
+  "After the ", k("sl_n_strong_onsets"), " strong onsets since ", k("year_start"),
+  ", maritime production the year after averaged ", k("sl_x3_mar_prod_t1_strong_total", unit = TRUE, sign = TRUE),
+  " against trend (interval ", k("sl_x3_mar_prod_t1_strong_total_lo", unit = TRUE), " to ",
+  k("sl_x3_mar_prod_t1_strong_total_hi", unit = TRUE), "), ",
+  if (strong_clear) "and strong events have gone with a different-sized gap than moderate ones, but on very few cases. "
+  else "but with so few events we cannot say strong events differ from moderate ones. ",
+  "Neither figure is a forecast for 2027."
 )
 r3_txt <- paste0(
   "With a more flexible production trend the estimate is ", k("sl_r3_mar_prod_t1_ns6", unit = TRUE, sign = TRUE),
@@ -163,7 +160,7 @@ mar_sentence <- if (mar_sig && mar_down) {
 }
 
 bottom_line <- paste0(
-  "Not in the year it begins, as far as deep shortfalls go. Across six Southeast Asian countries since ",
+  "Not in the year it begins, as far as shortfalls of 5% or more go. Across six Southeast Asian countries since ",
   k("year_start"), ", El Niño onset years show no detectable rise in national rice shortfalls of 5% or more (",
   k("p5_elnino_pct", unit = TRUE), " of country-years, against ", k("p5_other_pct", unit = TRUE),
   " in other years), though smaller losses cannot be ruled out. ", mar_sentence, " ", tail_txt, "."
@@ -206,7 +203,7 @@ method_plain <- paste0(
 )
 
 findings <- c(
-  paste0("In the year El Niño begins, no detectable rise in deep shortfalls: ",
+  paste0("In the year El Niño begins, no detectable rise in shortfalls of 5% or more: ",
          k("p5_elnino_pct", unit = TRUE), " of country-years vs ", k("p5_other_pct", unit = TRUE),
          " in other years. Smaller losses cannot be ruled out"),
   if (mar_sig && mar_down) {
@@ -243,7 +240,10 @@ caveats <- c(
          "where food insecurity concentrates. Prices and trade are outside our scope: in 2023, for example, ",
          "India's ban on non-basmati white rice exports in July pushed world rice prices to a 15-year high ",
          "([CGIAR](https://www.cgiar.org/news-events/news/indias-export-restrictions-on-rice-continue-to-disrupt-global-markets-supplies-and-prices)). ",
-         "We have not compared the production gaps with national import or reserve volumes."),
+         "We have not compared the production gaps with national import or reserve volumes. The six countries ",
+         "are the region's main producers, not necessarily those in the FAO-WFP appeal; Myanmar, Lao PDR and ",
+         "Timor-Leste are not covered. The results speak to national import and reserve timing, not to ",
+         "anticipatory action triggers, which rest on seasonal, subnational forecasts."),
   paste0("Timing is approximate. FAO records harvests by calendar year while cropping seasons ",
          "straddle years, so part of the year-after gap may be harvest moved between calendar years ",
          "rather than lost; the data cannot separate the two. Our pre-specified test looked at the ",
@@ -312,8 +312,8 @@ country-years. It happened in `r k("p10_obs_pct", unit = TRUE)`: `r k("n_loss10"
 variation). A bell curve stretched to cover all years, bad ones included, fits the 10% threshold
 much better: `r k("ratio10_sd")` times (interval `r k("ratio10_sd_lo")` to `r k("ratio10_sd_hi")`),
 `r if (val("ratio10_sd_lo") <= 1) "which does not rule out the bell curve" else "still above what it predicts"`.
-A formal estimate of the tail shape is close to zero (`r k("gpd_xi")`, interval `r k("gpd_xi_lo")`
-to `r k("gpd_xi_hi")`).
+A formal tail-shape estimate is too imprecise to settle this (`r k("gpd_xi")`, interval
+`r k("gpd_xi_lo")` to `r k("gpd_xi_hi")`, consistent with both thin and heavy tails).
 
 So the answer depends on the benchmark. Against typical years, deep shortfalls are clearly more
 frequent; against a bell curve fitted to all years, `r if (sd_ok) "they are not clearly so" else "the gap is smaller"`.
@@ -324,15 +324,15 @@ times) or the 1997-98 Asian crisis (`r k("sl_s4_nocrisis_ratio10")` times). A re
 product calibrated on typical years would have underpriced the bad years in the past; whether it
 would today is unclear.
 
-### In the year El Niño begins, no detectable rise in deep shortfalls
+### In the year El Niño begins, no detectable rise in shortfalls of 5% or more
 
 ![](output/fig1_hero.png){fig-alt="Dot chart with 95% intervals: `r k("p5_elnino_pct", unit = TRUE)` of El Niño onset country-years and `r k("p5_strong_pct", unit = TRUE)` of strong El Niño country-years had rice yields at least 5% below trend, against `r k("p5_other_pct", unit = TRUE)` of other years." width="100%"}
 
 El Niño onset years had a shortfall of 5% or more in `r k("p5_elnino_pct", unit = TRUE)` of
 country-years, against `r k("p5_other_pct", unit = TRUE)` in other years. The difference
 within countries is `r k("diff5_pp")` percentage points (95% interval `r k("diff5_lo_pp")` to
-`r k("diff5_hi_pp")`). That rules out a large increase but not a modest one. Strong events look
-no different (`r k("p5_strong_pct", unit = TRUE)`), and only
+`r k("diff5_hi_pp")`). That rules out a large increase but not a modest one. There are too few strong events to tell
+whether they differ (`r k("p5_strong_pct", unit = TRUE)`, `r k("n_strong_years", unit = TRUE)`), and only
 `r k("share_worst_elnino_pct", unit = TRUE)` of the worst tenth of harvests fell in onset
 years, which make up `r k("share_obs_elnino_pct", unit = TRUE)` of all years. Harvested area
 changes by `r k("sl_s2_area_t", unit = TRUE, sign = TRUE)` in the onset year (interval
@@ -362,7 +362,9 @@ their output, so that Indonesia counts most, gives `r k("sl_w3_mar_prod_t1", uni
 At `r k("sl_t3_year")` trend output, the weighted estimate corresponds to roughly
 `r mt_paddy("sl_t3_mar_hi_kt")` to `r mt_paddy("sl_t3_mar_lo_kt")` million tonnes of paddy (unmilled rice; central
 estimate `r mt_paddy("sl_t3_mar_kt")`, of which Indonesia `r mt_paddy("sl_t3_idn_kt")`). Milled rice, the unit
-of trade and reserves, weighs roughly a third less. These are gaps against each country's long-run
+of trade and reserves, weighs roughly a third to two-fifths less. The country split is in
+proportion to trend output, not estimated country by country, and the 2024 trend sits at the end of
+the sample, where it is least certain and partly reflects 2024 itself. These are gaps against each country's long-run
 trend, not falls from the previous year, so they are not comparable with the year-on-year changes
 usually reported. In contrast, `r mai_txt`. `r diff_txt`
 
@@ -468,7 +470,7 @@ src_brief <- paste(src_brief, collapse = "; ")
 #| label: linkedin
 #| include: false
 hook <- paste0("A strong to very strong El Niño is under way. In Southeast Asian rice data since ",
-               k("year_start"), ", the year it begins shows no rise in deep national shortfalls; any signal has come a year later.")
+               k("year_start"), ", onset years show no rise in national shortfalls of 5% or more; any signal came a year later.")
 li_why <- paste0("FAO and WFP have launched a joint anticipatory action appeal for this ",
                  "event. So we asked: when do El Niño's rice losses show up, and how deep can they go?")
 li <- paste0(
@@ -476,7 +478,7 @@ li <- paste0(
   li_why, "\n\n",
   "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
   "What it means: for timing imports or reserves, the national data point, tentatively, to the ",
-  "harvests after the El Niño year in the maritime countries, which is also what the agronomy predicts.\n\n",
+  "harvests after the El Niño year in the maritime countries, as agronomic studies for Indonesia predict.\n\n",
   "National annual totals hide local losses and arrive late, so early action still needs seasonal, ",
   "provincial data.\n\n",
   method_tag, "\n",

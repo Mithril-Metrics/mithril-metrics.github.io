@@ -29,6 +29,8 @@
 #  B5  maritime production t+1 with 5-year blocks
 # Added after the fourth review (2026-11-20):
 #  X3  maritime production t+1: extra effect of strong onsets (Jul-Dec ONI >= 1.5), and their total
+#  P3  (fifth review) shifts within two years of the real calendar are dropped: ENSO persists and
+#      alternates, so a one- or two-year shift re-aligns the real events and is not a valid null.
 #  P3  family-wise placebo: in each shift, the largest of the 14 margin contrasts (standardised by
 #      its placebo SD) is compared with the largest observed one, so the search is accounted for
 
@@ -316,7 +318,8 @@ rot_effect <- function(s) {
   margin_vec(d)
 }
 obs_vec <- margin_vec(panel)
-plac_mat <- t(vapply(seq_len(n_y - 1), rot_effect, numeric(length(obs_vec))))
+shifts <- setdiff(seq_len(n_y - 1), c(1, 2, n_y - 2, n_y - 1))
+plac_mat <- t(vapply(shifts, rot_effect, numeric(length(obs_vec))))
 colnames(plac_mat) <- names(obs_vec)
 plac <- plac_mat[, "mar_prod.t1"]
 obs_p3 <- obs_vec[["mar_prod.t1"]]
@@ -332,7 +335,7 @@ cat("Family-wise placebo: largest observed contrast =", names(which.max(z_obs)),
 n_as_large <- sum(abs(plac) >= abs(obs_p3))
 p_rank <- (1 + n_as_large) / (length(plac) + 1)
 cat("\nPlacebo shifts:", length(plac), "| as large as observed:", n_as_large, "| rank p =", round(p_rank, 3), "\n")
-readr::write_csv(tibble(shift = seq_len(n_y - 1), estimate = plac, max_std_contrast = z_plac_max),
+readr::write_csv(tibble(shift = shifts, estimate = plac, max_std_contrast = z_plac_max),
                  "output/tab_placebo.csv")
 add_t("sl_p3_n_shifts", length(plac), "", 0, "P3: number of placebo shifts of the ENSO years")
 add_t("sl_p3_n_as_large", n_as_large, "", 0, "P3: placebo shifts with a maritime t+1 effect at least as large (absolute)")

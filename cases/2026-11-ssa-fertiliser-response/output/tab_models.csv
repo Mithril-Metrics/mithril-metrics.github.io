@@ -20,3 +20,8 @@ N use per ha,"R4: high minus low, without Zimbabwe 2000-2009",All 14 countries,r
 Maize yield,F1: without crop years 2008-2009,All 14 countries,log_ratio,-0.0999,0.04,-0.1657,-0.0341,459
 Maize yield,F1: without crop years 2021-2022,All 14 countries,log_ratio,-0.1289,0.0368,-0.1894,-0.0683,459
 Maize yield,F2: years with official N data,All 14 countries,log_ratio,-0.1567,0.0456,-0.2316,-0.0817,217
+Maize yield,"B2: high minus low, trends + ENSO by group, 2005-2024",All 14 countries,ratio_high,-0.2362,0.0489,-0.3166,-0.1557,280
+N use per ha,"B2: high minus low, trends + ENSO by group, 2005-2024",All 14 countries,ratio_high,0.2485,0.4829,-0.5458,1.0428,279
+Maize yield,R5: ratio before planting,All 14 countries,log_ratio_plant,-0.0757,0.0333,-0.1305,-0.0209,487
+N use per ha,R5: ratio before planting,All 14 countries,log_ratio_plant,-0.0399,0.1013,-0.2065,0.1267,484
+Maize yield,"T1: 35 yearly means, Newey-West",All 14 countries,log_ratio,-0.124,0.0338,-0.1813,-0.0667,35

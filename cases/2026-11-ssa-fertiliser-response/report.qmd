@@ -85,6 +85,16 @@ loo_flip   <- val("loo_theta_n_excl0") > 0
 lag_txt <- paste0("with the previous season's ratio the link is ",
                   if (lag_clear) "smaller but still clear (" else "weaker and not statistically clear (",
                   k("b_yield_lag_10pct", unit = TRUE), ")")
+lead_txt <- paste0(
+  if (plant_clear) paste0("with the ratio in the six months before planting the link is smaller but still clear (",
+                          k("b_yield_plant_10pct", unit = TRUE), ")")
+  else paste0("with the ratio before planting it is not clear (", k("b_yield_plant_10pct", unit = TRUE), ")"),
+  if (!lag_clear) paste0(", and with the previous crop year's ratio it is not clear (", k("b_yield_lag_10pct", unit = TRUE), ")") else ""
+)
+maize_led <- abs(val("b_maize_yield")) > abs(val("b_urea_yield"))
+link_txt <- if (maize_led) "but part of the link may reflect world maize-market conditions rather than fertiliser costs. " else
+  if ((lag_clear || plant_clear) && ts_clear) "and the link holds across timing checks. " else "but the link is fragile. "
+b2n_clear <- excl0("theta_n_b2")
 ```
 
 ```{r}
@@ -93,11 +103,10 @@ lag_txt <- paste0("with the previous season's ratio the link is ",
 question <- meta$question
 
 bottom_line <- paste0(
-  "In the data, dearer fertiliser relative to maize goes with smaller harvests, but the link is ",
-  if (lag_clear && ts_clear) "consistent across checks. " else "fragile. ",
+  "In the data, dearer fertiliser relative to maize goes with smaller harvests, ", link_txt,
   "Across ", k("n_countries"), " Sub-Saharan African countries from ", k("year_start"), " to ",
   k("year_end"), ", years with a 10% higher world urea-to-maize price ratio have had ",
-  k("b_yield_10pct", abs = TRUE, unit = TRUE), " lower maize yields in the same season; ", lag_txt, ". ",
+  k("b_yield_10pct", abs = TRUE, unit = TRUE), " lower maize yields in the same season; ", lead_txt, ". ",
   "Countries with large input-subsidy budgets kept fertiliser use from falling, but whether their ",
   "harvests held up better depends on which countries are included."
 )
@@ -138,7 +147,9 @@ method_plain <- paste0(
 findings <- c(
   paste0("In ", peak_month, " a tonne of urea cost ", k("ratio_p26"), " tonnes of maize, the most since at least 1990"),
   paste0("Years with a 10% higher urea-to-maize ratio have had ", k("b_yield_10pct", abs = TRUE, unit = TRUE),
-         " lower maize yields in the same season; ", lag_txt),
+         " lower maize yields in the same season",
+         if (plant_clear) paste0("; with the ratio before planting, ", k("b_yield_plant_10pct", unit = TRUE), ", also clear")
+         else paste0("; ", lag_txt)),
   paste0("Where input subsidies are large, fertiliser use did not fall when prices rose (",
          k("b_n_high_10pct", unit = TRUE, sign = TRUE), " vs ", k("b_n_low_10pct", unit = TRUE),
          "); the yield evidence is inconclusive")
@@ -148,11 +159,13 @@ implications <- c(
   paste0("If the aim is to judge exposure to the 2026 spike, the world ratio is a rough guide only. ",
          "Farm-gate fertiliser and maize prices in these countries can move quite differently from world ",
          "prices, and on these data the ratio ",
-         if (lag_clear) "leads yields only weakly. " else "does not clearly lead yields by a season. ",
+         if (lag_clear || plant_clear) "measured before planting leads yields only weakly. " else "does not clearly lead yields by a season. ",
          "National farm-gate price and crop monitoring are the closer signals."),
   paste0("If input subsidies are meant to keep fertiliser flowing during price spikes, the countries ",
          "spending most on them kept nitrogen use from falling, though part of that may be programmes ",
-         "that were scaled up in the same years. If the aim is to protect harvests, the yield difference ",
+         "that were scaled up in the same years",
+         if (!b2n_clear) ", and the gap between the groups is not clear once each group gets its own trends" else "",
+         ". If the aim is to protect harvests, the yield difference ",
          "between the groups depends on which countries are in the sample. The trade-off is the fiscal ",
          "cost of scaling up during a spike, against a yield gain these data cannot confirm."),
   paste0("If the aim is to plan food needs, our benchmark (below) is a starting point for the 2026/27 ",
@@ -267,7 +280,7 @@ low-subsidy group, nitrogen use falls `r k("b_n_low_10pct", abs = TRUE, unit = T
 is 10% higher. In the high-subsidy group it rises `r k("b_n_high_10pct", unit = TRUE)`. The gap holds
 with year effects that absorb everything common to all countries
 (`r k("theta_n_10pct", unit = TRUE, sign = TRUE)`, interval `r k("theta_n_10pct_lo", unit = TRUE, sign = TRUE)`
-to `r k("theta_n_10pct_hi", unit = TRUE, sign = TRUE)`) and on 2005-2024 with country trends and an El
+to `r k("theta_n_10pct_hi", unit = TRUE, sign = TRUE)`)`r if (b2n_clear) " and" else ", but not clearly"` on 2005-2024 with country trends and an El
 Niño term for each group (`r k("theta_n_b2_10pct", unit = TRUE, sign = TRUE)`, interval
 `r k("theta_n_b2_10pct_lo", unit = TRUE, sign = TRUE)` to `r k("theta_n_b2_10pct_hi", unit = TRUE, sign = TRUE)`).
 A rise in fertiliser use when it is dearer is what scaled-up programmes would produce, not what
@@ -278,7 +291,7 @@ For yields the picture is unsettled. The high-minus-low difference is
 `r k("theta_yield_10pct_lo", unit = TRUE, sign = TRUE)` to `r k("theta_yield_10pct_hi", unit = TRUE, sign = TRUE)`),
 and `r k("theta_yield_b2_10pct", unit = TRUE, sign = TRUE)` on 2005-2024 with trends and the El Niño term
 (interval `r k("theta_yield_b2_10pct_lo", unit = TRUE, sign = TRUE)` to
-`r k("theta_yield_b2_10pct_hi", unit = TRUE, sign = TRUE)`). `r if (loo_flip) paste0("But it moves with the sample: ", if (val("loo_theta_max_is_zwe") == 1) "without Zimbabwe" else "leaving out one country", " it becomes ", k("loo_theta_max_10pct", unit = TRUE, sign = TRUE), " (interval ", k("loo_theta_max_10pct_lo", unit = TRUE, sign = TRUE), " to ", k("loo_theta_max_10pct_hi", unit = TRUE, sign = TRUE), "), meaning yields in the high-subsidy group fell clearly less.") else "Leaving out one country at a time does not change this."`
+`r k("theta_yield_b2_10pct_hi", unit = TRUE, sign = TRUE)`). `r if (loo_flip) paste0("But it moves with the sample: ", if (val("loo_theta_max_is_zwe") == 1) "without Zimbabwe" else "leaving out one country", " it becomes ", k("loo_theta_max_10pct", unit = TRUE, sign = TRUE), " (interval ", k("loo_theta_max_10pct_lo", unit = TRUE, sign = TRUE), " to ", k("loo_theta_max_10pct_hi", unit = TRUE, sign = TRUE), "), meaning yields in the high-subsidy group fell clearly less.") else "Leaving out one country at a time does not change this."` `r if (b2_clear && val("theta_yield_b2") < 0 && loo_flip && val("loo_theta_max") > 0) "These checks point in opposite directions: with each group's own trends, yields in the high-subsidy group fell clearly more; without Zimbabwe, clearly less. The data cannot say whether subsidies protect harvests." else ""`
 MAFAP spending data around the 2008 spike fit the programme reading: of the `r k("s08_n")`
 countries with figures for the 2007 and 2009 budget years, spending on variable inputs rose as a
 share of support in `r k("s08_share_up")` (`r and_list(s08_up)`) and fell in

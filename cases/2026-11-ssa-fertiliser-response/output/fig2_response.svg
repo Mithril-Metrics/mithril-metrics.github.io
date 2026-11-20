@@ -126,13 +126,13 @@
 <text x='15.94' y='85.46' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='432.94px' lengthAdjust='spacingAndGlyphs'>14 Sub-Saharan African countries, 1990-2024. Change in the harvest and</text>
 <text x='15.94' y='99.82' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='413.66px' lengthAdjust='spacingAndGlyphs'>in N use when the urea-to-maize price ratio is 10% higher, in the same</text>
 <text x='15.94' y='114.19' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='58.36px' lengthAdjust='spacingAndGlyphs'>crop year.</text>
-<text x='15.94' y='28.48' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='480.70px' lengthAdjust='spacingAndGlyphs'>A 10% higher fertiliser-to-maize price ratio goes with 1.2%</text>
-<text x='15.94' y='47.38' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='464.81px' lengthAdjust='spacingAndGlyphs'>lower maize yields; no clear difference by input-subsidy</text>
-<text x='15.94' y='66.28' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='38.92px' lengthAdjust='spacingAndGlyphs'>level</text>
+<text x='15.94' y='28.48' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='491.09px' lengthAdjust='spacingAndGlyphs'>Years with a 10% higher world fertiliser-to-maize price ratio</text>
+<text x='15.94' y='47.38' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='490.17px' lengthAdjust='spacingAndGlyphs'>have had 1.2% lower maize yields; no clear yield difference</text>
+<text x='15.94' y='66.28' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='183.77px' lengthAdjust='spacingAndGlyphs'>by input-subsidy level</text>
 <text x='15.94' y='303.65' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='457.88px' lengthAdjust='spacingAndGlyphs'>Source: FAOSTAT QCL (2025-12-31) and RFN (2026-07-30); World Bank Pink Sheet; FAO MAFAP public</text>
-<text x='15.94' y='314.23' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='444.73px' lengthAdjust='spacingAndGlyphs'>expenditure (March 2026); NOAA ONI (accessed 2026-11-19). Country fixed effects and trends, ENSO</text>
+<text x='15.94' y='314.23' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='444.73px' lengthAdjust='spacingAndGlyphs'>expenditure (March 2026); NOAA ONI (accessed 2026-11-20). Country fixed effects and trends, ENSO</text>
 <text x='15.94' y='324.82' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='396.55px' lengthAdjust='spacingAndGlyphs'>control, Driscoll-Kraay 90% intervals. Grey bar: range when one country at a time is left out.</text>
-<text x='15.94' y='335.40' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='108.23px' lengthAdjust='spacingAndGlyphs'>Associations, not effects.</text>
+<text x='15.94' y='335.40' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='343.59px' lengthAdjust='spacingAndGlyphs'>Associations, not effects. Nitrogen: national use on all crops per ha of cropland.</text>
 <text x='15.94' y='345.99' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='102.34px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
 </g>
 </g>

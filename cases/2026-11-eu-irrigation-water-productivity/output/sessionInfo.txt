@@ -1,0 +1,35 @@
+Run: 2026-11-20 12:15:04
+R version 4.6.1 (2026-06-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8    LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                           LC_TIME=English_United States.utf8    
+
+time zone: Europe/Berlin
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] Benchmarking_0.33        quadprog_1.5-8           ucminf_1.2.3             lpSolveAPI_5.5.2.0-17.15 tidyr_1.3.2             
+[6] dplyr_1.2.1              acutils_0.1.1           
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.6        xfun_0.61           ggplot2_4.0.4       httr2_1.3.0         remotes_2.5.0       ggrepel_0.9.8      
+ [7] tzdb_0.5.0          vctrs_0.7.3         tools_4.6.1         ISOweek_0.6-2       generics_0.1.4      parallel_4.6.1     
+[13] curl_8.0.0          tibble_3.3.1        proxy_0.4-29        pkgconfig_2.0.3     R.oo_1.27.1         KernSmooth_2.23-26 
+[19] data.table_1.18.6.1 RColorBrewer_1.1-3  S7_1.0.0            readxl_1.6.0        assertthat_0.2.1    lifecycle_1.0.5    
+[25] compiler_4.6.1      farver_2.1.2        stringr_1.6.0       textshaping_1.0.5   class_7.3-23        yaml_2.3.12        
+[31] pillar_1.11.1       crayon_1.5.3        regions_0.1.8       R.utils_2.13.0      classInt_0.4-11     countrycode_1.9.0  
+[37] tidyselect_1.2.1    digest_0.6.39       stringi_1.8.9       purrr_1.2.2         rprojroot_2.1.1     grid_4.6.1         
+[43] here_1.0.2          cli_3.6.6           magrittr_2.0.5      utf8_1.2.6          e1071_1.7-17        withr_3.0.3        
+[49] readr_2.2.0         scales_1.4.0        bit64_4.8.6         lubridate_1.9.5     timechange_0.4.0    bit_4.6.0          
+[55] otel_0.2.0          eurostat_4.1.1      cellranger_1.1.0    R.methodsS3_1.8.2   hms_1.1.4           evaluate_1.0.5     
+[61] knitr_1.52          rlang_1.3.0         Rcpp_1.1.2          glue_1.8.1          xml2_1.6.0          svglite_2.2.2      
+[67] rstudioapi_0.19.0   vroom_1.7.1         jsonlite_2.0.0      R6_2.6.1            systemfonts_1.3.2  

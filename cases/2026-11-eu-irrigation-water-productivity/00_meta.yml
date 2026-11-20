@@ -11,7 +11,7 @@ question: >
   water could each save by matching the best performers with the same cropland, and are the
   largest savings in the most water-stressed countries?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: code                      # plan | code | results | red-teamed | draft | published
+status: results                   # plan | code | results | red-teamed | draft | published
 
 hook:
   debate: >
@@ -47,43 +47,50 @@ sources:
     provider: "Eurostat (OECD/Eurostat Joint Questionnaire on Inland Waters)"
     table: "env_wat_abs; wat_proc ABS_AGR_IR (irrigation), ABS_AGR; wat_src FRW; unit MIO_M3"
     url: "https://ec.europa.eu/eurostat/databrowser/view/env_wat_abs"
-    version: "16.09.2026 (data to 2024; checked locally 2026-11-20)"
-    accessed: null
+    version: "16.09.2026 (data to 2024)"
+    accessed: "2026-11-20"
     licence: "Eurostat reuse policy (CC BY 4.0)"
-  - name: "Eurostat economic accounts for agriculture"
+  - name: "FAOSTAT Value of Agricultural Production (QV), used for crop output"
+    provider: "FAO"
+    table: "QV; item Crops; element Gross Production Value (constant 2014-2016 thousand I$)"
+    url: "https://www.fao.org/faostat/en/#data/QV"
+    version: "2026-05-11 (bulk catalogue DateUpdate), data to 2024"
+    accessed: "2026-11-20"
+    licence: "CC BY 4.0"
+  - name: "Eurostat economic accounts for agriculture (downloaded, not used)"
     provider: "Eurostat"
-    table: "aact_eaa01; itm_newa 10000 (crop output); unit MIO_EUR"
+    table: "aact_eaa01; bulk dimensions am_item, indic_agr (PRD_BP, PRD_PP, SUB, TAX), unit (MIO_EUR, MIO_NAC, MIO_PPS); crop-output code not identified"
     url: "https://ec.europa.eu/eurostat/databrowser/view/aact_eaa01"
     version: "11.11.2026 (data to 2025)"
-    accessed: null
+    accessed: "2026-11-20"
     licence: "Eurostat reuse policy (CC BY 4.0)"
   - name: "Eurostat irrigable and irrigated area"
     provider: "Eurostat (Integrated Farm Statistics)"
     table: "ef_fsi_irri; irr_area UAA_IT; unit PC"
     url: "https://ec.europa.eu/eurostat/databrowser/view/ef_fsi_irri"
     version: "17.06.2026 (survey years to 2023)"
-    accessed: null
+    accessed: "2026-11-20"
     licence: "Eurostat reuse policy (CC BY 4.0)"
   - name: "Eurostat water exploitation index plus (WEI+)"
     provider: "Eurostat / EEA"
     table: "sdg_06_60; statinfo VAL_A; unit PC"
     url: "https://ec.europa.eu/eurostat/databrowser/view/sdg_06_60"
     version: "28.04.2026 (data to 2023)"
-    accessed: null
+    accessed: "2026-11-20"
     licence: "Eurostat reuse policy (CC BY 4.0)"
   - name: "FAOSTAT Land use (RL)"
     provider: "FAO"
     table: "RL; item Cropland; element Area (1000 ha)"
     url: "https://www.fao.org/faostat/en/#data/RL"
     version: "2026-10-02 (bulk catalogue DateUpdate), data to 2024"
-    accessed: null
+    accessed: "2026-11-20"
     licence: "CC BY 4.0"
   - name: "FAO AQUASTAT via World Bank WDI (gap fill)"
     provider: "FAO AQUASTAT / World Bank"
     table: "ER.H2O.FWAG.ZS (agriculture, % of withdrawals); ER.H2O.FWTL.K3 (total, bn m3)"
     url: "https://api.worldbank.org/v2/"
-    version: "data to 2022 (checked locally 2026-11-20)"
-    accessed: null
+    version: "data to 2022"
+    accessed: "2026-11-20"
     licence: "CC BY 4.0"
 
 manual_steps: []
@@ -107,6 +114,17 @@ decisions:                        # fixed in the PLAN stage (P4, 2026-11-20), be
     - "R1: Eurostat-only sample (drop filled countries); Spearman of the saving ranks with the headline run"
     - "R2: leave one frontier country out of the reference set; range of each country's saving share"
   excluded: "labour (few units; farm labour includes livestock)"
+
+first_run:                        # 2026-11-20, JPH local run; headline NOT final
+  crop_output: "aact_eaa01 crop-output code not identified in the bulk table; the pre-specified fallback FAOSTAT QV (constant 2014-2016 int. $) was used"
+  sample: "14 member states (MT, EL, CY, NL, IT, PT, ES, DK, FR, RO, DE, HU, SE, AT); 4 filled from AQUASTAT (IT, PT, FR, AT)"
+  fill_gap: "median Eurostat irrigation abstraction = 56% of AQUASTAT agricultural withdrawal where both exist, so filled countries carry too much water"
+  result: "saving 19% of sample water; 6 of 14 on the frontier (DE, ES, FR, IT, MT, NL); Spearman with WEI+ 0.17 (p 0.55)"
+  problems:
+    - "Frontier set by largely rainfed countries (DE 3% irrigated, NL) and by VRS end points (MT smallest, ES largest output)"
+    - "Leave-one-out moves single shares by up to 86 pp (CY 0-86, EL 0-61): not robust"
+    - "Portugal's 97% mixes the AQUASTAT fill bias with rainfed peers"
+  status: "respecification to be decided at P6 before RED-TEAM; changes after this run are reported as such"
 
 links:
   blog: null

@@ -26,8 +26,9 @@ col_fill <- ac_palette(2)[2]
 src_lab <- c("Eurostat irrigation abstraction", "AQUASTAT agricultural withdrawal (filled)")
 res <- mutate(res, src = factor(if_else(filled, src_lab[2], src_lab[1]), levels = src_lab))
 fmt_m3 <- function(x) formatC(round(x), format = "d", big.mark = ",")
+crop_src <- if (raw$crop$source[1] == "qv") "FAOSTAT QV (constant 2014-2016 int. $)" else "Eurostat aact_eaa01"
 cap <- wrap_cap(source_caption(
-  c("Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60", "FAOSTAT RL",
+  c("Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60", crop_src, "FAOSTAT RL",
     "FAO AQUASTAT via World Bank"),
   accessed = raw$accessed,
   note = paste0("Means 2020-2022. Water-directional DEA, variable returns to scale, inputs ",

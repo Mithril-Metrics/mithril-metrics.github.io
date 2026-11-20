@@ -40,7 +40,12 @@ execute:
 #| include: false
 # Before the analysis has been run there are no results: stop knitting here, so the
 # website build on GitHub does not fail while a case is still in progress.
-if (!file.exists("output/key_numbers.csv")) knitr::knit_exit("*Results pending.*")
+# Results are committed before the text is written (WRITE stage), so also stop while the
+# bottom line in 00_meta.yml is still empty.
+if (!file.exists("output/key_numbers.csv") ||
+    is.null(yaml::read_yaml("00_meta.yml", fileEncoding = "UTF-8")$bottom_line)) {
+  knitr::knit_exit("*Results pending.*")
+}
 ```
 
 ```{r}

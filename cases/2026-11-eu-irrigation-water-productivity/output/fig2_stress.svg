@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='576.00pt' height='360.00pt' viewBox='0 0 576.00 360.00'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FCFCFB;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='360.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
+<rect x='0.00' y='0.00' width='576.00' height='360.00' style='stroke-width: 1.36; stroke: none; fill: #FCFCFB;' />
+</g>
+<defs>
+  <clipPath id='cpNTUuMzd8NTU2LjA3fDgxLjMxfDIwOC4zNw=='>
+    <rect x='55.37' y='81.31' width='500.71' height='127.06' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTUuMzd8NTU2LjA3fDgxLjMxfDIwOC4zNw==)'>
+<polyline points='55.37,202.59 556.07,202.59 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='55.37,173.71 556.07,173.71 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='55.37,144.84 556.07,144.84 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='55.37,115.96 556.07,115.96 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='55.37,87.08 556.07,87.08 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='76.44,208.37 76.44,81.31 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='204.95,208.37 204.95,81.31 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='333.47,208.37 333.47,81.31 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='461.99,208.37 461.99,81.31 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<line x1='114.79' y1='208.37' x2='114.79' y2='81.31' style='stroke-width: 1.36; stroke: #8C8C8C; stroke-dasharray: 7.24,7.24; stroke-linecap: butt;' />
+<line x1='55.37' y1='146.90' x2='556.07' y2='146.90' style='stroke-width: 1.36; stroke: #8C8C8C; stroke-dasharray: 7.24,7.24; stroke-linecap: butt;' />
+<circle cx='89.44' cy='129.33' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #FFFFFF;' />
+<circle cx='533.32' cy='103.05' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='103.21' cy='202.59' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='106.68' cy='120.76' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='155.39' cy='131.90' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='122.89' cy='202.59' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='99.44' cy='202.59' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #FFFFFF;' />
+<circle cx='82.97' cy='126.70' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='157.23' cy='202.59' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #FFFFFF;' />
+<circle cx='298.41' cy='202.59' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='96.29' cy='202.59' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='132.17' cy='90.90' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #FFFFFF;' />
+<circle cx='213.89' cy='100.72' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='78.13' cy='161.90' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<line x1='100.02' y1='130.24' x2='90.50' y2='129.42' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='146.33' y1='179.85' x2='104.15' y2='202.09' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='165.43' y1='132.51' x2='156.45' y2='131.97' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='136.37' y1='198.25' x2='123.91' y2='202.26' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='101.53' y1='179.83' x2='99.54' y2='201.53' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='88.26' y1='198.24' x2='95.35' y2='202.08' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='198.99' y1='103.72' x2='212.84' y2='100.93' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='88.73' y1='160.90' x2='79.19' y2='161.80' style='stroke-width: 1.07; stroke: #333333;' />
+<text x='111.93' y='138.97' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='30.11px' lengthAdjust='spacingAndGlyphs'>Austria</text>
+<text x='534.99' y='96.94' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='30.64px' lengthAdjust='spacingAndGlyphs'>Cyprus</text>
+<text x='147.98' y='178.05' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='39.77px' lengthAdjust='spacingAndGlyphs'>Germany</text>
+<text x='133.54' y='117.40' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='39.23px' lengthAdjust='spacingAndGlyphs'>Denmark</text>
+<text x='178.53' y='141.24' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='31.70px' lengthAdjust='spacingAndGlyphs'>Greece</text>
+<text x='140.46' y='196.45' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='24.73px' lengthAdjust='spacingAndGlyphs'>Spain</text>
+<text x='101.53' y='178.03' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='30.09px' lengthAdjust='spacingAndGlyphs'>France</text>
+<text x='79.40' y='120.55' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='36.55px' lengthAdjust='spacingAndGlyphs'>Hungary</text>
+<text x='173.38' y='201.95' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='17.75px' lengthAdjust='spacingAndGlyphs'>Italy</text>
+<text x='297.78' y='196.45' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='23.66px' lengthAdjust='spacingAndGlyphs'>Malta</text>
+<text x='87.20' y='196.44' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='52.14px' lengthAdjust='spacingAndGlyphs'>Netherlands</text>
+<text x='157.39' y='93.99' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='36.02px' lengthAdjust='spacingAndGlyphs'>Portugal</text>
+<text x='187.31' y='112.45' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='38.70px' lengthAdjust='spacingAndGlyphs'>Romania</text>
+<text x='102.83' y='159.10' text-anchor='middle' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='34.94px' lengthAdjust='spacingAndGlyphs'>Sweden</text>
+</g>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
+<text x='49.09' y='206.60' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='49.09' y='177.72' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='12.44px' lengthAdjust='spacingAndGlyphs'>25</text>
+<text x='49.09' y='148.84' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='12.44px' lengthAdjust='spacingAndGlyphs'>50</text>
+<text x='49.09' y='119.97' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='12.44px' lengthAdjust='spacingAndGlyphs'>75</text>
+<text x='49.09' y='91.09' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='18.66px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='76.44' y='222.66' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='204.95' y='222.66' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='12.44px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='333.47' y='222.66' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='12.44px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text x='461.99' y='222.66' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='12.44px' lengthAdjust='spacingAndGlyphs'>60</text>
+<text x='305.72' y='237.01' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Arial";' textLength='368.47px' lengthAdjust='spacingAndGlyphs'>Water exploitation index plus (WEI+), % of renewable freshwater used</text>
+<text transform='translate(24.45,144.84) rotate(-90)' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Arial";' textLength='134.97px' lengthAdjust='spacingAndGlyphs'>Water-saving potential, %</text>
+<circle cx='70.98' cy='269.07' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #2A78D6;' />
+<circle cx='247.66' cy='269.07' r='3.98' style='stroke-width: 1.13; stroke: #2A78D6; fill: #FFFFFF;' />
+<text x='86.60' y='273.07' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='145.45px' lengthAdjust='spacingAndGlyphs'>Eurostat irrigation abstraction</text>
+<text x='263.28' y='273.07' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='205.73px' lengthAdjust='spacingAndGlyphs'>AQUASTAT agricultural withdrawal (filled)</text>
+<text x='15.94' y='66.56' style='font-size: 13.30px;fill: #4A4A46; font-family: "Arial";' textLength='181.03px' lengthAdjust='spacingAndGlyphs'>Dashed lines: sample medians</text>
+<text x='15.94' y='28.48' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='502.78px' lengthAdjust='spacingAndGlyphs'>Saving potential is not concentrated where water is scarcest</text>
+<text x='15.94' y='47.38' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='295.66px' lengthAdjust='spacingAndGlyphs'>(rank correlation 0.17, 14 countries)</text>
+<text x='15.94' y='303.65' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='499.83px' lengthAdjust='spacingAndGlyphs'>Source: Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; FAO AQUASTAT via World Bank</text>
+<text x='15.94' y='314.23' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='487.09px' lengthAdjust='spacingAndGlyphs'>(accessed 2026-11-20). Means 2020-2022. Water-directional DEA, variable returns to scale, inputs cropland and</text>
+<text x='15.94' y='324.82' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='460.84px' lengthAdjust='spacingAndGlyphs'>irrigation water, output crop output. Countries with irrigated area &gt;= 2% of farmland. Country averages, not</text>
+<text x='15.94' y='335.40' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='27.22px' lengthAdjust='spacingAndGlyphs'>farms.</text>
+<text x='15.94' y='345.99' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='102.34px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
+</g>
+</g>
+</svg>

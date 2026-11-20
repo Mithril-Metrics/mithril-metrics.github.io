@@ -1,0 +1,15 @@
+Country,Water data,Crop output per m3 (I$),"Rank, output per m3 (1 = lowest)",Saving potential (%),"Rank, saving potential (1 = largest)",Leave-one-out range (%)
+Portugal,AQUASTAT agricultural withdrawal (filled),1.26,4,97,1,35-97
+Romania,Eurostat irrigation abstraction,7.05,7,88,2,53-88
+Cyprus,Eurostat irrigation abstraction,0.92,1,86,3,0-86
+Denmark,Eurostat irrigation abstraction,14.05,9,71,4,50-71
+Hungary,Eurostat irrigation abstraction,18.52,11,66,5,37-66
+Austria,AQUASTAT agricultural withdrawal (filled),15.28,10,63,6,0-63
+Greece,Eurostat irrigation abstraction,1.18,2,61,7,0-61
+Sweden,Eurostat irrigation abstraction,25.88,12,35,8,0-35
+Germany,Eurostat irrigation abstraction,63.76,14,0,9,0-0
+Spain,Eurostat irrigation abstraction,1.93,6,0,9,0-0
+France,AQUASTAT agricultural withdrawal (filled),10.55,8,0,9,0-0
+Italy,AQUASTAT agricultural withdrawal (filled),1.46,5,0,9,0-0
+Malta,Eurostat irrigation abstraction,1.25,3,0,9,0-0
+Netherlands,Eurostat irrigation abstraction,29.33,13,0,9,0-0

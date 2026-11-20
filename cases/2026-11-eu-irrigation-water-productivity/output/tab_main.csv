@@ -1,0 +1,15 @@
+Country,Climate,Water per irrigated ha (m3),Crop value per m3 (int. $),WEI+ (%),"Saving, model A (%)","Saving, model B (%)","Model B, leave-one-out (%)"
+Greece,Mediterranean climate,8680,1.18,12.3,77,96,0-96
+Malta,Mediterranean climate,6670,1.25,34.5,0,96,7-96
+Cyprus,Mediterranean climate,6460,0.92,71.1,86,99,97-99
+Spain,Mediterranean climate,6120,1.93,7.2,0,96,58-96
+Italy*,Mediterranean climate,4120,2.6,12.6,0,93,0-93
+Romania,Other,3490,7.05,21.4,88,89,75-89
+Portugal*,Mediterranean climate,3460,2.24,8.7,94,94,17-94
+Hungary,Other,1970,18.52,1,66,71,32-71
+Austria*,Other,1490,27.13,2,35,0,0-0
+Denmark,Other,1370,14.05,4.7,71,78,51-78
+France*,Other,1080,18.73,3.6,0,69,31-69
+Sweden,Other,1030,25.88,0.3,35,59,7-59
+Netherlands,Other,590,29.33,3.1,0,0,0-0
+Germany,Other,580,63.76,4.2,0,0,0-0

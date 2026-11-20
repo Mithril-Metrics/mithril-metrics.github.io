@@ -78,9 +78,11 @@ irr_ha <- raw$irr |>
     values[time == 2016] + (values[time == 2023] - values[time == 2016]) * 5 / 7
   } else {
     values[which.min(abs(time - 2021))]
-  }, .groups = "drop") |>
-  mutate(irrigated = irr_ha / 1000) |>                           # ha -> 1000 ha
-  select(geo, irrigated)
+  }, irr_2016 = values[match(2016, time)], irr_2023 = values[match(2023, time)],
+  .groups = "drop") |>
+  mutate(irrigated = irr_ha / 1000,                              # ha -> 1000 ha
+         irrigated_2016 = irr_2016 / 1000, irrigated_2023 = irr_2023 / 1000) |>
+  select(geo, irrigated, irrigated_2016, irrigated_2023)
 irr_share <- raw$irr |>
   filter(unit == "PC", !is.na(values)) |>
   group_by(geo) |>

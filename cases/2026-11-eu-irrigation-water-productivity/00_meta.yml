@@ -5,11 +5,11 @@ id: "2026-11-eu-irrigation-water-productivity"
 issue: 3
 local_folder: "Issue 3"
 author: "Juan Pablo Henao"
-title: "How much irrigation water could EU countries save by matching the best performers?"
+title: "Can one EU benchmark rank irrigation water efficiency?"
 question: >
-  Which EU countries get the least crop output per cubic metre of irrigation water, how much
-  water could each save by matching the best performers with the same cropland, and are the
-  largest savings in the most water-stressed countries?
+  Does a single EU-wide benchmark of irrigation water efficiency compare like with like, or does
+  it mostly reflect climate? (Reframed 2026-11-20 from "Which EU countries could save the most
+  irrigation water by matching the best performers?" after two frontier runs; see reframe.)
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
 status: results                   # plan | code | results | red-teamed | draft | published
 
@@ -138,7 +138,19 @@ second_run:                       # 2026-11-20, option 1 chosen by JPH after fir
     (median 6,290 vs 1,227). Saving shares track water per hectare (Spearman 0.92) and water per
     hectare tracks WEI+ (0.75): the benchmark measures climate and crop mix (NL greenhouses), not
     irrigation management. Not publishable as an efficiency ranking.
-  status: "decision on reframing pending (P6)"
+  status: "superseded by reframe"
+
+reframe:                          # 2026-11-20, chosen by JPH at P6 after second_run
+  format: "Does the assumption hold?"
+  question: "Can one EU-wide benchmark rank irrigation water efficiency, or does it mostly measure climate?"
+  step1: "Water per irrigated hectare (abstraction / irrigated area interpolated to 2021), Mediterranean-climate member states (CY, EL, ES, IT, MT, PT, fixed a priori) vs the rest"
+  step2: "Both frontier specifications (A = first-run model, VRS cropland + water; B = second-run model, CRS rainfed + irrigated land + water), same scaled water; Spearman of savings with water per hectare; leave-one-out for B"
+  robustness:
+    - "R1: Eurostat-only countries (drop the 4 AQUASTAT fills)"
+    - "R2: irrigated area from the 2016 or the 2023 survey instead of the interpolation"
+  result: "Mediterranean median 6,290 vs 1,227 m3/ha (5.1x; R1 5.5x, R2 3.8x-5.4x); water per ha vs WEI+ Spearman 0.75; frontier savings 23% (A) or 92% (B) of sample water, Spearman A vs B 0.37, B vs water per ha 0.92; leave-one-out moves single B shares by up to 96 pp"
+  not_claimed: "No country is called inefficient; the case does not estimate efficiency net of climate"
+  follow_up: "Q020: climate-adjusted frontier with growing-season water deficit (ERA5) as a non-discretionary input"
 
 links:
   blog: null

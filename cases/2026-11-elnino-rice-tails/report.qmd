@@ -122,7 +122,7 @@ fw_txt <- paste0(
   " Because this effect was picked from ", k("sl_n_margin_tests"), " we looked at, we also compared, ",
   "for each shift, the largest of all ", k("sl_n_margin_tests"), " placebo effects (each scaled by its own ",
   "spread) with the largest real one: ",
-  if (val("sl_p3_fw_n_as_large") == 0) "none was as large" else paste(k("sl_p3_fw_n_as_large"), "were as large"),
+  if (val("sl_p3_fw_n_as_large") == 0) "none was as large" else if (val("sl_p3_fw_n_as_large") == 1) "only one was as large" else paste(k("sl_p3_fw_n_as_large"), "were as large"),
   " (rank p = ", k("sl_p3_fw_p_rank"), "). ",
   if (val("sl_p3_fw_top_is_mar") != 1) "The largest real effect is a different one, so this test does not single out the maritime result."
   else if (fw_clear) "The search across effects does not explain the result."

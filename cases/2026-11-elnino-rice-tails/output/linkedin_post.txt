@@ -1,17 +1,17 @@
-This El Niño is among the strongest on record. In Southeast Asian rice data since 1961, the year El Niño begins shows no detectable national rice losses.
+A strong to very strong El Niño is under way. In Southeast Asian rice data since 1961, the year it begins shows no rise in deep national shortfalls; any signal has come a year later.
 
-FAO and WFP have launched their first joint anticipatory action appeal for this event. So we asked: when do El Niño's rice losses show up, and how deep can they go?
+FAO and WFP have launched a joint anticipatory action appeal for this event. So we asked: when do El Niño's rice losses show up, and how deep can they go?
 
 What we found:
-→ In the year El Niño begins, no detectable rise in shortfalls: 11% of country-years vs 15% in other years
-→ The year after, production in Indonesia, the Philippines and Malaysia runs 4.9% below trend, about 3,830 thousand tonnes (exploratory). No detectable effect on the mainland
-→ Harvests 10% or more below trend have come 1.4 to 8.3 times as often as a bell curve predicts, mostly before 1980
+→ In the year El Niño begins, no detectable rise in deep shortfalls: 11% of country-years vs 15% in other years. Smaller losses cannot be ruled out
+→ The year after, production in Indonesia, the Philippines and Malaysia runs about 4.1% below trend (exploratory). No detectable effect on the mainland
+→ Deep shortfalls of 10% or more have come more often than typical years suggest, but 8 of 11 came before 1980
 
-What it means: for timing imports or reserves, the national data point, tentatively, to the harvests after the El Niño year. Buffers sized on typical years have been too thin for the bad ones in the past.
+What it means: for timing imports or reserves, the national data point, tentatively, to the harvests after the El Niño year in the maritime countries, which is also what the agronomy predicts.
 
 National annual totals hide local losses and arrive late, so early action still needs seasonal, provincial data.
 
-Method: detrended FAOSTAT rice data, 6 countries, 1961-2024; country fixed effects; block-bootstrap intervals
+Method: detrended FAOSTAT rice data, 6 countries, 1961-2024; fixed effects, block bootstrap
 Full analysis and code: link in the first comment
 
 #FoodSecurity #ElNino #AgriculturalEconomics #SoutheastAsia

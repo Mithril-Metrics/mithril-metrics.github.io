@@ -141,6 +141,16 @@ red_team_6:                       # P7, 2026-11-20, on the final re-run (59 plac
     - "Trend caveat: Indonesia's 2018 break estimated over El Niño years, conservative"
   not_changed: "Fig 4 title keeps '4.1 to 4.9%' (needs a re-run); the figure shows the intervals"
 
+publication:                      # 2026-11-20
+  red_team: "done (six P7 rounds; last three PUBLISH WITH CAVEATS from both reviewers)"
+  author_approval: "PS, 2026-11-20"
+  coauthor_review: "pending: JPH (24 h; silence = approval)"
+  external_facts_checked:
+    - "NOAA CPC 12 Nov 2026: strong-to-very strong El Niño likely through Jan-Mar 2027"
+    - "FAO-WFP appeal (18 Jun 2026): 22 priority countries; of our six only the Philippines"
+    - "Statistics Indonesia: rice imports 4.52 Mt in 2024"
+  to_publish: "set draft: false in report.qmd and push"
+
 manual_steps: []
 
 identification: >

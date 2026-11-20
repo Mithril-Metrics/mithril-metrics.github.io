@@ -108,9 +108,11 @@ p3_clear <- val("sl_p3_p_rank") < 0.05
 p3_txt <- paste0(
   "As a placebo test, we shifted the El Niño years against the harvest data by each of the ",
   k("sl_p3_n_shifts"), " offsets of more than two years (shorter shifts would partly re-align the real events); ",
-  if (val("sl_p3_n_as_large") == 0) "none gave" else paste(k("sl_p3_n_as_large"), if (val("sl_p3_n_as_large") == 1) "gave" else "gave"),
-  " a maritime effect as large as the real one (rank p = ", k("sl_p3_p_rank"), ", the smallest attainable being ",
-  k("sl_p3_min_p"), ")."
+  if (val("sl_p3_n_as_large") == 0) "none gave" else paste(k("sl_p3_n_as_large"), "gave"),
+  " a maritime effect as large as the real one (rank p = ", k("sl_p3_p_rank"),
+  if (val("sl_p3_p_rank") <= val("sl_p3_min_p")) paste0(", the smallest possible with ", k("sl_p3_n_shifts"), " shifts")
+  else paste0("; the smallest possible is ", k("sl_p3_min_p")),
+  ")."
 )
 r3_both <- excl0("sl_r3_mar_prod_t1_ns6") && excl0("sl_r3_mar_prod_t1_loess")
 fw_clear <- val("sl_p3_fw_p_rank") < 0.05

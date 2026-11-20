@@ -1,0 +1,114 @@
+# 00_meta.yml — single source of truth for this case's metadata.
+# report.qmd reads this file for the hook, the "Data & code" section and the footer.
+
+id: "2026-11-eu-irrigation-water-productivity"
+issue: 3
+local_folder: "Issue 3"
+author: "Juan Pablo Henao"
+title: "How much irrigation water could EU countries save by matching the best performers?"
+question: >
+  Which EU countries get the least crop output per cubic metre of irrigation water, how much
+  water could each save by matching the best performers with the same cropland, and are the
+  largest savings in the most water-stressed countries?
+bottom_line: null                 # written at the WRITE stage from key_numbers.csv
+status: code                      # plan | code | results | red-teamed | draft | published
+
+hook:
+  debate: >
+    At the AGRIFISH Council of 26-27 October 2026, France and Portugal, backed by Cyprus,
+    Czechia, Hungary and Slovakia, asked for EU action to cut average water use per irrigated
+    hectare and to fund agricultural water infrastructure. On 27 October the Commission proposed
+    a European Climate Resilience Law that makes water security a mandatory part of national
+    climate-risk assessments and plans.
+  date: "2026-10-22"
+  primary_source:
+    title: "Council of the EU (2026), note 14698/26: Taking action at the European level to support the adaptation of agriculture to climate change and to strengthen the water resilience of farms"
+    url: "https://data.consilium.europa.eu/doc/document/ST-14698-2026-INIT/x/pdf"
+  other_sources:
+    - title: "European Commission (27 Oct 2026), Protecting Europe with stronger climate-resilience"
+      url: "https://commission.europa.eu/news-and-media/news/protecting-europe-stronger-climate-resilience-2026-10-27_en"
+
+tags:
+  region: ["EU"]
+  method: ["DEA"]
+  employer_theme: ["OECD", "JRC", "IIASA", "FAO"]
+  skills: ["DEA / network DEA, SFA, optimisation", "Water pricing, cost recovery, economic instruments"]
+
+dates:
+  created: "2026-11-20"
+  published: null
+
+hours:
+  planned: 4
+  actual: null
+
+sources:
+  - name: "Eurostat annual freshwater abstraction by source and sector"
+    provider: "Eurostat (OECD/Eurostat Joint Questionnaire on Inland Waters)"
+    table: "env_wat_abs; wat_proc ABS_AGR_IR (irrigation), ABS_AGR; wat_src FRW; unit MIO_M3"
+    url: "https://ec.europa.eu/eurostat/databrowser/view/env_wat_abs"
+    version: "16.09.2026 (data to 2024; checked locally 2026-11-20)"
+    accessed: null
+    licence: "Eurostat reuse policy (CC BY 4.0)"
+  - name: "Eurostat economic accounts for agriculture"
+    provider: "Eurostat"
+    table: "aact_eaa01; itm_newa 10000 (crop output); unit MIO_EUR"
+    url: "https://ec.europa.eu/eurostat/databrowser/view/aact_eaa01"
+    version: "11.11.2026 (data to 2025)"
+    accessed: null
+    licence: "Eurostat reuse policy (CC BY 4.0)"
+  - name: "Eurostat irrigable and irrigated area"
+    provider: "Eurostat (Integrated Farm Statistics)"
+    table: "ef_fsi_irri; irr_area UAA_IT; unit PC"
+    url: "https://ec.europa.eu/eurostat/databrowser/view/ef_fsi_irri"
+    version: "17.06.2026 (survey years to 2023)"
+    accessed: null
+    licence: "Eurostat reuse policy (CC BY 4.0)"
+  - name: "Eurostat water exploitation index plus (WEI+)"
+    provider: "Eurostat / EEA"
+    table: "sdg_06_60; statinfo VAL_A; unit PC"
+    url: "https://ec.europa.eu/eurostat/databrowser/view/sdg_06_60"
+    version: "28.04.2026 (data to 2023)"
+    accessed: null
+    licence: "Eurostat reuse policy (CC BY 4.0)"
+  - name: "FAOSTAT Land use (RL)"
+    provider: "FAO"
+    table: "RL; item Cropland; element Area (1000 ha)"
+    url: "https://www.fao.org/faostat/en/#data/RL"
+    version: "2026-10-02 (bulk catalogue DateUpdate), data to 2024"
+    accessed: null
+    licence: "CC BY 4.0"
+  - name: "FAO AQUASTAT via World Bank WDI (gap fill)"
+    provider: "FAO AQUASTAT / World Bank"
+    table: "ER.H2O.FWAG.ZS (agriculture, % of withdrawals); ER.H2O.FWTL.K3 (total, bn m3)"
+    url: "https://api.worldbank.org/v2/"
+    version: "data to 2022 (checked locally 2026-11-20)"
+    accessed: null
+    licence: "CC BY 4.0"
+
+manual_steps: []
+
+identification: >
+  Descriptive benchmarking, not causal. The frontier is the best observed combination of
+  cropland, irrigation water and crop output among the countries in the sample, so a gap is
+  distance to best practice under a common-technology assumption. Gaps also reflect climate
+  (evaporative demand), crop mix and the share of rainfed output, not only water management.
+
+decisions:                        # fixed in the PLAN stage (P4, 2026-11-20), before seeing results
+  years: [2020, 2022]             # means of available years; ES and SE report 2020 only
+  units: "member states with irrigated area >= 2% of UAA in 2023 (ef_fsi_irri UAA_IT, PC); 1% if fewer than 10"
+  water: "env_wat_abs ABS_AGR_IR, FRW, MIO_M3; countries without it in 2020-2022 filled with AQUASTAT agricultural withdrawals (WDI share x total), flagged filled = TRUE and kept in the headline"
+  output: "aact_eaa01 itm_newa 10000, EUR million at basic prices; fallback FAOSTAT QV crops gross production value (constant international dollars)"
+  land: "FAOSTAT RL cropland, 1000 ha"
+  model: "water-directional (sub-vector) DEA, Benchmarking::dea.direct, direction (0, water), VRS, input orientation"
+  comparison: "partial productivity: crop output per m3 of irrigation water"
+  second_step: "Spearman rank correlation of the water-saving share with WEI+ (mean 2020-2022)"
+  robustness:
+    - "R1: Eurostat-only sample (drop filled countries); Spearman of the saving ranks with the headline run"
+    - "R2: leave one frontier country out of the reference set; range of each country's saving share"
+  excluded: "labour (few units; farm labour includes livestock)"
+
+links:
+  blog: null
+  linkedin: null
+  code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-eu-irrigation-water-productivity"

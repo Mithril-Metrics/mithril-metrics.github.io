@@ -149,6 +149,7 @@ publication:                      # 2026-11-20
     - "NOAA CPC 12 Nov 2026: strong-to-very strong El Niño likely through Jan-Mar 2027"
     - "FAO-WFP appeal (18 Jun 2026): 22 priority countries; of our six only the Philippines"
     - "Statistics Indonesia: rice imports 4.52 Mt in 2024"
+  style_pass: "2026-11-20: concise, evidence-bound rewrite and bold key sentences (07 templates); no new numbers"
   to_publish: "set draft: false in report.qmd and push"
 
 manual_steps: []

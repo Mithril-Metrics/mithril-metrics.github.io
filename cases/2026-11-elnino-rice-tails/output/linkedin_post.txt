@@ -7,7 +7,7 @@ What we found:
 → The year after, production in Indonesia, the Philippines and Malaysia runs about 4.1% below trend (interval 1.4% to 5.8%; exploratory, mostly Indonesia). Nothing detectable on the mainland
 → Shortfalls of 10% or more are rare (11 of 365, 8 before 1980); whether that exceeds a bell curve depends on how spread is measured
 
-What it means: for timing imports or reserves, the national data point, tentatively, to the harvests after the El Niño year in the maritime countries, as agronomic studies for Indonesia predict. They are not anticipatory action triggers, which need seasonal, provincial data.
+What it means: for timing imports or reserves, the national data point, tentatively, to the harvests after the El Niño year in the maritime countries, consistent with agronomic studies for Indonesia. They are not anticipatory action triggers, which need seasonal, provincial data.
 
 Method: detrended FAOSTAT rice data, 6 countries, 1961-2024; fixed effects, block bootstrap
 Full analysis and code: link in the first comment

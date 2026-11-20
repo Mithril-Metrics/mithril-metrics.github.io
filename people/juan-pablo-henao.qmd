@@ -1,18 +1,18 @@
 ---
 title: "Juan Pablo Henao"
 image: ../images/people/juan-pablo-henao.jpg
-about:
-  template: solana
-  image-shape: round
-  image-width: 14em
-  links:
-    - icon: file-earmark-pdf
-      text: CV (PDF)
-      href: ../files/Henao_JuanPablo_CV.pdf
-    - icon: envelope
-      text: Email
-      href: mailto:juanpabloh27@gmail.com
 ---
+
+::: {.person-aside}
+![](../images/people/juan-pablo-henao.jpg){.person-photo fig-alt="Portrait of Juan Pablo Henao"}
+
+```{=html}
+<div class="person-links">
+<a class="person-link" href="../files/Henao_JuanPablo_CV.pdf"><i class="bi bi-file-earmark-pdf"></i> CV (PDF)</a>
+<a class="person-link" href="mailto:juanpabloh27@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+</div>
+```
+:::
 
 **Juan Pablo Henao** is an applied environmental economist working on water economics and
 water governance. He is a doctoral candidate and research associate at the Chair of Agricultural

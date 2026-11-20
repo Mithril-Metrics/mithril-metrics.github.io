@@ -282,3 +282,41 @@ main.content li,
   text-align: left;
   hyphens: manual;
 }
+
+// ---- Person pages: photo and links floated right, text wraps around ----
+.person-aside {
+  float: right;
+  width: 14em;
+  margin: 0.2rem 0 1rem 1.75rem;
+  text-align: center;
+  .person-photo, img {
+    width: 14em;
+    height: 14em;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0.8rem;
+  }
+  p { margin: 0; }
+  .person-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .person-link {
+    display: block;
+    border: 1px solid $mm-silver;
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.9rem;
+    color: $mm-ink-2;
+    text-decoration: none;
+    text-align: left;
+    &:hover { background: $mm-mist; color: $mm-ink; }
+    .bi { margin-right: 0.35rem; }
+  }
+}
+main.content h2 { clear: none; }
+@media (max-width: 576px) {
+  .person-aside { float: none; width: 100%; margin: 0 0 1rem 0; }
+  .person-aside .person-photo, .person-aside img { width: 10em; height: 10em; }
+}

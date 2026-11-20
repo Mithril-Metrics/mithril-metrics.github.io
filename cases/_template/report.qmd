@@ -55,6 +55,15 @@ kn_file <- "output/key_numbers.csv"
 k <- function(key, ...) acutils::kn(key, file = kn_file, ...)   # formatted key number
 kn_tbl  <- acutils::kn_read(kn_file)
 `%||%` <- function(a, b) if (is.null(a) || identical(a, "")) b else a
+bold_first <- function(x) unname(vapply(x, function(s) {   # PDF: bold the first sentence, or its lead clause if long
+  sent <- sub("^(.+?[.:])( .*|)$", "\\1", s, perl = TRUE)
+  lead <- sent
+  if (length(strsplit(sent, " ")[[1]]) > 16) {
+    cl <- sub("^(.+?[,;])( .*|)$", "\\1", s, perl = TRUE)
+    if (cl != s) lead <- cl
+  }
+  paste0("**", lead, "**", substring(s, nchar(lead) + 1))
+}, ""))
 bullets  <- function(x) cat(paste0("- ", x), sep = "\n")
 site_url <- "https://mithril-metrics.github.io"   # same for both authors
 case_id  <- meta$id %||% basename(getwd())
@@ -68,11 +77,11 @@ code_url <- meta$links$code %||% paste0("https://github.com/Mithril-Metrics/mith
 # ---------------------------------------------------------------------------------
 # WRITE HERE ONCE. These strings feed the blog, the technical note (PDF) and the LinkedIn post.
 # Note-only strings (more detail than the blog): method_detail, robustness, references.
-method_detail <- "PLACEHOLDER: data sources and sample; the estimating equation in words; what identifies the estimate and its main threat; how intervals are computed. One paragraph, 120-200 words."
-robustness <- c("PLACEHOLDER: each planned robustness check with its estimate and interval (from kn()).",
-                "PLACEHOLDER: checks added after the first results, labelled exploratory.")
-references <- "PLACEHOLDER: literature and policy sources cited, author-year with links."
-note_tbl <- data.frame(Estimate = "PLACEHOLDER", Value = "", Interval = "", Type = "planned", check.names = FALSE)
+method_detail <- "PLACEHOLDER: **one bolded sentence on what we compare.** Then *Data.*, *Model.*, *Inference.*, *Identification.* as short italic-labelled parts. 120-200 words."
+results_note <- c("PLACEHOLDER: **bolded key finding.** Then the estimate and its interval from kn(), in one or two short sentences.")
+robustness <- c("PLACEHOLDER: **bolded lead: what the check shows.** Then each check with its estimate and interval from kn().")
+references <- c("PLACEHOLDER: Author, A. (year). Title. *Outlet*. [link text](https://...)",
+                "PLACEHOLDER: one reference per element; each prints on its own line.")
 # Use k("key") for every number (k("key", unit = TRUE) adds the unit, abs = TRUE drops sign).
 # ---------------------------------------------------------------------------------
 question <- meta$question
@@ -218,8 +227,8 @@ cat('<div class="post-footer">',
 ::: {.content-visible when-format="typst"}
 
 <!-- TECHNICAL NOTE (2-3 pages A4, never more). The blog and LinkedIn stay concise; extra
-     detail goes here: specification, identification, inference, the full results and robustness
-     table, exploratory checks labelled as such, references. Same style rules: concise, every
+     detail goes here: specification, identification, inference, results and robustness as short
+     bullets with a bolded lead (no tables), references and data sources one per line. Same style rules: concise, every
      result from kn(), untested mechanisms labelled, one bolded key sentence per section. -->
 
 **Question.** `r question`
@@ -235,14 +244,11 @@ cat('<div class="post-footer">',
 ![](output/fig1_hero.png){width="80%"}
 
 ```{r}
-#| label: note-table
 #| results: asis
-# Main estimates with intervals, built from kn() in the shared-text chunk as `note_tbl`
-# (columns: Estimate, Value, 95% interval or 90% interval, Type = planned / robustness / exploratory).
-if (exists("note_tbl")) print(knitr::kable(note_tbl, format = "pipe", row.names = FALSE))
+bullets(results_note)
 ```
 
-**3. Robustness and exploratory checks**
+**3. Robustness checks**
 
 ```{r}
 #| results: asis
@@ -253,27 +259,37 @@ bullets(robustness)
 
 ```{r}
 #| results: asis
-bullets(implications)
+bullets(bold_first(implications))
 ```
 
 **5. Caveats**
 
 ```{r}
 #| results: asis
-bullets(caveats)
+bullets(bold_first(caveats))
 ```
 
-**References.** `r references`
+**References**
+
+```{r}
+#| results: asis
+bullets(references)
+```
 
 ```{r}
 #| label: brief-sources
 #| include: false
 src_brief <- vapply(Filter(function(s) !is.null(s$name), meta$sources), function(s)
   paste0(s$name, if (!is.null(s$accessed)) paste0(" (accessed ", s$accessed, ")") else ""), "")
-src_brief <- if (length(src_brief)) paste(src_brief, collapse = "; ") else "[fill sources in 00_meta.yml]"
+if (!length(src_brief)) src_brief <- "[fill sources in 00_meta.yml]"
 ```
 
-**Data & code.** `r src_brief`. Code: `r code_url`
+**Data and code**
+
+```{r}
+#| results: asis
+bullets(c(src_brief, paste0("Code: [GitHub, Mithril-Metrics](", code_url, ")")))
+```
 
 ```{=typst}
 #text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are the authors' own. Mithril Metrics · mithril-metrics.github.io]

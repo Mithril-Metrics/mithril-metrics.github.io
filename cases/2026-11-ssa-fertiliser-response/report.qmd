@@ -53,6 +53,15 @@ val <- function(key) kn_tbl$value[kn_tbl$key == key]
 pct10 <- function(b) sprintf("%.1f%%", 100 * (1.1^b - 1))   # % change for a 10% higher ratio
 mt <- function(key) sprintf("%.1f", abs(val(key)) / 1e3)
 `%||%` <- function(a, b) if (is.null(a) || identical(a, "")) b else a
+bold_first <- function(x) unname(vapply(x, function(s) {   # PDF: bold the first sentence, or its lead clause if long
+  sent <- sub("^(.+?[.:])( .*|)$", "\\1", s, perl = TRUE)
+  lead <- sent
+  if (length(strsplit(sent, " ")[[1]]) > 16) {
+    cl <- sub("^(.+?[,;])( .*|)$", "\\1", s, perl = TRUE)
+    if (cl != s) lead <- cl
+  }
+  paste0("**", lead, "**", substring(s, nchar(lead) + 1))
+}, ""))
 bullets  <- function(x) cat(paste0("- ", x), sep = "\n")
 site_url <- "https://mithril-metrics.github.io"   # same for both authors
 case_id  <- meta$id %||% basename(getwd())
@@ -190,8 +199,7 @@ caveats <- c(
          "with similar shares (Ghana and Benin). MAFAP counts only on-budget spending, and its variable-input ",
          "category also covers seed, energy and credit. El Niño is measured in December-February, which fits ",
          "southern Africa's season better than West Africa's. With one world price series and about 20 checks ",
-         "at 90%, results whose intervals barely exclude zero are suggestive; checks added after the first ",
-         "results are labelled as such. The headline estimate is the one we planned.")
+         "at 90%, results whose intervals barely exclude zero are suggestive.")
 )
 
 method_tag <- paste0("Method: country trends and fixed effects, ", k("n_countries"), " countries, ",
@@ -200,18 +208,19 @@ hashtags <- "#FoodSecurity #Fertiliser #AgriculturalEconomics #Africa"
 
 # ---- Technical note (PDF) only: more detail than the blog ----
 rng <- function(lo, hi, ...) paste0(k(lo, ...), " to ", k(hi, ...))
-row10 <- function(key) c(k(paste0(key, "_10pct"), unit = TRUE, sign = TRUE),
-                         rng(paste0(key, "_10pct_lo"), paste0(key, "_10pct_hi"), unit = TRUE, sign = TRUE))
+e10 <- function(key) paste0(k(paste0(key, "_10pct"), unit = TRUE, sign = TRUE), " (",
+                            rng(paste0(key, "_10pct_lo"), paste0(key, "_10pct_hi"), unit = TRUE, sign = TRUE), ")")
 method_detail <- paste0(
-  "*Data.* World Bank Pink Sheet monthly prices of urea (Middle East) and maize (US Gulf), averaged ",
-  "into one ratio per crop year (October to September); FAOSTAT maize yield (QCL) and nitrogen use per ",
-  "hectare of cropland (RFN) for ", k("n_countries"), " Sub-Saharan African countries, ", k("year_start"), "-",
-  k("year_end"), " (", k("n_obs_yield"), " country-years for yield, ", k("n_obs_n"), " for nitrogen); NOAA's ",
-  "December-February ONI; FAO MAFAP public expenditure. *Planned model (A).* Log yield, or log nitrogen ",
-  "use, on the log ratio and the ONI, with country fixed effects and country-specific linear trends; the ",
-  "coefficient is an elasticity, reported as the % change for a 10% higher ratio. *Subsidy comparison (B).* ",
-  "The log ratio interacted with a high-subsidy indicator, with country and year fixed effects, so the ",
-  "difference between groups is identified net of everything common to all countries in a year; groups are a ",
+  "**We relate maize yields and nitrogen use to the world urea-to-maize price ratio, overall and by ",
+  "input-subsidy level.** *Data.* World Bank Pink Sheet monthly prices of urea (Middle East) and maize (US ",
+  "Gulf), averaged into one ratio per crop year (October to September); FAOSTAT maize yield (QCL) and ",
+  "nitrogen use per hectare of cropland (RFN) for ", k("n_countries"), " Sub-Saharan African countries, ",
+  k("year_start"), "-", k("year_end"), " (", k("n_obs_yield"), " country-years for yield, ", k("n_obs_n"),
+  " for nitrogen); NOAA's December-February ONI; FAO MAFAP public expenditure. *Main model.* Log yield, or ",
+  "log nitrogen use, on the log ratio and the ONI, with country fixed effects and country-specific linear ",
+  "trends; the coefficient is an elasticity, reported as the % change for a 10% higher ratio. *Subsidy ",
+  "comparison.* The log ratio interacted with a high-subsidy indicator, with country and year fixed effects, ",
+  "so the difference between groups is net of everything common to all countries in a year; groups are a ",
   "median split of MAFAP variable-input spending as a share of all public support to agriculture. ",
   "*Inference.* Driscoll-Kraay standard errors, robust to correlation across countries within a year and ",
   "over time; 90% intervals. Because the ratio is one world series, the effective sample is ",
@@ -219,60 +228,45 @@ method_detail <- paste0(
   "errors and t critical values checks this. *Identification.* None for a causal effect: high-ratio years ",
   "can differ in other ways, so all estimates are associations."
 )
-note_tbl <- data.frame(
-  Estimate = c("Yield, ratio in the same crop year (headline)",
-               "Yield, ratio in the six months before planting",
-               "Yield, previous crop year's ratio",
-               "Yield, 35 yearly means (Newey-West, t values)",
-               "Nitrogen use per ha, all countries",
-               "Nitrogen use per ha, official figures only",
-               "Yield, high minus low subsidy (B)",
-               "Yield, high minus low, group trends, 2005-2024",
-               "Nitrogen, high minus low subsidy (B)",
-               "Nitrogen, high minus low, group trends, 2005-2024"),
-  rbind(row10("b_yield"), row10("b_yield_plant"), row10("b_yield_lag"), row10("b_yield_ts"),
-        row10("b_n"), row10("b_n_official"), row10("theta_yield"), row10("theta_yield_b2"),
-        row10("theta_n"), row10("theta_n_b2")),
-  Type = c("planned", "added", "planned", "added", "planned", "planned", "planned", "added", "planned", "added"),
-  check.names = FALSE
-)
-names(note_tbl)[2:3] <- c("% for a 10% higher ratio", "90% interval")
-note_caption <- paste0(
-  "**The headline association is the planned same-season estimate; the link weakens once prices after ",
-  "planting are left out, and the subsidy yield comparison changes sign across specifications.** ",
-  "'Added' marks checks run after the first results. The figure shows model A by subsidy group."
+results_note <- c(
+  paste0("**Yields are lower when the ratio is high.** Same crop year: ", e10("b_yield"),
+         " for a 10% higher ratio; on the ", k("n_years_ts"), " yearly averages: ", e10("b_yield_ts"), "."),
+  paste0("**The link weakens once prices after planting are left out.** Ratio in the six months before ",
+         "planting: ", e10("b_yield_plant"), "; previous crop year's ratio: ", e10("b_yield_lag"),
+         clear_lbl("b_yield_lag"), "."),
+  paste0("**Nitrogen use does not fall with the ratio.** All countries: ", e10("b_n"), clear_lbl("b_n"),
+         "; official figures only: ", e10("b_n_official"), "."),
+  paste0("**Subsidy groups: nitrogen held up, harvests show no consistent difference.** Nitrogen, high ",
+         "minus low subsidy: ", e10("theta_n"), "; with each group's own trends, 2005-2024: ", e10("theta_n_b2"),
+         ". Yield, high minus low: ", e10("theta_yield"), "; with group trends: ", e10("theta_yield_b2"), ".")
 )
 robustness <- c(
-  paste0("Headline yield elasticity, planned checks: leaving out one country at a time gives ",
-         pct10(val("loo_yield_min")), " to ", pct10(val("loo_yield_max")), " for a 10% higher ratio. ",
-         "Added: without the 2008-09 crop years ", k("b_yield_no0809_10pct", unit = TRUE), ", without 2021-22 ",
-         k("b_yield_no2122_10pct", unit = TRUE), ", in the ", k("n_obs_offn"), " country-years with official ",
-         "nitrogen figures ", k("b_yield_offn_10pct", unit = TRUE), ", without Zimbabwe 2000-09 ",
-         k("b_yield_nozwe_10pct", unit = TRUE), "."),
-  paste0("Prices entered separately (added diagnostic): ", k("b_urea_yield_10pct", unit = TRUE),
-         " for a 10% higher urea price and ", k("b_maize_yield_10pct", unit = TRUE, sign = TRUE),
-         " for a 10% higher maize price. Equal and opposite effects are what the ratio assumes, so this ",
-         "does not separate a fertiliser channel from market conditions; it uses log average prices and ",
-         "does not decompose the ratio exactly."),
-  paste0("Subsidy yield difference (planned B): ", k("theta_yield_10pct", unit = TRUE, sign = TRUE),
-         ". Leave-one-out, most extreme run, dropping ",
-         if (val("loo_theta_max_is_zwe") == 1) "Zimbabwe entirely" else "one country", ": ",
-         k("loo_theta_max_10pct", unit = TRUE, sign = TRUE), " (",
-         rng("loo_theta_max_10pct_lo", "loo_theta_max_10pct_hi", unit = TRUE, sign = TRUE),
-         "); dropping only Zimbabwe 2000-09 (added): ", k("theta_yield_nozwe_10pct", unit = TRUE, sign = TRUE),
-         " (", rng("theta_yield_nozwe_10pct_lo", "theta_yield_nozwe_10pct_hi", unit = TRUE, sign = TRUE), "). ",
-         "The group-trend model on 2005-2024 has 20 years and Driscoll-Kraay errors; its narrow interval ",
-         "should be read with care."),
-  paste0("Scale check: at the 2026 crop-year ratio (", k("ratio_now"), ", ", k("ratio_now_multiple"),
-         " times the 1990-2019 median), yields ", f1(boe_plant), "% (before-planting estimate) to ",
-         k("boe_yield_pct", abs = TRUE, unit = TRUE), " (same season) below a median year, about ",
-         mt_pct(boe_plant), " to ", mt("boe_kt"), " million t of maize on 2024 output; constant elasticity, ",
-         "coefficient uncertainty only.")
+  paste0("**The headline yield association is stable.** Leaving out one country at a time: ",
+         pct10(val("loo_yield_min")), " to ", pct10(val("loo_yield_max")), "; without the 2008-09 crop years ",
+         k("b_yield_no0809_10pct", unit = TRUE), "; without 2021-22 ", k("b_yield_no2122_10pct", unit = TRUE),
+         "; in the ", k("n_obs_offn"), " country-years with official nitrogen figures ",
+         k("b_yield_offn_10pct", unit = TRUE), "; without Zimbabwe 2000-09 ", k("b_yield_nozwe_10pct", unit = TRUE), "."),
+  paste0("**Entering the two prices separately does not identify the channel.** ",
+         k("b_urea_yield_10pct", unit = TRUE), " for a 10% higher urea price, ",
+         k("b_maize_yield_10pct", unit = TRUE, sign = TRUE), " for a 10% higher maize price. Equal and opposite ",
+         "effects are what the ratio assumes, and the split uses log average prices, so it does not decompose ",
+         "the ratio exactly."),
+  paste0("**The subsidy yield difference changes sign across specifications.** Dropping ",
+         if (val("loo_theta_max_is_zwe") == 1) "Zimbabwe entirely" else "the most influential country", ": ",
+         e10("loo_theta_max"), "; dropping only Zimbabwe 2000-09: ", e10("theta_yield_nozwe"),
+         ". The group-trend model rests on 20 years; its narrow interval should be read with care."),
+  paste0("**Scale check, not a forecast.** At the 2026 crop-year ratio (", k("ratio_now"), ", ",
+         k("ratio_now_multiple"), " times the 1990-2019 median), yields ", f1(boe_plant),
+         "% (before-planting estimate) to ", k("boe_yield_pct", abs = TRUE, unit = TRUE),
+         " (same season) below a median year: about ", mt_pct(boe_plant), " to ", mt("boe_kt"),
+         " million t of maize on 2024 output, assuming a constant elasticity.")
 )
-references <- paste0(
-  "OECD (2026), fertiliser market disruptions and food security policy brief; OECD (2026), Agricultural ",
-  "Policy Monitoring and Evaluation 2026; ICC (2026) on the Strait of Hormuz closure; World Bank ",
-  "Commodity Price Data (Pink Sheet); FAOSTAT QCL and RFN; FAO MAFAP public expenditure database."
+references <- c(
+  paste0("OECD (2026). Policy brief on fertiliser market disruptions and food security, October 2026. [oecd.org](", oecd_brief_url, ")"),
+  paste0("OECD (2026). Agricultural Policy Monitoring and Evaluation 2026, 2 November 2026. [oecd.org](", oecd_apme_url, ")"),
+  paste0("International Chamber of Commerce (2026). On the closure of the Strait of Hormuz. [iccwbo.org](", icc_url, ")"),
+  "World Bank (2026). Commodity Price Data (Pink Sheet), updated 3 November 2026.",
+  "FAO (2026). FAOSTAT Production (QCL) and Fertilizers by Nutrient (RFN); MAFAP public expenditure database."
 )
 
 author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
@@ -456,14 +450,11 @@ cat('<div class="post-footer">',
 ![](output/fig2_response.png){width="70%"}
 
 ```{r}
-#| label: note-table
 #| results: asis
-if (exists("note_tbl")) print(knitr::kable(note_tbl, format = "pipe", row.names = FALSE))
+bullets(results_note)
 ```
 
-`r note_caption`
-
-**3. Robustness and exploratory checks**
+**3. Robustness checks**
 
 ```{r}
 #| results: asis
@@ -474,27 +465,36 @@ bullets(robustness)
 
 ```{r}
 #| results: asis
-bullets(implications)
+bullets(bold_first(implications))
 ```
 
 **5. Caveats**
 
 ```{r}
 #| results: asis
-bullets(caveats)
+bullets(bold_first(caveats))
 ```
 
-**References.** `r references`
+**References**
+
+```{r}
+#| results: asis
+bullets(references)
+```
 
 ```{r}
 #| label: brief-sources
 #| include: false
 src_brief <- vapply(Filter(function(s) !is.null(s$name), meta$sources), function(s)
   paste0(s$name, if (!is.null(s$accessed)) paste0(" (accessed ", s$accessed, ")") else ""), "")
-src_brief <- paste(src_brief, collapse = "; ")
 ```
 
-**Data & code.** `r src_brief`. Code: [GitHub, Mithril-Metrics](`r code_url`).
+**Data and code**
+
+```{r}
+#| results: asis
+bullets(c(src_brief, paste0("Code: [GitHub, Mithril-Metrics](", code_url, ")")))
+```
 
 ```{=typst}
 #text(size: 9pt, fill: rgb("#5b6876"))[`r rmarkdown::metadata$author` · Views are the authors' own. Mithril Metrics · mithril-metrics.github.io]

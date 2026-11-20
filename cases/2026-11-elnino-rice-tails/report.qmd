@@ -123,7 +123,8 @@ fw_txt <- paste0(
   if (val("sl_p3_fw_n_as_large") == 0) "none was as large" else if (val("sl_p3_fw_n_as_large") == 1) "only one was as large" else paste(k("sl_p3_fw_n_as_large"), "were as large"),
   " (rank p = ", k("sl_p3_fw_p_rank"), "). ",
   if (val("sl_p3_fw_top_is_mar") != 1) "The largest real effect is a different one, so this test does not single out the maritime result."
-  else if (fw_clear) "The search across effects does not explain the result."
+  else if (fw_clear) paste0("This accounts for the search across the ", k("sl_n_margin_tests"),
+                            " effects within the maritime/mainland split, but not for the choice of that split, which was made after the main result.")
   else "The search across effects may explain it."
 )
 strong_clear <- excl0("sl_x3_mar_prod_t1_strong_extra")
@@ -165,15 +166,16 @@ bottom_line <- paste0(
   "Not in the year it begins, as far as shortfalls of 5% or more go. Across six Southeast Asian countries since ",
   k("year_start"), ", El Niño onset years show no detectable rise in national rice shortfalls of 5% or more (",
   k("p5_elnino_pct", unit = TRUE), " of country-years, against ", k("p5_other_pct", unit = TRUE),
-  " in other years), though smaller losses cannot be ruled out. ", mar_sentence, " ", tail_txt, "."
+  " in other years; the lower share is within chance, not a sign that El Niño helps), though smaller losses cannot be ruled out. ", mar_sentence, " ", tail_txt, "."
 )
 
 key_figures <- list(
   c(value = paste0(k("p5_elnino_pct", unit = TRUE), " vs ", k("p5_other_pct", unit = TRUE)),
-    label = "Country-years at least 5% below trend: El Niño onset years vs other years"),
+    label = "Country-years at least 5% below trend: El Niño onset years vs other years (difference within chance)"),
   if (mar_sig && mar_down) {
     c(value = k("sl_w3_mar_prod_t1", unit = TRUE),
-      label = "Rice production in Indonesia, the Philippines and Malaysia the year after an onset, vs long-run trend, not a fall from the previous year (weighted, exploratory)")
+      label = paste0("Rice production in Indonesia, the Philippines and Malaysia the year after an onset, vs long-run trend, not a fall from the previous year (weighted, exploratory; 95% interval ",
+                     k("sl_w3_mar_prod_t1_lo", unit = TRUE), " to ", k("sl_w3_mar_prod_t1_hi", unit = TRUE), "; mostly Indonesia)"))
   } else {
     c(value = k("sl_s3_mar_prod_t1", unit = TRUE, sign = TRUE),
       label = "Maritime rice production vs trend the year after an onset; interval includes zero (exploratory)")
@@ -207,16 +209,18 @@ method_plain <- paste0(
 findings <- c(
   paste0("In the year El Niño begins, no detectable rise in shortfalls of 5% or more: ",
          k("p5_elnino_pct", unit = TRUE), " of country-years vs ", k("p5_other_pct", unit = TRUE),
-         " in other years. Smaller losses cannot be ruled out"),
+         " otherwise. Smaller losses cannot be ruled out"),
   if (mar_sig && mar_down) {
     paste0("The year after, production in Indonesia, the Philippines and Malaysia runs about ",
-           k("sl_w3_mar_prod_t1", unit = TRUE, abs = TRUE), " below trend (exploratory). No detectable effect on the mainland")
+           k("sl_w3_mar_prod_t1", unit = TRUE, abs = TRUE), " below trend (interval ",
+           k("sl_w3_mar_prod_t1_hi", unit = TRUE, abs = TRUE), " to ", k("sl_w3_mar_prod_t1_lo", unit = TRUE, abs = TRUE),
+           "; exploratory, mostly Indonesia). Nothing detectable on the mainland")
   } else {
     paste0("The year after, maritime production is ", k("sl_s3_mar_prod_t1", unit = TRUE, sign = TRUE),
            " vs trend, but the interval includes zero (exploratory)")
   },
-  paste0("Deep shortfalls of 10% or more have come more often than typical years suggest, but ",
-         k("n_loss10_pre1980"), " of ", k("n_loss10"), " came before 1980")
+  paste0("Shortfalls of 10% or more are rare (", k("n_loss10"), " of ", k("n_obs"), ", ",
+         k("n_loss10_pre1980"), " before 1980); whether that exceeds a bell curve depends on how spread is measured")
 )
 
 implications <- c(
@@ -242,13 +246,14 @@ caveats <- c(
          "where food insecurity concentrates. Prices and trade are outside our scope: in 2023, for example, ",
          "India's ban on non-basmati white rice exports in July pushed world rice prices to a 15-year high ",
          "([CGIAR](https://www.cgiar.org/news-events/news/indias-export-restrictions-on-rice-continue-to-disrupt-global-markets-supplies-and-prices)). ",
-         "We have not compared the production gaps with national import or reserve volumes. The six countries ",
+         "Beyond the Indonesian scale check above, we have not compared the production gaps with import or reserve volumes. The six countries ",
          "are the region's main producers, not necessarily those in the FAO-WFP appeal; Myanmar, Lao PDR and ",
          "Timor-Leste are not covered. The results speak to national import and reserve timing, not to ",
          "anticipatory action triggers, which rest on seasonal, subnational forecasts."),
   paste0("Timing is approximate. FAO records harvests by calendar year while cropping seasons ",
          "straddle years, so part of the year-after gap may be harvest moved between calendar years ",
-         "rather than lost; the data cannot separate the two. Our pre-specified test looked at the ",
+         "rather than lost. We have not checked whether the year after that rebounds above trend, which ",
+         "would point to delay rather than loss. Our pre-specified test looked at the ",
          "onset year, although the agronomic literature points to the following harvest, and the ",
          "comparison group includes the years after each onset, which pulls that test toward zero."),
   paste0("The maritime result comes from checks added after the pre-specified test came back null. ",
@@ -260,7 +265,9 @@ caveats <- c(
          "Tonnes ",
          "are paddy (unmilled) rice, roughly 1.5 to 1.7 times the milled weight."),
   paste0("The intervals re-estimate each country's typical variation in every draw but treat its ",
-         "long-run trend as known, so they are somewhat too narrow. The tonnes scale an average past ",
+         "long-run trend as known, so they are somewhat too narrow. The 2018 break in Indonesia's series ",
+         "is estimated over years that include two El Niño episodes, which if anything understates the ",
+         "Indonesian effect. The tonnes scale an average past ",
          "event to an end-of-sample trend that is itself uncertain; they indicate magnitude, not a forecast for 2027.")
 )
 
@@ -364,7 +371,14 @@ their output, so that Indonesia counts most, gives `r k("sl_w3_mar_prod_t1", uni
 At `r k("sl_t3_year")` trend output, the weighted estimate corresponds to roughly
 `r mt_paddy("sl_t3_mar_hi_kt")` to `r mt_paddy("sl_t3_mar_lo_kt")` million tonnes of paddy (unmilled rice; central
 estimate `r mt_paddy("sl_t3_mar_kt")`, of which Indonesia `r mt_paddy("sl_t3_idn_kt")`). Milled rice, the unit
-of trade and reserves, weighs roughly a third to two-fifths less. The country split is in
+of trade and reserves, weighs roughly a third to two-fifths less, so Indonesia's share is about
+`r sprintf("%.1f to %.1f", abs(val("sl_t3_idn_kt")) * 0.6 / 1e3, abs(val("sl_t3_idn_kt")) * 2 / 3 / 1e3)` million
+tonnes of milled rice. For scale, Indonesia imported 4.52 million tonnes of rice in 2024, the harvest
+year after the 2023 onset, according to Statistics Indonesia
+([CNBC Indonesia](https://www.cnbcindonesia.com/news/20250116085359-4-603570/impor-beras-ri-sepanjang-2024-tembus-452-juta-ton-ini-pemasoknya)).
+Imports respond to more than the harvest gap (reserve targets, prices, food aid), so this is a check
+of scale, not a test: in 2024 the import response was already well above the average gap
+estimated here. The country split is in
 proportion to trend output, not estimated country by country, and the 2024 trend sits at the end of
 the sample, where it is least certain and partly reflects 2024 itself. These are gaps against each country's long-run
 trend, not falls from the previous year, so they are not comparable with the year-on-year changes
@@ -474,15 +488,14 @@ src_brief <- paste(src_brief, collapse = "; ")
 hook <- paste0("A strong to very strong El Niño is under way. In Southeast Asian rice data since ",
                k("year_start"), ", onset years show no rise in national shortfalls of 5% or more; any signal came a year later.")
 li_why <- paste0("FAO and WFP have launched a joint anticipatory action appeal for this ",
-                 "event. So we asked: when do El Niño's rice losses show up, and how deep can they go?")
+                 "event. So we asked: when do the rice losses show up, and how deep?")
 li <- paste0(
   hook, "\n\n",
   li_why, "\n\n",
   "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
   "What it means: for timing imports or reserves, the national data point, tentatively, to the ",
-  "harvests after the El Niño year in the maritime countries, as agronomic studies for Indonesia predict.\n\n",
-  "National annual totals hide local losses and arrive late, so early action still needs seasonal, ",
-  "provincial data.\n\n",
+  "harvests after the El Niño year in the maritime countries, as agronomic studies for Indonesia predict. ",
+  "They are not anticipatory action triggers, which need seasonal, provincial data.\n\n",
   method_tag, "\n",
   "Full analysis and code: link in the first comment\n\n",
   hashtags

@@ -127,6 +127,20 @@ red_team_5:                       # P7, 2026-11-20: fresh WFP policy and econome
     - "LinkedIn: agronomy claim limited to Indonesia"
   stop_rule: "Two consecutive P7 rounds without analytical objections; hand to co-author review"
 
+red_team_6:                       # P7, 2026-11-20, on the final re-run (59 placebo shifts: 0 as large, p = 0.017)
+  verdicts: {policy: "PUBLISH WITH CAVEATS", econometrics: "PUBLISH WITH CAVEATS"}
+  decision: "Text only (author's choice); no code changes, no re-run. P7 stopped; handed to co-author review"
+  caveats_instead_of_checks:
+    - "Family-wise placebo covers the 14 effects within the maritime/mainland split, not the choice of split (check over all 10 three-vs-three splits not run)"
+    - "No test of a rebound above trend two years after onset (delay vs loss not separated)"
+  text_fixes:
+    - "Onset-year 11% vs 15%: 'within chance, not a sign that El Niño helps'"
+    - "Weighted maritime estimate shown with its 95% interval and 'mostly Indonesia'"
+    - "Scale check: Indonesia's share in milled rice vs the 4.52 Mt it imported in 2024 (BPS, via CNBC Indonesia)"
+    - "LinkedIn: deep-shortfall line depends on the benchmark; results are not anticipatory action triggers"
+    - "Trend caveat: Indonesia's 2018 break estimated over El Niño years, conservative"
+  not_changed: "Fig 4 title keeps '4.1 to 4.9%' (needs a re-run); the figure shows the intervals"
+
 manual_steps: []
 
 identification: >

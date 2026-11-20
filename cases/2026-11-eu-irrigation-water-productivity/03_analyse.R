@@ -196,6 +196,11 @@ kn_add("rho_b_ppm", rho_b_ppm, "", 3, "Spearman, B saving share vs crop value pe
 kn_add("loo_shift_a", shift("A"), "pp", 0, "Model A: largest change in a saving share, leave-one-out", src)
 kn_add("loo_shift_b", shift("B"), "pp", 0, "Model B: largest change in a saving share, leave-one-out", src)
 kn_add("loo_infeasible", sum(loo$infeasible), "runs", 0, "Leave-one-out runs with no feasible peer", src)
+# Reference values quoted in the post (not computed here).
+kn_add("ref_wrs_target", 10, "%", 0, "EU Water Resilience Strategy: water-efficiency improvement target by 2030",
+       "European Commission (2025), European Water Resilience Strategy")
+kn_add("ref_fr_m3ha", 1902, "m3/ha", 0, "France, irrigation abstraction per irrigated ha, 2020",
+       "INSEE (2024), https://www.insee.fr/fr/statistiques/7728881")
 
 readr::write_csv(out, "output/tab_results.csv")
 readr::write_csv(tab_specs, "output/tab_specs.csv")

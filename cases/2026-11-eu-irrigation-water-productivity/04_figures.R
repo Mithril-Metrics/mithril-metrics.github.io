@@ -28,7 +28,7 @@ cap_base <- c("Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60", crop_src, "FAOSTAT
               "FAO AQUASTAT via World Bank")
 fill_note <- paste0("* No Eurostat irrigation data: AQUASTAT agricultural withdrawal scaled by ",
                     k("fill_ratio", unit = TRUE), " (hollow bars; not in the headline medians or ",
-                    "models; France's national statistics give about 1,900 m3/ha for 2020).")
+                    "models; France's national statistics give ", k("ref_fr_m3ha"), " m3/ha for 2020).")
 
 # ---- Figure 1 (hero): abstraction per irrigated hectare ----
 cap1 <- wrap_cap(source_caption(cap_base, accessed = raw$accessed, note = paste0(

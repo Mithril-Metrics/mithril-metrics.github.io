@@ -1,14 +1,11 @@
 ---
-# ONE source file -> three outputs (07_report_and_post_templates.md):
-#   (1) blog post            report.html   (format: html, sections A1-A8)
-#   (2) LinkedIn post        output/linkedin_post.txt + output/linkedin_check.txt (section B)
-#   (3) one-page A4 brief    report.pdf    (format: typst, section C)
-# Every number comes from output/key_numbers.csv through kn(); an unknown key stops the render.
-title: "How much irrigation water could EU countries save by matching the best performers?"
-description: "One-sentence teaser shown in the listing and in LinkedIn link previews."
+# One source file, three outputs: blog post (html), LinkedIn text (output/linkedin_post.txt)
+# and a one-page brief (brief.pdf). Every number comes from output/key_numbers.csv via kn().
+title: "Can one EU benchmark rank irrigation water efficiency?"
+description: "Mediterranean member states abstract four to six times more irrigation water per irrigated hectare than the rest. Compared across countries, a per-hectare benchmark mostly shows where a country is, not how well it irrigates."
 author: "Juan Pablo Henao"
 date: "2026-11-20"
-categories: ["Region: EU", "Method: DEA", "Theme: OECD"]
+categories: ["Region: EU", "Method: DEA", "Theme: Water"]
 image: output/fig1_hero.png           # listing thumbnail + open-graph image
 draft: true                           # set to false to publish
 title-block-banner: true
@@ -40,12 +37,7 @@ execute:
 #| include: false
 # Before the analysis has been run there are no results: stop knitting here, so the
 # website build on GitHub does not fail while a case is still in progress.
-# Results are committed before the text is written (WRITE stage), so also stop while the
-# bottom line in 00_meta.yml is still empty.
-if (!file.exists("output/key_numbers.csv") ||
-    is.null(yaml::read_yaml("00_meta.yml", fileEncoding = "UTF-8")$bottom_line)) {
-  knitr::knit_exit("*Results pending.*")
-}
+if (!file.exists("output/key_numbers.csv")) knitr::knit_exit("*Results pending.*")
 ```
 
 ```{r}
@@ -68,55 +60,97 @@ code_url <- meta$links$code %||% "[GitHub link]"
 ```{r}
 #| label: shared-text
 #| include: false
-# ---------------------------------------------------------------------------------
-# WRITE HERE ONCE. These strings feed the blog, the brief and the LinkedIn post.
-# Use k("key") for every number (k("key", unit = TRUE) adds the unit, abs = TRUE drops sign).
-# ---------------------------------------------------------------------------------
-question <- meta$question
+# Written once; feeds the blog, the brief and the LinkedIn post.
+question <- "Can one EU-wide benchmark rank irrigation water efficiency across member states?"
+
+ratio_rng <- paste0(k("ratio_min"), " to ", k("ratio_max"))
 
 bottom_line <- paste0(
-  "Placeholder answer: X changed by ", k("example_change_pct", unit = TRUE),
-  " between ", k("example_period_start"), " and ", k("example_period_end"),
-  " across ", k("example_n_units", unit = TRUE), ". ",
-  "Second sentence: who is most affected, or how large this is in interpretable units."
+  "Not on its own. In the ", k("n_main"), " member states with Eurostat irrigation data, ",
+  "Mediterranean countries abstract ", ratio_rng, " times more irrigation water per irrigated ",
+  "hectare than the rest (median ", k("m3ha_med"), " against ", k("m3ha_other"), " m³/ha, ",
+  k("year_start"), "–", k("year_end"), "), a gap that mixes climate, crop mix and ",
+  "infrastructure. Two common frontier models put the 'saving potential' at ", k("share_a"),
+  "% or ", k("share_b"), "% of irrigation water, so a ranking across countries would mostly ",
+  "show where a country is, not how well it irrigates."
 )
 
 why_now <- paste0(
-  "Placeholder: the debate in one paragraph, with the date and the primary source ",
-  "(", meta$hook$primary_source$title %||% "primary source", ")."
+  "On 22 October 2026, France and Portugal, backed by Cyprus, Czechia, Hungary and Slovakia, ",
+  "asked EU agriculture ministers for action to reduce average water use per irrigated hectare ",
+  "and to ease EU funding of farm water infrastructure. Ministers discussed the note at the ",
+  "AGRIFISH Council on 26–27 October, and on 27 October the Commission proposed a European Climate ",
+  "Resilience Law that makes water security a mandatory part of national climate-risk plans. ",
+  "Both build on the 2025 Water Resilience Strategy and its target of ", k("ref_wrs_target"),
+  "% better water efficiency by 2030. Water per irrigated hectare is the obvious indicator for ",
+  "tracking this. We asked whether it can also be compared across countries."
 )
 
 method_plain <- paste0(
-  "Placeholder: we estimate a production frontier, which measures how far each country is ",
-  "from the best practice of comparable countries, using ... data for ... ."
+  "We divided Eurostat's irrigation abstraction (mean ", k("year_start"), "–",
+  k("year_end"), ") by the irrigated area from the 2016 and 2023 farm surveys, for the ",
+  k("n_all"), " member states where at least ", k("irr_threshold"), "% of farmland is irrigated, ",
+  "and compared countries with a Mediterranean climate with the rest. We then ran a frontier ",
+  "analysis (data envelopment analysis), which asks how much water each country could save if it ",
+  "matched the best performers while keeping its land and crop value fixed, under four common ",
+  "specifications. This second step is a stress test: if a cross-country benchmark is meaningful, ",
+  "reasonable modelling choices should not change its answer much. We set out to rank countries ",
+  "by irrigation efficiency; our first two model runs convinced us that a ranking would mostly ",
+  "reflect climate and crop mix, so we changed the question and chose the climate grouping at ",
+  "that point."
 )
 
-findings <- c(                                   # 3 short findings, each with a number
-  paste0("Finding 1 with a number: ", k("example_change_pct", unit = TRUE)),
-  "Finding 2 with a number",
-  "Finding 3: heterogeneity (who/where)"
+findings <- c(
+  paste0("Mediterranean member states abstract ", ratio_rng, " times more irrigation water per ",
+         "irrigated hectare (median ", k("m3ha_med"), " vs ", k("m3ha_other"), " m³/ha)"),
+  paste0("Two common frontier models put the 'saving potential' at ", k("share_a"), "% or ",
+         k("share_b"), "% of irrigation water"),
+  paste0("Almost all of that gap comes from one technical choice, returns to scale (",
+         k("d_rts"), " points)")
 )
 
-implications <- c(                               # conditional, neutral: if aim X, then Y; trade-off Z
-  "If the aim is X, then Y; the trade-off is Z.",
-  "If the aim is A, then B; the trade-off is C."
+implications <- c(
+  paste0("If the aim is to track progress towards the ", k("ref_wrs_target"), "% efficiency ",
+         "target, then measuring each country against its own baseline, as current EU texts do, ",
+         "sidesteps the climate gap. The trade-off is that it says nothing about where the room ",
+         "for improvement is largest."),
+  paste0("If a per-hectare indicator were used to compare countries, set eligibility or ",
+         "allocate EU funds, then it would need to account for crop water requirements, crop mix ",
+         "and infrastructure, for example through climate-adjusted or river-basin benchmarks. ",
+         "The trade-off is more data and less simplicity."),
+  paste0("If a common per-hectare threshold were applied, most of the adjustment would fall on ",
+         "Mediterranean irrigators. Whether that is justified depends on basin-level and seasonal ",
+         "scarcity, which national annual averages do not show.")
 )
 
-caveats <- c(                                    # 3 honest, specific caveats
-  "Caveat 1 (identification).",
-  "Caveat 2 (measurement or aggregation).",
-  "Caveat 3 (external validity or data vintage)."
+caveats <- c(
+  paste0("We do not separate climate from crop mix, irrigation infrastructure and national ",
+         "reporting practice. The Mediterranean grouping and this framing were chosen after our ",
+         "first two model runs."),
+  paste0("The data measure water abstracted, not water applied at the field, as national annual ",
+         "averages that hide basin and seasonal stress. Italy, Portugal, France and Austria have no ",
+         "Eurostat irrigation figures; their scaled AQUASTAT estimates are shown but not used (France's ",
+         "national statistics give ", k("ref_fr_m3ha"), " m³/ha for 2020, well above our estimate)."),
+  paste0(k("n_main"), " countries are few for a frontier analysis: dropping one frontier country moves a single ",
+         "country's 'saving potential' by up to ", k("loo_shift_b"), " points, and model B mostly ",
+         "compares crop value per m³ with largely rainfed peers.")
 )
 
-key_figures <- list(                             # 2-4 headline numbers shown as tiles under the bottom line
-  c(value = k("example_change_pct", unit = TRUE), label = "Placeholder: what this number measures"),
-  c(value = k("example_n_units"), label = "Placeholder: units covered")
+key_figures <- list(
+  c(value = paste0(ratio_rng, "×"),
+    label = "Irrigation water per irrigated hectare, Mediterranean vs other member states"),
+  c(value = paste0(k("m3ha_med"), " vs ", k("m3ha_other")),
+    label = "Median m³ per irrigated hectare, 2020–2022"),
+  c(value = paste0(k("share_a"), "% or ", k("share_b"), "%"),
+    label = "Frontier 'saving potential' under two common models")
 )
 
 author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
 
-method_tag <- "Method: [e.g. stochastic frontier on a FAOSTAT country panel, 1995-2023]"
-hashtags   <- "#AgriculturalEconomics #FoodPolicy #[Topic] #[Region]"
+method_tag <- paste0("Method: water per irrigated hectare and water-directional DEA (2 × 2 ",
+                     "specifications), ", k("n_all"), " EU member states, ", k("year_start"), "–",
+                     k("year_end"), ".")
+hashtags   <- "#AgriculturalEconomics #WaterPolicy #CAP #EU"
 ```
 
 ::: {.content-visible when-format="html"}
@@ -148,14 +182,41 @@ cat('</div>\n')
 
 ## What the data show
 
-### Section 1: finding-style subheading
+### Where Eurostat has the data, every Mediterranean country abstracts more per hectare than every other
 
-![](output/fig1_hero.png){fig-alt="ALT TEXT: describe what the hero chart shows and its main number, for screen readers." width="100%"}
+![](output/fig1_hero.png){fig-alt="Horizontal bar chart of irrigation water abstracted per irrigated hectare in EU member states, 2020 to 2022. Greece, Malta, Cyprus and Spain are highest; Germany and the Netherlands are lowest. Italy, Portugal, Austria and France are shown as hollow bars because their figures are estimates." width="100%"}
 
-Two or three sentences interpreting the figure. Separate **what the data show** from
-**what we infer** and **what remains uncertain**.
+The split is clean. Greece abstracts the most, `r k("m3ha_max")` m³ per irrigated hectare, and
+Germany the least, `r k("m3ha_min")`. Among the `r k("n_main")` countries with Eurostat irrigation
+data, the `r k("n_main_med")` Mediterranean ones sit above all `r k("n_main_other")` others, which is
+as clear as an exact rank-sum test with groups this small can show (p = `r k("p_ranksum")`). The
+ratio of the medians ranges from `r ratio_rng` depending on which survey year we use for the
+irrigated area and on whether the `r k("n_filled")` estimated countries are included.
 
-<!-- ### Section 2 ... (max 3 figures in total) -->
+What the data show is a large, stable gap in water abstracted per hectare. What we infer is that a
+cross-country comparison on this indicator would mainly sort countries by where they are. What
+remains uncertain is how much of the gap is climate itself and how much is crop mix (vegetables,
+orchards and rice in the south), conveyance losses in collective schemes and differences in how
+countries report abstraction.
+
+### Two common frontier models disagree, and neither estimates saveable water
+
+![](output/fig2_two_models.png){fig-alt="Dot chart comparing two frontier models for the EU member states with Eurostat irrigation data. Model A, with variable returns to scale, puts Greece, Malta, Spain, Germany and the Netherlands at zero saving potential. Model B, with constant returns to scale, puts most countries far higher, with only Germany and the Netherlands at zero." width="100%"}
+
+A frontier model asks how much water each country could save if it matched the best combination
+of land, water and crop value observed in the sample. Model A puts the saving potential at
+`r k("share_a")`% of irrigation water; model B at `r k("share_b")`%. The country rankings
+barely agree (rank correlation `r k("rho_ab")`, where 1 means the same order and 0 no relation).
+
+Running all four combinations shows where the difference comes from. Allowing for differences in
+scale (variable returns) puts the largest and smallest countries, Spain and Malta, on the frontier
+by construction; assuming constant returns leaves only Germany and the Netherlands there. That one
+choice moves the saving potential by `r k("d_rts")` points on average, while splitting land into
+rainfed and irrigated hectares moves it by `r k("d_land")`. Under constant returns, a country's
+"saving" is almost exactly its crop value per m³ compared with Germany's or the Netherlands'
+(rank correlation `r k("rho_b_ppm")`), and most crop output there is rainfed. Dropping a single
+frontier country moves a country's result by up to `r k("loo_shift_b")` points. None of these
+numbers is an estimate of water that farms could save.
 
 ## What this means for policy
 
@@ -163,6 +224,11 @@ Two or three sentences interpreting the figure. Separate **what the data show** 
 #| results: asis
 bullets(implications)
 ```
+
+Current EU texts already lean towards the first option: the Commission's recommendation leaves each
+member state to set its own efficiency target based on national circumstances
+([European Commission, June 2025](https://cyprus.representation.ec.europa.eu/news/commission-launches-strategy-enhance-water-security-people-economy-and-environment-2025-06-04_en)),
+and the Council note asks for lower water use per hectare without a cross-country yardstick.
 
 ::: {.caveats}
 ## Caveats
@@ -253,14 +319,14 @@ src_brief <- if (length(src_brief)) paste(src_brief, collapse = "; ") else "[fil
 ```{r}
 #| label: linkedin
 #| include: false
-# Section B: LinkedIn post, built from the same strings and key numbers.
-hook <- paste0("Placeholder hook with the surprising number: ",
-               k("example_change_pct", unit = TRUE), ".")
+# Section B: LinkedIn post, built from the same strings and key numbers (finalised at P9).
+hook <- paste0("Should the EU compare countries on irrigation water per hectare? Mediterranean ",
+               "member states abstract ", ratio_rng, " times more per irrigated hectare than the rest.")
 li <- paste0(
   hook, "\n\n",
   why_now, "\n\n",
   "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
-  "What it means: ", implications[1], "\n\n",
+  "What it means: ", implications[2], "\n\n",
   method_tag, "\n",
   "Full analysis and code: link in the first comment\n\n",
   hashtags

@@ -2,7 +2,7 @@
 # One source file, three outputs: blog post (html), LinkedIn text (output/linkedin_post.txt)
 # and a one-page brief (brief.pdf). Every number comes from output/key_numbers.csv via kn().
 title: "Does El Niño bring unusually severe rice shortfalls in Southeast Asia?"
-description: "No detectable rise in deep shortfalls in the year it begins. An exploratory check points to lower production in Indonesia, the Philippines and Malaysia the year after, as the agronomy would predict."
+description: "No detectable rise in deep shortfalls in the year it begins. An exploratory check points to lower production in Indonesia, the Philippines and Malaysia the year after, consistent with agronomic studies for Indonesia."
 author: "Pietro Sala"
 date: "2026-11-19"
 categories: ["Region: SE Asia", "Method: Tails and risk", "Theme: Food security"]

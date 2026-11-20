@@ -209,7 +209,7 @@ add("p5_elnino_pct", 100 * est[["p5_elnino"]], "%", 0, "P(yield >= 5% below tren
 add("p5_strong_pct", 100 * est[["p5_strong"]], "%", 0, "P(yield >= 5% below trend), strong El Niño years")
 add("diff5_pp", 100 * est[["diff5"]], "pp", 1, "Change in P(>=5% shortfall), El Niño vs other (LPM, country FE)")
 add("diff5_lo_pp", 100 * ci[1, "diff5"], "pp", 1, "95% CI lower, moving-block bootstrap")
-add("diff5_hi_pp", 100 * ci[2, "diff5"], "pp", 1, "95% CI upper, year-block bootstrap")
+add("diff5_hi_pp", 100 * ci[2, "diff5"], "pp", 1, "95% CI upper, moving-block bootstrap")
 add("diff10_pp", 100 * est[["diff10"]], "pp", 1, "Change in P(>=10% shortfall), El Niño vs other")
 add("diff10_lo_pp", 100 * ci[1, "diff10"], "pp", 1, "95% CI lower")
 add("diff10_hi_pp", 100 * ci[2, "diff10"], "pp", 1, "95% CI upper")

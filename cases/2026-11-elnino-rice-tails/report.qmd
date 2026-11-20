@@ -61,6 +61,9 @@ excl0 <- function(key) {                  # TRUE if the 95% interval excludes ze
   hi <- val(paste0(key, "_hi"))
   lo > 0 || hi < 0
 }
+pv <- function(key) {                     # "p = 0.068" or "p < 0.001"
+  if (val(key) < 0.001) "p < 0.001" else paste("p =", k(key))
+}
 kt <- function(key) format(round(abs(val(key)), -1), big.mark = ",")   # thousand t, rounded to 10
 # Ratio range: the classical-SD benchmark is the low end, the robust one the high end
 r_lo <- k(if (val("ratio10_sd") <= val("ratio10")) "ratio10_sd" else "ratio10")
@@ -75,12 +78,17 @@ old_txt <- if (old_share > 0.5) {
 mar_sig  <- excl0("sl_s3_mar_prod_t1")
 mar_down <- val("sl_s3_mar_prod_t1") < 0
 diff_sig <- excl0("sl_d3_prod_t1")
-mai_txt <- paste0("on the mainland the estimate is ", k("sl_s3_mai_prod_t1", unit = TRUE, sign = TRUE),
-                  " (95% interval ", k("sl_s3_mai_prod_t1_lo", unit = TRUE), " to ",
+mai_txt <- paste0("on the mainland ",
+                  if (excl0("sl_s3_mai_prod_t1")) "the estimate is " else "there is no detectable effect (",
+                  k("sl_s3_mai_prod_t1", unit = TRUE, sign = TRUE),
+                  if (excl0("sl_s3_mai_prod_t1")) " (" else ", ",
+                  "95% interval ", k("sl_s3_mai_prod_t1_lo", unit = TRUE), " to ",
                   k("sl_s3_mai_prod_t1_hi", unit = TRUE), ")")
 diff_txt <- if (diff_sig) {
-  paste0("The gap between the two regions is ", k("sl_d3_prod_t1", abs = TRUE), " percentage points (interval ",
-         k("sl_d3_prod_t1_lo"), " to ", k("sl_d3_prod_t1_hi"), "), so the regions do differ.")
+  lo_hi <- sort(abs(c(val("sl_d3_prod_t1_lo"), val("sl_d3_prod_t1_hi"))))
+  paste0("The maritime effect is ", k("sl_d3_prod_t1", abs = TRUE), " percentage points ",
+         if (val("sl_d3_prod_t1") < 0) "lower" else "higher", " than the mainland one (interval ",
+         sprintf("%.1f", lo_hi[1]), " to ", sprintf("%.1f", lo_hi[2]), "), so the regions do differ.")
 } else {
   paste0("The gap between the two regions (", k("sl_d3_prod_t1", abs = TRUE), " percentage points, interval ",
          k("sl_d3_prod_t1_lo"), " to ", k("sl_d3_prod_t1_hi"), ") is not statistically clear, so we cannot say ",
@@ -191,8 +199,8 @@ caveats <- c(
          "straddle years, so part of the year-after effect may be the same season recorded late."),
   paste0("The maritime result comes from checks added after the pre-specified test came back null. ",
          "The region split and the one-year lag were not specified in advance, and the yield-only ",
-         "effect does not survive a correction for multiple testing (adjusted p = ",
-         k("sl_holm_mar_yield_t1"), "). Treat it as a hypothesis to test on future data, not an estimate."),
+         "effect does not survive a correction for multiple testing (adjusted ",
+         pv("sl_holm_mar_yield_t1"), "). Treat it as a hypothesis to test on future data, not an estimate."),
   paste0("The intervals re-estimate each country's typical variation in every draw but treat its ",
          "long-run trend as known, so they are somewhat too narrow.")
 )
@@ -245,7 +253,8 @@ country-years. It happened in `r k("p10_obs_pct", unit = TRUE)`: `r k("n_loss10"
 `r k("n_obs")` country-years, or `r k("ratio10")` times as often (95% interval
 `r k("ratio10_lo")` to `r k("ratio10_hi")`, allowing for uncertainty in each country's typical
 variation). A bell curve stretched to cover all years, bad ones included, fits the 10% threshold
-much better: `r k("ratio10_sd")` times (interval `r k("ratio10_sd_lo")` to `r k("ratio10_sd_hi")`).
+much better: `r k("ratio10_sd")` times (interval `r k("ratio10_sd_lo")` to `r k("ratio10_sd_hi")`),
+`r if (val("ratio10_sd_lo") <= 1) "which does not rule out the bell curve" else "still above what it predicts"`.
 A formal estimate of the tail shape is close to zero (`r k("gpd_xi")`, interval `r k("gpd_xi_lo")`
 to `r k("gpd_xi_hi")`).
 
@@ -269,8 +278,8 @@ no different (`r k("p5_strong_pct", unit = TRUE)`), and only
 `r k("share_worst_elnino_pct", unit = TRUE)` of the worst tenth of harvests fell in onset
 years, which make up `r k("share_obs_elnino_pct", unit = TRUE)` of all years. Harvested area
 changes by `r k("sl_s2_area_t", unit = TRUE, sign = TRUE)` in the onset year (interval
-`r k("sl_s2_area_t_lo", unit = TRUE)` to `r k("sl_s2_area_t_hi", unit = TRUE)`; adjusted p =
-`r k("sl_holm_area_t")` after the multiple-testing correction).
+`r k("sl_s2_area_t_lo", unit = TRUE)` to `r k("sl_s2_area_t_hi", unit = TRUE)`; adjusted
+`r pv("sl_holm_area_t")` after the multiple-testing correction).
 
 ### A possible signal a year later, in maritime Southeast Asia
 
@@ -285,7 +294,7 @@ pre-specified version, the chance of a 5% yield shortfall the year after, shows 
 In Indonesia, the Philippines and Malaysia, rice production runs
 `r k("sl_s3_mar_prod_t1", unit = TRUE, sign = TRUE)` against trend the year after an onset (95%
 interval `r k("sl_s3_mar_prod_t1_lo", unit = TRUE)` to `r k("sl_s3_mar_prod_t1_hi", unit = TRUE)`;
-adjusted p = `r k("sl_holm_mar_prod_t1")` across `r k("sl_n_margin_tests")` tested effects).
+adjusted `r pv("sl_holm_mar_prod_t1")` across `r k("sl_n_margin_tests")` tested effects).
 Dropping one El Niño event at a time (with the year after it) leaves it between
 `r k("sl_loo_min", unit = TRUE)` and `r k("sl_loo_max", unit = TRUE)`. Weighting countries by
 their output, so that Indonesia counts most, gives `r k("sl_w3_mar_prod_t1", unit = TRUE, sign = TRUE)`

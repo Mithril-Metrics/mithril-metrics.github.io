@@ -164,8 +164,14 @@ if (file.exists("output/tab_second_look.csv")) {
                "Maritime (IDN, PHL, MYS)" = "In maritime Southeast Asia",
                "Mainland (THA, VNM, KHM)" = "In mainland Southeast Asia")[[as.character(pr$group[1])]]
     when <- ifelse(grepl("_t1$", pr$stat[1]), " the year after an El Niño onset", " in El Niño onset years")
+    size_txt <- if (pr$stat[1] == "s3_mar_prod_t1" && length(kv("sl_w3_mar_prod_t1")) == 1) {
+      v <- sort(abs(c(pr$estimate[1], kv("sl_w3_mar_prod_t1"))))
+      sprintf("%.1f to %.1f%%", v[1], v[2])
+    } else {
+      paste0(round(abs(pr$estimate[1]), 1), "%")
+    }
     paste0("Exploratory: ", tolower(substr(where, 1, 1)), substr(where, 2, nchar(where)),
-           ", rice production runs ", round(abs(pr$estimate[1]), 1), "% ",
+           ", rice production runs ", size_txt, " ",
            ifelse(pr$estimate[1] < 0, "below", "above"), " trend", when)
   } else {
     "El Niño's footprint on rice yields, area and production is small and imprecise"

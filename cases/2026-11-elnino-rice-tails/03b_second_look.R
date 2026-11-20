@@ -27,6 +27,10 @@
 #  T3  tonnes now use the production-weighted estimate (W3); FAOSTAT rice is paddy
 #  P3  placebo: shift the ENSO years against the panel by each possible offset (rank p-value)
 #  B5  maritime production t+1 with 5-year blocks
+# Added after the fourth review (2026-11-20):
+#  X3  maritime production t+1: extra effect of strong onsets (Jul-Dec ONI >= 1.5), and their total
+#  P3  family-wise placebo: in each shift, the largest of the 14 margin contrasts (standardised by
+#      its placebo SD) is compared with the largest observed one, so the search is accounted for
 
 stopifnot("Run this script from the issue folder (AgEcon/Issue 1)" = file.exists("00_meta.yml"))
 options(acutils.data_dir = "data_raw")
@@ -47,6 +51,11 @@ panel <- panel |>
   mutate(w_prod = mean(prod)) |>
   ungroup() |>
   mutate(prod_trend = prod / exp(shock_prod))
+# Strong onset in the previous year (Jul-Dec ONI >= 1.5), for X3
+strong_yr <- panel |> distinct(year, strong) |> arrange(year)
+panel <- panel |>
+  left_join(strong_yr |> transmute(year = year + 1L, strong_lag = strong), by = "year") |>
+  mutate(strong_lag = dplyr::coalesce(strong_lag, FALSE))
 
 coef_of <- function(fit, term) {
   cf <- coef(fit)
@@ -66,6 +75,14 @@ s2 <- function(d, y, w = NULL) {
 }
 main_diff5 <- function(d) {   # same estimand as the headline (El Niño vs all other years)
   coef_of(lm(as.numeric(loss5) ~ elnino + factor(iso3), data = d), "elninoTRUE")
+}
+# Maritime t+1 production with an extra term for strong onsets: extra = strong minus moderate,
+# total = effect after a strong onset
+s2_strong <- function(d) {
+  f <- lm(shock_prod ~ elnino + elnino_lag + strong_lag + lanina + lanina_lag + factor(iso3), data = d)
+  b_all <- coef_of(f, "elnino_lagTRUE")
+  b_extra <- coef_of(f, "strong_lagTRUE")
+  c(extra = b_extra, total = b_all + b_extra)
 }
 ratio10 <- function(d) {
   # normal benchmark re-estimated on the data at hand, as in 03_analyse.R
@@ -102,7 +119,9 @@ stats_fun <- function(d) {
     d3_yield_t1 = pct(ym[["t1"]]) - pct(yn[["t1"]]),
     w3_mar_prod_t1 = pw[["t1"]],
     r3_mar_prod_t1_ns6 = s2(mar, "shock_prod_ns6")[["t1"]],
-    r3_mar_prod_t1_loess = s2(mar, "shock_prod_loess")[["t1"]]
+    r3_mar_prod_t1_loess = s2(mar, "shock_prod_loess")[["t1"]],
+    x3_mar_prod_t1_strong_extra = s2_strong(mar)[["extra"]],
+    x3_mar_prod_t1_strong_total = s2_strong(mar)[["total"]]
   )
 }
 
@@ -165,7 +184,9 @@ tab <- tibble(
     "D3: maritime minus mainland, yield effect t+1 (pp)",
     "W3: maritime production t+1, weighted by mean production",
     "R3: maritime production t+1, 6 df spline production trend",
-    "R3: maritime production t+1, LOESS production trend"
+    "R3: maritime production t+1, LOESS production trend",
+    "X3: maritime production t+1, extra effect of a strong onset (vs moderate)",
+    "X3: maritime production t+1 after a strong onset (total)"
   )
 )
 # Many contrasts were looked at, so adjust the S2/S3 p-values for multiple testing (Holm).
@@ -271,31 +292,56 @@ add_t("sl_p_d3_prod_t1", tab$p[tab$stat == "d3_prod_t1"], "", 3,
 
 # --- P3: placebo, ENSO years shifted against the panel --------------------------------------------
 # Rotate the year-level El Nino / La Nina indicators by s = 1..(n-1) years (wrapping around), rebuild
-# the lags, and re-estimate the maritime t+1 production effect. Rank p-value, two-sided.
+# the lags, and re-estimate all 14 margin contrasts (S2, S3). Two rank p-values: for the maritime
+# t+1 production effect alone, and family-wise (largest standardised contrast per shift).
 yt <- panel |> distinct(year, elnino, lanina) |> arrange(year)
 stopifnot(!anyDuplicated(yt$year))
 n_y <- nrow(yt)
+margin_vec <- function(d) {
+  mar <- d[d$region == "Maritime", ]
+  mai <- d[d$region == "Mainland", ]
+  out <- c(s2_yield = s2(d, "shock"), s2_area = s2(d, "shock_area"), s2_prod = s2(d, "shock_prod"),
+           mar_yield = s2(mar, "shock"), mai_yield = s2(mai, "shock"),
+           mar_prod = s2(mar, "shock_prod"), mai_prod = s2(mai, "shock_prod"))
+  pct(out)
+}
 rot_effect <- function(s) {
   idx <- ((seq_len(n_y) - 1 + s) %% n_y) + 1
   r <- tibble(year = yt$year, elnino = yt$elnino[idx], lanina = yt$lanina[idx])
   r$elnino_lag <- r$elnino[c(n_y, seq_len(n_y - 1))]
   r$lanina_lag <- r$lanina[c(n_y, seq_len(n_y - 1))]
   d <- panel |>
-    filter(region == "Maritime") |>
     select(-elnino, -lanina, -elnino_lag, -lanina_lag) |>
     left_join(r, by = "year")
-  pct(s2(d, "shock_prod")[["t1"]])
+  margin_vec(d)
 }
-plac <- vapply(seq_len(n_y - 1), rot_effect, numeric(1))
-obs_p3 <- pct(est[["s3_mar_prod_t1"]])
+obs_vec <- margin_vec(panel)
+plac_mat <- t(vapply(seq_len(n_y - 1), rot_effect, numeric(length(obs_vec))))
+colnames(plac_mat) <- names(obs_vec)
+plac <- plac_mat[, "mar_prod.t1"]
+obs_p3 <- obs_vec[["mar_prod.t1"]]
+# Family-wise: standardise each contrast by its placebo SD, take the largest per shift
+sd_j <- apply(plac_mat, 2, stats::sd)
+z_obs <- abs(obs_vec) / sd_j
+z_plac_max <- apply(sweep(abs(plac_mat), 2, sd_j, "/"), 1, max)
+n_fw <- sum(z_plac_max >= max(z_obs))
+p_fw <- (1 + n_fw) / (length(z_plac_max) + 1)
+fw_top_is_mar <- as.numeric(names(which.max(z_obs)) == "mar_prod.t1")
+cat("Family-wise placebo: largest observed contrast =", names(which.max(z_obs)),
+    "| shifts as large:", n_fw, "| rank p =", round(p_fw, 3), "\n")
 n_as_large <- sum(abs(plac) >= abs(obs_p3))
 p_rank <- (1 + n_as_large) / (length(plac) + 1)
 cat("\nPlacebo shifts:", length(plac), "| as large as observed:", n_as_large, "| rank p =", round(p_rank, 3), "\n")
-readr::write_csv(tibble(shift = seq_len(n_y - 1), estimate = plac), "output/tab_placebo.csv")
+readr::write_csv(tibble(shift = seq_len(n_y - 1), estimate = plac, max_std_contrast = z_plac_max),
+                 "output/tab_placebo.csv")
 add_t("sl_p3_n_shifts", length(plac), "", 0, "P3: number of placebo shifts of the ENSO years")
 add_t("sl_p3_n_as_large", n_as_large, "", 0, "P3: placebo shifts with a maritime t+1 effect at least as large (absolute)")
 add_t("sl_p3_p_rank", p_rank, "", 3, "P3: rank p-value, maritime production t+1")
 add_t("sl_p3_min_p", 1 / (length(plac) + 1), "", 3, "P3: smallest attainable rank p-value")
+add_t("sl_p3_fw_n_as_large", n_fw, "", 0, "P3 family-wise: shifts whose largest standardised contrast is at least the observed largest")
+add_t("sl_p3_fw_p_rank", p_fw, "", 3, "P3 family-wise: rank p-value across the 14 margin contrasts")
+add_t("sl_p3_fw_top_is_mar", fw_top_is_mar, "", 0, "1 if the largest observed standardised contrast is maritime production t+1")
+add_t("sl_n_strong_onsets", sum(strong_yr$strong), "events", 0, "Strong El Nino onsets in the sample (Jul-Dec ONI >= 1.5)")
 
 # --- B5: 5-year blocks for the maritime t+1 production effect --------------------------------------
 mar_only <- panel[panel$region == "Maritime", ]

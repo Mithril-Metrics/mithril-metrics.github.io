@@ -88,7 +88,7 @@ diff_txt <- if (diff_sig) {
   lo_hi <- sort(abs(c(val("sl_d3_prod_t1_lo"), val("sl_d3_prod_t1_hi"))))
   paste0("The maritime effect is ", k("sl_d3_prod_t1", abs = TRUE), " percentage points ",
          if (val("sl_d3_prod_t1") < 0) "lower" else "higher", " than the mainland one (interval ",
-         sprintf("%.1f", lo_hi[1]), " to ", sprintf("%.1f", lo_hi[2]), "), so the regions do differ.")
+         sprintf("%.1f", lo_hi[1]), " to ", sprintf("%.1f", lo_hi[2]), "), so in this sample the gap between the regions is also clear (exploratory).")
 } else {
   paste0("The gap between the two regions (", k("sl_d3_prod_t1", abs = TRUE), " percentage points, interval ",
          k("sl_d3_prod_t1_lo"), " to ", k("sl_d3_prod_t1_hi"), ") is not statistically clear, so we cannot say ",
@@ -117,6 +117,26 @@ p3_txt <- paste0(
   k("sl_p3_min_p"), ")."
 )
 r3_both <- excl0("sl_r3_mar_prod_t1_ns6") && excl0("sl_r3_mar_prod_t1_loess")
+fw_clear <- val("sl_p3_fw_p_rank") < 0.05
+fw_txt <- paste0(
+  " Because this effect was picked from ", k("sl_n_margin_tests"), " we looked at, we also compared, ",
+  "for each shift, the largest of all ", k("sl_n_margin_tests"), " placebo effects (each scaled by its own ",
+  "spread) with the largest real one: ",
+  if (val("sl_p3_fw_n_as_large") == 0) "none was as large" else paste(k("sl_p3_fw_n_as_large"), "were as large"),
+  " (rank p = ", k("sl_p3_fw_p_rank"), "). ",
+  if (val("sl_p3_fw_top_is_mar") != 1) "The largest real effect is a different one, so this test does not single out the maritime result."
+  else if (fw_clear) "The search across effects does not explain the result."
+  else "The search across effects may explain it."
+)
+strong_clear <- excl0("sl_x3_mar_prod_t1_strong_extra")
+strong_txt <- paste0(
+  "Among the ", k("sl_n_strong_onsets"), " strong onsets since ", k("year_start"),
+  ", maritime production the year after ran ", k("sl_x3_mar_prod_t1_strong_total", unit = TRUE, sign = TRUE),
+  " against trend, ", k("sl_x3_mar_prod_t1_strong_extra", sign = TRUE), " points relative to moderate onsets (interval ",
+  k("sl_x3_mar_prod_t1_strong_extra_lo"), " to ", k("sl_x3_mar_prod_t1_strong_extra_hi"), "); ",
+  if (strong_clear) "strong events have gone with a different-sized gap, but on very few cases."
+  else "with so few strong events, the data cannot say whether a strong event brings a larger gap."
+)
 r3_txt <- paste0(
   "With a more flexible production trend the estimate is ", k("sl_r3_mar_prod_t1_ns6", unit = TRUE, sign = TRUE),
   " (interval ", k("sl_r3_mar_prod_t1_ns6_lo", unit = TRUE), " to ", k("sl_r3_mar_prod_t1_ns6_hi", unit = TRUE),
@@ -154,7 +174,7 @@ key_figures <- list(
     label = "Country-years at least 5% below trend: El Niño onset years vs other years"),
   if (mar_sig && mar_down) {
     c(value = k("sl_w3_mar_prod_t1", unit = TRUE),
-      label = "Rice production vs trend in Indonesia, the Philippines and Malaysia the year after an onset, weighted by output (exploratory)")
+      label = "Rice production in Indonesia, the Philippines and Malaysia the year after an onset, vs long-run trend, not a fall from the previous year (weighted, exploratory)")
   } else {
     c(value = k("sl_s3_mar_prod_t1", unit = TRUE, sign = TRUE),
       label = "Maritime rice production vs trend the year after an onset; interval includes zero (exploratory)")
@@ -167,7 +187,7 @@ why_now <- paste0(
   "On 12 November 2026 NOAA's Climate Prediction Center reported that El Niño is still ",
   "strengthening, with a strong to very strong event likely through January to March 2027. ",
   "The three-month Niño 3.4 anomaly for August to October stood at ", k("oni_latest"),
-  "°C. FAO and WFP have launched their first joint ",
+  "°C. FAO and WFP have launched a joint ",
   "anticipatory action appeal for this event, and rice, Southeast Asia's staple, is among the ",
   "crops most exposed. Anyone planning reserves, imports or early action needs two answers: ",
   "when do the harvest losses arrive, and how deep can they go?"
@@ -177,9 +197,9 @@ method_plain <- paste0(
   "We use FAOSTAT national rice yields, harvested area and production for Viet Nam, Indonesia, ",
   "the Philippines, Thailand, Malaysia and Cambodia, ", k("year_start"), " to ", k("year_end"),
   " (", k("n_obs", unit = TRUE), "). For each country we fit a smooth long-run trend and treat ",
-  "the deviation from it as that year's shock. A year counts as an El Niño onset year when ",
+  "the deviation from it as that year's shock. A year counts as an El Niño year when ",
   "NOAA's Oceanic Niño Index averages at least 0.5°C from July to December (",
-  k("n_elnino_years", unit = TRUE), "). We then compare how often harvests fall at least 5% ",
+  k("n_elnino_years", unit = TRUE), "; in back-to-back events such as 1976-77 and 1986-87 both years count). We then compare how often harvests fall at least 5% ",
   "below trend in El Niño years and in other years, within each country. Confidence intervals come ",
   "from resampling blocks of ", k("block_len"), " consecutive years, because a single El Niño hits all ",
   "six countries at once and shocks carry over from one year to the next."
@@ -209,19 +229,21 @@ implications <- c(
   paste0("If reserves or insurance are sized on variation in typical years, deep national shortfalls ",
          "have come more often than that implies, but most of them before 1980",
          if (sd_ok) ", and a bell curve fitted to all years, bad ones included, is not rejected" else "",
-         ". Calibrating on all years is the more defensible benchmark. Larger buffers cost money in the ",
+         ". Calibrating on all years matches the historical record better; calibrating on recent decades matches current volatility better. Larger buffers cost money in the ",
          "many calm years, so the choice is between that cost and the cost of a shortfall."),
   paste0("If the 2026-27 event behaves like past ones, the 2027 harvests in Indonesia, the Philippines ",
          "and Malaysia are where a national signal would show. The estimate averages ",
          k("n_elnino_years"), " past events and cannot say how this one, stronger than most, will play ",
-         "out, and FAOSTAT figures for 2027 will only appear in late 2028.")
+         "out, and FAOSTAT figures for 2027 will only appear in late 2028. ", strong_txt)
 )
 
 caveats <- c(
   paste0("These are national annual totals. A drought that halves the harvest in one province can ",
          "vanish in the national total, so the results say nothing about local losses, which is ",
-         "where food insecurity concentrates. Prices and trade are outside our scope: in 2023 much of ",
-         "the pressure on regional rice markets came from export restrictions rather than from harvests."),
+         "where food insecurity concentrates. Prices and trade are outside our scope: in 2023, for example, ",
+         "India's ban on non-basmati white rice exports in July pushed world rice prices to a 15-year high ",
+         "([CGIAR](https://www.cgiar.org/news-events/news/indias-export-restrictions-on-rice-continue-to-disrupt-global-markets-supplies-and-prices)). ",
+         "We have not compared the production gaps with national import or reserve volumes."),
   paste0("Timing is approximate. FAO records harvests by calendar year while cropping seasons ",
          "straddle years, so part of the year-after gap may be harvest moved between calendar years ",
          "rather than lost; the data cannot separate the two. Our pre-specified test looked at the ",
@@ -231,16 +253,17 @@ caveats <- c(
          "The region split and the one-year lag were not specified in advance, and the yield-only ",
          "effect does not survive a correction for multiple testing (adjusted ",
          pv("sl_holm_mar_yield_t1"), "). ",
-         if (p3_clear && r3_both) "The placebo test and the alternative trends make chance and detrending less likely explanations, but it remains a pattern to test on future data. "
+         if (p3_clear && fw_clear && val("sl_p3_fw_top_is_mar") == 1 && r3_both) "The placebo tests and the alternative trends make chance and detrending less likely explanations, but it remains a pattern to test on future data. "
          else "The placebo test or the alternative trends do not fully support it, so treat it as a hypothesis to test on future data. ",
          "Tonnes ",
          "are paddy (unmilled) rice, roughly 1.5 to 1.7 times the milled weight."),
   paste0("The intervals re-estimate each country's typical variation in every draw but treat its ",
-         "long-run trend as known, so they are somewhat too narrow.")
+         "long-run trend as known, so they are somewhat too narrow. The tonnes scale an average past ",
+         "event to an end-of-sample trend that is itself uncertain; they indicate magnitude, not a forecast for 2027.")
 )
 
 method_tag <- paste0("Method: detrended FAOSTAT rice data, ", k("n_countries"), " countries, ",
-                     k("year_start"), "-", k("year_end"), "; country fixed effects; block-bootstrap intervals")
+                     k("year_start"), "-", k("year_end"), "; fixed effects, block bootstrap")
 hashtags <- "#FoodSecurity #ElNino #AgriculturalEconomics #SoutheastAsia"
 
 author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
@@ -329,8 +352,8 @@ pre-specified version, the chance of a 5% yield shortfall the year after, shows 
 In Indonesia, the Philippines and Malaysia, rice production runs
 `r k("sl_s3_mar_prod_t1", unit = TRUE, sign = TRUE)` against trend the year after an onset (95%
 interval `r k("sl_s3_mar_prod_t1_lo", unit = TRUE)` to `r k("sl_s3_mar_prod_t1_hi", unit = TRUE)`).
-Of the `r k("sl_n_margin_tests")` effects we tested, it is `r if (val("sl_n_holm_sig") == 1 && val("sl_holm_mar_prod_t1") < 0.05) "the only one" else "one of those"` that survive a correction for
-multiple testing. `r p3_txt`
+Of the `r k("sl_n_margin_tests")` effects we tested, it is `r if (val("sl_n_holm_sig") == 1 && val("sl_holm_mar_prod_t1") < 0.05) "the only one that survives" else "one of those that survive"` a correction for
+multiple testing. `r p3_txt``r fw_txt`
 Dropping one El Niño event at a time (with the year after it) leaves it between
 `r k("sl_loo_min", unit = TRUE)` and `r k("sl_loo_max", unit = TRUE)`. Weighting countries by
 their output, so that Indonesia counts most, gives `r k("sl_w3_mar_prod_t1", unit = TRUE, sign = TRUE)`
@@ -445,8 +468,8 @@ src_brief <- paste(src_brief, collapse = "; ")
 #| label: linkedin
 #| include: false
 hook <- paste0("A strong to very strong El Niño is under way. In Southeast Asian rice data since ",
-               k("year_start"), ", the year it begins shows no detectable rise in deep national shortfalls.")
-li_why <- paste0("FAO and WFP have launched their first joint anticipatory action appeal for this ",
+               k("year_start"), ", the year it begins shows no rise in deep national shortfalls; any signal has come a year later.")
+li_why <- paste0("FAO and WFP have launched a joint anticipatory action appeal for this ",
                  "event. So we asked: when do El Niño's rice losses show up, and how deep can they go?")
 li <- paste0(
   hook, "\n\n",

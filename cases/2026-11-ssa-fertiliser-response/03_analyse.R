@@ -60,6 +60,67 @@ r4_y <- feols(log_yield ~ log_ratio + oni | iso3[t], data = no_zwe)
 r4_by <- feols(log_yield ~ ratio_high | iso3 + year, data = no_zwe)
 r4_bn <- feols(log_n ~ ratio_high | iso3 + year, data = no_zwe)
 
+# ---- Second red team (P7, 2026-11-20: policy and econometric reviews) ----
+# B2: subsidy split with country trends and an ENSO-by-group term next to the year FE, on
+# 2005-2024 only, the years the MAFAP budgets that define the groups actually cover
+panel <- panel |> mutate(oni_high = oni * high)
+b2_y <- feols(log_yield ~ ratio_high + oni_high | iso3[t] + year, data = filter(panel, year >= 2005))
+b2_n <- feols(log_n ~ ratio_high + oni_high | iso3[t] + year, data = filter(panel, year >= 2005))
+# R5: ratio over the six months before each region's main maize planting, so the price is
+# known when fertiliser is bought. Southern Africa plants Nov-Dec (window Jun-Nov of t-1),
+# East Africa Mar-Apr (Sep t-1 to Feb t), West Africa May-Jul (Dec t-1 to May t).
+plant_region <- c(MWI = "S", ZMB = "S", ZWE = "S", MOZ = "S",
+                  KEN = "E", ETH = "E", TZA = "E", UGA = "E", RWA = "E",
+                  NGA = "W", GHA = "W", BFA = "W", MLI = "W", BEN = "W")
+stopifnot(all(unique(panel$iso3) %in% names(plant_region)))
+plant_window <- list(S = 6:11, E = c(9:12, 1:2), W = c(12, 1:5))
+plant_offset <- list(S = rep(1, 6), E = c(1, 1, 1, 1, 0, 0), W = c(1, 0, 0, 0, 0, 0))
+ratio_plant <- bind_rows(lapply(names(plant_window), function(r) {
+  mo <- plant_window[[r]]
+  off <- plant_offset[[r]]
+  ratio_month |>
+    filter(month %in% mo) |>
+    mutate(harvest_year = year + off[match(month, mo)]) |>
+    group_by(harvest_year) |>
+    summarise(ratio_plant = mean(ratio), n_m = n(), .groups = "drop") |>
+    filter(n_m == length(mo)) |>
+    transmute(region = r, year = harvest_year, log_ratio_plant = log(ratio_plant))
+}))
+panel <- panel |>
+  mutate(region = plant_region[iso3]) |>
+  left_join(ratio_plant, by = c("region", "year"))
+r5_y <- feols(log_yield ~ log_ratio_plant + oni | iso3[t], data = panel)
+r5_n <- feols(log_n ~ log_ratio_plant + oni | iso3[t], data = panel)
+
+# T1: the ratio is one world series, so the effective sample is the number of years. Partial out
+# country effects, trends and ENSO, average the residuals by year and regress the 35 yearly means
+# on each other, with Newey-West errors (2 lags) and t critical values.
+ts_d <- filter(panel, !is.na(log_yield), !is.na(log_ratio), !is.na(oni))
+ts_d$y_res <- resid(feols(log_yield ~ oni | iso3[t], data = ts_d))
+ts_d$r_res <- resid(feols(log_ratio ~ oni | iso3[t], data = ts_d))
+ts_y <- ts_d |>
+  group_by(year) |>
+  summarise(y = mean(y_res), r = mean(r_res), .groups = "drop")
+ts_fit <- lm(y ~ r, data = ts_y)
+nw_se <- function(fit, L) {
+  X <- model.matrix(fit)
+  u <- X * resid(fit)
+  n <- nrow(X)
+  S <- crossprod(u)
+  for (l in seq_len(L)) {
+    G <- crossprod(u[(l + 1):n, , drop = FALSE], u[1:(n - l), , drop = FALSE])
+    S <- S + (1 - l / (L + 1)) * (G + t(G))
+  }
+  B <- solve(crossprod(X))
+  sqrt(diag(B %*% S %*% B))
+}
+ts_se <- nw_se(ts_fit, 2)[["r"]]
+t90 <- qt(0.95, df = nrow(ts_y) - 2)
+ts_row <- tibble::tibble(outcome = "Maize yield", model = "T1: 35 yearly means, Newey-West",
+                         sample = "All 14 countries", term = "log_ratio",
+                         est = unname(coef(ts_fit)[["r"]]), se = ts_se,
+                         lo = est - t90 * se, hi = est + t90 * se, n = nrow(ts_y))
+
 # ---- Red-team checks (P7, 2026-11-19) ----
 # F1: does the yield link survive without each earlier spike episode? (crop years)
 f1a_y <- feols(log_yield ~ log_ratio + oni | iso3[t], data = filter(panel, !year %in% 2008:2009))
@@ -90,7 +151,12 @@ models <- bind_rows(
   grab(r4_bn, "ratio_high", "N use per ha", "R4: high minus low, without Zimbabwe 2000-2009"),
   grab(f1a_y, "log_ratio", "Maize yield", "F1: without crop years 2008-2009"),
   grab(f1b_y, "log_ratio", "Maize yield", "F1: without crop years 2021-2022"),
-  grab(f2_y, "log_ratio", "Maize yield", "F2: years with official N data")
+  grab(f2_y, "log_ratio", "Maize yield", "F2: years with official N data"),
+  grab(b2_y, "ratio_high", "Maize yield", "B2: high minus low, trends + ENSO by group, 2005-2024"),
+  grab(b2_n, "ratio_high", "N use per ha", "B2: high minus low, trends + ENSO by group, 2005-2024"),
+  grab(r5_y, "log_ratio_plant", "Maize yield", "R5: ratio before planting"),
+  grab(r5_n, "log_ratio_plant", "N use per ha", "R5: ratio before planting"),
+  ts_row
 )
 readr::write_csv(models |> mutate(across(where(is.double), ~ round(.x, 4))), "output/tab_models.csv")
 print(models)
@@ -171,7 +237,9 @@ kn_add("year_end", 2024, "", 0, "Last year with yield and N data", big_mark = ""
 kn_add("n_obs_yield", nobs(a_y), "", 0, "Country-years, yield model")
 kn_add("n_obs_n", nobs(a_n), "", 0, "Country-years, N model")
 kn_add("n_imputed_pct", 100 * mean(!panel$n_official[!is.na(panel$log_n)]), "%", 0,
-       "Share of N-use values not from official or international sources (FAO flags I, E)", src_fao)
+       "Share of N-use values not flagged A or X (imputed, estimated or no flag on total use)", src_fao)
+kn_add("n_years_ratio", n_distinct(panel$year[!is.na(panel$log_ratio) & !is.na(panel$log_yield)]), "", 0,
+       "Crop years of the world price ratio in the yield model (effective time-series length)")
 
 kn_add("ratio_base", base, "t maize per t urea", 2, "Median crop-year urea/maize price ratio 1990-2019", src_pink)
 kn_add("ratio_now", ratio_now, "t maize per t urea", 2, "Urea/maize ratio, crop year Oct 2025-Sep 2026", src_pink)
@@ -233,6 +301,16 @@ kn_add("loo_yield_min", min(loo_a$est), "", 3, "Leave-one-out minimum, yield ela
 kn_add("loo_yield_max", max(loo_a$est), "", 3, "Leave-one-out maximum, yield elasticity")
 kn_add("loo_theta_min", min(loo_b$est), "", 3, "Leave-one-out minimum, high-low yield difference")
 kn_add("loo_theta_max", max(loo_b$est), "", 3, "Leave-one-out maximum, high-low yield difference")
+top_b <- loo_b[which.max(loo_b$est), ]
+kn_add("loo_theta_max_lo", top_b$lo, "", 3, "90% CI low, leave-one-out maximum of the high-low yield difference")
+kn_add("loo_theta_max_hi", top_b$hi, "", 3, "90% CI high, leave-one-out maximum of the high-low yield difference")
+kn_add("loo_theta_max_10pct", pct10(top_b$est), "%", 1, "Leave-one-out maximum, high-low yield difference, % for +10%")
+kn_add("loo_theta_max_10pct_lo", pct10(top_b$lo), "%", 1, "90% CI low, % for +10%")
+kn_add("loo_theta_max_10pct_hi", pct10(top_b$hi), "%", 1, "90% CI high, % for +10%")
+kn_add("loo_theta_max_is_zwe", as.numeric(top_b$dropped == "ZWE"), "", 0,
+       "1 if dropping Zimbabwe gives the largest high-low yield difference")
+kn_add("loo_theta_n_excl0", sum(loo_b$lo > 0 | loo_b$hi < 0), "", 0,
+       "Leave-one-out runs where the high-low yield interval excludes zero")
 
 g <- read.csv("output/tab_subsidy_groups.csv")
 kn_add("b1_share_high", mean(g$b1_share[g$high]), "%", 0, "Mean B1 share of support, high group", src_mafap)
@@ -257,6 +335,15 @@ add_b("b_yield_no0809", m("Maize yield", "F1: without crop years 2008-2009"), "m
 add_b("b_yield_no2122", m("Maize yield", "F1: without crop years 2021-2022"), "maize yield, without crop years 2021-2022")
 add_b("b_yield_offn", m("Maize yield", "F2: years with official N data"), "maize yield, years with official N data")
 kn_add("n_obs_offn", nobs(f2_y), "", 0, "Country-years with official N data in the yield model")
+
+add_b("theta_yield_b2", m("Maize yield", "B2: high minus low, trends + ENSO by group, 2005-2024"),
+      "yield, high minus low subsidy, trends and ENSO by group, 2005-2024")
+add_b("theta_n_b2", m("N use per ha", "B2: high minus low, trends + ENSO by group, 2005-2024"),
+      "N use, high minus low subsidy, trends and ENSO by group, 2005-2024")
+add_b("b_yield_plant", m("Maize yield", "R5: ratio before planting"), "maize yield, ratio in the six months before planting")
+add_b("b_n_plant", m("N use per ha", "R5: ratio before planting"), "N use, ratio in the six months before planting")
+add_b("b_yield_ts", m("Maize yield", "T1: 35 yearly means, Newey-West"), "maize yield, yearly means, Newey-West")
+kn_add("n_years_ts", nrow(ts_y), "", 0, "Years in the time-series check")
 
 kn_add("s08_n", nrow(spike08), "", 0, "Countries with MAFAP B1 data for budget years 2007 and 2009", src_mafap)
 kn_add("s08_share_up", sum(spike08$share_change_pp > 0), "", 0, "Of these, B1 share of support higher in 2009", src_mafap)

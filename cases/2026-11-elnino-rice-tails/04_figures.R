@@ -56,7 +56,7 @@ p1 <- ggplot(f1, aes(y = group, x = p)) +
   labs(title = wrap(title1, 62),
        subtitle = wrap(paste0("Share of country-years with yields at least 5% below trend; ",
                          k("n_countries"), " Southeast Asian countries, ", k("year_start"), "-",
-                         k("year_end"), ". Bars: 95% intervals (year-block bootstrap)."), 88),
+                         k("year_end"), ". Bars: 95% intervals (bootstrap over blocks of 3 years)."), 88),
        x = "Share of country-years with yield at least 5% below trend", y = "Type of year",
        caption = cap) +
   theme_ac(grid = "x")
@@ -165,6 +165,13 @@ if (file.exists("output/tab_second_look.csv")) {
   } else {
     paste0(n_sig, " of ", nrow(sl), " effects survive a correction for multiple testing (Holm).")
   }
+  cap4 <- source_caption(
+    c(paste0("FAOSTAT QCL rice yield, area and production (release ", substr(raw$fao_version, 1, 10), ")"),
+      "NOAA CPC ONI", "UCDP/PRIO ACD v26.1"),
+    accessed = raw$fao_accessed,
+    note = "Outcomes: national yield, harvested area and production, % deviation from each country's long-run trend. Cambodia from 1980."
+  )
+  cap4 <- paste(vapply(strsplit(cap4, "\n")[[1]], wrap, "", width = 115), collapse = "\n")
   p4 <- ggplot(sl, aes(x = estimate, y = margin, colour = timing)) +
     geom_vline(xintercept = 0, colour = "grey40", linewidth = 0.4) +
     geom_errorbar(aes(xmin = lo, xmax = hi), width = 0.25, orientation = "y", linewidth = 0.6,
@@ -174,13 +181,12 @@ if (file.exists("output/tab_second_look.csv")) {
     scale_colour_manual(values = c("Onset year (t)" = col_en, "Year after onset (t+1)" = col_norm)) +
     scale_x_continuous(labels = function(x) paste0(x, "%")) +
     labs(title = wrap(title4, 62),
-         subtitle = wrap(paste0("Effect of an El Niño year on the deviation from trend, vs ENSO-neutral years; ",
-                                "country fixed effects, 95% intervals (year-block bootstrap). ",
+         subtitle = wrap(paste0("Effect of an El Niño onset on the deviation from trend, compared with years that have ",
+                                "neither El Niño nor La Niña in the same or the previous year; country fixed effects, ",
+                                "95% intervals (bootstrap over blocks of 3 years). ",
                                 "Exploratory: added after the main results. ", holm_note), 88),
-         x = "El Niño effect, % deviation from trend vs ENSO-neutral years", y = "Outcome",
-         caption = paste(vapply(strsplit(sub("NOAA CPC ONI", "NOAA CPC ONI; UCDP/PRIO ACD v26.1",
-                                              gsub("\n(?!Analysis)", " ", cap, perl = TRUE), fixed = TRUE), "\n")[[1]],
-                                 wrap, "", width = 115), collapse = "\n")) +
+         x = "El Niño effect, % deviation from trend", y = "Outcome",
+         caption = cap4) +
     theme_ac(grid = "x")
   save_fig(p4, "fig4_second_look_margins", height_px = 1300)
 }

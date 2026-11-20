@@ -140,6 +140,21 @@ red_team:                         # P7, 2026-11-19 (reviewer stance: senior WB a
     - "agronomic N-response numbers (not in our data)"
     - "named governments expanding subsidies in 2008 or 2022, beyond what tab_subsidy_2008.csv shows"
 
+red_team_2:                       # P7, 2026-11-20: separate policy (World Bank) and econometric reviews
+  verdicts: {policy: "REVISE", econometrics: "REVISE"}
+  checks_added:
+    - "B2: subsidy split with country trends and ENSO x group next to year FE, 2005-2024 only"
+    - "R5: urea/maize ratio over the six months before each region's main planting (S: Jun-Nov t-1; E: Sep t-1-Feb t; W: Dec t-1-May t)"
+    - "T1: 35 yearly means of residual yield on residual ratio, Newey-West (2 lags), t critical values"
+    - "R3 extended: leave-one-out maximum of the high-low yield difference and its interval reported"
+  text_fixes:
+    - "Headline reworded as an association; lagged-ratio result (R2) reported next to it"
+    - "Subsidy section retitled: fertiliser use kept up, yield evidence inconclusive; Zimbabwe leave-one-out reported"
+    - "Back-of-envelope: one interval (main estimate), framed as a benchmark for seasons planted after the spike; tonnes out of key figures and LinkedIn"
+    - "Early-warning implication dropped; world vs farm-gate prices caveat added"
+    - "n_imputed_pct label: values not flagged A or X, including missing flags"
+    - "Fig 1 subtitle: estimates use crop-year averages; Fig 2 title: no clear yield difference"
+
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html"
   linkedin: null

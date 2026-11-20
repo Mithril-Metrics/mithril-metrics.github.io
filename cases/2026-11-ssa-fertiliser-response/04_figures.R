@@ -70,7 +70,7 @@ p1 <- ggplot(d1, aes(date, ratio)) +
   labs(title = wrap(title1, 62),
        subtitle = wrap(paste0("Tonnes of maize needed to buy one tonne of urea, monthly. Average for the ",
                               "Oct 2025-Sep 2026 crop year: ", k("ratio_now"), " (", k("ratio_now_multiple"),
-                              " times the median)."), 72),
+                              " times the median). The estimates use crop-year averages, not monthly peaks."), 72),
        x = "Month", y = "Tonnes of maize per tonne of urea", caption = cap1) +
   theme_ac() +
   theme(plot.margin = margin(10, 80, 10, 10))
@@ -92,8 +92,8 @@ loo <- readr::read_csv("output/tab_loo.csv", show_col_types = FALSE) |>
 clear_drop <- kv("b_yield_hi") < 0
 clear_rise <- kv("b_yield_lo") > 0
 part1 <- if (clear_drop) {
-  paste0("A 10% higher fertiliser-to-maize price ratio goes with ", k("b_yield_10pct", abs = TRUE, unit = TRUE),
-         " lower maize yields")
+  paste0("Years with a 10% higher world fertiliser-to-maize price ratio have had ",
+         k("b_yield_10pct", abs = TRUE, unit = TRUE), " lower maize yields")
 } else if (clear_rise) {
   paste0("Maize yields did not fall when fertiliser got dearer relative to maize (",
          k("b_yield_10pct", unit = TRUE), " for a 10% higher ratio)")
@@ -108,14 +108,15 @@ part2 <- if (theta_lo > 0) {
 } else if (theta_hi < 0) {
   "; yields fall more where input subsidies are large"
 } else {
-  "; no clear difference by input-subsidy level"
+  "; no clear yield difference by input-subsidy level"
 }
 cap2 <- wrap_cap(source_caption(
   c(paste0("FAOSTAT QCL (", substr(raw$versions$qcl, 1, 10), ") and RFN (", substr(raw$versions$rfn, 1, 10), ")"),
     "World Bank Pink Sheet", "FAO MAFAP public expenditure (March 2026)", "NOAA ONI"),
   accessed = raw$accessed,
   note = paste0("Country fixed effects and trends, ENSO control, Driscoll-Kraay 90% intervals. ",
-                "Grey bar: range when one country at a time is left out. Associations, not effects.")
+                "Grey bar: range when one country at a time is left out. Associations, not effects. ",
+                "Nitrogen: national use on all crops per ha of cropland.")
 ))
 p2 <- ggplot(d2, aes(y = sample, x = est)) +
   geom_vline(xintercept = 0, colour = "grey55", linewidth = 0.5) +

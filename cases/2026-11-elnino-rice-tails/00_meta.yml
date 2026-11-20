@@ -71,6 +71,21 @@ red_team:                         # P7, 2026-11-19
     - "Holm adjustment across the 14 margin contrasts; leave-one-event-out for maritime t+1 production"
   caveats: ["national aggregation hides local losses", "calendar-year timing", "exploratory maritime result"]
 
+red_team_2:                       # P7, 2026-11-20: separate policy (WFP) and econometric reviews
+  verdicts: {policy: "REVISE", econometrics: "REVISE"}
+  code_fixes:
+    - "Moving-block bootstrap over years (3-year blocks) in 03 and 03b; each country's MAD and SD re-estimated in every draw"
+    - "D3: maritime minus mainland difference in the t+1 effect (production, yield), outside the Holm family"
+    - "W3: maritime production t+1 weighted by mean production"
+    - "T3: maritime t+1 effect in thousand tonnes at 2024 trend production; C24: 2024 observed vs trend"
+    - "n_loss10_pre1980: deep shortfalls before 1980"
+    - "Fig 4 caption: reference = no El Nino or La Nina in t or t-1; outcome note instead of the yield-shortfall definition"
+  text_fixes:
+    - "Tail result reported as a range (classical SD to robust benchmark), with the pre-1980 share"
+    - "Maritime result labelled exploratory and conditional on its interval; mainland stated as no detectable effect with its interval"
+    - "Hook no longer claims the damage arrives later than expected; 'floor' line and 'watch 2027 figures' removed"
+    - "Caveats: aggregation level vs decisions, price and trade channels, forking paths, trend treated as known"
+
 manual_steps: []
 
 identification: >
@@ -89,7 +104,7 @@ decisions:                        # pre-specified before seeing results (P4, 202
   main_timing: "onset year t"
   shortfall_threshold: "yield >= 5% below trend (also 10%)"
   robustness: ["R1: exposure in harvest year t+1", "R2: robust LOESS trend (span 0.5)"]
-  inference: "year-block bootstrap, 999 draws"
+  inference: "year-block bootstrap, 999 draws (changed 2026-11-20 to a moving-block bootstrap, 3-year blocks, sigma re-estimated per draw)"
 
 second_look:                      # ADDED AFTER the main results (2026-11-18), exploratory, script 03b
   why: "Main result null for El Niño; checks chosen on economic grounds before running them"

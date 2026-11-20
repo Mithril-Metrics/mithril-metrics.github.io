@@ -49,35 +49,35 @@ sources:
     table: "CMO-Historical-Data-Monthly.xlsx, sheet 'Monthly Prices': Urea; Maize ($/mt, nominal)"
     url: "https://www.worldbank.org/en/research/commodity-markets"
     version: "Updated on November 03, 2026 (data to October 2026)"
-    accessed: "2026-11-19"
+    accessed: "2026-11-20"
     licence: "CC BY 4.0"
   - name: "FAOSTAT Fertilizers by Nutrient (RFN)"
     provider: "FAO"
     table: "RFN; item Nutrient nitrogen N (total); elements Agricultural Use, Use per area of cropland"
     url: "https://www.fao.org/faostat/en/#data/RFN"
     version: "2026-07-30 (bulk catalogue DateUpdate), data to 2024"
-    accessed: "2026-11-19"
+    accessed: "2026-11-20"
     licence: "CC BY 4.0"
   - name: "FAOSTAT Production: Crops and livestock products (QCL)"
     provider: "FAO"
     table: "QCL; item Maize (corn); elements Yield, Area harvested, Production"
     url: "https://www.fao.org/faostat/en/#data/QCL"
     version: "2025-12-31 (bulk catalogue DateUpdate), data to 2024"
-    accessed: "2026-11-19"
+    accessed: "2026-11-20"
     licence: "CC BY 4.0"
   - name: "FAO MAFAP public expenditure on food and agriculture (bulk file)"
     provider: "FAO MAFAP programme"
     table: "public-expenditure-dataset_fao-mafap-programme_march2026rev.xlsx; B1. Variable inputs; III. Total expenditures in support of food and agriculture"
     url: "https://www.fao.org/in-action/mafap/data-hub/en"
     version: "March 2026 revision"
-    accessed: "2026-11-19"
+    accessed: "2026-11-20"
     licence: "FAO terms of use"
   - name: "NOAA CPC Oceanic Niño Index (ONI)"
     provider: "NOAA Climate Prediction Center"
     table: "oni.ascii.txt"
     url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
     version: "monthly update"
-    accessed: "2026-11-19"
+    accessed: "2026-11-20"
     licence: "US Government work (public domain)"
 
 manual_steps: []
@@ -139,6 +139,38 @@ red_team:                         # P7, 2026-11-19 (reviewer stance: senior WB a
   do_not_claim:
     - "agronomic N-response numbers (not in our data)"
     - "named governments expanding subsidies in 2008 or 2022, beyond what tab_subsidy_2008.csv shows"
+
+red_team_2:                       # P7, 2026-11-20: separate policy (World Bank) and econometric reviews
+  verdicts: {policy: "REVISE", econometrics: "REVISE"}
+  checks_added:
+    - "B2: subsidy split with country trends and ENSO x group next to year FE, 2005-2024 only"
+    - "R5: urea/maize ratio over the six months before each region's main planting (S: Jun-Nov t-1; E: Sep t-1-Feb t; W: Dec t-1-May t)"
+    - "T1: 35 yearly means of residual yield on residual ratio, Newey-West (2 lags), t critical values"
+    - "R3 extended: leave-one-out maximum of the high-low yield difference and its interval reported"
+  text_fixes:
+    - "Headline reworded as an association; lagged-ratio result (R2) reported next to it"
+    - "Subsidy section retitled: fertiliser use kept up, yield evidence inconclusive; Zimbabwe leave-one-out reported"
+    - "Back-of-envelope: one interval (main estimate), framed as a benchmark for seasons planted after the spike; tonnes out of key figures and LinkedIn"
+    - "Early-warning implication dropped; world vs farm-gate prices caveat added"
+    - "n_imputed_pct label: values not flagged A or X, including missing flags"
+    - "Fig 1 subtitle: estimates use crop-year averages; Fig 2 title: no clear yield difference"
+
+red_team_3:                       # P7, 2026-11-20, on the re-run (IFPRI policy + econometric), then confirmation round (World Bank policy + econometric)
+  verdicts_round_1: {policy: "REVISE", econometrics: "PUBLISH WITH CAVEATS (REVISE until fixes 1-2)"}
+  verdicts_confirmation: {policy: "REVISE", econometrics: "PUBLISH WITH CAVEATS"}
+  note: "Confirmation econometric review first read an older branch by mistake; re-checked on the correct files, all numbers trace"
+  decisions:
+    - "Headline stays the pre-specified same-season estimate; the timing pattern (same season > before planting > previous year, not clear) carries the interpretation (author's choice: statistically sounder than leading with a post-hoc estimate)"
+    - "Price split (D1) no longer used as evidence against a fertiliser channel"
+    - "Subsidy yield result: 'sign flips across specifications'; N gap does not hold on 2005-2024; MAFAP 2008 count removed"
+    - "Scale check retitled to the 2026 crop year, range across timings, not a projection for 2026/27"
+    - "03_analyse.R prints the full models table in the run log (next run)"
+  next: "co-author review; no further P7"
+publication:
+  red_team: "done (three P7 rounds plus a confirmation round)"
+  author_approval: "PS, 2026-11-20"
+  coauthor_review: "pending: JPH (24 h; silence = approval)"
+  to_publish: "set draft: false in report.qmd and push"
 
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html"

@@ -23,7 +23,7 @@ wrap <- function(x, width) paste(strwrap(x, width), collapse = "\n")
 wrap_cap <- function(x) paste(vapply(strsplit(x, "\n")[[1]], wrap, "", width = 110), collapse = "\n")
 col_eu <- ac_palette(1)
 col_fill <- ac_palette(2)[2]
-src_lab <- c("Eurostat irrigation abstraction", "AQUASTAT agricultural withdrawal (filled)")
+src_lab <- c("Eurostat irrigation abstraction", "AQUASTAT agricultural withdrawal (filled, scaled)")
 res <- mutate(res, src = factor(if_else(filled, src_lab[2], src_lab[1]), levels = src_lab))
 fmt_m3 <- function(x) formatC(round(x), format = "d", big.mark = ",")
 crop_src <- if (raw$crop$source[1] == "qv") "FAOSTAT QV (constant 2014-2016 int. $)" else "Eurostat aact_eaa01"
@@ -31,9 +31,10 @@ cap <- wrap_cap(source_caption(
   c("Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60", crop_src, "FAOSTAT RL",
     "FAO AQUASTAT via World Bank"),
   accessed = raw$accessed,
-  note = paste0("Means 2020-2022. Water-directional DEA, variable returns to scale, inputs ",
-                "cropland and irrigation water, output crop output. Countries with irrigated area >= ",
-                k("irr_threshold"), "% of farmland. Country averages, not farms.")
+  note = paste0("Means 2020-2022. Water-directional DEA, constant returns to scale; inputs rainfed ",
+                "cropland, irrigated area and irrigation water; output crop production value. ",
+                "Countries with irrigated area >= ", k("irr_threshold"), "% of farmland. Filled ",
+                "values scaled to an irrigation basis. Country averages, not farms.")
 ))
 
 # ---- Figure 1 (hero): water-saving potential by country ----
@@ -53,7 +54,7 @@ p1 <- ggplot(d1, aes(saving_pct, name)) +
   scale_fill_manual(values = c(col_eu, "white"), name = NULL, drop = FALSE) +
   scale_x_continuous(limits = c(0, 135), breaks = seq(0, 100, 20), expand = c(0, 0)) +
   labs(title = wrap(title1, 62),
-       x = "Water-saving potential, % of irrigation water at the same cropland and crop output",
+       x = "Water-saving potential, % of irrigation water at the same land and crop output",
        y = "Member state", caption = cap) +
   theme_ac(grid = "x") +
   theme(legend.position = "top", legend.justification = "left")
@@ -97,6 +98,7 @@ tab <- res |>
             `Water data` = as.character(src),
             !!paste0("Crop output per m3 (", ppm_unit, ")") := round(out_per_m3, 2),
             `Rank, output per m3 (1 = lowest)` = rank_ppm,
+            `Water per irrigated ha (m3)` = round(m3_per_ha, -1),
             `Saving potential (%)` = round(saving_pct),
             `Rank, saving potential (1 = largest)` = rank_dea,
             `Leave-one-out range (%)` = if_else(is.na(loo_min), "",
@@ -104,7 +106,7 @@ tab <- res |>
 readr::write_csv(tab, "output/tab_ranks.csv")
 title3 <- paste0("Ranking by output per m3 and by the frontier differs by 3 or more places for ",
                  k("n_disagree"), " of ", k("n_countries"), " countries")
-html <- knitr::kable(tab, format = "html", caption = title3, align = c("l", "l", rep("r", 5)))
+html <- knitr::kable(tab, format = "html", caption = title3, align = c("l", "l", rep("r", 6)))
 writeLines(c(as.character(html), paste0("<p>", gsub("\n", "<br>", cap), "</p>")),
            "output/tab_ranks.html")
 cat(title1, "\n", title2, "\n", title3, "\n", sep = "")

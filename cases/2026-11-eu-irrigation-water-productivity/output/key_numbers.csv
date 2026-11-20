@@ -1,27 +1,29 @@
 key,value,unit,digits,big_mark,description,source,updated
-n_countries,14,countries,0,",",Member states in the sample,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-n_filled,4,countries,0,",",Water filled from AQUASTAT,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-n_frontier,6,countries,0,",",Countries on the frontier (no saving),"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-irr_threshold,2,%,0,",","Minimum irrigated area, % of UAA (latest survey year)",Eurostat ef_fsi_irri,2026-11-20 12:15
-fill_ratio,56.33902721957905,%,0,",",Median Eurostat irrigation abstraction as % of AQUASTAT agricultural withdrawal,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-year_start,2020,,0,,First year of the averaging window,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-year_end,2022,,0,,Last year of the averaging window,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-water_total,51012.49227993624,million m3,0,",","Irrigation water, sample total (mean 2020-2022)","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-saving_total,9802.362408677564,million m3,0,",",Water saving if every country matched the frontier,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-saving_share,19.21561164839017,%,0,",",Saving as % of the sample's irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-saving_mean,40.53342758531854,%,0,",",Unweighted mean saving share,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-saving_median,48.213847190260864,%,0,",",Median saving share,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-saving_top,96.6983839567742,%,0,",",Largest saving share: Portugal,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-saving_top_m3,3285.3354586176697,million m3,0,",",Saving in Portugal,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-rho_wei,0.17385342413123744,,2,",","Spearman, saving share vs WEI+","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-p_wei,0.5522396396722566,,2,",",p-value of the Spearman test,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-n_wei,14,countries,0,",",Countries with WEI+,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-n_hi_both,4,countries,0,",",Countries at or above the median of both stress and saving share,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-n_disagree,12,countries,0,",",Countries whose rank by output per m3 and by DEA differ by 3 or more places,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-rho_ppm,0.26535522630557296,,2,",","Spearman, DEA saving share vs water per unit of output","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-ppm_min,0.9205468258956632,I$/m3,2,",",Lowest crop output per m3 of irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-ppm_max,63.76017228219388,I$/m3,2,",",Highest crop output per m3 of irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-ppm_median,8.798399945367969,I$/m3,2,",",Median crop output per m3 of irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-r1_n,10,countries,0,",",R1 sample: Eurostat irrigation data only,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-r1_rho,0.9271819108914476,,2,",",R1: Spearman of saving shares with the headline run,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
-r2_shift,86.17618359411355,pp,0,",","R2: largest change in a saving share, leave-one-out","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:15
+n_countries,14,countries,0,",",Member states in the sample,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+n_filled,4,countries,0,",",Water filled from AQUASTAT,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+n_frontier,3,countries,0,",",Countries on the frontier (no saving),"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+irr_threshold,2,%,0,",","Minimum irrigated area, % of UAA (latest survey year)",Eurostat ef_fsi_irri,2026-11-20 12:23
+fill_ratio,56.33902721957905,%,0,",",Median Eurostat irrigation abstraction as % of AQUASTAT agricultural withdrawal,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+year_start,2020,,0,,First year of the averaging window,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+year_end,2022,,0,,Last year of the averaging window,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+water_total,40819.77606354273,million m3,0,",","Irrigation water, sample total (mean 2020-2022)","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+saving_total,37577.22842255921,million m3,0,",",Water saving if every country matched the frontier,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+saving_share,92.05642961897692,%,0,",",Saving as % of the sample's irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+saving_mean,67.08404420964398,%,0,",",Unweighted mean saving share,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+saving_median,83.45518469824579,%,0,",",Median saving share,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+saving_top,98.55623535359688,%,0,",",Largest saving share: Cyprus,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+saving_top_m3,156.80297044757265,million m3,0,",",Saving in Cyprus,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+rho_wei,0.8101624213983736,,2,",","Spearman, saving share vs WEI+","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+p_wei,4.428282451016385e-4,,2,",",p-value of the Spearman test,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+n_wei,14,countries,0,",",Countries with WEI+,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+n_hi_both,7,countries,0,",",Countries at or above the median of both stress and saving share,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+n_disagree,0,countries,0,",",Countries whose rank by output per m3 and by DEA differ by 3 or more places,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+rho_ppm,0.9955946922361484,,2,",","Spearman, DEA saving share vs water per unit of output","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+ppm_min,0.9205468258956632,I$/m3,2,",",Lowest crop output per m3 of irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+ppm_max,63.76017228219388,I$/m3,2,",",Highest crop output per m3 of irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+ppm_median,10.54900274015978,I$/m3,2,",",Median crop output per m3 of irrigation water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+r1_n,10,countries,0,",",R1 sample: Eurostat irrigation data only,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+r1_rho,1,,2,",",R1: Spearman of saving shares with the headline run,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+r2_shift,96.34461998844624,pp,0,",","R2: largest change in a saving share, leave-one-out","Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+m3_per_ha_median,2715.5418003384275,m3/ha,0,",",Median irrigation water per irrigated hectare,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23
+d1_max_change,13.703187605281187,pp,0,",",D1: largest change for a filled country with unscaled AQUASTAT water,"Eurostat env_wat_abs, aact_eaa01, ef_fsi_irri, sdg_06_60; FAOSTAT RL; AQUASTAT via World Bank",2026-11-20 12:23

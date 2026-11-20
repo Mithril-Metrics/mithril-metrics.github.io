@@ -124,7 +124,21 @@ first_run:                        # 2026-11-20, JPH local run; headline NOT fina
     - "Frontier set by largely rainfed countries (DE 3% irrigated, NL) and by VRS end points (MT smallest, ES largest output)"
     - "Leave-one-out moves single shares by up to 86 pp (CY 0-86, EL 0-61): not robust"
     - "Portugal's 97% mixes the AQUASTAT fill bias with rainfed peers"
-  status: "respecification to be decided at P6 before RED-TEAM; changes after this run are reported as such"
+  status: "superseded by second_run (respecified after these results)"
+
+second_run:                       # 2026-11-20, option 1 chosen by JPH after first_run; run in Claude's session on JPH's cached data_raw
+  changes:
+    - "Inputs: rainfed cropland and irrigated area (ef_fsi_irri UAA_IT HA, interpolated to 2021 between the 2016 and 2023 surveys) instead of total cropland"
+    - "Constant returns to scale instead of VRS"
+    - "AQUASTAT fills scaled by the median Eurostat/AQUASTAT ratio (0.56); unscaled kept as diagnostic D1"
+  result: "saving 92% of sample water; frontier AT, DE, NL; Spearman with WEI+ 0.81; leave-one-out ranges up to 96 pp (EL 0-96, IT 0-93)"
+  diagnosis: >
+    The frontier is now set by countries that irrigate little water per hectare because rain covers
+    most crop needs (DE 581, NL 594, AT 1,487 m3/ha) against 3,500-8,700 m3/ha in the Mediterranean
+    (median 6,290 vs 1,227). Saving shares track water per hectare (Spearman 0.92) and water per
+    hectare tracks WEI+ (0.75): the benchmark measures climate and crop mix (NL greenhouses), not
+    irrigation management. Not publishable as an efficiency ranking.
+  status: "decision on reframing pending (P6)"
 
 links:
   blog: null

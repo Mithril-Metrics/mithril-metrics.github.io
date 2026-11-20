@@ -66,12 +66,12 @@ question <- "Can one EU-wide benchmark rank irrigation water efficiency across m
 ratio_rng <- paste0(k("ratio_min"), " to ", k("ratio_max"))
 
 bottom_line <- paste0(
-  "Not on its own. In the ", k("n_main"), " member states with Eurostat irrigation data, ",
+  "**Not on its own.** In the ", k("n_main"), " member states with Eurostat irrigation data, ",
   "Mediterranean countries abstract ", ratio_rng, " times more irrigation water per irrigated ",
   "hectare than the rest (median ", k("m3ha_med"), " against ", k("m3ha_other"), " m³/ha, ",
-  k("year_start"), "–", k("year_end"), "), a gap that mixes climate, crop mix and ",
-  "infrastructure. Two common frontier models put the 'saving potential' at ", k("share_a"),
-  "% or ", k("share_b"), "% of irrigation water, so a ranking across countries would mostly ",
+  k("year_start"), "–", k("year_end"), "); we cannot separate climate from crop mix and ",
+  "infrastructure in that gap. Two common frontier models put the 'saving potential' at ", k("share_a"),
+  "% or ", k("share_b"), "% of irrigation water. We infer that a ranking across countries would mostly ",
   "show where a country is, not how well it irrigates."
 )
 
@@ -94,10 +94,8 @@ method_plain <- paste0(
   "analysis (data envelopment analysis), which asks how much water each country could save if it ",
   "matched the best performers while keeping its land and crop value fixed, under four common ",
   "specifications. This second step is a stress test: if a cross-country benchmark is meaningful, ",
-  "reasonable modelling choices should not change its answer much. We set out to rank countries ",
-  "by irrigation efficiency; our first two model runs convinced us that a ranking would mostly ",
-  "reflect climate and crop mix, so we changed the question and chose the climate grouping at ",
-  "that point."
+  "reasonable modelling choices should not change its answer much. We set out to rank countries; ",
+  "after our first two model runs we changed the question and chose the climate grouping."
 )
 
 findings <- c(
@@ -105,8 +103,8 @@ findings <- c(
          "irrigated hectare (median ", k("m3ha_med"), " vs ", k("m3ha_other"), " m³/ha)"),
   paste0("Two common frontier models put the 'saving potential' at ", k("share_a"), "% or ",
          k("share_b"), "% of irrigation water"),
-  paste0("Almost all of that gap comes from one technical choice, returns to scale (",
-         k("d_rts"), " points)")
+  paste0("Almost all of that gap comes from one modelling choice, returns to scale (",
+         k("d_rts"), " points on average)")
 )
 
 implications <- c(
@@ -186,33 +184,30 @@ cat('</div>\n')
 
 ![](output/fig1_hero.png){fig-alt="Horizontal bar chart of irrigation water abstracted per irrigated hectare in EU member states, 2020 to 2022. Greece, Malta, Cyprus and Spain are highest; Germany and the Netherlands are lowest. Italy, Portugal, Austria and France are shown as hollow bars because their figures are estimates." width="100%"}
 
-The split is clean. Greece abstracts the most, `r k("m3ha_max")` m³ per irrigated hectare, and
-Germany the least, `r k("m3ha_min")`. Among the `r k("n_main")` countries with Eurostat irrigation
-data, the `r k("n_main_med")` Mediterranean ones sit above all `r k("n_main_other")` others, which is
-as clear as an exact rank-sum test with groups this small can show (p = `r k("p_ranksum")`). The
-ratio of the medians ranges from `r ratio_rng` depending on which survey year we use for the
+**Among the `r k("n_main")` countries with Eurostat irrigation data, all `r k("n_main_med")`
+Mediterranean ones abstract more water per irrigated hectare than all `r k("n_main_other")` others**
+(exact rank-sum p = `r k("p_ranksum")`, the smallest possible with groups this size). Greece
+abstracts the most, `r k("m3ha_max")` m³ per irrigated hectare, and Germany the least,
+`r k("m3ha_min")`. The ratio of the medians is `r ratio_rng`, depending on the survey year used for
 irrigated area and on whether the `r k("n_filled")` estimated countries are included.
 
-What the data show is a large, stable gap in water abstracted per hectare. What we infer is that a
-cross-country comparison on this indicator would mainly sort countries by where they are. What
-remains uncertain is how much of the gap is climate itself and how much is crop mix (vegetables,
-orchards and rice in the south), conveyance losses in collective schemes and differences in how
-countries report abstraction.
+We infer that a cross-country comparison on this indicator would mainly sort countries by where they
+are. How much of the gap is climate and how much is crop mix (vegetables, orchards and rice in the
+south), conveyance losses or reporting practice, we do not test.
 
 ### Two common frontier models disagree, and neither estimates saveable water
 
 ![](output/fig2_two_models.png){fig-alt="Dot chart comparing two frontier models for the EU member states with Eurostat irrigation data. Model A, with variable returns to scale, puts Greece, Malta, Spain, Germany and the Netherlands at zero saving potential. Model B, with constant returns to scale, puts most countries far higher, with only Germany and the Netherlands at zero." width="100%"}
 
-A frontier model asks how much water each country could save if it matched the best combination
-of land, water and crop value observed in the sample. Model A puts the saving potential at
-`r k("share_a")`% of irrigation water; model B at `r k("share_b")`%. The country rankings
-barely agree (rank correlation `r k("rho_ab")`, where 1 means the same order and 0 no relation).
+**Two common frontier models put the saving potential at `r k("share_a")`% (model A) or
+`r k("share_b")`% (model B) of irrigation water**, and their country rankings barely agree (rank correlation `r k("rho_ab")`, where 1 means the same order and 0 no relation).
 
-Running all four combinations shows where the difference comes from. Allowing for differences in
-scale (variable returns) puts the largest and smallest countries, Spain and Malta, on the frontier
-by construction; assuming constant returns leaves only Germany and the Netherlands there. That one
-choice moves the saving potential by `r k("d_rts")` points on average, while splitting land into
-rainfed and irrigated hectares moves it by `r k("d_land")`. Under constant returns, a country's
+A frontier model asks how much water each country could save if it matched the best observed mix of
+land, water and crop value. **Across the four combinations we ran, one modelling choice drives the
+difference: returns to scale moves the saving potential by `r k("d_rts")` points on average**, while
+splitting land into rainfed and irrigated hectares moves it by `r k("d_land")`. Variable returns put
+the largest and smallest countries, Spain and Malta, on the frontier by construction; constant
+returns leave only Germany and the Netherlands there. Under constant returns, a country's
 "saving" is almost exactly its crop value per m³ compared with Germany's or the Netherlands'
 (rank correlation `r k("rho_b_ppm")`), and most crop output there is rainfed. Dropping a single
 frontier country moves a country's result by up to `r k("loo_shift_b")` points. None of these
@@ -322,9 +317,12 @@ src_brief <- if (length(src_brief)) paste(src_brief, collapse = "; ") else "[fil
 # Section B: LinkedIn post, built from the same strings and key numbers (finalised at P9).
 hook <- paste0("Should the EU compare countries on irrigation water per hectare? Mediterranean ",
                "member states abstract ", ratio_rng, " times more per irrigated hectare than the rest.")
+li_why <- paste0("On 22 October France and Portugal asked EU ministers to cut water use per irrigated ",
+                 "hectare; the EU targets ", k("ref_wrs_target"), "% better water efficiency by 2030. We asked ",
+                 "whether that indicator can compare countries.")
 li <- paste0(
   hook, "\n\n",
-  why_now, "\n\n",
+  li_why, "\n\n",
   "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
   "What it means: ", implications[2], "\n\n",
   method_tag, "\n",

@@ -147,8 +147,12 @@ cat('</div>\n')
 
 ![](output/fig1_hero.png){fig-alt="ALT TEXT: describe what the hero chart shows and its main number, for screen readers." width="100%"}
 
-Two or three sentences interpreting the figure. Separate **what the data show** from
-**what we infer** and **what remains uncertain**.
+**One bolded key sentence: the main result of this section, with its number from kn().** Then two
+or three short sentences: the interval, one robustness check, and what remains uncertain.
+<!-- Style (07_report_and_post_templates.md): concise and scientific; claim only what an estimate
+shows ("not clear" if the interval includes zero); label untested mechanisms ("we hypothesise",
+"untested here"); at most one bolded sentence per paragraph; no bold in the LinkedIn text. -->
+
 
 <!-- ### Section 2 ... (max 3 figures in total) -->
 

@@ -102,6 +102,18 @@ red_team_3:                       # P7 on the revised draft, 2026-11-20: fresh p
     - "Onset-year wording limited to deep shortfalls; smaller losses not ruled out; NOAA wording in the hook"
     - "Tonnes out of key figures and LinkedIn; paddy vs milled noted"
     - "Year-after timing linked to Naylor et al. 2001, 2007; caveats on harvest shifted vs lost and on the comparison group"
+red_team_4:                       # P7 on the final draft, 2026-11-20: fresh WFP policy and econometric reviewers
+  verdicts: {policy: "PUBLISH WITH CAVEATS", econometrics: "PUBLISH WITH CAVEATS"}
+  code_fixes:
+    - "P3 family-wise: largest standardised margin contrast per placebo shift vs the observed largest"
+    - "X3: extra effect of strong onsets on maritime production t+1, and the total after a strong onset"
+    - "Fig 4 title gives the weighted-unweighted range (4.1 to 4.9%)"
+  text_fixes:
+    - "LinkedIn file regenerated from the current chunk; hook adds that any signal came a year later"
+    - "Key figure labelled as a gap vs trend, not a fall from the previous year"
+    - "Maritime-mainland difference softened to 'clear in this sample (exploratory)'"
+    - "Caveats: tonnes are magnitude not forecast; no comparison with import or reserve volumes; 2023 export ban sourced (CGIAR)"
+    - "Benchmark line rewritten as a trade-off; El Nino year definition covers back-to-back years; 'first joint' appeal claim dropped (unverified)"
 
 manual_steps: []
 

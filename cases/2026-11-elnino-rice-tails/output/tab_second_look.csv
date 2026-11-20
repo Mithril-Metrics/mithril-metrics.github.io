@@ -24,3 +24,5 @@ d3_yield_t1,-3.9826111978009116,-6.49146423166471,-0.2766621739677071,pp,"D3: ma
 w3_mar_prod_t1,-4.0964113752066655,-5.795232852588395,-1.4052549048828467,% vs trend,"W3: maritime production t+1, weighted by mean production",3.3805079627558237e-4,NA
 r3_mar_prod_t1_ns6,-4.094686356448429,-6.11501915966195,-1.6761390520048547,% vs trend,"R3: maritime production t+1, 6 df spline production trend",3.9828303519196423e-4,NA
 r3_mar_prod_t1_loess,-4.566647442122818,-6.798089478433534,-1.682200869675532,% vs trend,"R3: maritime production t+1, LOESS production trend",5.182177694044549e-4,NA
+x3_mar_prod_t1_strong_extra,-4.091676596434102,-8.7969428827257,0.17002021683083512,% vs trend,"X3: maritime production t+1, extra effect of a strong onset (vs moderate)",0.08200597526658973,NA
+x3_mar_prod_t1_strong_total,-7.670145736670031,-11.366594557476395,-3.662942630524191,% vs trend,X3: maritime production t+1 after a strong onset (total),3.4764719324376883e-4,NA

@@ -4,8 +4,8 @@ The OECD's new fertiliser work covers only one Sub-Saharan African country. We l
 
 What we found:
 → Years with a 10% higher urea-to-maize ratio have had 1.2% lower maize yields in the same season (-0.7% with the ratio before planting)
-→ Nitrogen use did not fall in step (-0.9%, not clear), so we read the link as reflecting world market conditions as much as fertiliser costs
-→ High-subsidy countries: recorded nitrogen use did not fall in high-price years, but harvests show no clear difference from other countries
+→ The link weakens once prices after planting are left out (previous year's ratio: -0.5%, not clear), so we read it as world market conditions as much as fertiliser costs
+→ High-subsidy countries: recorded nitrogen use did not fall in high-price years (not on 2005-2024 alone); no consistent yield difference
 
 What it means: the world ratio is a rough signal, not a forecast. World prices only; farm-gate ratios differ widely and were not used. These data cannot confirm that input subsidies protect harvests.
 

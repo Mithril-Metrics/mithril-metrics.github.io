@@ -155,6 +155,23 @@ red_team_2:                       # P7, 2026-11-20: separate policy (World Bank)
     - "n_imputed_pct label: values not flagged A or X, including missing flags"
     - "Fig 1 subtitle: estimates use crop-year averages; Fig 2 title: no clear yield difference"
 
+red_team_3:                       # P7, 2026-11-20, on the re-run (IFPRI policy + econometric), then confirmation round (World Bank policy + econometric)
+  verdicts_round_1: {policy: "REVISE", econometrics: "PUBLISH WITH CAVEATS (REVISE until fixes 1-2)"}
+  verdicts_confirmation: {policy: "REVISE", econometrics: "PUBLISH WITH CAVEATS"}
+  note: "Confirmation econometric review first read an older branch by mistake; re-checked on the correct files, all numbers trace"
+  decisions:
+    - "Headline stays the pre-specified same-season estimate; the timing pattern (same season > before planting > previous year, not clear) carries the interpretation (author's choice: statistically sounder than leading with a post-hoc estimate)"
+    - "Price split (D1) no longer used as evidence against a fertiliser channel"
+    - "Subsidy yield result: 'sign flips across specifications'; N gap does not hold on 2005-2024; MAFAP 2008 count removed"
+    - "Scale check retitled to the 2026 crop year, range across timings, not a projection for 2026/27"
+    - "03_analyse.R prints the full models table in the run log (next run)"
+  next: "co-author review; no further P7"
+publication:
+  red_team: "done (three P7 rounds plus a confirmation round)"
+  author_approval: "PS, 2026-11-20"
+  coauthor_review: "pending: JPH (24 h; silence = approval)"
+  to_publish: "set draft: false in report.qmd and push"
+
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html"
   linkedin: null

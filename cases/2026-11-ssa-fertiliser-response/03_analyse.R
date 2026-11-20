@@ -159,7 +159,7 @@ models <- bind_rows(
   ts_row
 )
 readr::write_csv(models |> mutate(across(where(is.double), ~ round(.x, 4))), "output/tab_models.csv")
-print(models)
+print(models, n = Inf, width = Inf)
 
 # ---- R3: leave one country out ----
 loo <- bind_rows(lapply(unique(panel$iso3), function(c) {

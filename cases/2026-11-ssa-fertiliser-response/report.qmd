@@ -2,7 +2,7 @@
 # One source file, three outputs: blog post (html), LinkedIn text (output/linkedin_post.txt)
 # and a one-page brief (brief.pdf). Every number comes from output/key_numbers.csv via kn().
 title: "Do fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?"
-description: "In 14 Sub-Saharan African countries since 1990, maize yields have been lower when world fertiliser was dear relative to maize, but nitrogen use did not fall in step. The yield evidence on input subsidies is inconclusive."
+description: "In 14 Sub-Saharan African countries since 1990, maize yields have been lower when world fertiliser was dear relative to maize, but the link weakens once prices after planting are left out. The yield evidence on input subsidies is inconclusive."
 author: "Pietro Sala"
 date: "2026-11-19"
 categories: ["Region: SSA", "Method: Elasticities", "Theme: Food security"]
@@ -103,16 +103,18 @@ question <- meta$question
 
 bottom_line <- paste0(
   "**Maize yields in these ", k("n_countries"), " countries have been lower in years when world ",
-  "fertiliser was dear relative to maize",
-  if (n_flat) ", but measured nitrogen use did not fall in step.** " else ".** ",
-  if (n_flat) "We read the link as tracking world market conditions at least as much as fertiliser costs. " else "",
-  "A 10% higher world urea-to-maize price ratio goes with ", k("b_yield_10pct", abs = TRUE, unit = TRUE),
-  " lower yields in the same season (", k("year_start"), "-", k("year_end"), ")",
-  if (plant_clear) paste0(" and ", k("b_yield_plant_10pct", abs = TRUE, unit = TRUE), " lower with the ratio before planting. ")
-  else ". Measured before planting, the link is not clear. ",
-  "In high-subsidy countries, recorded nitrogen use did not fall in high-price years, but the gap with ",
-  "other countries is fragile",
-  if (!theta_clear) ", and harvests show no clear difference between the groups." else "."
+  "fertiliser was dear relative to maize, but the link weakens once prices after planting are ",
+  "left out.** A 10% higher world urea-to-maize price ratio goes with ",
+  k("b_yield_10pct", abs = TRUE, unit = TRUE), " lower yields in the same season (", k("year_start"), "-",
+  k("year_end"), "), ",
+  if (plant_clear) paste0(k("b_yield_plant_10pct", abs = TRUE, unit = TRUE), " lower with the ratio before planting")
+  else "no clear change with the ratio before planting",
+  if (lag_clear) paste0(" and ", k("b_yield_lag_10pct", abs = TRUE, unit = TRUE), " with the previous year's ratio. ")
+  else " and no clear change with the previous year's ratio. ",
+  "We read this as the ratio tracking world market conditions at least as much as fertiliser costs. ",
+  "In high-subsidy countries, recorded nitrogen use did not fall in high-price years",
+  if (!b2n_clear) ", but this does not hold on 2005-2024 alone" else "",
+  ", and harvests show no consistent difference between the groups."
 )
 
 key_figures <- list(
@@ -149,10 +151,11 @@ findings <- c(
   paste0("Years with a 10% higher urea-to-maize ratio have had ", k("b_yield_10pct", abs = TRUE, unit = TRUE),
          " lower maize yields in the same season (", k("b_yield_plant_10pct", unit = TRUE),
          " with the ratio before planting)"),
-  paste0("Nitrogen use did not fall in step (", k("b_n_10pct", unit = TRUE), clear_lbl("b_n"),
-         "), so we read the link as reflecting world market conditions as much as fertiliser costs"),
-  paste0("High-subsidy countries: recorded nitrogen use did not fall in high-price years, but harvests ",
-         if (!theta_clear) "show no clear difference from other countries" else "differ from other countries")
+  paste0("The link weakens once prices after planting are left out (previous year's ratio: ",
+         k("b_yield_lag_10pct", unit = TRUE), clear_lbl("b_yield_lag"), "), so we read it as world market ",
+         "conditions as much as fertiliser costs"),
+  paste0("High-subsidy countries: recorded nitrogen use did not fall in high-price years",
+         if (!b2n_clear) " (not on 2005-2024 alone)" else "", "; no consistent yield difference")
 )
 
 implications <- c(
@@ -160,11 +163,12 @@ implications <- c(
          "Farm-gate prices can diverge from world prices and were not used here; national price monitoring ",
          "(FAO GIEWS for maize, AfricaFertilizer.org for fertiliser) is the closer signal."),
   paste0("If input subsidies are meant to keep fertiliser flowing during spikes, recorded nitrogen use in ",
-         "high-subsidy countries did hold up. This may partly reflect programmes scaled up during spikes, which ",
+         "high-subsidy countries held up over 1990-2024",
+         if (!b2n_clear) ", though not on 2005-2024 alone" else "", ". This may partly reflect programmes scaled up during spikes, which ",
          "we did not test; for scale, Malawi's variable-input spending went from ", round(mwi$share_2007), "% to ",
          round(mwi$share_2009), "% of all public support to agriculture between the 2007 and 2009 budget years (",
          sprintf("%+.0f%%", mwi$real_change_pct), " in real terms). If the aim is to protect harvests, these data ",
-         "show no clear yield difference. The trade-off is the budget share such programmes take against a ",
+         "show no consistent yield difference. The trade-off is the budget share such programmes take against a ",
          "yield gain the data cannot confirm."),
   paste0("If the aim is to plan food needs, the benchmark below is a scale check for seasons planted at ",
          "2026 prices, not an estimate of 2026 losses: most southern African 2026 harvests were planted ",
@@ -173,21 +177,19 @@ implications <- c(
 
 caveats <- c(
   paste0("Associations, not effects. The ratio is one world series, and high-ratio years can differ in ",
-         "other ways (energy, freight, the dollar). Entered separately, yields rise with the world maize ",
-         "price (", k("b_maize_yield_10pct", unit = TRUE, sign = TRUE), " per 10%) about as much as they fall ",
-         "with the urea price (", k("b_urea_yield_10pct", unit = TRUE), "); this split uses log average prices, so ",
-         "it does not decompose the ratio exactly. Prices are US Gulf maize and Middle East urea; farm-gate ",
-         "ratios are not observed."),
-  paste0("The channel is not shown. Nitrogen is national use on all crops per hectare of cropland, and ",
-         k("n_imputed_pct", unit = TRUE), " of the figures are not officially reported. That nitrogen use ",
-         "rose with the ratio in high-subsidy countries is consistent with programmes scaled up in those ",
-         "years; we did not test this."),
-  paste0("Subsidy groups are fixed over time, based on MAFAP spending in 2004-2019, and also applied to ",
-         "earlier years; Ghana and Benin sit near the cut. MAFAP counts only on-budget spending, and its ",
-         "variable-input category also covers seed, energy and credit. El Niño is measured in ",
-         "December-February, which fits southern Africa's season better than West Africa's. Checks added ",
-         "after the first results are labelled as such; their intervals do not allow for the number of ",
-         "specifications tried. The headline estimate is the one we planned.")
+         "other ways (energy, freight, the dollar). Prices are US Gulf maize and Middle East urea; farm-gate ",
+         "ratios, which in landlocked countries can differ widely, are not observed."),
+  paste0("The nitrogen data cannot settle why yields fall. Nitrogen is national use on all crops per ",
+         "hectare of cropland, ", k("n_imputed_pct", unit = TRUE), " of the figures are FAO estimates, and on ",
+         "official figures alone nitrogen use rises with the ratio (", k("b_n_official_10pct", unit = TRUE, sign = TRUE),
+         "). The timing pattern, not the nitrogen result, is our main reason to doubt a pure fertiliser-cost channel."),
+  paste0("The subsidy comparison is indicative only. Groups are fixed over time, based on MAFAP spending ",
+         "from 2004 (Ghana from 2016), and applied to earlier years; the median split separates countries ",
+         "with similar shares (Ghana and Benin). MAFAP counts only on-budget spending, and its variable-input ",
+         "category also covers seed, energy and credit. El Niño is measured in December-February, which fits ",
+         "southern Africa's season better than West Africa's. With one world price series and about 20 checks ",
+         "at 90%, results whose intervals barely exclude zero are suggestive; checks added after the first ",
+         "results are labelled as such. The headline estimate is the one we planned.")
 )
 
 method_tag <- paste0("Method: country trends and fixed effects, ", k("n_countries"), " countries, ",
@@ -251,25 +253,26 @@ and without Zimbabwe's 2000-09 collapse `r k("b_yield_nozwe_10pct", unit = TRUE)
 `r k("n_years_ts")` yearly averages gives `r k("b_yield_ts_10pct", unit = TRUE)` (interval
 `r k("b_yield_ts_10pct_lo", unit = TRUE)` to `r k("b_yield_ts_10pct_hi", unit = TRUE)`).
 
-### Nitrogen use does not move with the ratio
+### The link weakens once prices after planting are left out
 
-We expected lower yields to come with less fertiliser. **Measured nitrogen use per hectare does not
-fall when the ratio is high** (`r k("b_n_10pct", unit = TRUE)`, interval `r k("b_n_10pct_lo", unit = TRUE)`
-to `r k("b_n_10pct_hi", unit = TRUE, sign = TRUE)`). In the `r k("n_obs_offn")` country-years with
-official nitrogen figures, nitrogen use rises (`r k("b_n_official_10pct", unit = TRUE, sign = TRUE)`)
-while yields fall (`r k("b_yield_offn_10pct", unit = TRUE)`).
-
-The yield link also weakens as the timing becomes more plausible for a fertiliser decision:
-`r k("b_yield_10pct", unit = TRUE)` in the same season, `r k("b_yield_plant_10pct", unit = TRUE)` with
-the ratio in the six months before each region's main planting (interval
-`r k("b_yield_plant_10pct_lo", unit = TRUE)` to `r k("b_yield_plant_10pct_hi", unit = TRUE)`), and
+**The link is strongest when the ratio includes months after planting:**
+`r k("b_yield_10pct", unit = TRUE)` in the same crop year, which includes months after planting,
+`r k("b_yield_plant_10pct", unit = TRUE)` with the ratio in the six months before each region's
+main planting (interval `r k("b_yield_plant_10pct_lo", unit = TRUE)` to
+`r k("b_yield_plant_10pct_hi", unit = TRUE)`; added after the first results), and
 `r k("b_yield_lag_10pct", unit = TRUE)` with the previous crop year's ratio`r clear_lbl("b_yield_lag")`.
-Entered separately, yields fall with the urea price (`r k("b_urea_yield_10pct", unit = TRUE)` per 10%)
-and rise with the maize price (`r k("b_maize_yield_10pct", unit = TRUE, sign = TRUE)`) by similar
-amounts. **We read this as the ratio tracking world market conditions at least as much as fertiliser
-costs**; which conditions, we do not test.
+If fertiliser costs drove the link, the before-planting ratio should matter most. We read the pattern
+as the ratio tracking world market conditions at least as much as fertiliser costs; which conditions,
+we do not test.
 
-### Input subsidies: nitrogen use held up, harvests show no clear difference
+Nitrogen data do not settle this. Measured nitrogen use per hectare does not fall when the ratio is
+high (`r k("b_n_10pct", unit = TRUE)`, interval `r k("b_n_10pct_lo", unit = TRUE)` to
+`r k("b_n_10pct_hi", unit = TRUE, sign = TRUE)`), but `r k("n_imputed_pct", unit = TRUE)` of the
+figures are FAO estimates, and in the `r k("n_obs_offn")` country-years with official figures
+nitrogen use rises (`r k("b_n_official_10pct", unit = TRUE, sign = TRUE)`) while yields fall
+(`r k("b_yield_offn_10pct", unit = TRUE)`).
+
+### Input subsidies: nitrogen use held up, no consistent yield difference
 
 `r n_high_word` countries (`r and_list(high_names)`) spend on average
 `r k("b1_share_high", unit = TRUE)` of public support to agriculture on input subsidies, against
@@ -278,31 +281,27 @@ ratio is 10% higher, nitrogen use falls `r k("b_n_low_10pct", abs = TRUE, unit =
 low-subsidy group and rises `r k("b_n_high_10pct", unit = TRUE)` in the high-subsidy group. The gap is
 `r if (excl0("theta_n")) "clear" else "not clear"` with year effects
 (`r k("theta_n_10pct", unit = TRUE, sign = TRUE)`, interval `r k("theta_n_10pct_lo", unit = TRUE, sign = TRUE)`
-to `r k("theta_n_10pct_hi", unit = TRUE, sign = TRUE)`) and `r if (b2n_clear) "clear" else "not clear"`
-with each group's own trends and El Niño term on 2005-2024
+to `r k("theta_n_10pct_hi", unit = TRUE, sign = TRUE)`) but `r if (b2n_clear) "also holds" else "does not hold"`
+on 2005-2024 with each group's own trends and El Niño term
 (`r k("theta_n_b2_10pct", unit = TRUE, sign = TRUE)`, interval `r k("theta_n_b2_10pct_lo", unit = TRUE, sign = TRUE)`
-to `r k("theta_n_b2_10pct_hi", unit = TRUE, sign = TRUE)`). A rise in fertiliser use as it gets dearer is
-consistent with programmes being scaled up, not with farmers buying at market prices; we do not test
-this directly. Around the 2008 spike, of the `r k("s08_n")` countries with MAFAP figures for the 2007
-and 2009 budget years, variable-input spending rose as a share of support in `r k("s08_share_up")`
-(`r and_list(s08_up)`).
+to `r k("theta_n_b2_10pct_hi", unit = TRUE, sign = TRUE)`). One possible explanation, untested here, is that programmes procured more in spike years.
 
 **`r if (!theta_clear) "The planned comparison shows no clear yield difference between the groups" else "The planned comparison shows a yield difference between the groups"`**
 (`r k("theta_yield_10pct", unit = TRUE, sign = TRUE)` for a 10% higher ratio, interval
 `r k("theta_yield_10pct_lo", unit = TRUE, sign = TRUE)` to `r k("theta_yield_10pct_hi", unit = TRUE, sign = TRUE)`).
-Checks added after the first results move it both ways: `r k("theta_yield_b2_10pct", unit = TRUE, sign = TRUE)`
+Checks added after the first results give clear differences of opposite sign: `r k("theta_yield_b2_10pct", unit = TRUE, sign = TRUE)`
 (interval `r k("theta_yield_b2_10pct_lo", unit = TRUE, sign = TRUE)` to
 `r k("theta_yield_b2_10pct_hi", unit = TRUE, sign = TRUE)`) with each group's own trends on 2005-2024,
 and `r k("loo_theta_max_10pct", unit = TRUE, sign = TRUE)` (interval
 `r k("loo_theta_max_10pct_lo", unit = TRUE, sign = TRUE)` to `r k("loo_theta_max_10pct_hi", unit = TRUE, sign = TRUE)`)
 after dropping `r if (val("loo_theta_max_is_zwe") == 1) "Zimbabwe entirely" else "the most influential country"`,
-the most extreme of `r k("n_countries")` leave-one-out runs. Dropping only Zimbabwe 2000-09 gives
-`r k("theta_yield_nozwe_10pct", unit = TRUE, sign = TRUE)``r clear_lbl("theta_yield_nozwe")`. None of
-these is robust, so we treat the yield difference as not distinguishable from zero.
+the most extreme of `r k("n_countries")` leave-one-out runs (dropping only Zimbabwe 2000-09:
+`r k("theta_yield_nozwe_10pct", unit = TRUE, sign = TRUE)``r clear_lbl("theta_yield_nozwe")`). **The sign
+flips across specifications, so the data do not show whether subsidies protect harvests.**
 
-### What the spike could mean for the next season
+### Scale check: the 2026 crop year
 
-**Scale check, not a forecast.** If yields respond as in the past, a crop year at the
+**Not a forecast.** If yields respond as in the past, a crop year at the
 `r k("crop_year_now")` ratio (`r k("ratio_now")`) implies maize yields `r f1(boe_plant)`% (with the
 before-planting estimate; interval `r f1(boe_plant_hi)`% to `r f1(boe_plant_lo)`%) to
 `r k("boe_yield_pct", abs = TRUE, unit = TRUE)` (same-season estimate; interval
@@ -310,9 +309,10 @@ before-planting estimate; interval `r f1(boe_plant_hi)`% to `r f1(boe_plant_lo)`
 below a year at the 1990-2019 median ratio: roughly `r mt_pct(boe_plant)` to `r mt("boe_kt")` million
 tonnes on the `r k("prod_2024_mt", unit = TRUE)` harvested in 2024. This assumes the same response at
 every price level, uses the crop-year average rather than the monthly peak, and rests largely on two
-price spikes. Given the nitrogen results, it measures exposure to world market conditions, not to
+price spikes; the before-planting estimate was added after the first results. Given the timing pattern, it measures exposure to world market conditions, not to
 fertiliser costs alone. Most southern African 2026 harvests were planted before the spike, and
-FAOSTAT has no maize data for 2025 or 2026 yet.
+FAOSTAT has no maize data for 2025 or 2026 yet. The `r latest_month` ratio (`r k("ratio_latest")`) is
+much closer to normal, so this is not a projection for 2026/27.
 
 ## What this means for policy
 

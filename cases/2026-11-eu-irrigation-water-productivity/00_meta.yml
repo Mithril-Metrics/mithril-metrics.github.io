@@ -12,6 +12,7 @@ question: >
   irrigation water by matching the best performers?" after two frontier runs; see reframe.)
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
 status: draft                     # plan | code | results | red-teamed | draft | published
+publish_at: null                  # e.g. "2026-11-22T09:00+01:00"; set only after both authors approve. Hourly check publishes it.
 
 hook:
   debate: >

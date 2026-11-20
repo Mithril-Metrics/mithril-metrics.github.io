@@ -10,6 +10,7 @@ title: "{{TITLE}}"                # question or finding, also used as blog title
 question: "{{TITLE}}"             # one answerable empirical question
 bottom_line: null                 # 1–2 sentences, written at the WRITE stage (numbers via key_numbers.csv)
 status: draft                     # draft | red-teamed | published
+publish_at: null                  # e.g. "2026-11-22T09:00+01:00"; set only after both authors approve. Hourly check publishes it.
 
 hook:                             # the current debate this case speaks to
   debate: null                    # one line

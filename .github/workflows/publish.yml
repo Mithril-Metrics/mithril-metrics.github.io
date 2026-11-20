@@ -1,4 +1,7 @@
-# Render the Quarto blog (HTML + one-page PDF briefs) and publish it to the gh-pages branch.
+# Render the Quarto blog (HTML + PDF technical notes) and publish it to the gh-pages branch.
+# Scheduled publishing: every hour, cases whose 00_meta.yml `publish_at:` time has passed are
+# switched from draft to published (.github/scripts/release_scheduled.py), committed, and the
+# site is rebuilt. Hourly runs with nothing to release stop after that check.
 # Everything runs on GitHub's servers: R, the acutils package and Quarto are installed here,
 # so nothing needs to be installed on a laptop to publish.
 # The analysis scripts (01-04) are NOT run here: their outputs (output/key_numbers.csv,
@@ -8,6 +11,8 @@ name: Publish blog
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "7 * * * *"         # hourly, at minute 7 (GitHub may start it some minutes late)
   workflow_dispatch:
 
 permissions:
@@ -15,7 +20,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false      # queue runs, so an hourly check never cancels a build
 
 jobs:
   build-deploy:
@@ -23,13 +28,33 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Release scheduled posts (publish_at has passed)
+        id: release
+        run: |
+          released=$(python3 -I .github/scripts/release_scheduled.py)
+          if [ -n "$released" ]; then
+            echo "Releasing: $released"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+            git add cases
+            git commit -m "Publish scheduled posts: $(echo $released | tr '\n' ' ')"
+            git push origin HEAD:main
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Set up R
+        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true      # fast binary packages
 
       - name: Install R packages (acutils dependencies + rendering)
+        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           working-directory: acutils
@@ -39,14 +64,17 @@ jobs:
             any::yaml
 
       - name: Install acutils
+        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         run: R CMD INSTALL acutils
 
       - name: Set up Quarto
+        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: release           # bundles Typst for the PDF briefs
 
       - name: Render and publish to gh-pages
+        if: github.event_name != 'schedule' || steps.release.outputs.changed == 'true'
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages

@@ -12,6 +12,7 @@ question: >
   over 1990-2024, and was the response weaker in countries that spend more on input subsidies?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
 status: draft                     # plan | code | results | red-teamed | draft | published
+publish_at: null                  # e.g. "2026-11-22T09:00+01:00"; set only after both authors approve. Hourly check publishes it.
 
 hook:
   debate: >
@@ -170,7 +171,7 @@ publication:
   red_team: "done (three P7 rounds plus a confirmation round)"
   author_approval: "PS, 2026-11-20"
   coauthor_review: "pending: JPH (24 h; silence = approval)"
-  to_publish: "set draft: false in report.qmd and push"
+  to_publish: "set publish_at (with UTC offset) in this file and push; or set draft: false in report.qmd to publish now"
 
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html"

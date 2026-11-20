@@ -2,7 +2,7 @@
 # One source file, three outputs: blog post (html), LinkedIn text (output/linkedin_post.txt)
 # and a one-page brief (brief.pdf). Every number comes from output/key_numbers.csv via kn().
 title: "Can one EU benchmark rank irrigation water efficiency?"
-description: "Mediterranean member states abstract four to six times more irrigation water per irrigated hectare than the rest. Compared across countries, a per-hectare benchmark mostly shows where a country is, not how well it irrigates."
+description: "Mediterranean member states abstract 3.8 to 6.0 times more irrigation water per irrigated hectare than the rest. Compared across countries, a per-hectare benchmark mostly shows where a country is, not how well it irrigates."
 author: "Juan Pablo Henao"
 date: "2026-11-20"
 categories: ["Region: EU", "Method: DEA", "Theme: Water"]

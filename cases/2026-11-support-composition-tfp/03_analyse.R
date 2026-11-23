@@ -132,6 +132,8 @@ tab_rebal <- rebal |>
             mps_pct_of_tse = mps_pct_tse,
             stock_heavy) |>
   arrange(desc(gap_usd_bn))
+tab_rebal <- left_join(tab_rebal, select(dumb, iso3, real_change_pct_2000_04_to_2021_25 = real_change_pct, step),
+                       by = "iso3")
 readr::write_csv(tab_rebal, "output/tab_rebalancing.csv")
 print(tab_rebal, n = 40)
 pos_mps <- filter(rebal, mps_usd > 0)
@@ -144,10 +146,30 @@ cat("\nGap as % of own MPS (economies with a gap and MPS > 0): median",
     paste(round(range(pos_mps_gap$gap_pct_mps), 1), collapse = " to "),
     "| pooled without China", round(100 * sum(pos_mps_xchn$gap_usd) / sum(pos_mps_xchn$mps_usd), 1), "\n")
 
-# ---- Series-break check (diagnostic) ----
-brk <- cl$breaks
-brk_units <- unique(brk$iso3[brk$jump])
-cat("Units with a one-year jump in AKIS/VP above 50%:", paste(brk_units, collapse = ", "), "\n")
+# ---- Step changes (diagnostic) ----
+step_units <- cl$step_units
+cat("Units with a one-year jump in the AKIS share of GSSE above 50%:", paste(step_units, collapse = ", "), "\n")
+dumb_ns <- filter(dumb, !step)
+real_missing <- dumb$iso3[is.na(dumb$real_change_pct)]
+cat("Real AKIS fell in:", paste(sort(dumb$iso3[which(dumb$real_change_pct < 0)]), collapse = ", "),
+    "| no real comparison:", paste(real_missing, collapse = ", "), "\n")
+can_sens <- cl$can_sens
+
+# ---- FE check: where does the within-country variation come from? ----
+w_res <- resid(lm(akis_l ~ factor(iso3) + factor(period), data = fe))
+fe_infl <- tibble::tibble(iso3 = fe$iso3, w2 = w_res^2) |>
+  group_by(iso3) |>
+  summarise(share_within_var = 100 * sum(w2), .groups = "drop") |>
+  mutate(share_within_var = share_within_var / sum(share_within_var)) |>
+  arrange(desc(share_within_var))
+readr::write_csv(fe_infl, "output/tab_fe_influence.csv")
+print(head(fe_infl, 6))
+diag_out <- c("ISL", "CHE", "KAZ", "CAN")
+fe_d <- filter(fe, !iso3 %in% diag_out)
+m_fe_d <- lm(g ~ akis_l + mps_l + infra_l + factor(iso3) + factor(period), data = fe_d)
+ct_d <- clubSandwich::coef_test(m_fe_d, vcov = "CR2", cluster = fe_d$iso3, test = "Satterthwaite",
+                                coefs = "akis_l")
+print(ct_d)
 
 # ---- Benchmarks against the APME report (printed, not enforced) ----
 bench <- cl$ann |>
@@ -219,8 +241,29 @@ kn_add("n_real_fall", sum(dumb$real_change_pct < 0, na.rm = TRUE), "economies", 
        paste(src_oecd, "; World Bank WDI GDP deflator"))
 kn_add("n_real_avail", sum(!is.na(dumb$real_change_pct)), "economies", 0,
        "Economies with a real AKIS comparison", paste(src_oecd, "; World Bank WDI GDP deflator"))
-kn_add("n_breaks", length(brk_units), "economies", 0,
-       "Of ISL, CAN, ZAF, CHE, KAZ: economies with a one-year jump in AKIS/VP above 50%", src_oecd)
+kn_add("n_step", length(step_units), "economies", 0,
+       "Economies with a one-year jump in the AKIS share of GSSE above 50%, 2000-2025", src_oecd)
+kn_add("n_lower_nostep", sum(dumb_ns$akis_now < dumb_ns$akis_base), "economies", 0,
+       "Economies with lower AKIS/VP in 2021-25 than 2000-04, without step-change economies", src_oecd)
+kn_add("n_dumb_nostep", nrow(dumb_ns), "economies", 0, "Economies in the dumbbell without step-change economies", src_oecd)
+kn_add("n_real_fall_xeu", sum(dumb$real_change_pct[dumb$iso3 != "EU"] < 0, na.rm = TRUE), "economies", 0,
+       "Economies where real AKIS fell, EU excluded", paste(src_oecd, "; World Bank WDI GDP deflator"))
+kn_add("n_real_avail_xeu", sum(!is.na(dumb$real_change_pct[dumb$iso3 != "EU"])), "economies", 0,
+       "Economies with a real AKIS comparison, EU excluded", paste(src_oecd, "; World Bank WDI GDP deflator"))
+kn_add("n_real_rise_ratio_fall", sum(dumb$real_change_pct > 0 & dumb$akis_now < dumb$akis_base, na.rm = TRUE),
+       "economies", 0, "Economies where real AKIS rose but its share of output value fell", paste(src_oecd, "; World Bank WDI GDP deflator"))
+kn_add("can_gap_usd_bn", rebal$gap_usd[rebal$iso3 == "CAN"] / 1e9, "USD bn", 2, "Canada gap a year", src_oecd)
+kn_add("can_gap_pct_mps", rebal$gap_pct_mps[rebal$iso3 == "CAN"], "%", 0, "Canada gap as % of own MPS", src_oecd)
+kn_add("can_gap_usd_bn_x03", can_sens$gap_usd / 1e9, "USD bn", 2, "Canada gap a year, base without 2003", src_oecd)
+kn_add("can_gap_pct_mps_x03", can_sens$gap_pct_mps, "%", 0, "Canada gap as % of own MPS, base without 2003", src_oecd)
+kn_add("n_gap_gsse_over100", sum(rebal$gap_pct_gsse > 100, na.rm = TRUE), "economies", 0,
+       "Economies where the gap exceeds their whole current GSSE", src_oecd)
+kn_add("fe_top4_within_share", 100 * sum(head(fe_infl$share_within_var, 4)), "%", 0,
+       "Share of within-country AKIS variation in the FE check held by the top 4 economies", src_both)
+kn_add("beta1_fe_diag", unname(coef(m_fe_d)["akis_l"]), "", 2, "FE check without ISL, CHE, KAZ, CAN (diagnostic)", src_both)
+kn_add("p_fe_diag", ct_d$p_Satt[1], "", 3, "FE check without ISL, CHE, KAZ, CAN: CR2 Satterthwaite p", src_both)
+kn_add("df_fe_diag", ct_d$df_Satt[1], "", 1, "FE check without ISL, CHE, KAZ, CAN: Satterthwaite df", src_both)
+kn_add("df_fe", ct$df_Satt[1], "", 1, "FE check: Satterthwaite df", src_both)
 kn_add("beta1_ld_lo95", b_ld - qt(0.975, df = m_ld$df.residual) * se_ld, "", 2,
        "Lower end of the 95% interval of beta1 (HC3, t)", src_both)
 kn_add("beta1_ld_hi95", b_ld + qt(0.975, df = m_ld$df.residual) * se_ld, "", 2,

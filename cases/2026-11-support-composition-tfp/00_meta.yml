@@ -147,3 +147,23 @@ red_team:                         # P7, 2026-11-23: OECD TAD policy review (REVI
     - "EU block membership changed; UK excluded (AKIS from 2017)"
     - "Coverage thin for Sub-Saharan Africa and Latin America; TFP measurement quality; unweighted"
     - "TFP growth needs a complete window (rule added at coding, disclosed here)"
+
+red_team_2:                       # P7 second round, 2026-11-23: OECD TAD policy review (REVISE, light) and econometric review (PUBLISH WITH CAVEATS)
+  fixes_adopted:                  # all seven adopted by the author (option a)
+    - "1: headline and figure 1 lead with 'grew more slowly than farm output'; subtitle gives real falls and real rises below output growth"
+    - "2: Iceland's influence attributed to its TFP outlier (about 6% a year adjusted), not to its spending series; break called 'possible'"
+    - "3: step-change rule on the AKIS share of GSSE for all units, 2000-2025 (tab_breaks.csv); flagged units marked in figure 1; counts without them. Replaces the five-unit AKIS/VP check of round 1"
+    - "4: Canada sensitivity, 2000-04 base without 2003; headline says 'half or more' of own MPS"
+    - "5: rebalancing compared with budgetary support and GSSE in the headline; MPS only as context; 'a yardstick, not a target'"
+    - "6: FE diagnostic: share of within-country AKIS variation by country (tab_fe_influence.csv); FE without ISL, CHE, KAZ, CAN"
+    - "7: real change per economy in tab_rebalancing.csv; real count without the EU; missing unit named in run_log"
+  caveats_post:
+    - "Ratio vs real: the share fell mainly because farm output value grew faster (incl. 2022-23 prices); real spending fell in only a minority"
+    - "No evidence of an effect, but none against: 95% interval -0.63 to 2.11; theory links productivity to accumulated research; a high ratio can reflect a weak farm sector that later recovered"
+    - "The estimate depends on Iceland's productivity outlier; without it 0.74 falls to 0.29"
+    - "Undocumented step changes (ISL 2007, KAZ 2014, CHE 2006; OECD reports the Swiss rise as real growth); CAN 2003 spike in the base"
+    - "The cost is a yardstick, not a target; it scales with high recent output values; vs budgetary support and GSSE; absorption limits where the gap exceeds GSSE"
+  caveats_note_added:
+    - "FE check concentrated in a few countries"
+    - "EU real-terms comparison mixes enlargement with spending growth; 2025 values provisional; GDP deflator is not a research-cost deflator"
+    - "Iceland's 2000-09 value straddles its step change; distribution within countries not covered"

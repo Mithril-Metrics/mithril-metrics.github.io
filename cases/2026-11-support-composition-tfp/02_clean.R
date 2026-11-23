@@ -243,21 +243,38 @@ real <- ann |>
 dumb <- left_join(dumb, select(real, iso3, real_change_pct), by = "iso3")
 cat("Real AKIS change available for", sum(!is.na(dumb$real_change_pct)), "of", nrow(dumb), "units\n")
 
-# ---- Possible series breaks: one-year jumps in AKIS/VP larger than half the previous level ----
-break_units <- c("ISL", "CAN", "ZAF", "CHE", "KAZ")
+# ---- Step changes: one-year jumps in the AKIS share of GSSE above half the previous level ----
+# The share of GSSE does not move with the value of production, so a jump points to a change
+# in spending or in how it is classified. All units, 2000-2025 (the years the outputs use).
 breaks <- ann |>
-  filter(iso3 %in% break_units, year >= 1995) |>
+  filter(iso3 != "OECD", year >= 1999) |>
   mutate(akis_vp = 100 * akis / vp) |>
   group_by(iso3) |>
   arrange(year, .by_group = TRUE) |>
-  mutate(prev = lag(akis_vp),
-         jump = !is.na(prev) & prev > 0 & abs(akis_vp - prev) > 0.5 * prev) |>
+  mutate(prev = lag(akis_sh),
+         jump = year >= 2000 & !is.na(prev) & prev > 0 & abs(akis_sh - prev) > 0.5 * prev) |>
   ungroup() |>
-  select(iso3, year, akis_sh, akis_vp, prev, jump)
+  filter(year >= 2000) |>
+  select(iso3, year, akis_sh, prev, jump, akis_vp)
 readr::write_csv(breaks, "output/tab_breaks.csv")
-cat("\nOne-year jumps in AKIS/VP above 50% of the previous level:\n")
-print(filter(breaks, jump), n = 40)
+step_units <- sort(unique(breaks$iso3[breaks$jump]))
+cat("\nOne-year jumps in the AKIS share of GSSE above 50% of the previous level, 2000-2025:\n")
+print(filter(breaks, jump), n = 60)
+dumb <- mutate(dumb, step = iso3 %in% step_units)
+
+# ---- Canada sensitivity: 2000-04 base without the 2003 spike ----
+can_base <- ann |>
+  filter(iso3 == "CAN", year %in% c(2000:2002, 2004), !is.na(akis), !is.na(vp)) |>
+  summarise(akis_base = 100 * sum(akis) / sum(vp))
+can_sens <- filter(rebal, iso3 == "CAN") |>
+  mutate(akis_base = can_base$akis_base,
+         gap_pp = akis_base - akis_now,
+         gap_usd = pmax(gap_pp, 0) / 100 * vp_usd,
+         gap_pct_mps = ifelse(mps_usd > 0, 100 * gap_usd / mps_usd, NA_real_))
+cat("Canada base without 2003:", round(can_sens$akis_base, 2), "% | gap", round(can_sens$gap_usd / 1e9, 2),
+    "USD bn |", round(can_sens$gap_pct_mps, 1), "% of MPS\n")
 
 saveRDS(list(ann = ann, ld = ld, ld_all = ld_all, fe = fe, rebal = rebal, dumb = dumb, breaks = breaks,
+             step_units = step_units, can_sens = can_sens,
              coverage = coverage, stock_heavy = stock_heavy, accessed = raw$accessed),
         "output/cache/clean.rds")

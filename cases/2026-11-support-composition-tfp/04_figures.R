@@ -35,7 +35,7 @@ cap <- source_caption(
 
 # ---- Figure 1 (hero): AKIS spending as % of value of production, 2000-04 vs 2021-25 ----
 dumb <- cl$dumb |>
-  mutate(name = paste0(label_of(iso3), ifelse(stock_heavy, "*", "")),
+  mutate(name = paste0(label_of(iso3), ifelse(stock_heavy, "*", ""), ifelse(step, " \u2020", "")),
          name = reorder(name, akis_now))
 long <- bind_rows(
   transmute(dumb, name, window = "2000-04", value = akis_base),
@@ -49,16 +49,14 @@ p1 <- ggplot(dumb, aes(y = name)) +
   geom_point(data = long, aes(x = value, colour = window), size = 2.6) +
   scale_colour_manual(values = ac_palette(2)) +
   labs(
-    title = wrap(if (n_lower >= n_higher) {
-      sprintf("Research and extension spending fell relative to the value of farm output in %d of %d economies", n_lower, n_dumb)
-    } else {
-      sprintf("Research and extension spending rose relative to the value of farm output in %d of %d economies", n_higher, n_dumb)
-    }),
-    subtitle = wrap(sprintf("Public spending on agricultural knowledge and innovation (AKIS), %% of farm output value. Real spending (GDP deflator) fell in only %d of %d; elsewhere it grew more slowly than output value.",
-                            num("n_real_fall"), num("n_real_avail")), 85),
+    title = wrap(sprintf("Research and extension spending grew more slowly than farm output: its share fell in %d of %d economies",
+                         n_lower, n_dumb)),
+    subtitle = wrap(sprintf("Public spending on agricultural knowledge and innovation (AKIS), %% of farm output value. Real spending (GDP deflator) fell in %d of %d; in %d more it rose, but less than farm output value.",
+                            num("n_real_fall"), num("n_real_avail"), num("n_real_rise_ratio_fall")), 85),
     x = "AKIS spending, % of value of agricultural production",
     y = "Economy",
-    caption = paste0(cap1, "\n* Public stockholding is a large part of general services support here; it is not counted as AKIS.")
+    caption = paste0(cap1, "\n* Public stockholding is a large part of general services support here; it is not counted as AKIS.",
+                     "\n\u2020 One-year jump of more than half in the AKIS share of general services, 2000-2025: a reclassification or a real change.")
   ) +
   theme_ac(base_size = 12, grid = "x") +
   theme(axis.text.y = element_text(size = 9),
@@ -95,8 +93,8 @@ p2 <- ggplot(ld, aes(akis, g_post)) +
   labs(
     title = wrap(sprintf("Research and extension spending in 2000-09 and productivity growth in 2009-23: %s across %d economies",
                          assoc, nrow(ld))),
-    subtitle = wrap(sprintf("Both axes adjusted for price support, infrastructure spending, income and 1990-2000 growth; dashed line = fitted slope (permutation p = %.2f)",
-                            p_perm), 80),
+    subtitle = wrap(sprintf("Both axes adjusted for price support, infrastructure spending, income and 1990-2000 growth (residuals plus the sample mean, not actual values); dashed line = fitted slope (permutation p = %.2f)",
+                            p_perm), 85),
     x = "AKIS spending 2000-09, % of farm output value (adjusted)",
     y = "TFP growth 2009-23, % a year (adjusted)",
     caption = cap

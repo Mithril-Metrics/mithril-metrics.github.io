@@ -1,0 +1,124 @@
+# 00_meta.yml — single source of truth for this case's metadata.
+# report.qmd reads this file for the hook, the "Data & code" section and the footer.
+
+id: "2026-11-support-composition-tfp"
+issue: 5
+local_folder: "Issue 5"
+author: "Pietro Sala"
+title: "Research and extension spending versus price support: what goes with faster farm productivity growth?"
+question: >
+  Did economies that spent a larger share of their farm output value on agricultural research,
+  extension and education (the OECD's agricultural knowledge and innovation system, AKIS) in
+  2000-2009 see faster agricultural TFP growth in 2010-2023, and what would it cost to return
+  each economy to its 2000-04 spending intensity?
+bottom_line: null                 # written at the WRITE stage from key_numbers.csv
+status: draft                     # plan | code | results | red-teamed | draft | published
+publish_at: null
+
+hook:
+  debate: >
+    The OECD Agricultural Policy Monitoring and Evaluation 2026 report (2 Nov 2026) finds that
+    total support to agriculture averaged USD 885 bn a year in 2023-25 across 56 countries, that
+    general services support fell from 4.6% of the value of production in the early 2000s to
+    2.4% in 2023-25, and that agricultural TFP growth slowed from 1.8% a year in 1991-2000 to
+    0.8% in 2014-2023. It recommends rebalancing support toward knowledge and innovation.
+  date: "2026-11-02"
+  primary_source:
+    title: "OECD (2026), Agricultural Policy Monitoring and Evaluation 2026"
+    url: "https://www.oecd.org/en/publications/agricultural-policy-monitoring-and-evaluation-2026_2c7f3be1-en.html"
+  other_sources:
+    - title: "OECD (2026), Reforming agricultural policies for greater resilience (policy brief)"
+      url: "https://www.oecd.org/en/publications/reforming-agricultural-policies-for-greater-resilience_2cb067af-en/full-report"
+    - title: "OECD press release (2026), Government support to agriculture grew by 15 per cent in the last two years"
+      url: "https://www.oecd.org/en/about/news/press-releases/2026/10/government-support-to-agriculture-grew-by-15-per-cent-in-the-last-two-years-and-much-of-it-is-distortive-says-oecd.html"
+
+tags:
+  region: ["Global"]
+  method: ["TFP"]
+  employer_theme: ["OECD", "WB", "IFPRI"]
+  skills: ["Productivity and TFP", "Panel econometrics", "Policy support analysis"]
+
+dates:
+  created: "2026-11-23"
+  published: null
+
+hours:
+  planned: 4.3                    # P4 option (a): about 140 min of coding, 20 over the 2-hour budget
+  actual: null
+
+sources:
+  - name: "OECD Producer and Consumer Support Estimates (PSE/CSE) database"
+    provider: "OECD Trade and Agriculture Directorate"
+    table: "SDMX agency OECD.TAD.ARP; DSD_AGR_POLIND@DF_TSE, DF_GSSE, DF_COMGSSE, DF_COMM, DF_PSE"
+    url: "https://data-explorer.oecd.org/"
+    version: "2026 edition (Agricultural Policy Monitoring and Evaluation 2026), data to 2025"
+    accessed: null                # filled from data_raw/_access_log.csv
+    licence: "OECD terms and conditions"
+  - name: "USDA ERS International Agricultural Productivity"
+    provider: "USDA Economic Research Service"
+    table: "Machine-readable long-format file of TFP indices and components, 1961-2023 (TFP_Index)"
+    url: "https://www.ers.usda.gov/data-products/international-agricultural-productivity"
+    version: "1961-2023 release (updated 2026-01-27)"
+    accessed: null
+    licence: "US Government work (public domain)"
+  - name: "World Bank World Development Indicators"
+    provider: "World Bank"
+    table: "NY.GDP.PCAP.PP.KD (GDP per capita, PPP, constant international $)"
+    url: "https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD"
+    version: "API, accessed date in data_raw/_access_log.csv"
+    accessed: null
+    licence: "CC BY 4.0"
+
+manual_steps: []
+
+identification: >
+  Descriptive association. AKIS intensity is not randomly assigned: governments may spend more
+  on research where the sector is already doing well (reverse causality), and countries differ
+  in ways the controls (initial income, TFP growth in 1991-2000) only partly capture. The
+  long-difference coefficient compares countries; the fixed-effects panel compares each country
+  with itself but with a lag (5 years) too short for most returns to research.
+
+decisions:                        # fixed in the PLAN stage (P4, 2026-11-23), before seeing results
+  units_regressions: "29 non-EU PSE countries; EU only in the descriptive outputs; OECD total dropped"
+  coverage_rule: "a unit enters a window with >= 3 years of non-missing AKIS and value of production"
+  akis: "AKIS spending = GSSEHSH (% of GSSE) / 100 x GSSE; regressor = AKIS / value of production (VP), %"
+  other_regressors: "MPS / VP (%, may be negative); infrastructure (GSSEJSH) / VP (%); public stockholding enters no regressor"
+  ratio: "ratio of sums over each window (see after_plan for the currency used in the sums)"
+  growth: "100 x OLS slope of ln TFP_Index on year within the window, base year included"
+  long_difference: >
+    g(2009-2023) ~ AKIS/VP 2000-09 + MPS/VP 2000-09 + INFRA/VP 2000-09 + ln GDP pc PPP 2000-04
+    + g(1990-2000); one row per country; unweighted
+  fe_check: >
+    g(period p) ~ AKIS/VP, MPS/VP, INFRA/VP in period p-1 | country + period FE; outcome periods
+    2005-09 (2004-09), 2010-14 (2009-14), 2015-19 (2014-19), 2020-23 (2019-23); lagged windows
+    2000-04, 2005-09, 2010-14, 2015-19
+  primary_coefficient: "beta1 on AKIS/VP; other coefficients are reported without inference claims"
+  inference_ld: "HC3 standard errors; permutation p-value, 9,999 draws"
+  inference_fe: "CR2 by country with Satterthwaite df (clubSandwich); wild cluster bootstrap-t (restricted, Webb weights, 9,999 draws)"
+  scale: "effects reported per within-sample SD of AKIS/VP and per 0.1 pp"
+  robustness:
+    - "R1: leave one country out (long difference)"
+    - "R2: without IND, CHN, IDN, PHL (public stockholding is a large part of their GSSE)"
+  rebalancing: >
+    per unit (30, EU included): AKIS/VP 2000-04 (base) vs 2023-25; gap = max(base - now, 0) x VP
+    2023-25, USD bn a year; gap as % of MPS 2023-25 where MPS > 0; MPS as % of TSE where TSE > 0
+  dumbbell_windows: "AKIS/VP 2000-04 vs 2021-25"
+  title_rule: >
+    figure 2 and the headline say "a positive" or "a negative association" only if the
+    permutation p-value is below 0.10; otherwise "no clear association"
+
+after_plan:                       # choices made while coding, before any result was seen
+  - >
+    Ratios of sums are taken in USD (each year's AKIS, MPS and VP converted at the same annual
+    rate, so every single-year ratio is unchanged). Summing in national currency would give
+    almost all the weight to the last year in high-inflation economies (Argentina, Türkiye).
+  - >
+    The permutation test permutes residuals of the model without AKIS (Freedman-Lane) rather
+    than AKIS itself, because AKIS is correlated with the controls; permuting AKIS alone would
+    test its independence from all regressors, not beta1 = 0.
+  - "The wild cluster bootstrap is coded directly (no extra package)."
+
+links:
+  blog: "https://mithril-metrics.github.io/cases/2026-11-support-composition-tfp/report.html"
+  linkedin: null
+  code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-support-composition-tfp"

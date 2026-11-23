@@ -1,0 +1,21 @@
+{
+  "updated": "2026-11-23",
+  "note": "Public list of our OPEN backlog questions (short neutral titles). Kept in step with project-docs/pending_questions by Claude at P0, P0b and P10.",
+  "questions": [
+    { "id": "Q009", "title": "Does an El Niño hit southern African maize harder when fertiliser is expensive?", "region": "Sub-Saharan Africa" },
+    { "id": "Q015", "title": "How far below full cost do EU farmers pay for water services?", "region": "EU" },
+    { "id": "Q005", "title": "Which EU countries get the least crop output per tonne of mineral nitrogen?", "region": "EU" },
+    { "id": "Q019", "title": "Which EU countries report the water data that national climate-risk assessments will need?", "region": "EU" },
+    { "id": "Q006", "title": "How much of the change in EU farm income since 2021 comes from prices rather than volumes?", "region": "EU" },
+    { "id": "Q012", "title": "How far is each country from the agricultural water-use-efficiency frontier, and is the gap closing?", "region": "Global" },
+    { "id": "Q017", "title": "Did irrigation water per hectare fall in the EU, or did irrigated area grow and absorb the savings?", "region": "EU" },
+    { "id": "Q004", "title": "How far is each country from best-practice emissions per litre of milk?", "region": "Global" },
+    { "id": "Q008", "title": "How fast do world food price swings reach food prices in Sub-Saharan Africa, and faster up than down?", "region": "Sub-Saharan Africa" },
+    { "id": "Q010", "title": "How concentrated are EU direct payments, and how much would capping change?", "region": "EU" },
+    { "id": "Q020", "title": "Allowing for climate, which EU countries still use more irrigation water than their peers?", "region": "EU" },
+    { "id": "Q018", "title": "Where in the EU would the Nitrates Directive digestate derogation matter most?", "region": "EU" },
+    { "id": "Q007", "title": "How strongly did India's 2022–23 rice export bans reach prices in importing countries?", "region": "South Asia" },
+    { "id": "Q011", "title": "Which countries depend most on fertiliser imports from only a few suppliers?", "region": "Global" },
+    { "id": "Q014", "title": "Which African and Latin American exporters depend most on the EU market for EUDR commodities?", "region": "Several" }
+  ]
+}

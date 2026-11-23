@@ -208,7 +208,8 @@ rebal <- select(base, iso3, akis_base = akis) |>
   mutate(gap_pp = akis_base - akis_now,
          gap_usd = pmax(gap_pp, 0) / 100 * vp_usd,
          gap_pct_mps = ifelse(mps_usd > 0, 100 * gap_usd / mps_usd, NA_real_),
-         mps_pct_tse = ifelse(!is.na(tse_usd) & tse_usd > 0, 100 * mps_usd / tse_usd, NA_real_),
+         # only where both are positive: with negative MPS or TSE the share has no meaning
+         mps_pct_tse = ifelse(!is.na(tse_usd) & tse_usd > 0 & mps_usd > 0, 100 * mps_usd / tse_usd, NA_real_),
          stock_heavy = iso3 %in% stock_heavy)
 cat("Rebalancing table:", nrow(rebal), "units\n")
 

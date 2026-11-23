@@ -143,8 +143,14 @@ bench_oecd <- cl$ann |>
   summarise(akis_usd_bn = mean(akis, na.rm = TRUE) / 1e9, akis_pct_gsse = mean(akis_sh, na.rm = TRUE))
 cat("\nBenchmark: GSSE % of VP 2023-25, all units", round(bench$gsse_pct_vp, 2),
     "(APME 2026: 2.4%)\n")
+bench_all <- cl$ann |>
+  filter(iso3 != "OECD", year %in% 2022:2024) |>
+  summarise(akis_pct_gsse = 100 * sum(akis, na.rm = TRUE) / sum(gsse_usd[!is.na(akis)], na.rm = TRUE),
+            akis_pct_vp = 100 * sum(akis, na.rm = TRUE) / sum(vp[!is.na(akis)], na.rm = TRUE))
 cat("Benchmark: OECD AKIS 2022-24", round(bench_oecd$akis_usd_bn, 1), "USD bn,",
-    round(bench_oecd$akis_pct_gsse, 1), "% of GSSE (APME 2025: about USD 25 bn, 30% of OECD GSSE)\n")
+    round(bench_oecd$akis_pct_gsse, 1), "% of OECD GSSE (APME 2025: 30% of OECD GSSE)\n")
+cat("Benchmark: all units 2022-24, AKIS", round(bench_all$akis_pct_gsse, 1), "% of GSSE and",
+    round(bench_all$akis_pct_vp, 2), "% of VP (APME 2025: 22% of GSSE, about 0.5% of VP)\n")
 
 # ---- Key numbers ----
 kn_add("n_ld", nrow(ld), "countries", 0, "Countries in the long-difference regression", src_both)
@@ -178,6 +184,7 @@ kn_add("n_gap", sum(rebal$gap_usd > 0), "economies", 0, "Units with a positive g
 kn_add("gap_pct_mps", 100 * sum(pos_mps$gap_usd) / sum(pos_mps$mps_usd), "%", 1,
        "Gap as % of market price support, units with MPS > 0, 2023-25", src_oecd)
 kn_add("mps_usd_bn_pos", sum(pos_mps$mps_usd) / 1e9, "USD bn", 1, "MPS a year, 2023-25, units with MPS > 0", src_oecd)
+kn_add("bench_akis_pct_vp", bench_all$akis_pct_vp, "%", 2, "AKIS as % of VP 2022-24, all units (check vs APME 2025 about 0.5%)", src_oecd)
 kn_add("bench_gsse_pct_vp", bench$gsse_pct_vp, "%", 2, "GSSE as % of VP 2023-25, all units (check vs APME 2.4%)", src_oecd)
 
 write_session_info()

@@ -5,14 +5,14 @@ id: "2026-11-support-composition-tfp"
 issue: 5
 local_folder: "Issue 5"
 author: "Pietro Sala"
-title: "Research and extension spending versus price support: what goes with faster farm productivity growth?"
+title: "Farm research spending has not kept pace with farm output. What would catching up cost?"
 question: >
   Did economies that spent a larger share of their farm output value on agricultural research,
   extension and education (the OECD's agricultural knowledge and innovation system, AKIS) in
   2000-2009 see faster agricultural TFP growth in 2010-2023, and what would it cost to return
   each economy to its 2000-04 spending intensity?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: draft                     # plan | code | results | red-teamed | draft | published
+status: draft                     # plan | code | results | red-teamed | draft | published (red team closed 2026-11-23)
 publish_at: null
 
 hook:

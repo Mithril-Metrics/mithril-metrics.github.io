@@ -1,0 +1,61 @@
+key,value,unit,digits,big_mark,description,source,updated
+n_ld,28,countries,0,",",Countries in the long-difference regression,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+n_ld_candidates,29,countries,0,",",PSE countries outside the EU block,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+beta1_ld,0.7412855260903596,pp per pp,2,",","TFP growth (pp a year, 2009-23) per 1 pp of AKIS/VP 2000-09","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+se_ld,0.659780616802364,,2,",","HC3 standard error of beta1, long difference","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+p_perm_ld,0.2252,,3,",","Permutation p-value of beta1 (Freedman-Lane, 9,999 draws)","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+sd_akis_ld,0.7617084130981582,pp,2,",",SD of AKIS/VP 2000-09 across countries,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+effect_sd_ld,0.5646434217309211,pp,2,",",TFP growth difference per 1 SD of AKIS/VP 2000-09,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+effect_01_ld,0.07412855260903596,pp,2,",",TFP growth difference per 0.1 pp of AKIS/VP 2000-09,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_loo_min,0.28853873883020253,,2,",","Smallest beta1, leave one country out","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_loo_max,1.0348847071322589,,2,",","Largest beta1, leave one country out","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_r2,0.5922951500351289,,2,",","beta1 without IND, CHN, IDN, PHL","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_fe,-0.9133802606092604,,2,",",FE short-run check: beta1 (5-year lag),"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+p_fe_cr2,0.46929203488778515,,3,",",FE check: CR2 Satterthwaite p-value,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+p_fe_wb,0.8856885688568857,,3,",",FE check: wild cluster bootstrap p-value,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+n_fe,113,country-periods,0,",",Observations in the FE check,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+g_post_median,1.328649190178136,%,2,",","Median TFP growth 2009-23, % a year","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+akis_ld_median,0.8933662117533401,%,2,",",Median AKIS/VP 2000-09,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_dumb,29,economies,0,",",Economies in the dumbbell (EU included),"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_lower,22,economies,0,",",Economies with lower AKIS/VP in 2021-25 than in 2000-04,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_higher,7,economies,0,",",Economies with higher AKIS/VP in 2021-25 than in 2000-04,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+akis_median_base,0.8108162749959332,%,2,",",Median AKIS/VP 2000-04,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+akis_median_now,0.5949245807556525,%,2,",",Median AKIS/VP 2021-25,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+akis_usd_bn_now,26.1418262924082,USD bn,1,",","AKIS spending a year, 2023-25, all units","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_usd_bn,12.685733387946271,USD bn,1,",",Extra AKIS spending a year to return every unit to its 2000-04 intensity,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_gap,22,economies,0,",",Units with a positive gap,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_pct_mps,3.6884403075002896,%,1,",","Gap as % of market price support, units with MPS > 0, 2023-25","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+mps_usd_bn_pos,329.1097296,USD bn,1,",","MPS a year, 2023-25, units with MPS > 0","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_usd_bn_xchn,6.833185480832263,USD bn,1,",",Gap a year without China,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_usd_bn_chn,5.852547907114012,USD bn,1,",","Gap a year, China","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_pct_mps_median,4.181589265356553,%,0,",","Median of gap as % of own MPS, economies with a gap and MPS > 0","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_pct_mps_min,0.6044460826805474,%,1,",",Smallest gap as % of own MPS,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_pct_mps_max,75.44129527682736,%,0,",",Largest gap as % of own MPS,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_gap_mps_half,3,economies,0,",",Economies where the gap is at least half of own MPS,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_pct_mps_xchn,5.013124363912249,%,1,",","Gap as % of MPS, pooled, MPS > 0, without China","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_pct_gsse_median,16.402710646991522,%,0,",","Median of gap as % of own GSSE, economies with a gap","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+gap_pct_budget_median,5.686884019454972,%,0,",","Median of gap as % of own budgetary support (TSE - MPS), economies with a gap","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_real_fall,10,economies,0,",","Economies where real AKIS spending (national currency, GDP deflator) fell, 2000-04 to 2021-25","OECD PSE/CSE database, 2026 edition ; World Bank WDI GDP deflator",2026-11-23 18:34
+n_real_avail,28,economies,0,",",Economies with a real AKIS comparison,"OECD PSE/CSE database, 2026 edition ; World Bank WDI GDP deflator",2026-11-23 18:34
+n_step,16,economies,0,",","Economies with a one-year jump in the AKIS share of GSSE above 50%, 2000-2025","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_lower_nostep,10,economies,0,",","Economies with lower AKIS/VP in 2021-25 than 2000-04, without step-change economies","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_dumb_nostep,13,economies,0,",",Economies in the dumbbell without step-change economies,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_real_fall_xeu,10,economies,0,",","Economies where real AKIS fell, EU excluded","OECD PSE/CSE database, 2026 edition ; World Bank WDI GDP deflator",2026-11-23 18:34
+n_real_avail_xeu,28,economies,0,",","Economies with a real AKIS comparison, EU excluded","OECD PSE/CSE database, 2026 edition ; World Bank WDI GDP deflator",2026-11-23 18:34
+n_real_rise_ratio_fall,11,economies,0,",",Economies where real AKIS rose but its share of output value fell,"OECD PSE/CSE database, 2026 edition ; World Bank WDI GDP deflator",2026-11-23 18:34
+can_gap_usd_bn,1.290734903075715,USD bn,2,",",Canada gap a year,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+can_gap_pct_mps,68.46309328416883,%,0,",",Canada gap as % of own MPS,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+can_gap_usd_bn_x03,0.9978541379097552,USD bn,2,",","Canada gap a year, base without 2003","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+can_gap_pct_mps_x03,52.92812704213516,%,0,",","Canada gap as % of own MPS, base without 2003","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+n_gap_gsse_over100,3,economies,0,",",Economies where the gap exceeds their whole current GSSE,"OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+fe_top4_within_share,79.26976555082047,%,0,",",Share of within-country AKIS variation in the FE check held by the top 4 economies,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_fe_diag,1.38980055145578,,2,",","FE check without ISL, CHE, KAZ, CAN (diagnostic)","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+p_fe_diag,0.192878744825844,,3,",","FE check without ISL, CHE, KAZ, CAN: CR2 Satterthwaite p","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+df_fe_diag,5.1453803606344755,,1,",","FE check without ISL, CHE, KAZ, CAN: Satterthwaite df","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+df_fe,4.010666685014627,,1,",",FE check: Satterthwaite df,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_ld_lo95,-0.6270157258211694,,2,",","Lower end of the 95% interval of beta1 (HC3, t)","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_ld_hi95,2.1095867780018884,,2,",","Upper end of the 95% interval of beta1 (HC3, t)","OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+beta1_no_isl,0.28853873883020253,,2,",",beta1 without Iceland,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+n_fe_countries,28,countries,0,",",Countries with two or more periods in the FE check,"OECD PSE/CSE database, 2026 edition; USDA ERS International Agricultural Productivity, 1961-2023 release",2026-11-23 18:34
+bench_akis_pct_vp,0.5339710349884564,%,2,",","AKIS as % of VP 2022-24, all units (check vs APME 2025 about 0.5%)","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34
+bench_gsse_pct_vp,2.447846902564425,%,2,",","GSSE as % of VP 2023-25, all units (check vs APME 2.4%)","OECD PSE/CSE database, 2026 edition",2026-11-23 18:34

@@ -1,0 +1,5 @@
+model,beta1,se,p,p_type,n
+Long difference (main),0.7412855260903596,0.659780616802364,0.2252,"permutation (Freedman-Lane), HC3 t",28
+"R2: without IND, CHN, IDN, PHL",0.5922951500351289,0.6293605550058159,NA,HC3 SE only,24
+FE short-run check,-0.9133802606092605,1.1441453801097141,0.46929203488778515,"CR2, Satterthwaite df",113
+FE short-run check,-0.9133802606092605,NA,0.8856885688568857,"wild cluster bootstrap-t, Webb",113

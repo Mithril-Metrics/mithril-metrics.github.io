@@ -55,6 +55,18 @@ we keep only our wording and the link to the answer. Legal basis: our legitimate
 running the page and protecting it from abuse (Art. 6(1)(f) GDPR). Cloudflare is certified under
 the EU-U.S. Data Privacy Framework. Details: https://www.cloudflare.com/privacypolicy/
 
+## Cookies and local storage
+
+This site sets no cookies and uses no tracking. Only the following is stored in your browser:
+
+- **Questions page, after you vote:** which questions you have voted for, so the page shows
+  them as voted and does not send the same vote twice (local storage, until you clear it).
+- **Questions page, spam check:** Cloudflare Turnstile may store a short-lived entry needed to
+  tell people from automated programs. It is used only for this check.
+
+Both are strictly necessary for functions you use on that page (§ 25 (2) no. 2 TDDDG), so no
+consent banner is needed. Other pages store nothing.
+
 ## Links to other sites
 
 Posts link to LinkedIn, GitHub and the sources we use. These sites are only contacted when you

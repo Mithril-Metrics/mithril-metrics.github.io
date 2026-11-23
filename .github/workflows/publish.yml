@@ -88,6 +88,9 @@ jobs:
       - name: Render site
         uses: quarto-dev/quarto-actions/render@v2
 
+      - name: Stop Quarto writing an unused entry to browser storage
+        run: python3 -I .github/scripts/patch_quarto_storage.py _site
+
       - name: Check that no page loads resources from other sites
         run: python3 -I .github/scripts/check_external.py _site
 

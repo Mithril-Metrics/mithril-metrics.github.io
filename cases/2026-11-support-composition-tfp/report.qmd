@@ -367,7 +367,7 @@ bullets(bold_first(implications))
 
 ```{r}
 #| results: asis
-bullets(bold_first(caveats))
+bullets(caveats)   # caveats already carry their own bold lead
 ```
 
 **References**

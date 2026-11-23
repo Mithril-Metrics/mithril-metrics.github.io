@@ -4,10 +4,10 @@
 title: "Does El Niño bring unusually severe rice shortfalls in Southeast Asia?"
 description: "No detectable rise in deep shortfalls in the year it begins. An exploratory check points to lower production in Indonesia, the Philippines and Malaysia the year after, consistent with agronomic studies for Indonesia."
 author: "Pietro Sala"
-date: "2026-11-19"
+date: "2026-11-23"
 categories: ["Region: SE Asia", "Method: Tails and risk", "Theme: Food security"]
 image: output/fig4_second_look_margins.png
-draft: true                           # set to false to publish
+draft: false                          # set to false to publish
 title-block-banner: true
 params:
   linkedin_max_chars: 1300

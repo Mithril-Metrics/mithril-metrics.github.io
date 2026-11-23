@@ -11,8 +11,9 @@ question: >
   Thailand, Malaysia, Cambodia; 1961-2024) larger and more frequent in El Niño onset years,
   and more extreme than a normal distribution implies?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: draft                     # plan | code | results | red-teamed | draft | published
+status: published                 # plan | code | results | red-teamed | draft | published
 publish_at: null                  # e.g. "2026-11-22T09:00+01:00"; set only after both authors approve. Hourly check publishes it.
+published_at: "2026-11-23"
 
 hook:
   debate: >
@@ -145,7 +146,7 @@ red_team_6:                       # P7, 2026-11-20, on the final re-run (59 plac
 publication:                      # 2026-11-20
   red_team: "done (six P7 rounds; last three PUBLISH WITH CAVEATS from both reviewers)"
   author_approval: "PS, 2026-11-20"
-  coauthor_review: "pending: JPH (24 h; silence = approval)"
+  coauthor_review: "approved: JPH, 2026-11-23"
   external_facts_checked:
     - "NOAA CPC 12 Nov 2026: strong-to-very strong El Niño likely through Jan-Mar 2027"
     - "FAO-WFP appeal (18 Jun 2026): 22 priority countries; of our six only the Philippines"

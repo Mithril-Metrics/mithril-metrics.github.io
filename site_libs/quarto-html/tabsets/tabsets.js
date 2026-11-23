@@ -5,7 +5,7 @@ export function init() {
     function getTabSettings() {
       const data = localStorage.getItem("quarto-persistent-tabsets-data");
       if (!data) {
-        localStorage.setItem("quarto-persistent-tabsets-data", "{}");
+        
         return {};
       }
       if (data) {

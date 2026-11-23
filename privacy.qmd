@@ -1,0 +1,73 @@
+---
+title: "Privacy policy"
+draft: true                            # publish together with the legal notice
+search: false
+---
+
+*Last updated: 23 November 2026*
+
+## Who is responsible
+
+The controller under the EU General Data Protection Regulation (GDPR) is Pietro Sala, Breisacher
+Straße 17, 81667 München, Germany, CONTACT_EMAIL. See the [legal notice](impressum.qmd).
+
+## In short
+
+This site has no user accounts, no cookies, no analytics and no advertising. We do not collect
+names or email addresses. The only personal data processed when you visit is your network (IP)
+address and basic browser information, which the services below need to deliver the pages.
+
+## Hosting: GitHub Pages
+
+The site is hosted on GitHub Pages, a service of GitHub, Inc., 88 Colin P. Kelly Jr. Street, San
+Francisco, CA 94107, USA. When you open a page, GitHub processes your IP address, the page
+requested, the time, and your browser and operating system, to deliver the page and keep the
+service secure. GitHub may log this information. Legal basis: our legitimate interest in
+publishing the site (Art. 6(1)(f) GDPR). This involves a transfer to the USA; GitHub relies on the
+EU standard contractual clauses for such transfers. Details: GitHub's privacy statement,
+https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement
+
+## Fonts and formula display
+
+Pages load the *Inter* and *Source Sans Pro* typefaces from Google Fonts (Google Ireland Limited,
+Gordon House, Barrow Street, Dublin 4, Ireland; parent company Google LLC, USA), which processes
+your IP address to send the font files. Some pages with mathematical formulas load the MathJax
+library from jsDelivr (operated by Prospect One, Poland) and a small compatibility script from
+cdnjs (Cloudflare, Inc., USA); both process your IP address. Legal basis: our legitimate interest
+in a consistent and readable display (Art. 6(1)(f) GDPR). Google LLC and Cloudflare, Inc. are
+certified under the EU-U.S. Data Privacy Framework.
+
+## Reader questions page
+
+*This section applies once the page is live.* On the Questions page you can vote for questions and
+suggest new ones. The page uses services of Cloudflare, Inc., 101 Townsend Street, San Francisco,
+CA 94107, USA:
+
+- **Spam check (Cloudflare Turnstile):** checks your IP address and browser signals to tell people
+  from automated programs. No cookies are set for this.
+- **Question service (Cloudflare Workers and D1):** stores the text and region of a suggested
+  question and the votes per question. To limit repeated votes and spam, it stores a code derived
+  from your IP address with a secret value that changes every day, so the code cannot be turned
+  back into the address. These codes are deleted after 30 days. Your IP address itself is not
+  stored.
+
+Please do not include personal details in a question. We review every question before it is
+shown, may reword it, and publish only our wording. Questions we do not list are deleted after
+triage; listed questions are removed from the page at the latest 90 days after listing, and their
+text is deleted from the question service 30 days later. Legal basis: our legitimate interest in
+running the page and protecting it from abuse (Art. 6(1)(f) GDPR). Cloudflare is certified under
+the EU-U.S. Data Privacy Framework. Details: https://www.cloudflare.com/privacypolicy/
+
+## Links to other sites
+
+Posts link to LinkedIn, GitHub and the sources we use. These sites are only contacted when you
+follow a link; their own privacy policies apply.
+
+## Your rights
+
+You have the right to access, rectification, erasure, restriction of processing, data
+portability and to object to processing based on legitimate interest (Art. 15–21 GDPR). As we
+store no names or contact details, we usually cannot link data to you; write to us at the address
+above if you have a request. You also have the right to lodge a complaint with a supervisory
+authority, for example the Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18,
+91522 Ansbach, Germany.

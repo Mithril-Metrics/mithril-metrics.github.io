@@ -1,0 +1,42 @@
+---
+title: "Legal notice / Impressum"
+draft: true                            # publish once the contact email is filled in
+search: false
+---
+
+## Legal notice
+
+Information pursuant to § 5 DDG.
+
+Pietro Sala<br>
+Breisacher Straße 17<br>
+81667 München<br>
+Germany
+
+**Contact:** CONTACT_EMAIL
+
+**Responsible for content pursuant to § 18 (2) MStV:**<br>
+Pietro Sala, Breisacher Straße 17, 81667 München, Germany
+
+*Mithril Metrics* is a non-commercial project by Juan Pablo Henao and Pietro Sala. Each case study
+names its author. Views are the authors' own and do not represent their employers.
+
+## Impressum
+
+Angaben gemäß § 5 DDG.
+
+Pietro Sala<br>
+Breisacher Straße 17<br>
+81667 München<br>
+Deutschland
+
+**Kontakt:** CONTACT_EMAIL
+
+**Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:**<br>
+Pietro Sala, Breisacher Straße 17, 81667 München, Deutschland
+
+*Mithril Metrics* ist ein nichtkommerzielles Projekt von Juan Pablo Henao und Pietro Sala. Jede
+Fallstudie nennt ihren Autor. Die Beiträge geben die Meinung der Autoren wieder, nicht die ihrer
+Arbeitgeber.
+
+See also the [privacy policy](privacy.qmd).

@@ -5,6 +5,8 @@ project:
     - index.qmd
     - about.qmd
     - questions.qmd            # reader questions page (draft preview)
+    - impressum.qmd            # legal notice (draft until contact email is set)
+    - privacy.qmd              # privacy policy (draft)
     - people/*.qmd
     - cases/*/report.qmd       # folders starting with "_" (the template) are skipped automatically
   resources:

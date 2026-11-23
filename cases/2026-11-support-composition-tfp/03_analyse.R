@@ -127,12 +127,27 @@ tab_rebal <- rebal |>
             akis_usd_bn_2023_25 = akis_usd / 1e9,
             gap_usd_bn = gap_usd / 1e9,
             gap_pct_of_mps = gap_pct_mps,
+            gap_pct_of_gsse = gap_pct_gsse,
+            gap_pct_of_budget_support = gap_pct_budget,
             mps_pct_of_tse = mps_pct_tse,
             stock_heavy) |>
   arrange(desc(gap_usd_bn))
 readr::write_csv(tab_rebal, "output/tab_rebalancing.csv")
 print(tab_rebal, n = 40)
 pos_mps <- filter(rebal, mps_usd > 0)
+# Country ratios, not only the pooled one: China holds most of the pooled MPS
+gap_pos <- filter(rebal, gap_usd > 0)
+pos_mps_gap <- filter(pos_mps, gap_usd > 0)
+pos_mps_xchn <- filter(pos_mps, iso3 != "CHN")
+cat("\nGap as % of own MPS (economies with a gap and MPS > 0): median",
+    round(median(pos_mps_gap$gap_pct_mps), 1), "| range",
+    paste(round(range(pos_mps_gap$gap_pct_mps), 1), collapse = " to "),
+    "| pooled without China", round(100 * sum(pos_mps_xchn$gap_usd) / sum(pos_mps_xchn$mps_usd), 1), "\n")
+
+# ---- Series-break check (diagnostic) ----
+brk <- cl$breaks
+brk_units <- unique(brk$iso3[brk$jump])
+cat("Units with a one-year jump in AKIS/VP above 50%:", paste(brk_units, collapse = ", "), "\n")
 
 # ---- Benchmarks against the APME report (printed, not enforced) ----
 bench <- cl$ann |>
@@ -184,8 +199,48 @@ kn_add("n_gap", sum(rebal$gap_usd > 0), "economies", 0, "Units with a positive g
 kn_add("gap_pct_mps", 100 * sum(pos_mps$gap_usd) / sum(pos_mps$mps_usd), "%", 1,
        "Gap as % of market price support, units with MPS > 0, 2023-25", src_oecd)
 kn_add("mps_usd_bn_pos", sum(pos_mps$mps_usd) / 1e9, "USD bn", 1, "MPS a year, 2023-25, units with MPS > 0", src_oecd)
+kn_add("gap_usd_bn_xchn", sum(rebal$gap_usd[rebal$iso3 != "CHN"]) / 1e9, "USD bn", 1,
+       "Gap a year without China", src_oecd)
+kn_add("gap_usd_bn_chn", sum(rebal$gap_usd[rebal$iso3 == "CHN"]) / 1e9, "USD bn", 1, "Gap a year, China", src_oecd)
+kn_add("gap_pct_mps_median", median(pos_mps_gap$gap_pct_mps), "%", 0,
+       "Median of gap as % of own MPS, economies with a gap and MPS > 0", src_oecd)
+kn_add("gap_pct_mps_min", min(pos_mps_gap$gap_pct_mps), "%", 1, "Smallest gap as % of own MPS", src_oecd)
+kn_add("gap_pct_mps_max", max(pos_mps_gap$gap_pct_mps), "%", 0, "Largest gap as % of own MPS", src_oecd)
+kn_add("n_gap_mps_half", sum(pos_mps_gap$gap_pct_mps >= 50), "economies", 0,
+       "Economies where the gap is at least half of own MPS", src_oecd)
+kn_add("gap_pct_mps_xchn", 100 * sum(pos_mps_xchn$gap_usd) / sum(pos_mps_xchn$mps_usd), "%", 1,
+       "Gap as % of MPS, pooled, MPS > 0, without China", src_oecd)
+kn_add("gap_pct_gsse_median", median(gap_pos$gap_pct_gsse, na.rm = TRUE), "%", 0,
+       "Median of gap as % of own GSSE, economies with a gap", src_oecd)
+kn_add("gap_pct_budget_median", median(gap_pos$gap_pct_budget, na.rm = TRUE), "%", 0,
+       "Median of gap as % of own budgetary support (TSE - MPS), economies with a gap", src_oecd)
+kn_add("n_real_fall", sum(dumb$real_change_pct < 0, na.rm = TRUE), "economies", 0,
+       "Economies where real AKIS spending (national currency, GDP deflator) fell, 2000-04 to 2021-25",
+       paste(src_oecd, "; World Bank WDI GDP deflator"))
+kn_add("n_real_avail", sum(!is.na(dumb$real_change_pct)), "economies", 0,
+       "Economies with a real AKIS comparison", paste(src_oecd, "; World Bank WDI GDP deflator"))
+kn_add("n_breaks", length(brk_units), "economies", 0,
+       "Of ISL, CAN, ZAF, CHE, KAZ: economies with a one-year jump in AKIS/VP above 50%", src_oecd)
+kn_add("beta1_ld_lo95", b_ld - qt(0.975, df = m_ld$df.residual) * se_ld, "", 2,
+       "Lower end of the 95% interval of beta1 (HC3, t)", src_both)
+kn_add("beta1_ld_hi95", b_ld + qt(0.975, df = m_ld$df.residual) * se_ld, "", 2,
+       "Upper end of the 95% interval of beta1 (HC3, t)", src_both)
+if ("ISL" %in% loo$dropped) {
+  kn_add("beta1_no_isl", loo$beta1[loo$dropped == "ISL"], "", 2, "beta1 without Iceland", src_both)
+}
+kn_add("n_fe_countries", sum(table(fe$iso3) >= 2), "countries", 0,
+       "Countries with two or more periods in the FE check", src_both)
 kn_add("bench_akis_pct_vp", bench_all$akis_pct_vp, "%", 2, "AKIS as % of VP 2022-24, all units (check vs APME 2025 about 0.5%)", src_oecd)
 kn_add("bench_gsse_pct_vp", bench$gsse_pct_vp, "%", 2, "GSSE as % of VP 2023-25, all units (check vs APME 2.4%)", src_oecd)
+
+# Added-variable data for figure 2: both variables net of the controls, sample means added back
+ctrl <- g_post ~ mps + infra + ln_gdppc + g_pre
+av <- ld |>
+  transmute(iso3,
+            akis_adj = resid(lm(update(ctrl, akis ~ .), data = ld)) + mean(ld$akis),
+            g_adj = resid(lm(ctrl, data = ld)) + mean(ld$g_post))
+stopifnot("FWL slope must equal beta1" = abs(coef(lm(g_adj ~ akis_adj, data = av))[2] - b_ld) < 1e-8)
+saveRDS(av, "output/cache/av.rds")
 
 write_session_info()
 cat("\nKey numbers written:", nrow(kn_read()), "\n")

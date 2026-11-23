@@ -81,7 +81,12 @@ wdi <- get_wdi(c(gdppc = "NY.GDP.PCAP.PP.KD"), countries = countries, years = 20
 cat("WDI GDP per capita: countries", length(unique(wdi$iso3c)), "| NA share",
     round(mean(is.na(wdi$gdppc)), 3), "\n")
 
-saveRDS(list(oecd = oecd, tfp = tfp, wdi = wdi, units = units, countries = countries,
+# GDP deflators (EUU = European Union aggregate) to compare AKIS spending in real national currency
+defl <- get_wdi(c(defl = "NY.GDP.DEFL.ZS"), countries = c(countries, "EUU"), years = 2000:2025)
+cat("WDI GDP deflator: units", length(unique(defl$iso3c)), "| last year with data",
+    max(defl$year[!is.na(defl$defl)]), "\n")
+
+saveRDS(list(oecd = oecd, tfp = tfp, wdi = wdi, defl = defl, units = units, countries = countries,
              accessed = as.character(Sys.Date())),
         "output/cache/raw.rds")
 

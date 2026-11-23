@@ -155,6 +155,7 @@ growth <- function(years, label) {
 
 # ---- Long difference ----
 gdp <- raw$wdi |>
+  filter(year %in% 2000:2004) |>
   group_by(iso3 = iso3c) |>
   summarise(ln_gdppc = log(mean(gdppc, na.rm = TRUE)), .groups = "drop")
 ld_all <- tibble::tibble(iso3 = raw$countries) |>
@@ -185,7 +186,8 @@ fe <- bind_rows(lapply(seq_len(nrow(periods)), function(i) {
     mutate(period = periods$period[i])
 })) |>
   filter(iso3 %in% raw$countries, !is.na(g), !is.na(akis_l), !is.na(mps_l), !is.na(infra_l))
-cat("FE panel:", nrow(fe), "country-periods |", length(unique(fe$iso3)), "countries\n")
+cat("FE panel:", nrow(fe), "country-periods |", length(unique(fe$iso3)), "countries |",
+    sum(table(fe$iso3) >= 2), "with two or more periods (singletons add nothing to the FE estimate)\n")
 print(count(fe, period))
 
 # ---- Descriptive windows (EU included) ----
@@ -199,6 +201,7 @@ now3 <- ann |>
             vp_usd = mean(vp, na.rm = TRUE),
             mps_usd = mean(mps, na.rm = TRUE),
             tse_usd = mean(tse_usd, na.rm = TRUE),
+            gsse_usd = mean(gsse_usd, na.rm = TRUE),
             akis_now = 100 * sum(akis[!is.na(akis) & !is.na(vp)]) / sum(vp[!is.na(akis) & !is.na(vp)]),
             .groups = "drop")
 
@@ -208,6 +211,10 @@ rebal <- select(base, iso3, akis_base = akis) |>
   mutate(gap_pp = akis_base - akis_now,
          gap_usd = pmax(gap_pp, 0) / 100 * vp_usd,
          gap_pct_mps = ifelse(mps_usd > 0, 100 * gap_usd / mps_usd, NA_real_),
+         gap_pct_gsse = ifelse(gsse_usd > 0, 100 * gap_usd / gsse_usd, NA_real_),
+         # budgetary support = total support minus market price support (mostly taxpayer-financed)
+         budget_usd = tse_usd - mps_usd,
+         gap_pct_budget = ifelse(!is.na(budget_usd) & budget_usd > 0, 100 * gap_usd / budget_usd, NA_real_),
          # only where both are positive: with negative MPS or TSE the share has no meaning
          mps_pct_tse = ifelse(!is.na(tse_usd) & tse_usd > 0 & mps_usd > 0, 100 * mps_usd / tse_usd, NA_real_),
          stock_heavy = iso3 %in% stock_heavy)
@@ -219,6 +226,38 @@ dumb <- select(base, iso3, akis_base = akis) |>
   mutate(stock_heavy = iso3 %in% stock_heavy)
 cat("Dumbbell:", nrow(dumb), "units\n")
 
-saveRDS(list(ann = ann, ld = ld, ld_all = ld_all, fe = fe, rebal = rebal, dumb = dumb,
+# ---- Real AKIS spending, national currency deflated by the GDP deflator ----
+# A falling ratio can mean a growing farm sector rather than lower spending
+defl <- raw$defl |>
+  transmute(iso3 = ifelse(iso3c == "EUU", "EU", iso3c), year, defl)
+real <- ann |>
+  mutate(akis_xdc = akis_sh / 100 * gsse_xdc) |>
+  inner_join(defl, by = c("iso3", "year")) |>
+  mutate(akis_real = akis_xdc / defl * 100) |>
+  group_by(iso3) |>
+  summarise(real_base = mean(akis_real[year %in% 2000:2004], na.rm = TRUE),
+            real_now = mean(akis_real[year %in% 2021:2025], na.rm = TRUE),
+            .groups = "drop") |>
+  filter(is.finite(real_base), is.finite(real_now)) |>
+  mutate(real_change_pct = 100 * (real_now / real_base - 1))
+dumb <- left_join(dumb, select(real, iso3, real_change_pct), by = "iso3")
+cat("Real AKIS change available for", sum(!is.na(dumb$real_change_pct)), "of", nrow(dumb), "units\n")
+
+# ---- Possible series breaks: one-year jumps in AKIS/VP larger than half the previous level ----
+break_units <- c("ISL", "CAN", "ZAF", "CHE", "KAZ")
+breaks <- ann |>
+  filter(iso3 %in% break_units, year >= 1995) |>
+  mutate(akis_vp = 100 * akis / vp) |>
+  group_by(iso3) |>
+  arrange(year, .by_group = TRUE) |>
+  mutate(prev = lag(akis_vp),
+         jump = !is.na(prev) & prev > 0 & abs(akis_vp - prev) > 0.5 * prev) |>
+  ungroup() |>
+  select(iso3, year, akis_sh, akis_vp, prev, jump)
+readr::write_csv(breaks, "output/tab_breaks.csv")
+cat("\nOne-year jumps in AKIS/VP above 50% of the previous level:\n")
+print(filter(breaks, jump), n = 40)
+
+saveRDS(list(ann = ann, ld = ld, ld_all = ld_all, fe = fe, rebal = rebal, dumb = dumb, breaks = breaks,
              coverage = coverage, stock_heavy = stock_heavy, accessed = raw$accessed),
         "output/cache/clean.rds")

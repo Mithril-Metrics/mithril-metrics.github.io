@@ -122,3 +122,23 @@ links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-support-composition-tfp/report.html"
   linkedin: null
   code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-support-composition-tfp"
+
+red_team:                         # P7, 2026-11-23: OECD TAD policy review (REVISE) and econometric review (REVISE, minor)
+  fixes_adopted:                  # all five adopted by the author (option b)
+    - "1: gap also as % of own MPS (median, range, count >= 50%), of own GSSE and of budgetary support (TSE - MPS); pooled ratio also without China"
+    - "2: series-break diagnostic for ISL, CAN, ZAF, CHE, KAZ (one-year jumps in AKIS/VP above 50% of the previous level), output/tab_breaks.csv; sample unchanged"
+    - "3: figure 2 as an added-variable plot (both axes net of the controls; slope equals beta1)"
+    - "4: real AKIS spending (national currency, WDI GDP deflator) 2000-04 vs 2021-25; figure 1 says 'relative to the value of farm output'"
+    - "5: GDP per capita filtered to 2000-04; FE singleton count reported; labels harmonised to 2009-23; 95% interval and beta1 without Iceland in key numbers"
+  caveats_post:                   # top 5, in this order
+    - "Association, not effect; the 95% range runs from slightly negative to implausibly large"
+    - "One country can swing the result: without Iceland beta1 falls from 0.74 to 0.29"
+    - "Possible series breaks in ISL, CAN, ZAF, CHE, KAZ (result of the break check to be stated)"
+    - "Ratios move with farm output value (2022-23 price spike); real spending fell in fewer economies than the ratio"
+    - "MPS is mostly consumer-paid and research taxpayer-paid: a scale comparison, not money that can be moved; totals add national gaps and are dominated by China"
+  caveats_note:
+    - "FE check near-uninformative (Satterthwaite df about 4; UK a singleton)"
+    - "Long research lags; between-country comparison; public spending only; spillovers"
+    - "EU block membership changed; UK excluded (AKIS from 2017)"
+    - "Coverage thin for Sub-Saharan Africa and Latin America; TFP measurement quality; unweighted"
+    - "TFP growth needs a complete window (rule added at coding, disclosed here)"

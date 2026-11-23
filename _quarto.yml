@@ -13,6 +13,7 @@ project:
     - files/                   # CV PDF
     - fonts/                   # self-hosted Inter (OFL)
     - images/
+    - data/                    # public list of open questions (questions page)
 
 website:
   title: "Mithril Metrics"
@@ -66,6 +67,7 @@ format:
     code-tools: false
     smooth-scroll: true
     link-external-newwindow: true
+    html-math-method: mathml   # formulas drawn by the browser; no MathJax from a CDN
 
 execute:
   freeze: false     # GitHub Actions re-renders everything with R on every push

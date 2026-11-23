@@ -4,6 +4,7 @@ project:
   render:
     - index.qmd
     - about.qmd
+    - questions.qmd            # reader questions page (draft preview)
     - people/*.qmd
     - cases/*/report.qmd       # folders starting with "_" (the template) are skipped automatically
   resources:

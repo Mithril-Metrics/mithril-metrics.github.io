@@ -1,0 +1,212 @@
+---
+title: "Questions we could answer next"
+description: "Open questions on agri-food, water and climate policy. Vote for the ones you would like us to answer, or suggest a new one."
+draft: true                            # preview only: renders at its URL, not linked or listed
+search: false
+include-in-header:
+  text: |
+    <meta name="robots" content="noindex, nofollow">
+---
+
+```{=html}
+<div class="rq-preview-banner">
+  <strong>Preview, not live.</strong> Nothing on this page is saved or sent: votes and
+  questions stay in your browser and disappear on reload. The two reader questions are examples.
+</div>
+```
+
+Each case study starts from one narrow question that public data can answer well. Below are the
+questions we may take up next. **Vote for the ones you would like us to answer**, or suggest a new
+one. Votes help us choose between questions of similar quality; they do not decide on their own
+whether a question is feasible.
+
+## Our open questions
+
+```{=html}
+<table class="table rq-table" id="rq-ours">
+  <thead><tr><th>Question</th><th>Region</th><th class="rq-num">Votes</th><th></th></tr></thead>
+  <tbody></tbody>
+</table>
+```
+
+## Reader questions
+
+Questions sent by readers appear here once we have checked that public data could answer them.
+Each stays listed for up to 90 days.
+
+```{=html}
+<table class="table rq-table" id="rq-readers">
+  <thead><tr><th>Question</th><th>Region</th><th class="rq-num">Votes</th><th></th></tr></thead>
+  <tbody></tbody>
+</table>
+```
+
+## Suggest a question
+
+We take short, specific questions on agri-food, water, climate and rural policy, for example
+*"Do El Niño years cut rice output in Southeast Asia more than an average bad year?"* Please
+include no names or personal details. We read every question; those that public data can answer
+well are listed above and may become one of our next case studies, tagged *Reader questions*.
+**We don't reply individually**: follow Mithril Metrics on LinkedIn and turn on notifications to
+see when a question is answered.
+
+```{=html}
+<form id="rq-form" class="rq-form" novalidate>
+  <label for="rq-text" class="form-label">Your question</label>
+  <textarea id="rq-text" class="form-control" rows="3" maxlength="300"
+    placeholder="One question, one sentence if possible"></textarea>
+  <div class="rq-help"><span id="rq-count">0</span>/300 characters · no links</div>
+  <label for="rq-region" class="form-label mt-2">Region (optional)</label>
+  <select id="rq-region" class="form-select">
+    <option value="">Any or several</option>
+    <option>EU</option><option>Sub-Saharan Africa</option><option>South Asia</option>
+    <option>Southeast Asia</option><option>Latin America</option><option>Global</option>
+  </select>
+  <div class="rq-captcha">Spam check (Cloudflare Turnstile) appears here on the live page.</div>
+  <button type="submit" class="btn btn-primary">Send question</button>
+  <div id="rq-msg" class="rq-msg" role="status" aria-live="polite"></div>
+</form>
+```
+
+## Recently closed
+
+Questions we took up, answered, or closed in the last 30 days.
+
+```{=html}
+<ul id="rq-closed" class="rq-closed"></ul>
+```
+
+<p class="rq-privacy">We store only the question text and region. To limit spam, Cloudflare
+checks each request and we keep a scrambled, daily-changing code derived from your network address
+for 30 days; we never store the address itself, names or emails.</p>
+
+```{=html}
+<style>
+.rq-preview-banner { background:#fff4d6; border:1px solid #e8c868; border-radius:6px;
+  padding:.6rem .9rem; margin-bottom:1.2rem; font-size:.95rem; }
+.rq-table td, .rq-table th { vertical-align: middle; }
+.rq-table .rq-num { text-align:right; width:4.5rem; }
+.rq-table td.rq-num { font-variant-numeric: tabular-nums; }
+.rq-region { white-space: nowrap; color:#5b6876; font-size:.92rem; }
+.rq-vote { white-space: nowrap; width:6rem; text-align:right; }
+.rq-vote button { font-size:.85rem; padding:.15rem .6rem; }
+.rq-tag { display:inline-block; font-size:.75rem; color:#5b6876; border:1px solid #cfd6dd;
+  border-radius:3px; padding:0 .3rem; margin-left:.35rem; }
+.rq-form { max-width: 560px; }
+.rq-help { font-size:.85rem; color:#5b6876; margin-top:.2rem; }
+.rq-captcha { border:1px dashed #cfd6dd; border-radius:4px; padding:.5rem; margin:.8rem 0;
+  font-size:.85rem; color:#5b6876; }
+.rq-msg { margin-top:.6rem; font-size:.95rem; }
+.rq-closed { padding-left:1.1rem; }
+.rq-closed .rq-reason { color:#5b6876; }
+.rq-privacy { font-size:.85rem; color:#5b6876; margin-top:2rem; }
+</style>
+
+<script>
+(function () {
+  // Preview data. On the live page "ours" comes from a static file the authors maintain and
+  // "readers" from the question service; both are inserted as text, never as HTML.
+  var ours = [
+    { id: "Q005", q: "Which EU countries get the least crop output per tonne of mineral nitrogen?", region: "EU" },
+    { id: "Q009", q: "Does an El Niño hit southern African maize harder when fertiliser is expensive?", region: "Sub-Saharan Africa" },
+    { id: "Q015", q: "How far below full cost do EU farmers pay for water services?", region: "EU" },
+    { id: "Q012", q: "How far is each country from the agricultural water-use-efficiency frontier, and is the gap closing?", region: "Global" },
+    { id: "Q008", q: "How fast do world food price swings reach food prices in Sub-Saharan Africa, and is pass-through faster up than down?", region: "Sub-Saharan Africa" },
+    { id: "Q004", q: "How far is each country from best-practice emissions per litre of milk?", region: "Global" },
+    { id: "Q010", q: "How concentrated are EU direct payments, and how much would capping change?", region: "EU" },
+    { id: "Q007", q: "How strongly did India's 2022–23 rice export bans reach prices in importing countries?", region: "South Asia" }
+  ];
+  var readers = [
+    { id: "R-EX1", q: "Do farms in drought-prone regions of Brazil use more irrigation per tonne of soy than elsewhere?", region: "Latin America", days: 76 },
+    { id: "R-EX2", q: "Has the gap between rice farm-gate and retail prices in the Philippines widened since 2020?", region: "Southeast Asia", days: 12 }
+  ];
+  var closed = [
+    { q: "Does an El Niño year bring unusually severe rice shortfalls in Southeast Asia?", reason: "Answered", link: "cases/2026-11-elnino-rice-tails/report.html" },
+    { q: "Example: How would a world without farm subsidies look?", reason: "Closed: too broad for a short case" },
+    { q: "Example: Which village cooperatives in one region are least efficient?", reason: "Closed: needs data that are not public" }
+  ];
+
+  var votes = {};      // in-memory only in the preview
+  var voted = {};
+
+  function cell(tr, text, cls) {
+    var td = document.createElement("td");
+    td.textContent = text;
+    if (cls) td.className = cls;
+    tr.appendChild(td);
+    return td;
+  }
+
+  function render(tableId, rows, isReader) {
+    var tbody = document.querySelector("#" + tableId + " tbody");
+    tbody.replaceChildren();
+    rows.slice().sort(function (a, b) { return (votes[b.id] || 0) - (votes[a.id] || 0); })
+      .forEach(function (r) {
+        var tr = document.createElement("tr");
+        var td = cell(tr, r.q);
+        if (isReader) {
+          var tag = document.createElement("span");
+          tag.className = "rq-tag";
+          tag.textContent = "listed " + r.days + " of 90 days";
+          td.appendChild(tag);
+        }
+        cell(tr, r.region, "rq-region");
+        cell(tr, String(votes[r.id] || 0), "rq-num");
+        var vtd = cell(tr, "", "rq-vote");
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "btn btn-outline-primary";
+        b.textContent = voted[r.id] ? "Voted" : "▲ Vote";
+        b.disabled = !!voted[r.id];
+        b.setAttribute("aria-label", "Vote for: " + r.q);
+        b.addEventListener("click", function () {
+          votes[r.id] = (votes[r.id] || 0) + 1;
+          voted[r.id] = true;
+          render(tableId, rows, isReader);
+        });
+        vtd.appendChild(b);
+        tbody.appendChild(tr);
+      });
+  }
+
+  function renderClosed() {
+    var ul = document.getElementById("rq-closed");
+    closed.forEach(function (c) {
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(c.q + " "));
+      var s = document.createElement("span");
+      s.className = "rq-reason";
+      s.textContent = "(" + c.reason + ")";
+      li.appendChild(s);
+      if (c.link) {
+        li.appendChild(document.createTextNode(" "));
+        var a = document.createElement("a");
+        a.href = c.link;
+        a.textContent = "Read it";
+        li.appendChild(a);
+      }
+      ul.appendChild(li);
+    });
+  }
+
+  var text = document.getElementById("rq-text");
+  var count = document.getElementById("rq-count");
+  var msg = document.getElementById("rq-msg");
+  text.addEventListener("input", function () { count.textContent = text.value.length; });
+
+  document.getElementById("rq-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = text.value.trim();
+    if (v.length < 20) { msg.textContent = "Please write a full question (at least 20 characters)."; return; }
+    if (/https?:|www\.|<|>/i.test(v)) { msg.textContent = "Please leave out links and angle brackets."; return; }
+    msg.textContent = "Thank you. In the live version your question goes to us for a check; if public data can answer it, it appears under Reader questions within about two weeks.";
+    text.value = "";
+    count.textContent = "0";
+  });
+
+  render("rq-ours", ours, false);
+  render("rq-readers", readers, true);
+  renderClosed();
+})();
+</script>
+```

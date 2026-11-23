@@ -23,19 +23,20 @@ The site is hosted on GitHub Pages, a service of GitHub, Inc., 88 Colin P. Kelly
 Francisco, CA 94107, USA. When you open a page, GitHub processes your IP address, the page
 requested, the time, and your browser and operating system, to deliver the page and keep the
 service secure. GitHub may log this information. Legal basis: our legitimate interest in
-publishing the site (Art. 6(1)(f) GDPR). This involves a transfer to the USA; GitHub relies on the
-EU standard contractual clauses for such transfers. Details: GitHub's privacy statement,
+publishing the site (Art. 6(1)(f) GDPR). This involves a transfer to the USA. GitHub is certified
+under the EU-U.S. Data Privacy Framework and otherwise relies on the EU standard contractual
+clauses. Details: GitHub's privacy statement,
 https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement
 
 ## Fonts and formula display
 
-Pages load the *Inter* and *Source Sans Pro* typefaces from Google Fonts (Google Ireland Limited,
-Gordon House, Barrow Street, Dublin 4, Ireland; parent company Google LLC, USA), which processes
-your IP address to send the font files. Some pages with mathematical formulas load the MathJax
-library from jsDelivr (operated by Prospect One, Poland) and a small compatibility script from
-cdnjs (Cloudflare, Inc., USA); both process your IP address. Legal basis: our legitimate interest
-in a consistent and readable display (Art. 6(1)(f) GDPR). Google LLC and Cloudflare, Inc. are
-certified under the EU-U.S. Data Privacy Framework.
+Fonts are served from this site; no font service is contacted. Some pages with mathematical
+formulas load the MathJax library from jsDelivr, operated by Prospect One Sp. z o.o., Kraków,
+Poland. jsDelivr sets no cookies; your IP address is processed by its network providers
+(including Cloudflare and Fastly) only to route the request. These pages also load a small
+compatibility script from cdnjs (Cloudflare, Inc., USA), which processes your IP address. Legal
+basis: our legitimate interest in displaying formulas correctly (Art. 6(1)(f) GDPR). Cloudflare,
+Inc. is certified under the EU-U.S. Data Privacy Framework.
 
 ## Reader questions page
 

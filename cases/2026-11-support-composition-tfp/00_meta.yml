@@ -133,9 +133,14 @@ red_team:                         # P7, 2026-11-23: OECD TAD policy review (REVI
   caveats_post:                   # top 5, in this order
     - "Association, not effect; the 95% range runs from slightly negative to implausibly large"
     - "One country can swing the result: without Iceland beta1 falls from 0.74 to 0.29"
-    - "Possible series breaks in ISL, CAN, ZAF, CHE, KAZ (result of the break check to be stated)"
-    - "Ratios move with farm output value (2022-23 price spike); real spending fell in fewer economies than the ratio"
+    - "Series breaks: persistent jumps in the AKIS share of GSSE in ISL (2007), CHE (2006) and KAZ (2014) look like classification changes; CAN 2003 is a one-year spike inside the base window; ZAF declines gradually"
+    - "Ratios move with farm output value: real AKIS spending fell in only 10 of 28 economies, against 22 of 29 for the ratio"
     - "MPS is mostly consumer-paid and research taxpayer-paid: a scale comparison, not money that can be moved; totals add national gaps and are dominated by China"
+  break_check_result: >
+    tab_breaks.csv (2026-11-23): AKIS share of GSSE ISL 40.7% (2006) to 13.1% (2007), stays 8-14%;
+    CHE 21.8% (2005) to 38.7% (2006), stays 38-49%; KAZ 16.1% (2013) to 39.2% (2014), stays
+    35-53% until 2023. CAN 2003 spike (53.2%, AKIS/VP 4.71%) reverts in 2004. ZAF no jump after 1997.
+    Not confirmed against OECD country notes. Sample unchanged (fixed in advance).
   caveats_note:
     - "FE check near-uninformative (Satterthwaite df about 4; UK a singleton)"
     - "Long research lags; between-country comparison; public spending only; spillovers"

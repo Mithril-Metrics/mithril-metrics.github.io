@@ -54,8 +54,8 @@ p1 <- ggplot(dumb, aes(y = name)) +
     } else {
       sprintf("Research and extension spending rose relative to the value of farm output in %d of %d economies", n_higher, n_dumb)
     }),
-    subtitle = wrap(sprintf("Public spending on agricultural knowledge and innovation (AKIS), %% of the value of production. In real terms (national currency, GDP deflator) it fell in %d of %d",
-                            num("n_real_fall"), num("n_real_avail")), 80),
+    subtitle = wrap(sprintf("Public spending on agricultural knowledge and innovation (AKIS), %% of farm output value. Real spending (GDP deflator) fell in only %d of %d; elsewhere it grew more slowly than output value.",
+                            num("n_real_fall"), num("n_real_avail")), 85),
     x = "AKIS spending, % of value of agricultural production",
     y = "Economy",
     caption = paste0(cap1, "\n* Public stockholding is a large part of general services support here; it is not counted as AKIS.")

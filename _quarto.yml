@@ -35,7 +35,7 @@ website:
     left:
       - text: "Case Studies"
         href: index.qmd
-      - text: "Questions"
+      - text: "Research questions"
         href: questions.qmd
       - text: "About"
         menu:

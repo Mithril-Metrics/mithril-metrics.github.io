@@ -1,3 +1,3 @@
 # Outside hosts that rendered pages may load (one per line). The build fails on any other host.
 # Adding a host here requires a privacy check and a matching section in privacy.qmd.
-# challenges.cloudflare.com    # Turnstile spam check, questions page only (add when the page goes live)
+challenges.cloudflare.com      # Turnstile spam check, questions page only

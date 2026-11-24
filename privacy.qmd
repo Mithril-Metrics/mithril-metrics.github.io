@@ -9,7 +9,7 @@ search: false
 ## Who is responsible
 
 The controller under the EU General Data Protection Regulation (GDPR) is Pietro Sala, Breisacher
-Straße 17, 81667 München, Germany, CONTACT_EMAIL. See the [legal notice](impressum.qmd).
+Straße 17, 81667 München, Germany, mithrilmetrics@gmail.com. See the [legal notice](impressum.qmd).
 
 ## In short
 

@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 <meta name="robots" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://reader-questions.mithrilmetrics.workers.dev; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="quarto:status" content="draft">
 
 
@@ -190,9 +190,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- GO-LIVE: remove the robots meta above, add the question service address to connect-src,
-     and uncomment the Turnstile script below. -->
-<!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script> -->
+<!-- GO-LIVE: remove the robots meta above and set draft: false. -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async="" defer=""></script>
 <div class="rq-preview-banner" id="rq-banner">
   <strong>Preview, not live.</strong> Nothing on this page is saved or sent: votes and
   questions stay in your browser and disappear on reload. The reader questions are examples.
@@ -234,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="suggest-a-question" class="level2">
 <h2 class="anchored" data-anchor-id="suggest-a-question">Suggest a question</h2>
 <p>We take short, specific questions on agri-food, water, climate and rural policy, for example <em>“Do El Niño years cut rice output in Southeast Asia more than an average bad year?”</em> We read every question; those that public data can answer well are listed above and may become one of our next case studies, tagged <em>Reader questions</em>.</p>
-<p><strong>We don’t reply individually, and we don’t collect contact details.</strong> To see every new case study, including any answer to your question, follow <a href="LINKEDIN_PAGE_URL">Mithril Metrics on LinkedIn</a> and turn on notifications, or subscribe to our <a href="index.xml">RSS feed</a>.</p>
+<p><strong>We don’t reply individually, and we don’t collect contact details.</strong> To see every new case study, including any answer to your question, follow <a href="https://www.linkedin.com/company/mithril-metrics">Mithril Metrics on LinkedIn</a> and turn on notifications, or subscribe to our <a href="index.xml">RSS feed</a>.</p>
 <form id="rq-form" class="rq-form" novalidate="">
   <label for="rq-text" class="form-label">Your question</label>
   <textarea id="rq-text" class="form-control" rows="3" maxlength="300" placeholder="One question, one sentence if possible"></textarea>
@@ -295,8 +294,8 @@ We store only the question text, the region and vote counts; no names or emails.
 (function () {
   // GO-LIVE: fill in both values. While api is empty the page runs in preview mode.
   var CONFIG = {
-    api: "",          // e.g. https://reader-questions.<account>.workers.dev
-    sitekey: ""       // Turnstile site key (public)
+    api: "https://reader-questions.mithrilmetrics.workers.dev",
+    sitekey: "0x4AAAAAAGQkNKE7zDFgzGsf"   // Turnstile site key (public)
   };
   var LIVE = CONFIG.api !== "" && CONFIG.sitekey !== "";
 

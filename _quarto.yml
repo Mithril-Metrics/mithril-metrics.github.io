@@ -4,9 +4,9 @@ project:
   render:
     - index.qmd
     - about.qmd
-    - questions.qmd            # reader questions page (draft preview)
-    - impressum.qmd            # legal notice (draft until contact email is set)
-    - privacy.qmd              # privacy policy (draft)
+    - questions.qmd            # reader questions page
+    - impressum.qmd            # legal notice
+    - privacy.qmd              # privacy policy
     - people/*.qmd
     - cases/*/report.qmd       # folders starting with "_" (the template) are skipped automatically
   resources:
@@ -35,6 +35,8 @@ website:
     left:
       - text: "Case Studies"
         href: index.qmd
+      - text: "Questions"
+        href: questions.qmd
       - text: "About"
         menu:
           - text: "The project"
@@ -44,6 +46,9 @@ website:
           - text: "Pietro Sala"
             href: people/pietro-sala.qmd
     right:
+      - icon: linkedin
+        href: https://www.linkedin.com/company/mithril-metrics
+        aria-label: LinkedIn
       - icon: rss
         href: index.xml
         aria-label: RSS feed
@@ -52,7 +57,7 @@ website:
         aria-label: GitHub
   page-footer:
     left: "© 2026 Mithril Metrics · Text CC BY 4.0 · Code MIT"
-    right: "Views are the authors' own."
+    right: "Views are the authors' own. · [Legal notice / Impressum](/impressum.html) · [Privacy](/privacy.html)"
 
 format:
   html:

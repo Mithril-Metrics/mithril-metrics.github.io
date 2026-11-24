@@ -1,6 +1,5 @@
 ---
 title: "Legal notice / Impressum"
-draft: true                            # publish once the contact email is filled in
 search: false
 ---
 

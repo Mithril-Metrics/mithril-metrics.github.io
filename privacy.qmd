@@ -1,6 +1,5 @@
 ---
 title: "Privacy policy"
-draft: true                            # publish together with the legal notice
 search: false
 ---
 
@@ -35,7 +34,7 @@ formula service is contacted when you open a case study.
 
 ## Reader questions page
 
-*This section applies once the page is live.* On the Questions page you can vote for questions and
+On the Questions page you can vote for questions and
 suggest new ones. The page loads the Turnstile script from Cloudflare and uses services of Cloudflare, Inc., 101 Townsend Street, San Francisco,
 CA 94107, USA:
 

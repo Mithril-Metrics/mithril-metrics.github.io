@@ -1,6 +1,6 @@
 {
   "updated": "2026-11-23",
-  "note": "Public list of our OPEN backlog questions (short neutral titles) and our recently closed ones. Kept in step with project-docs/pending_questions by Claude at P0, P0b, P2 and P10.",
+  "note": "Public list of our OPEN backlog questions (short neutral titles) and our published answers. Kept in step with project-docs/pending_questions by Claude at P0, P0b, P2 and P10.",
   "questions": [
     {
       "id": "Q009",
@@ -85,30 +85,6 @@
       "note": "Answered",
       "date": "2026-11-23",
       "link": "cases/2026-11-elnino-rice-tails/report.html"
-    },
-    {
-      "id": "Q003",
-      "title": "Do countries that shift farm support towards knowledge and infrastructure see faster productivity growth?",
-      "note": "Taken up as a case study",
-      "date": "2026-11-23"
-    },
-    {
-      "id": "Q013",
-      "title": "Which EU countries get the least farm output per cubic metre of irrigation water?",
-      "note": "Taken up as a case study",
-      "date": "2026-11-20"
-    },
-    {
-      "id": "Q016",
-      "title": "How much did irrigation cushion the 2026 summer-crop yield loss across EU member states?",
-      "note": "Taken up as a case study",
-      "date": "2026-11-20"
-    },
-    {
-      "id": "Q002",
-      "title": "How unaffordable is fertiliser for maize farmers in Sub-Saharan Africa, and did input subsidies soften the response?",
-      "note": "Taken up as a case study",
-      "date": "2026-11-19"
     }
   ]
 }

@@ -21,8 +21,8 @@ include-in-header:
 Each case study starts from one narrow question that public data can answer well. Below are the
 questions we may take up next, ours and those suggested by readers. **Vote for the ones you would
 like us to answer**, or suggest a new one. Votes help us choose between questions of similar
-quality; they do not decide on their own whether a question is feasible. Reader questions appear
-in our wording once we have checked them, and stay listed for up to 90 days.
+quality; they do not decide on their own whether a question is feasible. Reader questions are
+listed only after we have reviewed them, in our wording, and stay listed for up to 90 days.
 
 ```{=html}
 <div class="rq-toolbar" role="group" aria-label="Show questions">
@@ -45,8 +45,9 @@ in our wording once we have checked them, and stay listed for up to 90 days.
 
 We take short, specific questions on agri-food, water, climate and rural policy, for example
 *"Do El Niño years cut rice output in Southeast Asia more than an average bad year?"* We read
-every question; those that public data can answer well are listed above and may become one of
-our next case studies, tagged *Reader questions*.
+every question, but we cannot take up all of them. Those that fit our scope and that public data
+can answer well may be listed above, in our wording, and some may become case studies, tagged
+*Reader questions*.
 
 **We don't reply individually, and we don't collect contact details.** To see every new case
 study, including any answer to your question, follow
@@ -83,7 +84,7 @@ turn on notifications, or subscribe to our <a href="index.xml">RSS feed</a>.
 
 ## Recently closed
 
-Questions we took up, answered, or closed in the last 30 days.
+The five most recent questions we took up, answered or closed, ours and readers'.
 
 ```{=html}
 <ul id="rq-closed" class="rq-closed"></ul>
@@ -142,9 +143,8 @@ address that cannot be turned back into it, for at most 30 days. Details in our
     { id: "R-EX1", title: "Do farms in drought-prone regions of Brazil use more irrigation per tonne of soy?", region: "Latin America", days_listed: 76, list_days: 90 },
     { id: "R-EX2", title: "Has the gap between rice farm-gate and retail prices in the Philippines widened since 2020?", region: "Southeast Asia", days_listed: 12, list_days: 90 }
   ];
-  var sampleClosed = [
-    { title: "Do El Niño years bring unusually severe rice shortfalls in Southeast Asia?", note: "Answered", link: "cases/2026-11-elnino-rice-tails/report.html" }
-  ];
+  var sampleClosed = [];
+  var ourClosed = [];
 
   var rows = [];
   var votes = {};
@@ -270,7 +270,10 @@ address that cannot be turned back into it, for at most 30 days. Details in our
       render();
     });
   });
-  function renderClosed(list) {
+  function renderClosed(readerClosed) {
+    var list = ourClosed.concat(readerClosed || [])
+      .sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); })
+      .slice(0, 5);
     var ul = document.getElementById("rq-closed");
     ul.replaceChildren();
     list.forEach(function (c) {
@@ -291,7 +294,7 @@ address that cannot be turned back into it, for at most 30 days. Details in our
     });
     if (!list.length) {
       var li = document.createElement("li");
-      li.textContent = "Nothing closed in the last 30 days.";
+      li.textContent = "Nothing closed yet.";
       ul.appendChild(li);
     }
   }
@@ -351,7 +354,7 @@ address that cannot be turned back into it, for at most 30 days. Details in our
     if (!consent.checked) { msg.textContent = "Please tick the consent box to send your question."; return; }
     if (v.length < 20) { msg.textContent = "Please write a full question (at least 20 characters)."; return; }
     if (/https?:|www\.|<|>/i.test(v)) { msg.textContent = "Please leave out links and angle brackets."; return; }
-    var done = "Thank you. We check every question; if public data can answer it, it appears in the list above within about two weeks, in our wording.";
+    var done = "Thank you, we have received your question. We read every question but cannot take up all of them; if we list it, it appears in the table above in our wording.";
     if (!LIVE) { msg.textContent = done + " (Preview: nothing was sent.)"; resetForm(); return; }
     sendBtn.disabled = true;
     msg.textContent = "Sending…";
@@ -379,6 +382,7 @@ address that cannot be turned back into it, for at most 30 days. Details in our
   // ---- load data ----
   fetch("data/open_questions.json").then(function (r) { return r.json(); }).then(function (d) {
     var ours = (d.questions || []).map(function (q) { return { id: q.id, title: q.title, region: q.region, src: "ours" }; });
+    ourClosed = d.closed || [];
     if (!LIVE) {
       rows = ours.concat(sampleReaders.map(function (r) { r.src = "reader"; return r; }));
       render();

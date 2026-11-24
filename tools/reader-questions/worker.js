@@ -87,7 +87,8 @@ async function publicList(env) {
   ).all();
   const closed = await env.DB.prepare(
     "SELECT title, status, link, closed_at FROM reader_questions " +
-    "WHERE status IN ('PICKED','ANSWERED','EXPIRED') AND closed_at >= ? ORDER BY closed_at DESC LIMIT 20"
+    "WHERE status IN ('PICKED','ANSWERED') OR (status = 'EXPIRED' AND closed_at >= ?) " +
+    "ORDER BY closed_at DESC LIMIT 5"
   ).bind(now - CLOSED_VISIBLE_DAYS * DAY).all();
   return json({
     votes,
@@ -97,6 +98,7 @@ async function publicList(env) {
     })),
     closed: closed.results.map((r) => ({
       title: r.title, note: PUBLIC_NOTES[r.status], link: r.status === "ANSWERED" ? r.link : null,
+      date: dayString(r.closed_at),
     })),
   }, 200, { "Cache-Control": "public, max-age=30" });
 }

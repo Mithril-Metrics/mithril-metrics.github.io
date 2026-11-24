@@ -233,7 +233,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="suggest-a-question" class="level2">
 <h2 class="anchored" data-anchor-id="suggest-a-question">Suggest a question</h2>
-<p>We take short, specific questions on agri-food, water, climate and rural policy, for example <em>“Do El Niño years cut rice output in Southeast Asia more than an average bad year?”</em> We read every question; those that public data can answer well are listed above and may become one of our next case studies, tagged <em>Reader questions</em>. <strong>We don’t reply individually</strong>: follow Mithril Metrics on LinkedIn and turn on notifications to see when a question is answered.</p>
+<p>We take short, specific questions on agri-food, water, climate and rural policy, for example <em>“Do El Niño years cut rice output in Southeast Asia more than an average bad year?”</em> We read every question; those that public data can answer well are listed above and may become one of our next case studies, tagged <em>Reader questions</em>.</p>
+<p><strong>We don’t reply individually, and we don’t collect contact details.</strong> To see every new case study, including any answer to your question, follow <a href="LINKEDIN_PAGE_URL">Mithril Metrics on LinkedIn</a> and turn on notifications, or subscribe to our <a href="index.xml">RSS feed</a>.</p>
 <form id="rq-form" class="rq-form" novalidate="">
   <label for="rq-text" class="form-label">Your question</label>
   <textarea id="rq-text" class="form-control" rows="3" maxlength="300" placeholder="One question, one sentence if possible"></textarea>
@@ -249,10 +250,14 @@ ul.task-list li input[type="checkbox"] {
     <input id="rq-website" type="text" tabindex="-1" autocomplete="off">
   </div>
   <div id="rq-captcha-submit" class="rq-captcha"></div>
-  <p class="rq-consent">By submitting, you agree that we may edit, shorten or reword your
-  question and publish it on this site with our answer. Please include no names, personal or
-  confidential information.</p>
-  <button type="submit" class="btn btn-primary" id="rq-send">Send question</button>
+  <div class="form-check rq-consent">
+    <input class="form-check-input" type="checkbox" id="rq-consent" required="">
+    <label class="form-check-label" for="rq-consent">I agree that Mithril Metrics may edit,
+    shorten or reword my question, use it for an analysis, and publish it, in its own wording,
+    on this site and its channels (such as LinkedIn) together with any answer. My question
+    contains no names, personal or confidential information.</label>
+  </div>
+  <button type="submit" class="btn btn-primary" id="rq-send" disabled="">Send question</button>
   <div id="rq-msg" class="rq-msg" role="status" aria-live="polite"></div>
 </form>
 <div id="rq-captcha-vote" class="rq-captcha-vote"></div>
@@ -279,7 +284,7 @@ We store only the question text, the region and vote counts; no names or emails.
 .rq-help { font-size:.85rem; color:#5b6876; margin-top:.2rem; }
 .rq-hp { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
 .rq-captcha { margin:.8rem 0; min-height:1rem; }
-.rq-consent { font-size:.88rem; color:#5b6876; margin:.6rem 0; }
+.rq-consent { font-size:.88rem; color:#3d4a56; margin:.8rem 0; }
 .rq-msg { margin-top:.6rem; font-size:.95rem; }
 .rq-closed { padding-left:1.1rem; }
 .rq-closed .rq-reason { color:#5b6876; }
@@ -444,13 +449,17 @@ We store only the question text, the region and vote counts; no names or emails.
   var text = document.getElementById("rq-text");
   var count = document.getElementById("rq-count");
   text.addEventListener("input", function () { count.textContent = text.value.length; });
+  var consent = document.getElementById("rq-consent");
+  var sendBtn = document.getElementById("rq-send");
+  consent.addEventListener("change", function () { sendBtn.disabled = !consent.checked; });
   document.getElementById("rq-form").addEventListener("submit", function (e) {
     e.preventDefault();
     var v = text.value.trim();
+    if (!consent.checked) { msg.textContent = "Please tick the consent box to send your question."; return; }
     if (v.length < 20) { msg.textContent = "Please write a full question (at least 20 characters)."; return; }
     if (/https?:|www\.|<|>/i.test(v)) { msg.textContent = "Please leave out links and angle brackets."; return; }
     var done = "Thank you. We check every question; if public data can answer it, it appears under Reader questions within about two weeks, in our wording.";
-    if (!LIVE) { msg.textContent = done + " (Preview: nothing was sent.)"; text.value = ""; count.textContent = "0"; return; }
+    if (!LIVE) { msg.textContent = done + " (Preview: nothing was sent.)"; text.value = ""; count.textContent = "0"; consent.checked = false; sendBtn.disabled = true; return; }
     var send = document.getElementById("rq-send");
     send.disabled = true;
     msg.textContent = "Sending…";
@@ -460,13 +469,13 @@ We store only the question text, the region and vote counts; no names or emails.
         website: document.getElementById("rq-website").value, token: token
       });
     }).then(function (res) {
-      if (res.status === 200) { msg.textContent = done; text.value = ""; count.textContent = "0"; }
+      if (res.status === 200) { msg.textContent = done; text.value = ""; count.textContent = "0"; consent.checked = false; }
       else if (res.body.error === "bad_text") { msg.textContent = "Please check the question: 20–300 characters, no links."; }
       else if (res.status === 429) { msg.textContent = "Thank you, that is the limit of questions for today."; }
       else { msg.textContent = "Sorry, the question could not be sent. Please try again later."; }
     }).catch(function () {
       msg.textContent = "Sorry, the spam check failed. Please reload the page and try again.";
-    }).then(function () { send.disabled = false; });
+    }).then(function () { send.disabled = !consent.checked; });
   });
 
   // ---- load data ----

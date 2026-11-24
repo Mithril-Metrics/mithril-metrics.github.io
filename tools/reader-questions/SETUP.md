@@ -15,7 +15,12 @@ The Worker holds no GitHub credentials. Never paste a secret into a chat, a comm
 
 ## 3. Database
 1. *Storage & Databases → D1 → Create*. Name `reader-questions`.
-2. Open the database → *Console*, paste the contents of `schema.sql`, run.
+2. Open the database → *Console*, paste the contents of `schema.sql` (no comments: the console
+   joins lines, so `--` comments would swallow the rest), click *Execute*. Check with
+   `SELECT name FROM sqlite_master WHERE type = 'table';` → four tables plus `_cf_KV`.
+   Columns: reader_questions holds raw text (never public), our title, status and dates;
+   vote_totals the counts; vote_log one row per voter code and question (30 days);
+   rate_limits daily counters (2 days).
 
 ## 4. Worker
 1. *Workers & Pages → Create → Start with Hello World*. Name `reader-questions` → *Deploy*.

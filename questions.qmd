@@ -320,7 +320,7 @@ address that cannot be turned back into it, for at most 30 days. Details in our
       } else if (res.status === 429) {
         voteMsg.textContent = "Vote limit for today reached. Thank you for taking part.";
       } else {
-        voteMsg.textContent = "Sorry, the vote could not be counted (code: " + (res.body.error || res.status) + ").";
+        voteMsg.textContent = "Sorry, the vote could not be counted (code: " + (res.body.error || res.status) + (res.body.detail ? ": " + res.body.detail : "") + ").";
       }
       render();
     }).catch(function (err) {
@@ -365,7 +365,7 @@ address that cannot be turned back into it, for at most 30 days. Details in our
       if (res.status === 200) { msg.textContent = done; resetForm(); return; }
       if (res.body.error === "bad_text") msg.textContent = "Please check the question: 20–300 characters, no links.";
       else if (res.status === 429) msg.textContent = "Thank you, that is the limit of questions for today.";
-      else msg.textContent = "Sorry, the question could not be sent (code: " + (res.body.error || res.status) + ").";
+      else msg.textContent = "Sorry, the question could not be sent (code: " + (res.body.error || res.status) + (res.body.detail ? ": " + res.body.detail : "") + ").";
       sendBtn.disabled = !consent.checked;
     }).catch(function (err) {
       usedToken();

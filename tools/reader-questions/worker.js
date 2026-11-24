@@ -109,7 +109,8 @@ async function vote(request, env, body) {
     if (!row || row.status !== "LISTED") return json({ error: "closed" }, 409);
   }
   const ip = request.headers.get("CF-Connecting-IP") || "";
-  if (!(await turnstileOk(env, body.token, ip, "vote"))) return json({ error: "captcha" }, 403);
+  const capV = await turnstileCheck(env, body.token, ip, "vote");
+  if (capV) return json({ error: "captcha", detail: capV }, 403);
   if (!(await underLimit(env, ip, "vote", VOTES_PER_DAY))) return json({ error: "rate_limited" }, 429);
   const voter = await hmac(env.VOTER_SECRET, "vote|" + ip + "|" + id);
   const ins = await env.DB.prepare(
@@ -130,7 +131,8 @@ async function submit(request, env, body) {
   const region = typeof body.region === "string" && REGIONS.includes(body.region) ? body.region : null;
   if (region === null) return json({ error: "bad_region" }, 400);
   const ip = request.headers.get("CF-Connecting-IP") || "";
-  if (!(await turnstileOk(env, body.token, ip, "submit"))) return json({ error: "captcha" }, 403);
+  const capS = await turnstileCheck(env, body.token, ip, "submit");
+  if (capS) return json({ error: "captcha", detail: capS }, 403);
   if (!(await underLimit(env, ip, "submit", SUBMITS_PER_DAY))) return json({ error: "rate_limited" }, 429);
   const queued = await env.DB.prepare("SELECT COUNT(*) AS n FROM reader_questions WHERE status = 'NEW'").first();
   if (queued.n >= MAX_NEW) return json({ error: "queue_full" }, 503);
@@ -271,17 +273,22 @@ export async function housekeeping(env) {
 
 // ---------- helpers ----------
 
-async function turnstileOk(env, token, ip, action) {
-  if (typeof token !== "string" || token.length < 10 || token.length > 2048) return false;
+// Returns "" when the token is valid, otherwise a short reason (Cloudflare's error codes).
+async function turnstileCheck(env, token, ip, action) {
+  if (typeof token !== "string" || token.length < 10 || token.length > 2048) return "no-token";
+  if (!env.TURNSTILE_SECRET) return "secret-missing";
   const form = new FormData();
   form.append("secret", env.TURNSTILE_SECRET);
   form.append("response", token);
   if (ip) form.append("remoteip", ip);
   const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form });
-  if (!res.ok) return false;
+  if (!res.ok) return "siteverify-" + res.status;
   const out = await res.json();
+  if (out.success !== true) return (out["error-codes"] || ["failed"]).join(",");
   const host = new URL(env.ALLOWED_ORIGIN).hostname;
-  return out.success === true && out.hostname === host && (!out.action || out.action === action);
+  if (out.hostname !== host) return "hostname-" + out.hostname;
+  if (out.action && out.action !== action) return "action";
+  return "";
 }
 
 async function underLimit(env, ip, kind, limit) {

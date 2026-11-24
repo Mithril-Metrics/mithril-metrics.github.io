@@ -196,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
   <strong>Preview, not live.</strong> Nothing on this page is saved or sent: votes and
   questions stay in your browser and disappear on reload. The reader questions are examples.
 </div>
-<p>Each case study starts from one narrow question that public data can answer well. Below are the questions we may take up next, ours and those suggested by readers. <strong>Vote for the ones you would like us to answer</strong>, or suggest a new one. Votes help us choose between questions of similar quality; they do not decide on their own whether a question is feasible. Reader questions appear in our wording once we have checked them, and stay listed for up to 90 days.</p>
+<p>Each case study starts from one narrow question that public data can answer well. Below are the questions we may take up next, ours and those suggested by readers. <strong>Vote for the ones you would like us to answer</strong>, or suggest a new one. Votes help us choose between questions of similar quality; they do not decide on their own whether a question is feasible. Reader questions are listed only after we have reviewed them, in our wording, and stay listed for up to 90 days.</p>
 <div class="rq-toolbar" role="group" aria-label="Show questions">
   <button type="button" class="rq-filter active" data-src="all">All</button>
   <button type="button" class="rq-filter" data-src="ours">Ours</button>
@@ -224,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="rq-vote-msg" class="rq-msg" role="status" aria-live="polite"></div>
 <section id="suggest-a-question" class="level2">
 <h2 class="anchored" data-anchor-id="suggest-a-question">Suggest a question</h2>
-<p>We take short, specific questions on agri-food, water, climate and rural policy, for example <em>“Do El Niño years cut rice output in Southeast Asia more than an average bad year?”</em> We read every question; those that public data can answer well are listed above and may become one of our next case studies, tagged <em>Reader questions</em>.</p>
+<p>We take short, specific questions on agri-food, water, climate and rural policy, for example <em>“Do El Niño years cut rice output in Southeast Asia more than an average bad year?”</em> We read every question, but we cannot take up all of them. Those that fit our scope and that public data can answer well may be listed above, in our wording, and some may become case studies, tagged <em>Reader questions</em>.</p>
 <p><strong>We don’t reply individually, and we don’t collect contact details.</strong> To see every new case study, including any answer to your question, follow <a href="https://www.linkedin.com/company/mithril-metrics">Mithril Metrics on LinkedIn</a> and turn on notifications, or subscribe to our <a href="index.xml">RSS feed</a>.</p>
 <form id="rq-form" class="rq-form" novalidate="">
   <label for="rq-text" class="form-label">Your question</label>
@@ -253,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="recently-closed" class="level2">
 <h2 class="anchored" data-anchor-id="recently-closed">Recently closed</h2>
-<p>Questions we took up, answered, or closed in the last 30 days.</p>
+<p>The five most recent questions we took up, answered or closed, ours and readers’.</p>
 <ul id="rq-closed" class="rq-closed"></ul>
 <p class="rq-privacy">
 We store only the question text, the region and vote counts; no names or emails. To limit spam, Cloudflare checks each request, and we keep codes derived from your network address that cannot be turned back into it, for at most 30 days. Details in our <a href="privacy.html">privacy policy</a>.
@@ -305,9 +305,8 @@ We store only the question text, the region and vote counts; no names or emails.
     { id: "R-EX1", title: "Do farms in drought-prone regions of Brazil use more irrigation per tonne of soy?", region: "Latin America", days_listed: 76, list_days: 90 },
     { id: "R-EX2", title: "Has the gap between rice farm-gate and retail prices in the Philippines widened since 2020?", region: "Southeast Asia", days_listed: 12, list_days: 90 }
   ];
-  var sampleClosed = [
-    { title: "Do El Niño years bring unusually severe rice shortfalls in Southeast Asia?", note: "Answered", link: "cases/2026-11-elnino-rice-tails/report.html" }
-  ];
+  var sampleClosed = [];
+  var ourClosed = [];
 
   var rows = [];
   var votes = {};
@@ -433,7 +432,10 @@ We store only the question text, the region and vote counts; no names or emails.
       render();
     });
   });
-  function renderClosed(list) {
+  function renderClosed(readerClosed) {
+    var list = ourClosed.concat(readerClosed || [])
+      .sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); })
+      .slice(0, 5);
     var ul = document.getElementById("rq-closed");
     ul.replaceChildren();
     list.forEach(function (c) {
@@ -454,7 +456,7 @@ We store only the question text, the region and vote counts; no names or emails.
     });
     if (!list.length) {
       var li = document.createElement("li");
-      li.textContent = "Nothing closed in the last 30 days.";
+      li.textContent = "Nothing closed yet.";
       ul.appendChild(li);
     }
   }
@@ -514,7 +516,7 @@ We store only the question text, the region and vote counts; no names or emails.
     if (!consent.checked) { msg.textContent = "Please tick the consent box to send your question."; return; }
     if (v.length < 20) { msg.textContent = "Please write a full question (at least 20 characters)."; return; }
     if (/https?:|www\.|<|>/i.test(v)) { msg.textContent = "Please leave out links and angle brackets."; return; }
-    var done = "Thank you. We check every question; if public data can answer it, it appears in the list above within about two weeks, in our wording.";
+    var done = "Thank you, we have received your question. We read every question but cannot take up all of them; if we list it, it appears in the table above in our wording.";
     if (!LIVE) { msg.textContent = done + " (Preview: nothing was sent.)"; resetForm(); return; }
     sendBtn.disabled = true;
     msg.textContent = "Sending…";
@@ -542,6 +544,7 @@ We store only the question text, the region and vote counts; no names or emails.
   // ---- load data ----
   fetch("data/open_questions.json").then(function (r) { return r.json(); }).then(function (d) {
     var ours = (d.questions || []).map(function (q) { return { id: q.id, title: q.title, region: q.region, src: "ours" }; });
+    ourClosed = d.closed || [];
     if (!LIVE) {
       rows = ours.concat(sampleReaders.map(function (r) { r.src = "reader"; return r; }));
       render();

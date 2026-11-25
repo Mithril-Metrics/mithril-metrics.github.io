@@ -4,10 +4,10 @@
 title: "Do fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?"
 description: "In 14 Sub-Saharan African countries since 1990, maize yields have been lower when world fertiliser was dear relative to maize, but the link weakens once prices after planting are left out. The yield evidence on input subsidies is inconclusive."
 author: "Pietro Sala"
-date: "2026-11-19"
+date: "2026-11-25"
 categories: ["Region: SSA", "Method: Elasticities", "Theme: Food security"]
 image: output/fig1_hero.png
-draft: true                           # set to false to publish
+draft: false                           # set to false to publish
 title-block-banner: true
 params:
   linkedin_max_chars: 1300

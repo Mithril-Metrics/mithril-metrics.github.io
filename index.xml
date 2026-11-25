@@ -17,7 +17,128 @@
 <width>144</width>
 </image>
 <generator>quarto-1.11.9</generator>
-<lastBuildDate>Mon, 23 Nov 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 25 Nov 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Do fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?</title>
+  <dc:creator>Pietro Sala</dc:creator>
+  <link>https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="bottom-line">
+<p><strong>Short answer.</strong> <strong>Maize yields in these 14 countries have been lower in years when world fertiliser was dear relative to maize, but the link weakens once prices after planting are left out.</strong> A 10% higher world urea-to-maize price ratio goes with 1.2% lower yields in the same season (1990-2024), 0.7% lower with the ratio before planting and no clear change with the previous year’s ratio. We read this as the ratio tracking world market conditions at least as much as fertiliser costs. In high-subsidy countries, recorded nitrogen use did not fall in high-price years, but this does not hold on 2005-2024 alone, and harvests show no consistent difference between the groups.</p>
+</div>
+<div class="key-figures">
+<div class="kf">
+<div class="kf-value">
+4.00
+</div>
+<div class="kf-label">
+Tonnes of maize needed to buy a tonne of urea in April 2026, the most since at least 1990
+</div>
+</div>
+<div class="kf">
+<div class="kf-value">
+-1.2%
+</div>
+<div class="kf-label">
+Maize yield when the world urea-to-maize ratio is 10% higher, same crop year (association; -0.7% with the ratio before planting)
+</div>
+</div>
+<div class="kf">
+<div class="kf-value">
+-0.9%
+</div>
+<div class="kf-label">
+Nitrogen use per hectare when the ratio is 10% higher, all countries, not clear
+</div>
+</div>
+</div>
+<section id="why-this-matters-now" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters-now">Why this matters now</h2>
+<p>Fertiliser prices jumped after the Strait of Hormuz, a key route for fertiliser trade, closed on 28 February 2026. The OECD’s October policy brief and its Agricultural Policy Monitoring and Evaluation 2026 (2 November) examine how fertiliser shocks reach food security, but their support estimates cover only one Sub-Saharan African country, South Africa. We ask, for 14 maize-growing countries in the region: how much smaller are harvests when fertiliser is dear relative to maize, and do input subsidies change that? Sources: <a href="https://www.oecd.org/en/publications/agricultural-resilience-and-food-security-in-an-interconnected-world_daa053c8-en.html">OECD fertiliser brief</a>, <a href="https://www.oecd.org/en/publications/agricultural-policy-monitoring-and-evaluation-2026_2c7f3be1-en.html">OECD Agricultural Policy Monitoring and Evaluation 2026</a> and <a href="https://iccwbo.org/news-publications/policy-paper/safeguarding-food-security-amid-the-hormuz-crisis/">ICC on the Hormuz closure</a>.</p>
+</section>
+<section id="what-we-did" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-did">What we did</h2>
+<div class="method-note">
+<p>We convert the World Bank’s monthly world prices of urea and maize into one ratio per crop year (October to September): the tonnes of maize that buy a tonne of urea. We relate it to FAOSTAT maize yields and nitrogen use per hectare in 14 countries, 1990-2024 (487 country-years), comparing each country with its own trend and allowing for El Niño. The ratio is a single world series, so the estimate rests on 35 crop years, not on every country-year. Countries are split at the median of FAO MAFAP spending on variable inputs as a share of all public support to agriculture. Intervals are 90% and allow for shocks shared across countries in the same year.</p>
+</div>
+</section>
+<section id="what-the-data-show" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-data-show">What the data show</h2>
+<section id="fertiliser-has-not-cost-this-much-maize-since-at-least-1990" class="level3">
+<h3 class="anchored" data-anchor-id="fertiliser-has-not-cost-this-much-maize-since-at-least-1990">Fertiliser has not cost this much maize since at least 1990</h3>
+<p><img src="https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/output/fig1_hero.png" class="img-fluid" style="width:100.0%" alt="Line chart of the monthly world urea-to-maize price ratio, 1990 to October 2026. It peaked at 3.34 in August 2008, 3.62 in November 2021 and 4.00 in April 2026, against a 1990-2019 median of 1.29, and stood at 1.85 in October 2026."></p>
+<p><strong>In April 2026 a tonne of urea cost 4.00 tonnes of maize on world markets, the most since at least 1990.</strong> The 1990-2019 median was 1.29; earlier spikes reached 3.34 (August 2008) and 3.62 (November 2021). The average for the October 2025-September 2026 crop year was 2.40, 1.86 times the median. By October 2026 the ratio was 1.85.</p>
+</section>
+<section id="yields-are-lower-when-the-ratio-is-high" class="level3">
+<h3 class="anchored" data-anchor-id="yields-are-lower-when-the-ratio-is-high">Yields are lower when the ratio is high</h3>
+<p><img src="https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/output/fig2_response.png" class="img-fluid" style="width:100.0%" alt="Dot chart with 90% intervals. A 10% higher urea-to-maize ratio goes with -1.2% maize yields across 14 countries, -1.0% in low-subsidy and -1.3% in high-subsidy countries. Nitrogen use changes by -0.9% overall, -5.0% in low-subsidy and +3.4% in high-subsidy countries."></p>
+<p><strong>A 10% higher ratio goes with 1.2% lower maize yields in the same crop year</strong> (90% interval -1.7% to -0.6%). Leaving out one country at a time gives -1.4% to -0.7%; without the 2008-09 crop years it is -0.9%, without 2021-22 -1.2%, and without Zimbabwe’s 2000-09 collapse -0.9%. A regression on the 35 yearly averages gives -1.2% (interval -1.7% to -0.6%).</p>
+</section>
+<section id="the-link-weakens-once-prices-after-planting-are-left-out" class="level3">
+<h3 class="anchored" data-anchor-id="the-link-weakens-once-prices-after-planting-are-left-out">The link weakens once prices after planting are left out</h3>
+<p><strong>The link is strongest when the ratio includes months after planting:</strong> -1.2% in the same crop year, which includes months after planting, -0.7% with the ratio in the six months before each region’s main planting (interval -1.2% to -0.2%; added after the first results), and -0.5% with the previous crop year’s ratio, not clear. If fertiliser costs drove the link, the before-planting ratio should matter most. We read the pattern as the ratio tracking world market conditions at least as much as fertiliser costs; which conditions, we do not test.</p>
+<p>Nitrogen data do not settle this. Measured nitrogen use per hectare does not fall when the ratio is high (-0.9%, interval -2.8% to +1.1%), but 55% of the figures are FAO estimates, and in the 217 country-years with official figures nitrogen use rises (+2.2%) while yields fall (-1.5%).</p>
+</section>
+<section id="input-subsidies-nitrogen-use-held-up-no-consistent-yield-difference" class="level3">
+<h3 class="anchored" data-anchor-id="input-subsidies-nitrogen-use-held-up-no-consistent-yield-difference">Input subsidies: nitrogen use held up, no consistent yield difference</h3>
+<p>Seven countries (Malawi, Zambia, Mali, Zimbabwe, Rwanda, Burkina Faso and Ghana) spend on average 20% of public support to agriculture on input subsidies, against 3% in the other seven. When the ratio is 10% higher, nitrogen use falls 5.0% in the low-subsidy group and rises 3.4% in the high-subsidy group. The gap is clear with year effects (+5.2%, interval +0.3% to +10.4%) but does not hold on 2005-2024 with each group’s own trends and El Niño term (+2.4%, interval -5.1% to +10.4%). One possible explanation, untested here, is that programmes procured more in spike years.</p>
+<p><strong>The planned comparison shows no clear yield difference between the groups</strong> (+0.4% for a 10% higher ratio, interval -1.0% to +1.8%). Checks added after the first results give clear differences of opposite sign: -2.2% (interval -3.0% to -1.5%) with each group’s own trends on 2005-2024, and +1.7% (interval +0.2% to +3.2%) after dropping Zimbabwe entirely, the most extreme of 14 leave-one-out runs (dropping only Zimbabwe 2000-09: +0.8%, not clear). <strong>The sign flips across specifications, so the data do not show whether subsidies protect harvests.</strong></p>
+</section>
+<section id="scale-check-the-2026-crop-year" class="level3">
+<h3 class="anchored" data-anchor-id="scale-check-the-2026-crop-year">Scale check: the 2026 crop year</h3>
+<p><strong>Not a forecast.</strong> If yields respond as in the past, a crop year at the 2026 ratio (2.40) implies maize yields 4.6% (with the before-planting estimate; interval 1.3% to 7.8%) to 7.4% (same-season estimate; interval 4.0% to 10.6%) below a year at the 1990-2019 median ratio: roughly 2.8 to 4.6 million tonnes on the 61.8 million t harvested in 2024. This assumes the same response at every price level, uses the crop-year average rather than the monthly peak, and rests largely on two price spikes; the before-planting estimate was added after the first results. Given the timing pattern, it measures exposure to world market conditions, not to fertiliser costs alone. Most southern African 2026 harvests were planted before the spike, and FAOSTAT has no maize data for 2025 or 2026 yet. The October 2026 ratio (1.85) is much closer to normal, so this is not a projection for 2026/27.</p>
+</section>
+</section>
+<section id="what-this-means-for-policy" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-means-for-policy">What this means for policy</h2>
+<ul>
+<li>If the aim is to judge exposure to the 2026 spike, the world ratio is a rough signal only. Farm-gate prices can diverge from world prices and were not used here; national price monitoring (FAO GIEWS for maize, AfricaFertilizer.org for fertiliser) is the closer signal.</li>
+<li>If input subsidies are meant to keep fertiliser flowing during spikes, recorded nitrogen use in high-subsidy countries held up over 1990-2024, though not on 2005-2024 alone. This may partly reflect programmes scaled up during spikes, which we did not test; for scale, Malawi’s variable-input spending went from 44% to 51% of all public support to agriculture between the 2007 and 2009 budget years (+76% in real terms). If the aim is to protect harvests, these data show no consistent yield difference. The trade-off is the budget share such programmes take against a yield gain the data cannot confirm.</li>
+<li>If the aim is to plan food needs, the scale check is a guide for seasons planted at 2026 prices, not an estimate of 2026 losses: most southern African 2026 harvests were planted before the spike.</li>
+</ul>
+</section>
+<section id="caveats" class="level2 caveats">
+<h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
+<ul>
+<li>Associations, not effects. The ratio is one world series, and high-ratio years can differ in other ways (energy, freight, the dollar). Prices are US Gulf maize and Middle East urea; farm-gate ratios, which in landlocked countries can differ widely, are not observed.</li>
+<li>The nitrogen data cannot settle why yields fall. Nitrogen is national use on all crops per hectare of cropland, 55% of the figures are FAO estimates, and on official figures alone nitrogen use rises with the ratio (+2.2%). The timing pattern, not the nitrogen result, is our main reason to doubt a pure fertiliser-cost channel.</li>
+<li>The subsidy comparison is indicative only. Groups are fixed over time, based on MAFAP spending from 2004 (Ghana from 2016), and applied to earlier years; the median split separates countries with similar shares (Ghana and Benin). MAFAP counts only on-budget spending, and its variable-input category also covers seed, energy and credit. El Niño is measured in December-February, which fits southern Africa’s season better than West Africa’s. With one world price series and about 20 checks at 90%, results whose intervals barely exclude zero are suggestive.</li>
+</ul>
+</section>
+<section id="data-code" class="level2 data-code">
+<h2 class="anchored" data-anchor-id="data-code">Data &amp; code</h2>
+<ul>
+<li><strong>World Bank Commodity Price Data (The Pink Sheet), monthly</strong> (CMO-Historical-Data-Monthly.xlsx, sheet ‘Monthly Prices’: Urea; Maize ($/mt, nominal)), version Updated on November 03, 2026 (data to October 2026), accessed 2026-11-20. <a href="https://www.worldbank.org/en/research/commodity-markets">Link</a></li>
+<li><strong>FAOSTAT Fertilizers by Nutrient (RFN)</strong> (RFN; item Nutrient nitrogen N (total); elements Agricultural Use, Use per area of cropland), version 2026-07-30 (bulk catalogue DateUpdate), data to 2024, accessed 2026-11-20. <a href="https://www.fao.org/faostat/en/#data/RFN">Link</a></li>
+<li><strong>FAOSTAT Production: Crops and livestock products (QCL)</strong> (QCL; item Maize (corn); elements Yield, Area harvested, Production), version 2025-12-31 (bulk catalogue DateUpdate), data to 2024, accessed 2026-11-20. <a href="https://www.fao.org/faostat/en/#data/QCL">Link</a></li>
+<li><strong>FAO MAFAP public expenditure on food and agriculture (bulk file)</strong> (public-expenditure-dataset_fao-mafap-programme_march2026rev.xlsx; B1. Variable inputs; III. Total expenditures in support of food and agriculture), version March 2026 revision, accessed 2026-11-20. <a href="https://www.fao.org/in-action/mafap/data-hub/en">Link</a></li>
+<li><strong>NOAA CPC Oceanic Niño Index (ONI)</strong> (oni.ascii.txt), version monthly update, accessed 2026-11-20. <a href="https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt">Link</a></li>
+</ul>
+<p>Checks added after the first results (price split, Zimbabwe, spike years, official nitrogen data, 2008 subsidy spending) are listed in <code>00_meta.yml</code>. Code to reproduce every number and figure: <a href="https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-ssa-fertiliser-response">GitHub</a>. Technical note with more detail (PDF, 2-3 pages): <a href="brief.pdf">brief.pdf</a>.</p>
+<p><strong>Use of AI tools.</strong> We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.</p>
+</section>
+<div class="post-footer">
+<img src="https://mithril-metrics.github.io/images/people/pietro-sala.jpg" alt="">
+<p>
+Written by <a href="../../people/pietro-sala.html">Pietro Sala</a>. Views are the authors’ own. Part of <em>Mithril Metrics</em>: reproducible analyses of current agri-food, water and climate policy questions.
+</p>
+</div>
+
+
+
+ ]]></description>
+  <category>Region: SSA</category>
+  <category>Method: Elasticities</category>
+  <category>Theme: Food security</category>
+  <guid>https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/report.html</guid>
+  <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://mithril-metrics.github.io/cases/2026-11-ssa-fertiliser-response/output/fig1_hero.png" medium="image" type="image/png" height="90" width="144"/>
+</item>
 <item>
   <title>Does El Niño bring unusually severe rice shortfalls in Southeast Asia?</title>
   <dc:creator>Pietro Sala</dc:creator>

@@ -220,15 +220,11 @@ robustness <- c(
 )
 # Technical note only: the remaining known limitations, after the post's five
 caveats_extra <- c(
-  paste0("**The within-country check is close to uninformative:** four economies hold ",
-         k("fe_top4_within_share", unit = TRUE), " of its variation in spending."),
-  "**Returns to research take a decade or more:** even the 2009-23 window may capture only part of them.",
-  "**Public spending only:** private research and research funded outside agriculture budgets are not counted.",
-  "**Spillovers:** economies benefit from each other's research, which a cross-country comparison cannot separate.",
-  "**EU and UK:** the EU block changed membership and is left out of the regressions and the real-terms count; the UK has separate data only from 2017.",
-  "**Provisional and deflated values:** 2025 values are provisional, and the GDP deflator is not a research-cost deflator.",
-  "**Coverage:** South Africa is the only Sub-Saharan economy and few low-income economies are included.",
-  "**TFP measurement:** USDA estimates rely on national statistics of varying quality; for a farm sector as small as Iceland's, measurement may drive the figure.",
+  paste0("**Long lags, little within-country evidence:** returns to research take a decade or more, so even the 2009-23 window may capture only part of them, and the within-country check is close to uninformative (four economies hold ",
+         k("fe_top4_within_share", unit = TRUE), " of its variation in spending)."),
+  "**Public spending only:** private research and research funded outside agriculture budgets are not counted, and spillovers between economies cannot be separated.",
+  "**Data breaks and deflators:** the EU block changed membership and is left out of the regressions and the real-terms count; the UK has separate data only from 2017; 2025 values are provisional, and the GDP deflator is not a research-cost deflator.",
+  "**Coverage and TFP measurement:** South Africa is the only Sub-Saharan economy and few low-income economies are included; USDA estimates rely on national statistics of varying quality, and for a farm sector as small as Iceland's, measurement may drive the figure.",
   "**Unweighted and national:** each economy counts once, and national totals do not show who gains within a country."
 )
 

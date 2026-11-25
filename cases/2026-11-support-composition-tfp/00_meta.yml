@@ -13,7 +13,7 @@ question: >
   each economy to its 2000-04 spending intensity?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
 status: draft                     # plan | code | results | red-teamed | draft | published (red team closed 2026-11-23)
-publish_at: null
+publish_at: "2026-12-02T11:00+01:00"   # Wed 2 Dec, 11:00 Munich (CET)
 
 hook:
   debate: >

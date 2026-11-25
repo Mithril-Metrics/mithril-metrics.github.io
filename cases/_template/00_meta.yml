@@ -21,7 +21,7 @@ hook:                             # the current debate this case speaks to
 
 tags:                             # mirrored in report.qmd `categories:` (Region / Method / Employer)
   region: ["{{REGION}}"]          # EU | SSA | South Asia | SE Asia | LatAm | Global
-  method: ["{{METHOD}}"]          # SFA | TFP | Eco-eff | Elasticities | Tails/risk | Causal | Descriptive
+  method: ["{{METHOD}}"]          # SFA | DEA | TFP | Eco-eff | Elasticities | Tails/risk | Causal | ML | Descriptive
   employer_theme: ["{{EMPLOYER}}"]  # WB | FAO | OECD | IFPRI | IIASA | WFP | IFAD | JRC | CGIAR
   skills: []                      # from 02_profile "Skills to showcase"
 
@@ -45,6 +45,11 @@ sources:                          # one entry per dataset; every number in the p
 manual_steps: []                  # only if no API exists: exact click-path, file name, date
 
 identification: null              # one sentence: what must hold for a causal reading (or "descriptive")
+
+method_track:                     # chosen at P4 (08_prompt_library): E econometrics | M machine learning | C comparison
+  choice: null
+  reason: null                    # one line; if no ML option was proposed, why not
+  ml_settings: null               # Track M/C: learners, tuning grid, folds, seed, fixed before the first run
 
 links:
   blog: "https://mithril-metrics.github.io/cases/{{CASE_ID}}/report.html"

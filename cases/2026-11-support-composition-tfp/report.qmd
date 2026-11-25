@@ -173,7 +173,7 @@ why_short <- paste0("The OECD's 2026 monitoring report (2 November) recommends s
 
 method_tag <- paste0("Method: OECD support data and USDA TFP, ", k("n_dumb"), " economies, 2000-2025; ",
                      "cross-country comparison with permutation inference")
-hashtags <- "#AgriculturalPolicy #Innovation #Productivity #OECD"
+hashtags <- "#AgriculturalPolicy #AgriculturalResearch #Productivity"
 
 # ---- Technical note (PDF) only ----
 method_detail <- paste0(
@@ -218,6 +218,20 @@ robustness <- c(
          " of output value in 2023-25 (APME 2026: 2.4%); AKIS ", k("bench_akis_pct_vp", unit = TRUE),
          " in 2022-24 (APME 2025: about 0.5%).")
 )
+# Technical note only: the remaining known limitations, after the post's five
+caveats_extra <- c(
+  paste0("**The within-country check is close to uninformative:** four economies hold ",
+         k("fe_top4_within_share", unit = TRUE), " of its variation in spending."),
+  "**Returns to research take a decade or more:** even the 2009-23 window may capture only part of them.",
+  "**Public spending only:** private research and research funded outside agriculture budgets are not counted.",
+  "**Spillovers:** economies benefit from each other's research, which a cross-country comparison cannot separate.",
+  "**EU and UK:** the EU block changed membership and is left out of the regressions and the real-terms count; the UK has separate data only from 2017.",
+  "**Provisional and deflated values:** 2025 values are provisional, and the GDP deflator is not a research-cost deflator.",
+  "**Coverage:** South Africa is the only Sub-Saharan economy and few low-income economies are included.",
+  "**TFP measurement:** USDA estimates rely on national statistics of varying quality; for a farm sector as small as Iceland's, measurement may drive the figure.",
+  "**Unweighted and national:** each economy counts once, and national totals do not show who gains within a country."
+)
+
 references <- c(
   "OECD (2026). *Agricultural Policy Monitoring and Evaluation 2026*. OECD Publishing. [Link](https://www.oecd.org/en/publications/agricultural-policy-monitoring-and-evaluation-2026_2c7f3be1-en.html)",
   "Fuglie, K. (2018). R&D capital, R&D spillovers, and productivity growth in world agriculture. *Applied Economic Perspectives and Policy*, 40(3), 421-444. [doi](https://doi.org/10.1093/aepp/ppx045)",
@@ -367,7 +381,7 @@ bullets(bold_first(implications))
 
 ```{r}
 #| results: asis
-bullets(caveats)   # caveats already carry their own bold lead
+bullets(c(caveats, caveats_extra))   # caveats already carry their own bold lead
 ```
 
 **References**

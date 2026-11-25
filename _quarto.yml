@@ -18,7 +18,7 @@ project:
 website:
   title: "Mithril Metrics"
   draft-mode: unlinked              # drafts render at their URL but are not listed or in the feed
-  description: "Short, reproducible analyses of current agri-food, climate and rural policy questions with public data."
+  description: "Reproducible analyses of current agri-food, climate and rural policy questions with public data."
   site-url: "https://mithril-metrics.github.io/"
   repo-url: "https://github.com/Mithril-Metrics/mithril-metrics.github.io"
   favicon: images/favicon.png

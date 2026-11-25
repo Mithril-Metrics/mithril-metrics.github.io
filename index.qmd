@@ -1,7 +1,7 @@
 ---
 pagetitle: "Mithril Metrics"
 image: images/og-default.png
-description: "Short, reproducible case studies on agri-food, water and climate policy, built from public data."
+description: "Reproducible case studies on agri-food, water and climate policy, built from public data."
 page-layout: full
 title-block-style: none
 listing:

@@ -504,7 +504,7 @@ photo <- file.path("..", "..", "images", "people", paste0(author_slug, ".jpg"))
 cat('<div class="post-footer">',
     if (nzchar(author_slug)) paste0('<img src="', photo, '" alt="">') else "",
     '<p>Written by <a href="../../people/', author_slug, '.html">', rmarkdown::metadata$author,
-    '</a>. Views are the authors\' own. Part of <em>Mithril Metrics</em>: short, reproducible analyses ',
+    '</a>. Views are the authors\' own. Part of <em>Mithril Metrics</em>: reproducible analyses ',
     'of current agri-food, water and climate policy questions.</p></div>\n', sep = "")
 ```
 

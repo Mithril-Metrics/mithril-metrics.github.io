@@ -1,6 +1,6 @@
 # How this repository works
 
-Each case is a short, reproducible analysis built from public data. The R scripts run on the
+Each case is a reproducible analysis built from public data. The R scripts run on the
 author's own computer; the blog and the PDF briefs are rendered by GitHub Actions on every push.
 
 Blog: <https://mithril-metrics.github.io/>

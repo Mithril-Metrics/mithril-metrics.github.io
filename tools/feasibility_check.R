@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-# feasibility_check.R — can this question be answered with this data, today, in 4 hours?
+# feasibility_check.R — can this question be answered with this data, today?
 #
 # Usage (repository root):  Rscript tools/feasibility_check.R tools/specs/example_usda_tfp.yml
 #                           Rscript tools/feasibility_check.R spec.yml --budget 120 --out feasibility_reports

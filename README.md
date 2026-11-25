@@ -1,6 +1,6 @@
 # Mithril Metrics
 
-Short, reproducible, data-driven policy case studies in agricultural, production and
+Reproducible, data-driven policy case studies in agricultural, production and
 applied microeconomics — the code behind **Mithril Metrics** (https://mithril-metrics.github.io/)
 by Juan Pablo Henao and Pietro Sala.
 
@@ -8,8 +8,7 @@ by Juan Pablo Henao and Pietro Sala.
 > nutrients, climate) into outputs, and how policy, prices and weather shocks shift that
 > relationship, using public data and reproducible code.
 
-Each case answers one narrow policy question with public data in about four hours,
-end to end. Blog: <https://mithril-metrics.github.io/>
+Each case answers one focused policy question with public data. Blog: <https://mithril-metrics.github.io/>
 
 ## Repository layout
 

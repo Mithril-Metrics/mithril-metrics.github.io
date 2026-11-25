@@ -1,7 +1,10 @@
 # Render the Quarto blog (HTML + PDF technical notes) and publish it to the gh-pages branch.
-# Scheduled publishing: every hour, cases whose 00_meta.yml `publish_at:` time has passed are
-# switched from draft to published (.github/scripts/release_scheduled.py), committed, and the
-# site is rebuilt. Hourly runs with nothing to release stop after that check.
+# Scheduled publishing: cases whose 00_meta.yml `publish_at:` time has passed are switched from
+# draft to published (.github/scripts/release_scheduled.py), committed, and the site is rebuilt.
+# Two triggers run this check, because GitHub's own schedule is best-effort (runs can be late or
+# dropped): an hourly Cloudflare Worker that calls workflow_dispatch with release_only=true
+# (tools/release-trigger-worker.js), and GitHub's schedule every 15 minutes as a backup.
+# Checks with nothing to release stop after the check. Running both is harmless.
 # Everything runs on GitHub's servers: R, the acutils package and Quarto are installed here,
 # so nothing needs to be installed on a laptop to publish.
 # The analysis scripts (01-04) are NOT run here: their outputs (output/key_numbers.csv,
@@ -12,15 +15,20 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "7 * * * *"         # hourly, at minute 7 (GitHub may start it some minutes late)
+    - cron: "7,22,37,52 * * * *"   # every 15 minutes, off the hour (backup; may be late or dropped)
   workflow_dispatch:
+    inputs:
+      release_only:
+        description: "Only release due scheduled posts; rebuild only if one was released"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 jobs:
   release:
-    # Hourly check for scheduled posts; own concurrency group, so it never cancels a queued build.
+    # Check for scheduled posts; own concurrency group, so it never cancels a queued build.
     runs-on: ubuntu-latest
     concurrency:
       group: release
@@ -51,8 +59,11 @@ jobs:
 
   build-deploy:
     needs: release
-    # On push or manual runs always build; on the hourly schedule only if a post was released.
-    if: github.event_name != 'schedule' || needs.release.outputs.changed == 'true'
+    # On push or manual runs always build; on the schedule and release-only runs (Cloudflare
+    # Worker) only if a post was released.
+    if: >-
+      (github.event_name != 'schedule' && !(github.event_name == 'workflow_dispatch' && inputs.release_only))
+      || needs.release.outputs.changed == 'true'
     runs-on: ubuntu-latest
     concurrency:
       group: pages

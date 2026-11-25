@@ -46,7 +46,10 @@ Rscript new_case.R <slug> --issue N --title "..."
 
 New posts start with `draft: true` in `report.qmd` (rendered but not listed, not in RSS) and are
 set to `draft: false` once the case has been reviewed and approved. The push triggers the workflow
-and the post is live a few minutes later. The LinkedIn text is rendered into
+and the post is live a few minutes later. To publish at a set time instead, set `publish_at:`
+(with UTC offset) in `00_meta.yml`; an hourly Cloudflare Worker and GitHub's schedule (every
+15 minutes, best-effort) release it within about an hour. See `tools/release-trigger/SETUP.md`.
+The LinkedIn text is rendered into
 `cases/<case>/output/linkedin_post.txt` during the build.
 
 ## Maintainer setup on GitHub (once)

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23",
+  "updated": "2026-11-25",
   "note": "Public list of our OPEN backlog questions (short neutral titles) and our published answers. Kept in step with project-docs/pending_questions by Claude at P0, P0b, P2 and P10.",
   "questions": [
     {
@@ -79,6 +79,13 @@
     }
   ],
   "closed": [
+    {
+      "id": "Q002",
+      "title": "How unaffordable is fertiliser for maize farmers in Sub-Saharan Africa, and did input subsidies soften the response?",
+      "note": "Answered",
+      "date": "2026-11-25",
+      "link": "cases/2026-11-ssa-fertiliser-response/report.html"
+    },
     {
       "id": "Q001",
       "title": "Do El Niño years bring unusually severe rice shortfalls in Southeast Asia?",

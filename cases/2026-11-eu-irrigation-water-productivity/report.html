@@ -179,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">Region: EU</div>
-                <div class="quarto-category">Method: DEA</div>
+                <div class="quarto-category">Method: Descriptive</div>
                 <div class="quarto-category">Theme: Water</div>
               </div>
                   </div>
@@ -218,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="bottom-line">
-<p><strong>Short answer.</strong> <strong>Not on its own.</strong> In the 10 member states with Eurostat irrigation data, Mediterranean countries abstract 3.8 to 6.0 times more irrigation water per irrigated hectare than the rest (median 6,561 against 1,202 m³/ha, 2020–2022); we cannot separate climate from crop mix and infrastructure in that gap. Two common frontier models put the ‘saving potential’ at 6% or 93% of irrigation water. We infer that a ranking across countries would mostly show where a country is, not how well it irrigates.</p>
+<p><strong>Short answer.</strong> <strong>Not on its own.</strong> In the 10 member states with Eurostat irrigation data, Mediterranean countries abstract 5.5 times more irrigation water per irrigated hectare than the rest (median 6,561 against 1,202 m³/ha, 2020–2022), and the gap stays between 3.8 and 6.0 times across samples and survey years. We cannot separate climate from crop mix and infrastructure in that gap, so we infer that a ranking across countries would mostly show where a country is, not how well it irrigates.</p>
 </div>
 <div class="key-figures">
 <div class="kf">
@@ -239,10 +239,10 @@ Median m³ per irrigated hectare, 2020–2022
 </div>
 <div class="kf">
 <div class="kf-value">
-6% or 93%
+4 of 4
 </div>
 <div class="kf-label">
-Frontier ‘saving potential’ under two common models
+Mediterranean countries above all 6 others with Eurostat data (exact p = 0.010)
 </div>
 </div>
 </div>
@@ -253,7 +253,7 @@ Frontier ‘saving potential’ under two common models
 <section id="what-we-did" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-did">What we did</h2>
 <div class="method-note">
-<p>We divided Eurostat’s irrigation abstraction (mean 2020–2022) by the irrigated area from the 2016 and 2023 farm surveys, for the 14 member states where at least 2% of farmland is irrigated, and compared countries with a Mediterranean climate with the rest. We then ran a frontier analysis (data envelopment analysis), which asks how much water each country could save if it matched the best performers while keeping its land and crop value fixed, under four common specifications. This second step is a stress test: if a cross-country benchmark is meaningful, reasonable modelling choices should not change its answer much. We set out to rank countries; after our first two model runs we changed the question and chose the climate grouping.</p>
+<p>We divided Eurostat’s irrigation abstraction (mean 2020–2022) by the irrigated area from the 2016 and 2023 farm surveys, for the 14 member states where at least 2% of farmland is irrigated, and compared countries with a Mediterranean climate with the rest. An exact rank test asks how likely a split this clean would be if the climate group made no difference. The headline uses the 10 countries with Eurostat irrigation data. We also tried a frontier model (data envelopment analysis) to adjust for land and crop value; with 10 countries it gives no stable answer, so it is in the technical note only. We set out to rank countries; after our first model runs we changed the question and chose the climate grouping.</p>
 </div>
 </section>
 <section id="what-the-data-show" class="level2">
@@ -264,11 +264,11 @@ Frontier ‘saving potential’ under two common models
 <p><strong>Among the 10 countries with Eurostat irrigation data, all 4 Mediterranean ones abstract more water per irrigated hectare than all 6 others</strong> (exact rank-sum p = 0.010, the smallest possible with groups this size). Greece abstracts the most, 8,680 m³ per irrigated hectare, and Germany the least, 581. The ratio of the medians is 3.8 to 6.0, depending on the survey year used for irrigated area and on whether the 4 estimated countries are included.</p>
 <p>We infer that a cross-country comparison on this indicator would mainly sort countries by where they are. How much of the gap is climate and how much is crop mix (vegetables, orchards and rice in the south), conveyance losses or reporting practice, we do not test.</p>
 </section>
-<section id="two-common-frontier-models-disagree-and-neither-estimates-saveable-water" class="level3">
-<h3 class="anchored" data-anchor-id="two-common-frontier-models-disagree-and-neither-estimates-saveable-water">Two common frontier models disagree, and neither estimates saveable water</h3>
-<p><img src="output/fig2_two_models.png" class="img-fluid" style="width:100.0%" alt="Dot chart comparing two frontier models for the EU member states with Eurostat irrigation data. Model A, with variable returns to scale, puts Greece, Malta, Spain, Germany and the Netherlands at zero saving potential. Model B, with constant returns to scale, puts most countries far higher, with only Germany and the Netherlands at zero."></p>
-<p><strong>Two common frontier models put the saving potential at 6% (model A) or 93% (model B) of irrigation water</strong>, and their country rankings barely agree (rank correlation 0.19, where 1 means the same order and 0 no relation).</p>
-<p>A frontier model asks how much water each country could save if it matched the best observed mix of land, water and crop value. <strong>Across the four combinations we ran, one modelling choice drives the difference: returns to scale moves the saving potential by 87 points on average</strong>, while splitting land into rainfed and irrigated hectares moves it by 0. Variable returns put the largest and smallest countries, Spain and Malta, on the frontier by construction; constant returns leave only Germany and the Netherlands there. Under constant returns, a country’s “saving” is almost exactly its crop value per m³ compared with Germany’s or the Netherlands’ (rank correlation -0.997), and most crop output there is rainfed. Dropping a single frontier country moves a country’s result by up to 96 points. None of these numbers is an estimate of water that farms could save.</p>
+<section id="the-gap-holds-whichever-sample-or-survey-year-we-use" class="level3">
+<h3 class="anchored" data-anchor-id="the-gap-holds-whichever-sample-or-survey-year-we-use">The gap holds whichever sample or survey year we use</h3>
+<p><img src="output/fig2_robustness.png" class="img-fluid" style="width:100.0%" alt="Dot chart of the ratio between the Mediterranean and the other member states' median water per irrigated hectare under six variants: with only the 10 countries with Eurostat data or all 14, and irrigated area from the 2016 survey, the 2023 survey or interpolated to 2021. All six ratios lie between 3.8 and 6.0."></p>
+<p><strong>The ratio of the medians stays between 3.8 and 6.0</strong>, whether we use the 10 countries with Eurostat data or all 14, and whichever farm survey we take irrigated area from. Adding the 4 estimated countries lowers it slightly in each case.</p>
+<p>Could a frontier model adjust for climate and crop mix? We tried data envelopment analysis, which compares each country with the best observed mix of land, water and crop value. With 10 countries, two common versions put the “saving potential” at 6% or 93% of irrigation water, depending mainly on one modelling choice. The technical note explains why we use neither.</p>
 </section>
 </section>
 <section id="what-this-means-for-policy" class="level2">
@@ -285,7 +285,7 @@ Frontier ‘saving potential’ under two common models
 <ul>
 <li>We do not separate climate from crop mix, irrigation infrastructure and national reporting practice. The Mediterranean grouping and this framing were chosen after our first two model runs.</li>
 <li>The data measure water abstracted, not water applied at the field, as national annual averages that hide basin and seasonal stress. Italy, Portugal, France and Austria have no Eurostat irrigation figures; their scaled AQUASTAT estimates are shown but not used (France’s national statistics give 1,902 m³/ha for 2020, well above our estimate).</li>
-<li>10 countries are few for a frontier analysis: dropping one frontier country moves a single country’s ‘saving potential’ by up to 96 points, and model B mostly compares crop value per m³ with largely rainfed peers.</li>
+<li>With 10 countries and national averages, we cannot adjust the gap for climate. A frontier model on this sample does not help: two common versions put the ‘saving potential’ at 6% or 93% of irrigation water (see the technical note).</li>
 </ul>
 </section>
 <section id="data-code" class="level2 data-code">

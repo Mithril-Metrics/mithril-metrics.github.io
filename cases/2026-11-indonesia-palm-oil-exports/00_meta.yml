@@ -118,6 +118,8 @@ p6_checks:
   S3: "Pass-through imposed on a grid from 0.1 to 0.9 (equal weights on lags 0-2); window and Apr-May shifts re-estimated"
   S4: "Dummy for the three months before the window (Oct-Dec 2021): does the gap move before any measure?"
   S5: "Placebo in time: the same model with a fake 5-month (and 2-month) window at every position outside Jan-May 2022"
+  S6: "One dummy per month, Oct 2021 - Dec 2022, in the AR(1) model: no assumption on when effects start (added 2026-11-26 after the lag question)"
+  S7: "Pre-registered phases moved by +1 and +2 months; all three timings reported, none selected"
   newey_west: "Reported with its own OLS estimate; it is not a p-value for the AR(1) estimate"
   placebo_note: "Wheat flour does not follow world wheat in this sample (pass-through near zero, AR(1) near 1), so the placebo is weak"
 
@@ -148,6 +150,7 @@ known_limitations:
   - "The world-price link is estimated in months that had caps or supply obligations (2022 onward), which may flatten it; S2 and S3 show how much this matters."
   - "The BPS national average sits well above the bulk / MinyaKita caps throughout, so the series mostly reflects packaged or uncapped oil; check the BPS definition before writing."
   - "The gap already moved before any measure (Oct-Dec 2021, S4), so the five-month window estimate depends on which months serve as the baseline."
+  - "The pre-registered phases switch on in the month a measure starts; effects that take one or two months (DMO, export ban) fall partly outside the window or into the post period. S6 and S7 show the timing without that assumption."
   - "The Jan-Mar / Apr-May split (R1) was a planned check, not the primary test; April 2022 is mostly before the export ban."
 
 pre_results_review: >

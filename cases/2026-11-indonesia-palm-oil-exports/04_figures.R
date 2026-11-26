@@ -1,7 +1,7 @@
 # 04_figures.R — figures for the report
 # Case: 2026-11-indonesia-palm-oil-exports
 # Input: output/cache/analysis_data_fitted.rds, output/tab_*.csv, output/key_numbers.csv
-# Output: output/fig1_hero, fig2_phase_effects, fig3_passthrough_grid, figA_levels (.png/.svg)
+# Output: output/fig1_hero, fig2_event_months, fig3_passthrough_grid, figA_levels, figB_phase_effects (.png/.svg)
 
 stopifnot("Run this script from the issue folder" = file.exists("00_meta.yml"))
 options(acutils.data_dir = "data_raw")
@@ -58,7 +58,7 @@ p1 <- ggplot(gaps, aes(date)) +
   theme(legend.position = "bottom")
 save_fig(p1, "fig1_hero")
 
-# ---- Fig 2: phase effects ----
+# ---- Fig B (supporting): pre-registered phase effects ----
 rows <- tribble(
   ~model, ~term, ~label,
   "main", "window", "Jan-May 2022 (primary test)",
@@ -88,7 +88,39 @@ p2 <- ggplot(eff, aes(pct, label, colour = kind)) +
   ) +
   theme_ac() +
   theme(legend.position = "bottom")
-save_fig(p2, "fig2_phase_effects")
+save_fig(p2, "figB_phase_effects")
+
+# ---- Fig 2: gap month by month (S6), no assumption on when effects start ----
+ev <- read.csv("output/tab_event_months.csv") |>
+  mutate(month = as.Date(month), mid = month + 14)
+ev22 <- ev[format(ev$month, "%Y") == "2022", ]
+top <- ev22[which.max(ev22$pct), ]
+low <- ev22[which.min(ev22$pct), ]
+key_of <- function(m) paste0("s6_", format(m, "%Y_%m"), "_pct")
+bands <- tibble(
+  from = as.Date(c("2022-02-01", "2022-04-28")),
+  to = as.Date(c("2022-03-16", "2022-05-23")),
+  label = c("Retail caps", "Export ban")
+)
+p2 <- ggplot(ev, aes(mid, pct)) +
+  geom_rect(data = bands, aes(xmin = from, xmax = to, ymin = -Inf, ymax = Inf), inherit.aes = FALSE,
+            fill = "grey85", alpha = 0.7) +
+  geom_text(data = bands, aes(x = from + 3, y = -Inf, label = label), inherit.aes = FALSE,
+            hjust = 0, vjust = -0.6, size = 3.2, colour = "grey25") +
+  geom_hline(yintercept = 0, colour = "grey40", linewidth = 0.4) +
+  geom_pointrange(aes(ymin = pct_lo, ymax = pct_hi), colour = cols[1], size = 0.5, linewidth = 0.8) +
+  scale_x_date(date_breaks = "2 months", date_labels = "%b\n%Y") +
+  labs(
+    title = str_wrap(paste0("Month by month, the gap peaked in ", format(top$month, "%B"), " 2022 (",
+                            k(key_of(top$month), sign = TRUE), "%) and was lowest in ",
+                            format(low$month, "%B"), " (", k(key_of(low$month), sign = TRUE), "%)"), 55),
+    subtitle = "Retail cooking oil vs the level implied by world palm oil, by month, % with 95% intervals",
+    x = NULL, y = "Gap, %",
+    caption = source_caption(paste0(src, "; policy dates: FAO FAPDA, press reports"), accessed = accessed,
+                             note = "\nAR(1) regression with one dummy per month, Oct 2021 - Dec 2022; Oct-Dec 2021 precede any measure.")
+  ) +
+  theme_ac()
+save_fig(p2, "fig2_event_months")
 
 # ---- Fig 3: how the estimates depend on the assumed pass-through ----
 grid_lab <- c(window = "Jan-May 2022", window_b = "Apr-May 2022")

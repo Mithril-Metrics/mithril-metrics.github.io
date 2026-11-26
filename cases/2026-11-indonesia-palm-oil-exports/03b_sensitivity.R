@@ -125,3 +125,61 @@ add("s5_share5", 100 * share5, "%", 0, "S5: share of fake 5-month windows with a
 add("s5_n2", length(f2), "", 0, "S5: number of fake 2-month windows")
 add("s5_share2", 100 * share2, "%", 0, "S5: share of fake 2-month windows with a shift at least as large as Apr-May 2022")
 add("s5_max2", max(abs(f2)), "%", 1, "S5: largest absolute shift among fake 2-month windows")
+
+# ---- S6: one dummy per month, Oct 2021 - Dec 2022 (no assumption on when effects start) ----
+# Each coefficient is that month's gap to the world-price level, allowing for the usual
+# persistence of the gap. Oct-Dec 2021 are before any measure and show the pre-trend.
+ev_months <- seq(as.Date("2021-10-01"), as.Date("2022-12-01"), by = "month")
+ev_names <- paste0("m", format(ev_months, "%Y_%m"))
+for (i in seq_along(ev_months)) {
+  df[[ev_names[i]]] <- as.integer(df$date == ev_months[i])
+}
+s6_fit <- ar_fit("ln_vegoil", c(x_lags, ev_names, "bps2023", "eid"))
+s6 <- bind_rows(lapply(seq_along(ev_names), function(i) {
+  shift(s6_fit, ev_names[i]) |> mutate(month = ev_months[i], term = ev_names[i])
+})) |>
+  relocate(month, term)
+write.csv(s6, "output/tab_event_months.csv", row.names = FALSE)
+print(as.data.frame(s6), digits = 3)
+
+for (i in seq_len(nrow(s6))) {
+  lab <- format(s6$month[i], "%b %Y")
+  key <- paste0("s6_", format(s6$month[i], "%Y_%m"))
+  add(paste0(key, "_pct"), s6$pct[i], "%", 1, paste("S6 month dummies: gap,", lab))
+  add(paste0(key, "_lo"), s6$pct_lo[i], "%", 1, paste("S6 month dummies: lower 95% bound,", lab))
+  add(paste0(key, "_hi"), s6$pct_hi[i], "%", 1, paste("S6 month dummies: upper 95% bound,", lab))
+}
+
+# ---- S7: pre-registered phases moved by 0, 1 and 2 months (all reported) ----
+shift_month <- function(x, k) seq(as.Date(x), by = paste(k, "months"), length.out = 2)[2]
+ph <- yaml::read_yaml("00_meta.yml", fileEncoding = "UTF-8")$decisions$phases
+in_range <- function(r, k) as.integer(df$date >= shift_month(r[1], k) & df$date <= shift_month(r[2], k))
+s7 <- bind_rows(lapply(0:2, function(k) {
+  d <- df
+  d$window <- in_range(ph$window, k)
+  d$window_a <- in_range(ph$window_a, k)
+  d$window_b <- in_range(ph$window_b, k)
+  d$post <- as.integer(d$date >= shift_month(ph$post_start, k))
+  m_w <- ar_fit("ln_vegoil", c(x_lags, "window", x_rest), d)
+  m_b <- ar_fit("ln_vegoil", c(x_lags, "window_a", "window_b", x_rest), d)
+  bind_rows(
+    shift(m_w, "window") |> mutate(term = "window"),
+    shift(m_w, "post") |> mutate(term = "post"),
+    shift(m_b, "window_a") |> mutate(term = "window_a"),
+    shift(m_b, "window_b") |> mutate(term = "window_b")
+  ) |>
+    mutate(lag_months = k, .before = 1)
+}))
+write.csv(s7, "output/tab_shifted_phases.csv", row.names = FALSE)
+print(as.data.frame(s7), digits = 3)
+
+for (k in 1:2) {
+  for (t in c("window", "window_a", "window_b", "post")) {
+    r <- s7[s7$lag_months == k & s7$term == t, ]
+    lab <- paste0("S7 phases moved ", k, " month(s): ", t)
+    add(paste0("s7_lag", k, "_", t, "_pct"), r$pct, "%", 1, paste(lab, "shift"))
+    add(paste0("s7_lag", k, "_", t, "_lo"), r$pct_lo, "%", 1, paste(lab, "lower 95% bound"))
+    add(paste0("s7_lag", k, "_", t, "_hi"), r$pct_hi, "%", 1, paste(lab, "upper 95% bound"))
+    add(paste0("s7_lag", k, "_", t, "_p"), r$p, "", 3, paste(lab, "p-value"))
+  }
+}

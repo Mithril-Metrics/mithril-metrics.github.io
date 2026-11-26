@@ -107,7 +107,7 @@ method_plain <- paste0(
   k("n_main"), " countries with Eurostat irrigation data. We also tried a frontier model (data ",
   "envelopment analysis) to adjust for land and crop value; with ", k("n_main"), " countries it gives ",
   "no stable answer, so it is in the technical note only. We set out to rank countries; after our ",
-  "first model runs we changed the question and chose the climate grouping."
+  "first two model runs we changed the question and chose the climate grouping."
 )
 
 findings <- c(
@@ -136,7 +136,7 @@ implications <- c(
 caveats <- c(
   paste0("We do not separate climate from crop mix, irrigation infrastructure and national ",
          "reporting practice. The Mediterranean grouping and this framing were chosen after our ",
-         "first two model runs."),
+         "first two model runs, so the rank test is exploratory."),
   paste0("The data measure water abstracted, not water applied at the field, as national annual ",
          "averages that hide basin and seasonal stress. Italy, Portugal, France and Austria have no ",
          "Eurostat irrigation figures; their scaled AQUASTAT estimates are shown but not used (France's ",
@@ -170,7 +170,7 @@ method_detail <- paste0(
   "but not used in the headline. *Comparison.* Water per irrigated hectare in Mediterranean-climate member ",
   "states (Cyprus, Greece, Spain, Italy, Malta, Portugal) against the rest: ratio of medians and an exact ",
   "rank-sum test, recomputed for both samples and for irrigated area from each survey year. *Frontier ",
-  "diagnostic (Section 4).* Water-directional data envelopment analysis under four specifications. ",
+  "diagnostic (Section 3).* Water-directional data envelopment analysis under four specifications. ",
   "*Identification.* Descriptive: we do not estimate efficiency net of climate, and no country is called ",
   "inefficient."
 )
@@ -190,9 +190,13 @@ robustness <- c(
          k("ratio_main"), " (irrigated area interpolated to 2021), ", k("ratio_main_2016"), " (2016 survey), ",
          k("ratio_main_2023"), " (2023 survey). With all ", k("n_all"), ": ", k("ratio_all"), ", ",
          k("ratio_all_2016"), " and ", k("ratio_all_2023"), "."),
-  paste0("**The estimated countries lower the ratio slightly but do not change the picture.** France's ",
-         "scaled AQUASTAT estimate is below its national figure of ", k("ref_fr_m3ha"), " m³/ha for 2020, ",
-         "but even that figure is below every Mediterranean country with Eurostat data."),
+  paste0("**The estimates for the four filled countries are rough.** We scale AQUASTAT by the median ",
+         "Eurostat/AQUASTAT ratio over ", k("n_fill_check"), " member states (", k("fill_ratio"), "%), but the ",
+         "ratio follows climate: ", k("fill_ratio_med"), "% in the Mediterranean countries with both figures. ",
+         "Italy's and Portugal's estimates are therefore probably too low, and France's is below its national ",
+         "figure of ", k("ref_fr_m3ha"), " m³/ha for 2020. The net effect on the ratio with all ", k("n_all"),
+         " countries is unclear, which is why the headline uses Eurostat countries only; even France's national ",
+         "figure is below every Mediterranean country with Eurostat data."),
   "**Not tested:** a comparison net of crop water requirements, for example per-hectare water relative to the growing-season water deficit."
 )
 dea_note <- c(
@@ -202,7 +206,8 @@ dea_note <- c(
          "and A passes it only just. Under variable returns, ", k("nfront_a"), " of ", k("n_main"),
          " countries sit on the frontier."),
   paste0("**One modelling choice decides the answer.** Variable returns give a saving potential of ",
-         k("share_a"), "% of sample water, constant returns ", k("share_b"), "%. Switching returns to scale ",
+         k("share_a"), "% of sample water (", k("share_b_vrs"), "% with land split), constant returns ",
+         k("share_b"), "% (", k("share_a_crs"), "% with total cropland). Switching returns to scale ",
          "moves the share by ", k("d_rts"), " points on average; splitting land into rainfed and irrigated ",
          "moves it by ", k("d_land"), ". The two models' country rankings barely agree (rank correlation ",
          k("rho_ab"), ")."),
@@ -230,7 +235,7 @@ author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||
 
 method_tag <- paste0("Method: water per irrigated hectare and an exact rank test, ", k("n_all"),
                      " EU member states, ", k("year_start"), "–", k("year_end"), ".")
-hashtags   <- "#AgriculturalEconomics #WaterPolicy #CAP #EU"
+hashtags   <- "#AgriculturalEconomics #WaterPolicy #Irrigation"
 ```
 
 ::: {.content-visible when-format="html"}
@@ -366,31 +371,17 @@ cat('<div class="post-footer">',
 bullets(results_note)
 ```
 
-**3. Robustness checks**
+**3. Robustness and exploratory checks**
 
 ```{r}
 #| results: asis
 bullets(robustness)
 ```
 
-**4. Why a national frontier gives no answer here**
-
-```{r}
-#| results: asis
-sp <- read.csv("output/tab_specs.csv")
-min_n <- ifelse(sp$land == "total", k("rot_a"), k("rot_b"))
-tb <- data.frame(
-  Model = unname(c(A = "A", A_crs = "A, CRS", B_vrs = "B, VRS", B = "B")[sp$spec]),
-  `Returns` = toupper(sp$rts),
-  `Land input` = ifelse(sp$land == "total", "cropland", "rainfed + irrigated"),
-  `Min. n` = min_n,
-  `Saving (%)` = round(sp$saving_share_eurostat),
-  `Frontier` = sp$n_frontier_eurostat,
-  check.names = FALSE)
-cat(knitr::kable(tb, format = "pipe", align = c("l", "l", "l", "r", "r", "r")), sep = "\n")
-cat("\n\n*Water-directional DEA, ", k("n_main"), " countries with Eurostat irrigation data. Min. n: ",
-    "rule-of-thumb minimum sample size of Cooper, Seiford and Tone (2007). Saving: share of sample water. Frontier: countries on it.*\n\n", sep = "")
-```
+*Why a national frontier gives no answer here.* We also ran water-directional data envelopment analysis,
+which asks how much water each country could drop at fixed land and crop value if it matched the best
+observed combination, under four specifications (variable or constant returns to scale; total cropland or
+rainfed plus irrigated land).
 
 ![](output/fig_note_dea.png){width="55%"}
 
@@ -399,14 +390,14 @@ cat("\n\n*Water-directional DEA, ", k("n_main"), " countries with Eurostat irrig
 bullets(dea_note)
 ```
 
-**5. What this means for policy**
+**4. What this means for policy**
 
 ```{r}
 #| results: asis
 bullets(bold_first(implications))
 ```
 
-**6. Caveats**
+**5. Caveats**
 
 ```{r}
 #| results: asis
@@ -449,8 +440,20 @@ bullets(c(src_brief, paste0("Code: [GitHub, Mithril-Metrics](", code_url, ")")))
 #| label: linkedin
 #| include: false
 # Section B: LinkedIn post, built from the same strings and key numbers (finalised at P9).
-hook <- paste0("Should the EU compare countries on irrigation water per hectare? Mediterranean ",
-               "member states abstract ", ratio_rng, " times more per irrigated hectare than the rest.")
+hooks <- c(
+  question = paste0("Should the EU compare countries on irrigation water per hectare? Mediterranean ",
+                    "member states abstract ", ratio_rng, " times more per irrigated hectare than the rest."),
+  extremes = paste0("Greece abstracts ", k("m3ha_max"), " m³ of irrigation water per irrigated hectare, ",
+                    "Germany ", k("m3ha_min"), ". Before the EU compares countries on this indicator, it ",
+                    "helps to ask what the gap measures."),
+  answer = paste0("One EU-wide benchmark for irrigation water per hectare would mostly sort countries by ",
+                  "where they are: Mediterranean member states abstract ", k("m3ha_ratio"), " times more ",
+                  "per hectare than the rest.")
+)
+hook_choice <- "question"   # set at P9 by the case author
+hook <- hooks[[hook_choice]]
+writeLines(sprintf("[%s] %d characters: %s", names(hooks), nchar(hooks), hooks), "output/linkedin_hooks.txt",
+           useBytes = TRUE)
 li_why <- paste0("On 22 October France and Portugal asked EU ministers to cut water use per irrigated ",
                  "hectare; the EU targets ", k("ref_wrs_target"), "% better water efficiency by 2030. We asked ",
                  "whether that indicator can compare countries.")

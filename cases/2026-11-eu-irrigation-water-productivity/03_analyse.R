@@ -14,6 +14,7 @@
 # sizes and crop value per m3 at the extremes as key numbers.
 # Input: output/cache/panel.rds. Output: output/key_numbers.csv, output/tab_results.csv,
 # output/tab_specs.csv, output/tab_robustness.csv, output/tab_variants.csv,
+# output/tab_fill_ratios.csv,
 # output/cache/results.rds,
 # output/sessionInfo.txt
 
@@ -111,6 +112,14 @@ cat("m3/ha (Eurostat-only): Mediterranean median", round(g["med"]), "| other", r
     "| ratio", round(g["ratio"], 1), "| range over variants", round(min(variants), 1), "-",
     round(max(variants), 1), "| exact rank-sum p", signif(rs_main$p.value, 2), "\n")
 
+# Eurostat/AQUASTAT ratio by country (used to scale the fills): one median for all
+# countries, but the ratio is close to 1 where almost all farm water goes to irrigation.
+fill_tab <- attr(panel, "fill_check") |>
+  mutate(group = if_else(geo %in% med, "Mediterranean climate", "Other")) |>
+  arrange(ratio)
+fill_ratio_med <- median(fill_tab$ratio[fill_tab$group == "Mediterranean climate"])
+print(as.data.frame(fill_tab), digits = 2)
+
 # ---- Step 2 (technical note): what the frontier picks up ----
 # Rule of thumb for DEA sample size (Cooper, Seiford and Tone): n >= max(m * s, 3 * (m + s)),
 # m inputs, s outputs. A: 2 inputs, B: 3 inputs, both 1 output.
@@ -190,6 +199,10 @@ kn_add("irr_threshold", attr(panel, "threshold"), "%", 0,
        "Minimum irrigated area, % of UAA (latest survey year)", "Eurostat ef_fsi_irri")
 kn_add("fill_ratio", 100 * attr(panel, "fill_ratio"), "%", 0,
        "Median Eurostat irrigation abstraction as % of AQUASTAT agricultural withdrawal", src)
+kn_add("fill_ratio_med", 100 * fill_ratio_med, "%", 0,
+       paste("Median Eurostat/AQUASTAT ratio, Mediterranean countries with both:",
+             paste(fill_tab$geo[fill_tab$group == "Mediterranean climate"], collapse = ", ")), src)
+kn_add("n_fill_check", nrow(fill_tab), "countries", 0, "Member states with both Eurostat and AQUASTAT", src)
 kn_add("year_start", 2020, "", 0, "First year of the averaging window", src, big_mark = "")
 kn_add("year_end", 2022, "", 0, "Last year of the averaging window", src, big_mark = "")
 kn_add("m3ha_med", g["med"], "m3/ha", 0, "Median abstraction per irrigated ha, Mediterranean (headline)", src)
@@ -241,6 +254,7 @@ readr::write_csv(out, "output/tab_results.csv")
 readr::write_csv(tab_specs, "output/tab_specs.csv")
 readr::write_csv(loo, "output/tab_robustness.csv")
 readr::write_csv(tab_variants, "output/tab_variants.csv")
+readr::write_csv(fill_tab, "output/tab_fill_ratios.csv")
 saveRDS(list(res = out, main = main, specs = tab_specs, variants = tab_variants),
         "output/cache/results.rds")
 write_session_info()

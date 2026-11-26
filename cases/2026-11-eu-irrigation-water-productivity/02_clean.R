@@ -44,6 +44,8 @@ aqua <- raw$aqua |>
 # How far apart are the two sources where both exist? Printed as a caveat.
 both <- inner_join(w_irr, aqua, by = "geo")
 fill_ratio <- median(both$water / both$water_aqua)
+# Ratio by country, kept for the technical note: it follows climate (near 1 in the south).
+fill_check <- transmute(both, geo, eurostat = water, aquastat = water_aqua, ratio = water / water_aqua)
 cat("Countries with both sources:", nrow(both),
     "| median Eurostat irrigation / AQUASTAT agriculture:", round(fill_ratio, 2), "\n")
 
@@ -124,6 +126,7 @@ stopifnot("Fewer than 8 countries left: check the inputs" = nrow(panel) >= 8)
 
 attr(panel, "threshold") <- threshold
 attr(panel, "fill_ratio") <- fill_ratio
+attr(panel, "fill_check") <- fill_check
 attr(panel, "output_measure") <- unique(raw$crop$measure)
 saveRDS(panel, "output/cache/panel.rds")
 readr::write_csv(all, "output/tab_inputs.csv")

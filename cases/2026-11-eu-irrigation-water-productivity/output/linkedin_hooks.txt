@@ -1,0 +1,3 @@
+[question] 160 characters: Should the EU compare countries on irrigation water per hectare? Mediterranean member states abstract 3.8 to 6.0 times more per irrigated hectare than the rest.
+[extremes] 172 characters: Greece abstracts 8,680 m³ of irrigation water per irrigated hectare, Germany 581. Before the EU compares countries on this indicator, it helps to ask what the gap measures.
+[answer] 180 characters: One EU-wide benchmark for irrigation water per hectare would mostly sort countries by where they are: Mediterranean member states abstract 5.5 times more per hectare than the rest.

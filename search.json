@@ -63,6 +63,41 @@
     "text": "Selected publications\n\nHenao, J. P., Vrachioli, M., Villalba, R., & Sauer, J. (2026). Optimal water pricing for sustainable agriculture and electricity cooling in the European Union. Journal of Environmental Management 417, 130804. doi:10.1016/j.jenvman.2026.130804\nBremer et al. (2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. Water Resources Management 40, 501. doi:10.1007/s11269-026-04848-0\nDinov et al. (2026). Environmental Kuznets Curve applications for water pollution in the EU. Journal of Environmental Management 398, 127942. doi:10.1016/j.jenvman.2025.127942\nVelez et al. (2025). Small-scale gold miners’ preferences on formalization: First steps toward sustainable supply chains in Colombia. World Development 188, 106899. doi:10.1016/j.worlddev.2024.106899\nMaldonado et al. (2019). Does exclusion matter in conservation agreements? A case of mangrove users in the Ecuadorian coast using participatory choice experiments. World Development 123, 104619. doi:10.1016/j.worlddev.2019.104619\nMaldonado et al. (2020). Innovation in economic analysis and evaluation approaches for coastal protection and restoration investments in the Caribbean. IDB Technical Note IDB-TN-01861. doi:10.18235/0002184"
   },
   {
+    "objectID": "questions.html",
+    "href": "questions.html",
+    "title": "Questions we could answer next",
+    "section": "",
+    "text": "Preview, not live. Nothing on this page is saved or sent: votes and\n  questions stay in your browser and disappear on reload. The reader questions are examples.\nEach case study starts from one narrow question that public data can answer well. Below are the questions we may take up next, ours and those suggested by readers. Vote for the ones you would like us to answer, or suggest a new one. Votes help us choose between questions of similar quality; they do not decide on their own whether a question is feasible. Reader questions are listed only after we have reviewed them, in our wording, and stay listed for up to 90 days."
+  },
+  {
+    "objectID": "questions.html#suggest-a-question",
+    "href": "questions.html#suggest-a-question",
+    "title": "Questions we could answer next",
+    "section": "Suggest a question",
+    "text": "Suggest a question\nWe take short, specific questions on agri-food, water, climate and rural policy, for example “Do El Niño years cut rice output in Southeast Asia more than an average bad year?” We read every question, but we cannot take up all of them. Those that fit our scope and that public data can answer well may be listed above, in our wording, and some may become case studies, tagged Reader questions.\nWe don’t reply individually, and we don’t collect contact details. To see every new case study, including any answer to your question, follow Mithril Metrics on LinkedIn and turn on notifications, or subscribe to our RSS feed.\n\n  Your question\n  \n  0/300 characters · no links\n  Region (optional)\n  \n    Any or several\n    EUSub-Saharan AfricaSouth Asia\n    Southeast AsiaLatin AmericaGlobal\n  \n  \n    Leave this empty\n    \n  \n  \n    \n    I agree that Mithril Metrics may edit, shorten or reword my question, use it for an\n    analysis, and publish it, in its own wording, on this site and its channels (such as\n    LinkedIn) together with any answer. My question contains no names, personal or confidential\n    information.\n  \n  Send question"
+  },
+  {
+    "objectID": "questions.html#recently-answered",
+    "href": "questions.html#recently-answered",
+    "title": "Questions we could answer next",
+    "section": "Recently answered",
+    "text": "Recently answered\nThe five most recent questions we have answered, ours and readers’.\n\n\nWe store only the question text, the region and vote counts; no names or emails. To limit spam, Cloudflare checks each request, and we keep codes derived from your network address that cannot be turned back into it, for at most 30 days. Details in our privacy policy."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mithril Metrics",
+    "section": "",
+    "text": "Mithril Metrics\nPublic data, policy-relevant answers, one question at a time.\nAbout the project Code on GitHub RSS"
+  },
+  {
+    "objectID": "index.html#case-studies",
+    "href": "index.html#case-studies",
+    "title": "Mithril Metrics",
+    "section": "Case Studies",
+    "text": "Case Studies\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nDo fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?\n\n22 min\n\n\nRegion: SSA\n\nMethod: Elasticities\n\nTheme: Food security\n\n\n\nIn 14 Sub-Saharan African countries since 1990, maize yields have been lower when world fertiliser was dear relative to maize, but the link weakens once prices after…\n\n\n\nPietro Sala\n\n\nNov 25, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nDoes El Niño bring unusually severe rice shortfalls in Southeast Asia?\n\n29 min\n\n\nRegion: SE Asia\n\nMethod: Tails and risk\n\nTheme: Food security\n\n\n\nNo detectable rise in deep shortfalls in the year it begins. An exploratory check points to lower production in Indonesia, the Philippines and Malaysia the year after…\n\n\n\nPietro Sala\n\n\nNov 23, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About Mithril Metrics",
@@ -103,41 +138,6 @@
     "title": "About Mithril Metrics",
     "section": "Licence",
     "text": "Licence\nText and figures: CC BY 4.0. Code: MIT. Views are the authors’ own and do not represent their institutions."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Mithril Metrics",
-    "section": "",
-    "text": "Mithril Metrics\nPublic data, policy-relevant answers, one question at a time.\nAbout the project Code on GitHub RSS"
-  },
-  {
-    "objectID": "index.html#case-studies",
-    "href": "index.html#case-studies",
-    "title": "Mithril Metrics",
-    "section": "Case Studies",
-    "text": "Case Studies\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nDo fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?\n\n22 min\n\n\nRegion: SSA\n\nMethod: Elasticities\n\nTheme: Food security\n\n\n\nIn 14 Sub-Saharan African countries since 1990, maize yields have been lower when world fertiliser was dear relative to maize, but the link weakens once prices after…\n\n\n\nPietro Sala\n\n\nNov 25, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nDoes El Niño bring unusually severe rice shortfalls in Southeast Asia?\n\n29 min\n\n\nRegion: SE Asia\n\nMethod: Tails and risk\n\nTheme: Food security\n\n\n\nNo detectable rise in deep shortfalls in the year it begins. An exploratory check points to lower production in Indonesia, the Philippines and Malaysia the year after…\n\n\n\nPietro Sala\n\n\nNov 23, 2026\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "questions.html",
-    "href": "questions.html",
-    "title": "Questions we could answer next",
-    "section": "",
-    "text": "Preview, not live. Nothing on this page is saved or sent: votes and\n  questions stay in your browser and disappear on reload. The reader questions are examples.\nEach case study starts from one narrow question that public data can answer well. Below are the questions we may take up next, ours and those suggested by readers. Vote for the ones you would like us to answer, or suggest a new one. Votes help us choose between questions of similar quality; they do not decide on their own whether a question is feasible. Reader questions are listed only after we have reviewed them, in our wording, and stay listed for up to 90 days."
-  },
-  {
-    "objectID": "questions.html#suggest-a-question",
-    "href": "questions.html#suggest-a-question",
-    "title": "Questions we could answer next",
-    "section": "Suggest a question",
-    "text": "Suggest a question\nWe take short, specific questions on agri-food, water, climate and rural policy, for example “Do El Niño years cut rice output in Southeast Asia more than an average bad year?” We read every question, but we cannot take up all of them. Those that fit our scope and that public data can answer well may be listed above, in our wording, and some may become case studies, tagged Reader questions.\nWe don’t reply individually, and we don’t collect contact details. To see every new case study, including any answer to your question, follow Mithril Metrics on LinkedIn and turn on notifications, or subscribe to our RSS feed.\n\n  Your question\n  \n  0/300 characters · no links\n  Region (optional)\n  \n    Any or several\n    EUSub-Saharan AfricaSouth Asia\n    Southeast AsiaLatin AmericaGlobal\n  \n  \n    Leave this empty\n    \n  \n  \n    \n    I agree that Mithril Metrics may edit, shorten or reword my question, use it for an\n    analysis, and publish it, in its own wording, on this site and its channels (such as\n    LinkedIn) together with any answer. My question contains no names, personal or confidential\n    information.\n  \n  Send question"
-  },
-  {
-    "objectID": "questions.html#recently-answered",
-    "href": "questions.html#recently-answered",
-    "title": "Questions we could answer next",
-    "section": "Recently answered",
-    "text": "Recently answered\nThe five most recent questions we have answered, ours and readers’.\n\n\nWe store only the question text, the region and vote counts; no names or emails. To limit spam, Cloudflare checks each request, and we keep codes derived from your network address that cannot be turned back into it, for at most 30 days. Details in our privacy policy."
   },
   {
     "objectID": "people/pietro-sala.html",

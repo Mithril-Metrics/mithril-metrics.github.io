@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1450161f493600e7bcd703f936db0b09.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-2da66ef2613a05faae79ed6a1d360f52.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -253,7 +253,7 @@ Mediterranean countries above all 6 others with Eurostat data (exact p = 0.010)
 <section id="what-we-did" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-did">What we did</h2>
 <div class="method-note">
-<p>We divided Eurostat’s irrigation abstraction (mean 2020–2022) by the irrigated area from the 2016 and 2023 farm surveys, for the 14 member states where at least 2% of farmland is irrigated, and compared countries with a Mediterranean climate with the rest. An exact rank test asks how likely a split this clean would be if the climate group made no difference. The headline uses the 10 countries with Eurostat irrigation data. We also tried a frontier model (data envelopment analysis) to adjust for land and crop value; with 10 countries it gives no stable answer, so it is in the technical note only. We set out to rank countries; after our first model runs we changed the question and chose the climate grouping.</p>
+<p>We divided Eurostat’s irrigation abstraction (mean 2020–2022) by the irrigated area from the 2016 and 2023 farm surveys, for the 14 member states where at least 2% of farmland is irrigated, and compared countries with a Mediterranean climate with the rest. An exact rank test asks how likely a split this clean would be if the climate group made no difference. The headline uses the 10 countries with Eurostat irrigation data. We also tried a frontier model (data envelopment analysis) to adjust for land and crop value; with 10 countries it gives no stable answer, so it is in the technical note only. We set out to rank countries; after our first two model runs we changed the question and chose the climate grouping.</p>
 </div>
 </section>
 <section id="what-the-data-show" class="level2">
@@ -283,7 +283,7 @@ Mediterranean countries above all 6 others with Eurostat data (exact p = 0.010)
 <section id="caveats" class="level2 caveats">
 <h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
 <ul>
-<li>We do not separate climate from crop mix, irrigation infrastructure and national reporting practice. The Mediterranean grouping and this framing were chosen after our first two model runs.</li>
+<li>We do not separate climate from crop mix, irrigation infrastructure and national reporting practice. The Mediterranean grouping and this framing were chosen after our first two model runs, so the rank test is exploratory.</li>
 <li>The data measure water abstracted, not water applied at the field, as national annual averages that hide basin and seasonal stress. Italy, Portugal, France and Austria have no Eurostat irrigation figures; their scaled AQUASTAT estimates are shown but not used (France’s national statistics give 1,902 m³/ha for 2020, well above our estimate).</li>
 <li>With 10 countries and national averages, we cannot adjust the gap for climate. A frontier model on this sample does not help: two common versions put the ‘saving potential’ at 6% or 93% of irrigation water (see the technical note).</li>
 </ul>

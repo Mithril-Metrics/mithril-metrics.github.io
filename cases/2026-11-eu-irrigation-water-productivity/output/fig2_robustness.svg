@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='576.00pt' height='360.00pt' viewBox='0 0 576.00 360.00'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='576.00pt' height='360.00pt' viewBox='0 0 576.00 360.00'>
+<g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -12,6 +13,10 @@
     .svglite text {
       white-space: pre;
     }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
   ]]></style>
 </defs>
 <rect width='100%' height='100%' style='stroke: none; fill: #FCFCFB;'/>
@@ -21,61 +26,62 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
-<rect x='0.00' y='0.00' width='576.00' height='360.00' style='stroke-width: 1.36; stroke: none; fill: #FCFCFB;' />
+<rect x='0.000000000000064' y='0.00' width='576.00' height='360.00' style='stroke-width: 1.36; stroke: none; fill: #FCFCFB;' />
 </g>
 <defs>
-  <clipPath id='cpMTQyLjQzfDU1Ni4wN3wxMDIuNTF8MjQyLjM4'>
-    <rect x='142.43' y='102.51' width='413.64' height='139.87' />
+  <clipPath id='cpMTM2LjIwfDU1Ni4wN3wxMDIuMjF8MjQyLjk2'>
+    <rect x='136.20' y='102.21' width='419.88' height='140.74' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMTQyLjQzfDU1Ni4wN3wxMDIuNTF8MjQyLjM4)'>
-<polyline points='161.23,242.38 161.23,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='214.95,242.38 214.95,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='268.67,242.38 268.67,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='322.39,242.38 322.39,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='376.11,242.38 376.11,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='429.83,242.38 429.83,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='483.55,242.38 483.55,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<polyline points='537.27,242.38 537.27,102.51 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
-<line x1='214.95' y1='242.38' x2='214.95' y2='102.51' style='stroke-width: 1.07; stroke: #999999; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
-<circle cx='454.58' cy='134.20' r='4.09' style='stroke-width: 0.71; stroke: none; fill: #2A78D6;' />
-<circle cx='385.59' cy='177.91' r='4.09' style='stroke-width: 0.71; stroke: none; fill: #2A78D6;' />
-<circle cx='484.85' cy='221.62' r='4.09' style='stroke-width: 0.71; stroke: none; fill: #2A78D6;' />
-<circle cx='436.52' cy='123.27' r='4.09' style='stroke-width: 0.71; stroke: #EB6834;' />
-<circle cx='365.47' cy='166.98' r='4.09' style='stroke-width: 0.71; stroke: #EB6834;' />
-<circle cx='450.71' cy='210.69' r='4.09' style='stroke-width: 0.71; stroke: #EB6834;' />
-<text x='463.31' y='137.72' style='font-size: 9.67px;fill: #333333; font-family: "Liberation Sans";' textLength='14.55px' lengthAdjust='spacingAndGlyphs'>5.5</text>
-<text x='394.55' y='181.43' style='font-size: 9.67px;fill: #333333; font-family: "Liberation Sans";' textLength='14.93px' lengthAdjust='spacingAndGlyphs'>4.2</text>
-<text x='493.78' y='225.14' style='font-size: 9.67px;fill: #333333; font-family: "Liberation Sans";' textLength='14.88px' lengthAdjust='spacingAndGlyphs'>6.0</text>
-<text x='444.08' y='126.79' style='font-size: 9.67px;fill: #333333; font-family: "Liberation Sans";' textLength='12.60px' lengthAdjust='spacingAndGlyphs'>5.1</text>
-<text x='374.32' y='170.50' style='font-size: 9.67px;fill: #333333; font-family: "Liberation Sans";' textLength='14.75px' lengthAdjust='spacingAndGlyphs'>3.8</text>
-<text x='459.66' y='214.21' style='font-size: 9.67px;fill: #333333; font-family: "Liberation Sans";' textLength='14.92px' lengthAdjust='spacingAndGlyphs'>5.4</text>
+<g clip-path='url(#cpMTM2LjIwfDU1Ni4wN3wxMDIuMjF8MjQyLjk2)'>
+<polyline points='155.28,242.96 155.28,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='209.81,242.96 209.81,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='264.34,242.96 264.34,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='318.87,242.96 318.87,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='373.40,242.96 373.40,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='427.93,242.96 427.93,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='482.46,242.96 482.46,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<polyline points='536.99,242.96 536.99,102.21 ' style='stroke-width: 0.75; stroke: #E4E3DF; stroke-linecap: butt;' />
+<line x1='209.81' y1='242.96' x2='209.81' y2='102.21' style='stroke-width: 1.36; stroke: #999999; stroke-dasharray: 7.24,7.24; stroke-linecap: butt;' />
+<circle cx='453.05' cy='134.10' r='4.19' style='stroke-width: 0.90; stroke: none; fill: #2A78D6;' />
+<circle cx='383.02' cy='178.08' r='4.19' style='stroke-width: 0.90; stroke: none; fill: #2A78D6;' />
+<circle cx='483.78' cy='222.07' r='4.19' style='stroke-width: 0.90; stroke: none; fill: #2A78D6;' />
+<circle cx='434.72' cy='123.11' r='4.19' style='stroke-width: 0.90; stroke: #EB6834;' />
+<circle cx='362.60' cy='167.09' r='4.19' style='stroke-width: 0.90; stroke: #EB6834;' />
+<circle cx='449.13' cy='211.07' r='4.19' style='stroke-width: 0.90; stroke: #EB6834;' />
+<text x='461.12' y='137.57' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='13.44px' lengthAdjust='spacingAndGlyphs'>5.5</text>
+<text x='391.08' y='181.55' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='13.44px' lengthAdjust='spacingAndGlyphs'>4.2</text>
+<text x='491.84' y='225.53' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='13.44px' lengthAdjust='spacingAndGlyphs'>6.0</text>
+<text x='442.79' y='126.57' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='13.44px' lengthAdjust='spacingAndGlyphs'>5.1</text>
+<text x='370.66' y='170.55' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='13.44px' lengthAdjust='spacingAndGlyphs'>3.8</text>
+<text x='457.19' y='214.53' style='font-size: 9.67px;fill: #333333; font-family: "Arial";' textLength='13.44px' lengthAdjust='spacingAndGlyphs'>5.4</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
-<text x='136.15' y='220.22' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='66.59px' lengthAdjust='spacingAndGlyphs'>2023 survey</text>
-<text x='136.15' y='176.51' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='64.35px' lengthAdjust='spacingAndGlyphs'>2016 survey</text>
-<text x='136.15' y='132.80' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='105.50px' lengthAdjust='spacingAndGlyphs'>Interpolated to 2021</text>
-<text x='161.23' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='7.06px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='214.95' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='4.55px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='268.67' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='6.83px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='322.39' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='6.91px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='376.11' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='7.23px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='429.83' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='6.80px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='483.55' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='6.94px' lengthAdjust='spacingAndGlyphs'>6</text>
-<text x='537.27' y='256.79' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='6.33px' lengthAdjust='spacingAndGlyphs'>7</text>
-<text x='349.25' y='271.35' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='368.19px' lengthAdjust='spacingAndGlyphs'>Mediterranean median / other median, water per irrigated hectare</text>
-<text transform='translate(24.59,172.45) rotate(-90)' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Liberation Sans";' textLength='106.07px' lengthAdjust='spacingAndGlyphs'>Irrigated area used</text>
-<circle cx='165.02' cy='72.95' r='4.09' style='stroke-width: 0.71; stroke: none; fill: #2A78D6;' />
-<circle cx='265.47' cy='72.95' r='4.09' style='stroke-width: 0.71; stroke: #EB6834;' />
-<text x='180.63' y='77.02' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='69.23px' lengthAdjust='spacingAndGlyphs'>Eurostat only</text>
-<text x='281.09' y='77.02' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='160.06px' lengthAdjust='spacingAndGlyphs'>All, incl. AQUASTAT estimates</text>
-<text x='15.94' y='28.68' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='533.69px' lengthAdjust='spacingAndGlyphs'>The gap holds whichever sample or survey year we use: 3.8 to</text>
-<text x='15.94' y='47.58' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Liberation Sans";' textLength='389.54px' lengthAdjust='spacingAndGlyphs'>6.0 times as much water per irrigated hectare</text>
-<text x='15.94' y='293.01' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='530.50px' lengthAdjust='spacingAndGlyphs'>Source: Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV (constant 2014-2016 int. $); FAOSTAT RL; FAO</text>
-<text x='15.94' y='303.59' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='525.08px' lengthAdjust='spacingAndGlyphs'>AQUASTAT via World Bank (accessed 2026-11-20). Ratio of the Mediterranean median to the median of the other</text>
-<text x='15.94' y='314.18' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='501.16px' lengthAdjust='spacingAndGlyphs'>member states, irrigation abstraction per irrigated hectare, mean 2020-2022. Irrigated area from the 2016 or</text>
-<text x='15.94' y='324.76' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='485.39px' lengthAdjust='spacingAndGlyphs'>2023 farm survey, or interpolated to 2021 (headline). 'All' adds Italy, Portugal, France and Austria, whose</text>
-<text x='15.94' y='335.34' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='353.94px' lengthAdjust='spacingAndGlyphs'>abstraction is a scaled AQUASTAT estimate. A ratio of 1 would mean no gap.</text>
-<text x='15.94' y='345.93' style='font-size: 9.80px;fill: #6B6B66; font-family: "Liberation Sans";' textLength='110.24px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
+<text x='129.92' y='220.58' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='60.92px' lengthAdjust='spacingAndGlyphs'>2023 survey</text>
+<text x='129.92' y='176.59' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='60.92px' lengthAdjust='spacingAndGlyphs'>2016 survey</text>
+<text x='129.92' y='132.61' text-anchor='end' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='99.48px' lengthAdjust='spacingAndGlyphs'>Interpolated to 2021</text>
+<text x='155.28' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='209.81' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='264.34' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='318.87' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='373.40' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='427.93' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='482.46' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text x='536.99' y='257.25' text-anchor='middle' style='font-size: 11.20px;fill: #4A4A46; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>7</text>
+<text x='346.14' y='271.60' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Arial";' textLength='343.44px' lengthAdjust='spacingAndGlyphs'>Mediterranean median / other median, water per irrigated hectare</text>
+<text transform='translate(24.45,172.59) rotate(-90)' text-anchor='middle' style='font-size: 11.90px;fill: #4A4A46; font-family: "Arial";' textLength='99.73px' lengthAdjust='spacingAndGlyphs'>Irrigated area used</text>
+<circle cx='151.81' cy='72.65' r='4.19' style='stroke-width: 0.90; stroke: none; fill: #2A78D6;' />
+<circle cx='248.32' cy='72.65' r='4.19' style='stroke-width: 0.90; stroke: #EB6834;' />
+<text x='167.42' y='76.66' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='65.28px' lengthAdjust='spacingAndGlyphs'>Eurostat only</text>
+<text x='263.93' y='76.66' style='font-size: 11.20px;fill: #1C1C1A; font-family: "Arial";' textLength='150.45px' lengthAdjust='spacingAndGlyphs'>All, incl. AQUASTAT estimates</text>
+<text x='15.94' y='28.48' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='518.36px' lengthAdjust='spacingAndGlyphs'>The gap holds whichever sample or survey year we use: 3.8 to</text>
+<text x='15.94' y='47.38' style='font-size: 17.50px; font-weight: bold;fill: #1C1C1A; font-family: "Arial";' textLength='375.44px' lengthAdjust='spacingAndGlyphs'>6.0 times as much water per irrigated hectare</text>
+<text x='15.94' y='293.07' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='506.53px' lengthAdjust='spacingAndGlyphs'>Source: Eurostat env_wat_abs, ef_fsi_irri, sdg_06_60; FAOSTAT QV (constant 2014-2016 int. $); FAOSTAT RL; FAO</text>
+<text x='15.94' y='303.65' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='493.16px' lengthAdjust='spacingAndGlyphs'>AQUASTAT via World Bank (accessed 2026-11-26). Ratio of the Mediterranean median to the median of the other</text>
+<text x='15.94' y='314.23' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='466.86px' lengthAdjust='spacingAndGlyphs'>member states, irrigation abstraction per irrigated hectare, mean 2020-2022. Irrigated area from the 2016 or</text>
+<text x='15.94' y='324.82' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='452.25px' lengthAdjust='spacingAndGlyphs'>2023 farm survey, or interpolated to 2021 (headline). 'All' adds Italy, Portugal, France and Austria, whose</text>
+<text x='15.94' y='335.40' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='332.77px' lengthAdjust='spacingAndGlyphs'>abstraction is a scaled AQUASTAT estimate. A ratio of 1 would mean no gap.</text>
+<text x='15.94' y='345.99' style='font-size: 9.80px;fill: #6B6B66; font-family: "Arial";' textLength='102.34px' lengthAdjust='spacingAndGlyphs'>Analysis: Mithril Metrics</text>
+</g>
 </g>
 </svg>

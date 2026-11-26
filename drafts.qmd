@@ -1,0 +1,57 @@
+---
+title: "Drafts awaiting review"
+description: "Case studies written but not yet published."
+search: false
+include-in-header:
+  text: |
+    <meta name="robots" content="noindex, nofollow">
+---
+
+Case studies that are written and waiting for review before they go live. A case appears here when
+its `00_meta.yml` says `status: draft` and its `report.qmd` still says `draft: true`; it leaves the
+list when it is published. The list is rebuilt with the site on every push and every scheduled
+release. This page is not linked from the menu.
+
+```{r}
+#| label: drafts
+#| results: asis
+`%||%` <- function(a, b) if (is.null(a)) b else a
+cases <- list.dirs("cases", recursive = FALSE)
+cases <- cases[!startsWith(basename(cases), "_")]
+
+# Front-matter flag in report.qmd: draft: true / false
+is_draft <- function(dir) {
+  qmd <- file.path(dir, "report.qmd")
+  if (!file.exists(qmd)) return(FALSE)
+  any(grepl("^draft:\\s*true\\b", readLines(qmd, warn = FALSE, encoding = "UTF-8")))
+}
+
+rows <- lapply(cases, function(dir) {
+  meta_file <- file.path(dir, "00_meta.yml")
+  if (!file.exists(meta_file)) return(NULL)
+  meta <- yaml::read_yaml(meta_file, fileEncoding = "UTF-8")
+  if (!identical(meta$status, "draft") || !is_draft(dir)) return(NULL)
+  id <- basename(dir)
+  when <- if (is.null(meta$publish_at)) "awaiting review" else paste("scheduled for", meta$publish_at)
+  data.frame(issue = meta$issue %||% NA, id = id, title = meta$title %||% id,
+             author = meta$author %||% "", when = when, stringsAsFactors = FALSE)
+})
+rows <- do.call(rbind, rows)
+
+if (is.null(rows) || nrow(rows) == 0) {
+  cat("*No drafts awaiting review.*\n")
+} else {
+  rows <- rows[order(rows$issue), ]
+  cat('<table class="table">\n<thead><tr><th>Issue</th><th>Draft</th><th>Author</th>',
+      '<th>Technical note</th><th>Status</th></tr></thead>\n<tbody>\n', sep = "")
+  for (i in seq_len(nrow(rows))) {
+    r <- rows[i, ]
+    cat('<tr><td>', r$issue, '</td>',
+        '<td><a href="/cases/', r$id, '/report.html">', r$title, '</a></td>',
+        '<td>', r$author, '</td>',
+        '<td><a href="/cases/', r$id, '/brief.pdf">PDF</a></td>',
+        '<td>', r$when, '</td></tr>\n', sep = "")
+  }
+  cat('</tbody>\n</table>\n')
+}
+```

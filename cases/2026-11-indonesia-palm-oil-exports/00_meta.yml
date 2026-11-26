@@ -122,7 +122,7 @@ p6_checks:
   placebo_note: "Wheat flour does not follow world wheat in this sample (pass-through near zero, AR(1) near 1), so the placebo is weak"
 
 events_2022:
-  - {date: "2022-02-01", label: "Bulk cap Rp11,500", source: "Jakarta Post, 18 Mar 2022"}
+  - {date: "2022-02-01", label: "Retail caps (bulk Rp11,500)", source: "Jakarta Post, 18 Mar 2022"}
   - {date: "2022-03-16", label: "Packaged caps lifted", source: "Jakarta Post, 18 Mar 2022"}
   - {date: "2022-04-28", label: "Export ban (to 23 May)", source: "FAO FAPDA; Trade Regulation 30/2022"}
 
@@ -146,6 +146,8 @@ known_limitations:
   - "One country and one episode; the result does not predict the effect of the 2027 state-exporter scheme."
   - "March 2022 mixes both regimes and is assigned to the first sub-phase in R1."
   - "The world-price link is estimated in months that had caps or supply obligations (2022 onward), which may flatten it; S2 and S3 show how much this matters."
+  - "The BPS national average sits well above the bulk / MinyaKita caps throughout, so the series mostly reflects packaged or uncapped oil; check the BPS definition before writing."
+  - "The gap already moved before any measure (Oct-Dec 2021, S4), so the five-month window estimate depends on which months serve as the baseline."
   - "The Jan-Mar / Apr-May split (R1) was a planned check, not the primary test; April 2022 is mostly before the export ban."
 
 pre_results_review: >

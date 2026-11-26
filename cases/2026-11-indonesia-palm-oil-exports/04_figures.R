@@ -37,8 +37,8 @@ p1 <- ggplot(gaps, aes(date)) +
   annotate("rect", xmin = win[1] - 15, xmax = win[2] + 15, ymin = -Inf, ymax = Inf,
            fill = "grey85", alpha = 0.6) +
   geom_hline(yintercept = 0, colour = "grey40", linewidth = 0.4) +
-  geom_col(aes(y = gap_pct, fill = "Main model"), width = 25) +
-  geom_line(aes(y = gap_ex2022_pct, colour = "Link estimated without 2022"), linewidth = 0.8) +
+  geom_col(aes(y = gap_pct, fill = "Gap, main model"), width = 25) +
+  geom_line(aes(y = gap_ex2022_pct, colour = "Gap, link estimated without 2022"), linewidth = 0.8) +
   geom_segment(data = events, aes(x = date, xend = date, y = 0, yend = y_pos),
                linetype = "dotted", colour = "grey25", linewidth = 0.4) +
   geom_text(data = events, aes(x = date + 20, y = y_pos, label = label),
@@ -47,8 +47,8 @@ p1 <- ggplot(gaps, aes(date)) +
   scale_colour_manual(values = "grey15", name = NULL) +
   labs(
     title = str_wrap(paste0("Retail cooking oil was ", gap_words("gap_aprmay_pct"),
-                            " its world-price level in Apr-May 2022 and ", gap_words("gap_janmar_pct"),
-                            " in Jan-Mar"), 55),
+                            " its world-price level in Apr-May 2022, against ", gap_words("gap_febmar_pct"),
+                            " while retail caps applied in Feb-Mar"), 55),
     subtitle = "Indonesia, national retail price vs the level implied by world palm oil in rupiah, %",
     x = NULL, y = "Gap, %",
     caption = source_caption(paste0(src, "; policy dates: FAO FAPDA, press reports"), accessed = accessed,
@@ -109,7 +109,8 @@ p3 <- ggplot(grid, aes(beta, pct, colour = series, fill = series)) +
     x = "Assumed pass-through (elasticity, lags 0-2)", y = "Shift in retail price, %",
     caption = source_caption(src, accessed = accessed,
                              note = paste0("\nDashed lines: estimated pass-through, all months (", k("passthrough_sum"),
-                                           ") and without 2022 (", k("passthrough_ex2022"), ")."))
+                                           ") and without 2022 (", k("passthrough_ex2022"), ").",
+                                           " Above 0.7 the AR(1) term nears 1 and the intervals are less reliable."))
   ) +
   theme_ac() +
   theme(legend.position = "bottom")

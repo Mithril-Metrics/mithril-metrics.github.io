@@ -76,6 +76,15 @@ res <- res |>
     idr_l = if_else(model %in% c("main", "r1_split"), pct / 100 * pre_mean, NA_real_)
   )
 
+# Check requested at P7: t critical values instead of normal ones (primary inference unchanged)
+df_t <- nrow(df) - length(coef(ar_fit("ln_vegoil", x_oil)))
+res <- res |>
+  mutate(
+    p_t = 2 * pt(-abs(est / se), df = df_t),
+    pct_lo_t = 100 * (exp(est - qt(0.975, df_t) * se) - 1),
+    pct_hi_t = 100 * (exp(est + qt(0.975, df_t) * se) - 1)
+  )
+
 phase_terms <- c("window", "window_a", "window_b", "post", "bps2023")
 tab_phase <- res |>
   filter(term %in% phase_terms) |>
@@ -137,6 +146,24 @@ gap_tab <- bind_rows(lapply(names(periods), function(n) {
 }))
 print(as.data.frame(gap_tab), digits = 3)
 
+# ---- Three estimators of the window shift (P7): they answer different questions ----
+# AR(1): weights the months where phases start and end; OLS: weights all months equally;
+# descriptive: mean gap in Jan-May 2022 minus mean gap in Nov 2020 - Dec 2021 (main link).
+pre_sel <- df$date <= as.Date("2021-12-01")
+desc_diff <- 100 * (exp(mean(df$gap_main[df$window == 1]) - mean(df$gap_main[pre_sel])) - 1)
+tab_est <- tibble(
+  estimator = c("AR(1) errors (pre-registered)", "OLS, Newey-West SE (check)", "Mean gap, Jan-May 2022 minus Nov 2020 - Dec 2021"),
+  question = c("Shift in the window, months where phases start and end weigh most",
+               "Shift in the window, all months weighted equally",
+               "Raw difference in the average gap, no model for persistence"),
+  pct = c(res$pct[res$model == "main" & res$term == "window"],
+          res$pct_ols[res$model == "main" & res$term == "window"], desc_diff),
+  p = c(res$p[res$model == "main" & res$term == "window"],
+        res$p_nw[res$model == "main" & res$term == "window"], NA)
+)
+write.csv(tab_est, "output/tab_estimators.csv", row.names = FALSE)
+print(as.data.frame(tab_est), digits = 3)
+
 # ---- Descriptives ----
 in_win <- df$window == 1
 in_2021 <- df$date >= as.Date("2021-01-01") & df$date <= as.Date("2021-12-01")
@@ -168,6 +195,11 @@ for (t in c("window", "post", "bps2023")) {
 }
 add("main_window_ols_pct", g("main", "window", "pct_ols"), "%", 1, "Check: OLS estimate of the window shift (Newey-West SE)")
 add("main_window_ols_p_nw", g("main", "window", "p_nw"), "", 3, "Check: Newey-West p-value of the OLS window estimate")
+add("desc_window_minus_pre_pct", desc_diff, "%", 1, "Mean gap Jan-May 2022 minus mean gap Nov 2020 - Dec 2021 (main link)", src_model)
+add("main_window_lo_t", g("main", "window", "pct_lo_t"), "%", 1, "Check: lower 95% bound with t critical values, window")
+add("main_window_hi_t", g("main", "window", "pct_hi_t"), "%", 1, "Check: upper 95% bound with t critical values, window")
+add("main_window_p_t", g("main", "window", "p_t"), "", 3, "Check: p-value with t critical values, window")
+add("r1_window_b_p_t", g("r1_split", "window_b", "p_t"), "", 3, "Check: p-value with t critical values, Apr-May 2022")
 add("main_window_idr", g("main", "window", "idr_l"), "IDR/litre", 0, "Main model: window shift in IDR/litre at the 2021 mean price")
 add("main_post_idr", g("main", "post", "idr_l"), "IDR/litre", 0, "Main model: shift from Jun 2022 in IDR/litre at the 2021 mean price")
 add("passthrough_sum", lr["sum"], "", 2, "Sum of CPO elasticities, lags 0-2 (main model)")
@@ -194,6 +226,8 @@ for (i in seq_len(nrow(gap_tab))) {
   add(paste0("gap_", gap_tab$period[i], "_ex2022_pct"), gap_tab$gap_ex2022[i], "%", 1,
       paste("Mean gap, retail vs world-price level (link estimated without 2022),", gap_tab$label[i]), src_gap)
 }
+add("gap_aprmay_minus_febmar_pp", gap_tab$gap_main[gap_tab$period == "aprmay"] - gap_tab$gap_main[gap_tab$period == "febmar"],
+    "points", 1, "Gap in Apr-May 2022 minus gap in Feb-Mar 2022, percentage points (main link)", src_gap)
 add("passthrough_ex2022", lr_ex["sum"], "", 2, "S2: sum of CPO elasticities, link estimated without 2022")
 add("passthrough_ex2022_se", lr_ex["se"], "", 2, "S2: SE of that sum")
 

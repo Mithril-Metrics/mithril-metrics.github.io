@@ -150,6 +150,13 @@ for (i in seq_len(nrow(s6))) {
   add(paste0(key, "_hi"), s6$pct_hi[i], "%", 1, paste("S6 month dummies: upper 95% bound,", lab))
 }
 
+# Month-to-month changes (comparable across figures, unlike the levels)
+s6v <- function(m) s6$pct[format(s6$month, "%Y-%m") == m]
+add("s6_feb_minus_jan_pp", s6v("2022-02") - s6v("2022-01"), "points", 1, "S6: change in the gap, Jan to Feb 2022, percentage points")
+add("s6_apr_minus_mar_pp", s6v("2022-04") - s6v("2022-03"), "points", 1, "S6: change in the gap, Mar to Apr 2022, percentage points")
+add("s6_may_minus_apr_pp", s6v("2022-05") - s6v("2022-04"), "points", 1, "S6: change in the gap, Apr to May 2022, percentage points")
+add("s6_aug_minus_jun_pp", s6v("2022-08") - s6v("2022-06"), "points", 1, "S6: change in the gap, Jun to Aug 2022, percentage points")
+
 # ---- S7: pre-registered phases moved by 0, 1 and 2 months (all reported) ----
 shift_month <- function(x, k) seq(as.Date(x), by = paste(k, "months"), length.out = 2)[2]
 ph <- yaml::read_yaml("00_meta.yml", fileEncoding = "UTF-8")$decisions$phases

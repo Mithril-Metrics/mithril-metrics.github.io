@@ -25,7 +25,7 @@ accessed <- max(as.Date(access_log()$accessed))
 cols <- ac_palette(3)
 win <- as.Date(meta$decisions$phases$window)
 events <- bind_rows(lapply(meta$events_2022, as_tibble)) |>
-  mutate(date = as.Date(date), y = c(1.32, 1.21, 1.10))
+  mutate(date = as.Date(date), y = c(1.54, 1.43, 1.32, 1.21, 1.10))
 src <- "FAO GIEWS FPMA"
 
 gap_words <- function(key) paste0(k(key, abs = TRUE), "% ", if (v(key) < 0) "below" else "above")
@@ -46,10 +46,10 @@ p1 <- ggplot(gaps, aes(date)) +
   scale_fill_manual(values = cols[1], name = NULL) +
   scale_colour_manual(values = "grey15", name = NULL) +
   labs(
-    title = str_wrap(paste0("Retail cooking oil was ", gap_words("gap_aprmay_pct"),
-                            " its world-price level in Apr-May 2022, against ", gap_words("gap_febmar_pct"),
-                            " while retail caps applied in Feb-Mar"), 55),
-    subtitle = "Indonesia, national retail price vs the level implied by world palm oil in rupiah, %",
+    title = str_wrap(paste0("The gap was ", k("gap_aprmay_minus_febmar_pp", abs = TRUE), " points ",
+                            if (v("gap_aprmay_minus_febmar_pp") >= 0) "wider" else "narrower",
+                            " in Apr-May 2022 than in Feb-Mar, the first full months of retail caps"), 55),
+    subtitle = str_wrap("Indonesia, national retail price vs the price predicted from world palm oil prices (fitted relationship, not a parity price), %", 85),
     x = NULL, y = "Gap, %",
     caption = source_caption(paste0(src, "; policy dates: FAO FAPDA, press reports"), accessed = accessed,
                              note = "\nGrey band: Jan-May 2022. Implied level: AR(1) link to world CPO, lags 0-2.")
@@ -94,13 +94,11 @@ save_fig(p2, "figB_phase_effects")
 ev <- read.csv("output/tab_event_months.csv") |>
   mutate(month = as.Date(month), mid = month + 14)
 ev22 <- ev[format(ev$month, "%Y") == "2022", ]
-top <- ev22[which.max(ev22$pct), ]
-low <- ev22[which.min(ev22$pct), ]
-key_of <- function(m) paste0("s6_", format(m, "%Y_%m"), "_pct")
+chg <- function(key) paste0(if (v(key) < 0) "fell " else "rose ", k(key, abs = TRUE), " points")
 bands <- tibble(
-  from = as.Date(c("2022-02-01", "2022-04-28")),
+  from = as.Date(c("2022-01-19", "2022-04-28")),
   to = as.Date(c("2022-03-16", "2022-05-23")),
-  label = c("Retail caps", "Export ban")
+  label = c("One price, then caps", "Export ban")
 )
 p2 <- ggplot(ev, aes(mid, pct)) +
   geom_rect(data = bands, aes(xmin = from, xmax = to, ymin = -Inf, ymax = Inf), inherit.aes = FALSE,
@@ -111,13 +109,12 @@ p2 <- ggplot(ev, aes(mid, pct)) +
   geom_pointrange(aes(ymin = pct_lo, ymax = pct_hi), colour = cols[1], size = 0.5, linewidth = 0.8) +
   scale_x_date(date_breaks = "2 months", date_labels = "%b\n%Y") +
   labs(
-    title = str_wrap(paste0("Month by month, the gap peaked in ", format(top$month, "%B"), " 2022 (",
-                            k(key_of(top$month), sign = TRUE), "%) and was lowest in ",
-                            format(low$month, "%B"), " (", k(key_of(low$month), sign = TRUE), "%)"), 55),
-    subtitle = str_wrap("Shift of retail cooking oil vs the level implied by world palm oil, by month, % with 95% intervals; baseline Nov 2020 - Sep 2021, when retail sat below that level", 90),
+    title = str_wrap(paste0("Month by month, the gap ", chg("s6_feb_minus_jan_pp"), " in February 2022 and ",
+                            chg("s6_apr_minus_mar_pp"), " in April"), 55),
+    subtitle = str_wrap("Shift by month relative to Nov 2020 - Sep 2021, allowing for persistence, % with 95% intervals; compare months with each other, not with Fig 1", 90),
     x = NULL, y = "Gap, %",
     caption = source_caption(paste0(src, "; policy dates: FAO FAPDA, press reports"), accessed = accessed,
-                             note = "\nAR(1) regression with one dummy per month, Oct 2021 - Dec 2022; Oct-Dec 2021 precede any measure.")
+                             note = "\nAR(1) regression with one dummy per month, Oct 2021 - Dec 2022; Oct-Dec 2021 precede any measure.\nCheck added after first results.")
   ) +
   theme_ac()
 save_fig(p2, "fig2_event_months")
@@ -142,7 +139,7 @@ p3 <- ggplot(grid, aes(beta, pct, colour = series, fill = series)) +
     caption = source_caption(src, accessed = accessed,
                              note = paste0("\nDashed lines: estimated pass-through, all months (", k("passthrough_sum"),
                                            ") and without 2022 (", k("passthrough_ex2022"), ").",
-                                           "\nAbove 0.7 the AR(1) term nears 1 and the intervals are less reliable."))
+                                           "\nAbove 0.7 the AR(1) term nears 1 and the intervals are less reliable. Check added after first results."))
   ) +
   theme_ac() +
   theme(legend.position = "bottom")
@@ -153,7 +150,7 @@ caps <- bind_rows(lapply(meta$price_caps, as_tibble)) |>
   mutate(from = as.Date(from), to = as.Date(to))
 lines <- df |>
   select(date, `Retail price (BPS national average)` = vegoil,
-         `Level implied by world palm oil price` = cf_vegoil) |>
+         `Price predicted from world palm oil prices` = cf_vegoil) |>
   pivot_longer(-date, names_to = "series", values_to = "idr")
 pA <- ggplot() +
   annotate("rect", xmin = win[1], xmax = win[2] + 30, ymin = -Inf, ymax = Inf,
@@ -163,17 +160,17 @@ pA <- ggplot() +
   geom_segment(data = caps, aes(x = from, xend = to, y = idr_per_litre, yend = idr_per_litre),
                linetype = "dashed", colour = "grey40", linewidth = 0.5) +
   annotate("text", x = as.Date("2024-09-01"), y = max(caps$idr_per_litre), vjust = 1.5, hjust = 0,
-           size = 3.2, colour = "grey30", label = "Price caps, bulk / MinyaKita oil") +
+           size = 3.2, colour = "grey30", label = "Price caps (one price, packaged, bulk / MinyaKita)") +
   geom_line(data = lines, aes(date, idr, colour = series), linewidth = 1) +
   scale_colour_manual(values = cols[1:2], name = NULL) +
   scale_y_continuous(labels = scales::label_comma()) +
   labs(
-    title = "Retail cooking oil and the level implied by world palm oil prices",
+    title = "Retail cooking oil and the price predicted from world palm oil prices",
     subtitle = "Indonesia, national retail price, IDR per litre",
     x = NULL, y = "IDR per litre",
     caption = source_caption(paste0(src, "; price caps: Trade Ministry rules (press reports)"),
                              accessed = accessed,
-                             note = "\nCaps apply to bulk / MinyaKita oil, not to the whole BPS series.")
+                             note = "\nCaps apply to specific oil types, not to the whole BPS series.")
   ) +
   theme_ac() +
   theme(legend.position = "bottom")

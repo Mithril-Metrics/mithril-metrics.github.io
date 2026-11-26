@@ -12,7 +12,7 @@ question: >
   the world crude palm oil price in rupiah during the January-May 2022 policy bundle (domestic
   market obligation, retail price caps, a four-week export ban), and after it?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: code                      # plan | code | results | red-teamed | draft | published
+status: red-teamed                      # plan | code | results | red-teamed | draft | published
 publish_at: null                  # set only after both authors approve
 
 hook:
@@ -27,9 +27,9 @@ hook:
 
 tags:
   region: ["SE Asia"]
-  method: ["Causal"]
+  method: ["Descriptive / interrupted time series"]
   employer_theme: ["WB", "FAO", "IFPRI"]
-  skills: ["Panel econometrics (FE, IV, RDD, selection)", "Food security and palm oil (SEA)"]
+  skills: ["Time-series econometrics", "Food security and palm oil (SEA)"]
 
 dates:
   created: "2026-11-26"
@@ -77,9 +77,11 @@ sources:
 manual_steps: []                  # all prices come from the FPMA API; policy dates are below with their sources
 
 identification: >
-  Conditional on how the retail price normally follows the world palm oil price in rupiah (lags 0-2),
-  nothing other than the 2022 policy bundle shifted Indonesian retail cooking-oil prices in January-May
-  2022; wheat flour, which the palm oil rules did not touch, tests for shocks common to both.
+  Descriptive comparison, not a causal design. The working assumption was that, conditional on how
+  the retail price normally follows the world palm oil price in rupiah (lags 0-2), nothing other than
+  the 2022 policy bundle moved Indonesian retail cooking-oil prices in January-May 2022. The data
+  partly reject it: the gap widened by about 10% in October-December 2021, before any measure (S4),
+  and Indonesia's own measures moved the world price used as the benchmark.
 
 method_track:
   choice: "E"
@@ -106,7 +108,7 @@ decisions:
   placebo: "wheat flour vs US HRW wheat in rupiah, same specification"
   robustness:
     R1: "Window split into Jan-Mar 2022 and Apr-May 2022"
-    R2: "Dropped at P6: one-for-one gaps move with the world price cycle, the reason they were rejected at P4"
+    R2: "Dropped at P6, after first results: one-for-one gaps move with the world price cycle (the reason they were rejected as the main model at P4)"
   units: "Phase effects in % (100*(exp(b)-1)) and IDR/litre at the 2021 mean retail price"
   footnote_only: "World Bank Pink Sheet palm oil (same market as Oil World c.i.f. Rotterdam)"
 
@@ -118,19 +120,29 @@ p6_checks:
   S3: "Pass-through imposed on a grid from 0.1 to 0.9 (equal weights on lags 0-2); window and Apr-May shifts re-estimated"
   S4: "Dummy for the three months before the window (Oct-Dec 2021): does the gap move before any measure?"
   S5: "Placebo in time: the same model with a fake 5-month (and 2-month) window at every position outside Jan-May 2022"
-  S6: "One dummy per month, Oct 2021 - Dec 2022, in the AR(1) model: no assumption on when effects start (added 2026-11-26 after the lag question)"
+  S6: "One dummy per month, Oct 2021 - Dec 2022, in the AR(1) model, with no post dummy (2023 on covered by bps2023): no assumption on when effects start; levels are relative to Nov 2020 - Sep 2021, so only month-to-month changes are compared"
   S7: "Pre-registered phases moved by +1 and +2 months; all three timings reported, none selected"
+  t_values: "P7 check: intervals and p-values with t critical values (df = months minus parameters); primary inference unchanged"
+  estimators: "P7: tab_estimators.csv sets the AR(1), OLS and raw mean-gap estimates of the window side by side"
   newey_west: "Reported with its own OLS estimate; it is not a p-value for the AR(1) estimate"
   placebo_note: "Wheat flour does not follow world wheat in this sample (pass-through near zero, AR(1) near 1), so the placebo is weak"
 
 events_2022:
-  - {date: "2022-02-01", label: "Retail caps (bulk Rp11,500)", source: "Jakarta Post, 18 Mar 2022"}
+  - {date: "2022-01-19", label: "One price Rp14,000", source: "Setkab, 19 Jan 2022, https://setkab.go.id/en/govt-rolls-out-one-price-cooking-oil-policy/"}
+  - {date: "2022-01-27", label: "DMO 20%", source: "Setkab, 28 Jan 2022, https://setkab.go.id/en/govt-strengthens-measures-to-maintain-cooking-oil-price"}
+  - {date: "2022-02-01", label: "Retail caps", source: "Setkab, 28 Jan 2022 (bulk 11,500; simple packaged 13,500; premium packaged 14,000)"}
   - {date: "2022-03-16", label: "Packaged caps lifted", source: "Jakarta Post, 18 Mar 2022"}
   - {date: "2022-04-28", label: "Export ban (to 23 May)", source: "FAO FAPDA; Trade Regulation 30/2022"}
 
 # Retail price caps (HET) drawn in Fig 1. They apply to bulk / 'people's' cooking oil, not to the
 # whole BPS series, which mixes bulk and packaged oil.
 price_caps:
+  - {from: "2022-01-19", to: "2022-01-31", idr_per_litre: 14000, label: "One price, packaged oil",
+     source: "Setkab, 19 Jan 2022, https://setkab.go.id/en/govt-rolls-out-one-price-cooking-oil-policy/"}
+  - {from: "2022-02-01", to: "2022-03-15", idr_per_litre: 13500, label: "Simple packaged cap",
+     source: "Setkab, 28 Jan 2022, https://setkab.go.id/en/govt-strengthens-measures-to-maintain-cooking-oil-price"}
+  - {from: "2022-02-01", to: "2022-03-15", idr_per_litre: 14000, label: "Premium packaged cap",
+     source: "Setkab, 28 Jan 2022, https://setkab.go.id/en/govt-strengthens-measures-to-maintain-cooking-oil-price"}
   - {from: "2022-02-01", to: "2022-03-15", idr_per_litre: 11500, label: "Bulk oil cap",
      source: "Jakarta Post, 18 Mar 2022, https://www.thejakartapost.com/business/2022/03/18/govt-removes-price-cap-on-cooking-oil.html"}
   - {from: "2022-03-16", to: "2024-08-13", idr_per_litre: 14000, label: "Bulk oil / MinyaKita cap",
@@ -139,19 +151,36 @@ price_caps:
      source: "Antara, Aug 2024, https://makassar.antaranews.com/berita/553303/kemendag-menetapkan-het-minyakita-sebesar-rp15700-per-liter"}
 
 known_limitations:
-  - "The estimate covers the whole 2022 policy bundle; monthly data cannot isolate the export ban from the price caps and supply obligations."
-  - "The window spans five months, so its estimate is close to a five-month average and its confidence interval is wide."
-  - "The measures followed a price spike in late 2021, so part of any fall during the window may be prices returning to normal."
-  - "BPS widened its price sample from 90 to 150 districts in January 2023; the 2023 shift mixes that change with any policy drift."
-  - "The series mixes bulk and packaged cooking oil, and posted prices under a cap can understate what households paid when oil was scarce."
+  - "The estimate covers the whole January-May 2022 bundle: a Rp14,000 one-price policy with subsidy from 19 January, the domestic market obligation from 27 January, retail caps from 1 February, the end of packaged-oil caps on 16 March, and the export ban of 28 April-23 May. Monthly data cannot isolate any one of them; January is partly treated."
+  - "With persistent month-to-month errors (AR(1) coefficient 0.82), the pre-specified window estimate gives most weight to the months where phases start and end. An estimate weighting all months equally (OLS) gives +14.9%. The two answer different questions; both are reported."
+  - "The gap widened by about 10% in October-December 2021, before any measure (95% CI 4% to 16%); adding those months as their own period moves the window estimate from +4% to +16%. Part of any later fall may be the late-2021 spike unwinding."
+  - "Moving the phases by one month turns the window estimate to -10% (95% CI -14% to -6%); by two months it is +3%. All three timings are reported and none is selected."
+  - "Indonesia's own measures moved the world palm oil price used as the benchmark, so in 2022 the predicted level is not a policy-free counterfactual; any effect working through world prices is not captured, and the ban could move both lines at once."
+  - "The series is the national average retail price, which in 2022 sat well above every cap (Rp19,349 per litre in February 2022, 38% above the highest cap in force). It mostly reflects packaged or uncapped oil sold where available and does not show the price of capped oil, how much capped oil households could buy, or exporters' and smallholders' prices, where a change in export channels such as the 2027 scheme acts first."
+  - "FPMA labels the series 'vegetable oil, national average, BPS'. BPS's current monitoring records palm cooking oil in three variants (bulk, MinyaKita, premium packaged); which variants and weights the series uses, especially before 2022, could not be confirmed."
+  - "The world-price link is estimated mostly on months under a supply obligation or the MinyaKita cap. Estimating it without 2022 barely changes April-May (gap 13.3% either way) but halves the gap after 2022 (7.0% vs 3.6%), so the post-2022 level is the less reliable number."
+  - "Wheat flour barely follows world wheat (pass-through 0.06, AR(1) 0.99) and its own window shift is small but significant (+1.9%, p = 0.04), so the placebo cannot rule out common shocks and suggests the intervals may be too narrow."
+  - "Month-by-month estimates (Fig 2) are measured against November 2020 - September 2021 and against neighbouring months, so their levels are not comparable with Fig 1; intervals at the ends of the period are narrow because those months are pinned by the observed months next to them."
+  - "BPS widened its price sample from 90 to 150 districts in January 2023; the shift that month is about 19% for wheat flour, so the small cooking-oil estimate (-2.1%) does not show the change was harmless in general."
+  - "A four-week export ban (28 April-23 May), averaged into monthly prices that also contain Eid, may not be visible at this frequency; 'no further break in May' does not mean the ban had no effect."
   - "Lower consumer prices were paid partly by producers; farm-gate fresh-fruit-bunch prices are not analysed here."
   - "One country and one episode; the result does not predict the effect of the 2027 state-exporter scheme."
-  - "March 2022 mixes both regimes and is assigned to the first sub-phase in R1."
-  - "The world-price link is estimated in months that had caps or supply obligations (2022 onward), which may flatten it; S2 and S3 show how much this matters."
-  - "The BPS national average sits well above the bulk / MinyaKita caps throughout, so the series mostly reflects packaged or uncapped oil; check the BPS definition before writing."
-  - "The gap already moved before any measure (Oct-Dec 2021, S4), so the five-month window estimate depends on which months serve as the baseline."
-  - "The pre-registered phases switch on in the month a measure starts; effects that take one or two months (DMO, export ban) fall partly outside the window or into the post period. S6 and S7 show the timing without that assumption."
-  - "The Jan-Mar / Apr-May split (R1) was a planned check, not the primary test; April 2022 is mostly before the export ban."
+
+write_notes:
+  - "Lead with the pre-specified test, then the comparison of estimators, then the month-by-month pattern; label S1-S7 as checks added after first results."
+  - "Timing words: 'in the same or the following month', never 'within weeks'; 'after', never 'because of'."
+  - "Call the benchmark 'the price predicted from world palm oil prices (a fitted relationship, not a parity price)'."
+  - "Give the Apr-May shift also in IDR per litre (about Rp2,694 at the 2021 mean, R1); no share of household spending without a cited Susenas figure."
+  - "One sentence on smallholders, labelled as farmer reports: Al Jazeera, 16 May 2022; Jakarta Post, 3 Aug 2022."
+  - "Pink Sheet palm oil as a footnote only (same market as Oil World c.i.f. Rotterdam)."
+  - "Do not cite the World Bank Indonesia Economic Prospects (June 2022) as support; reviewers could not confirm cooking-oil content."
+
+p7_review: >
+  2026-11-26. World Bank policy analyst and field-journal econometrician, both REVISE (light). Adopted:
+  headline leads with the pre-specified test; estimator comparison table; corrected 2022 timeline
+  (one price 19 Jan, DMO 27 Jan, packaged caps 1 Feb); Fig 1 and Fig 2 retitled as changes; t-value
+  check; identification, tags and R2 wording; limitations rewritten. Caveat instead of fix: endogenous
+  benchmark, series level vs caps, placebo, ban visibility.
 
 pre_results_review: >
   2026-11-25. World Bank policy analyst and field-journal econometrician, both PROCEED WITH CHANGES.

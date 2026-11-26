@@ -114,7 +114,7 @@ p2 <- ggplot(ev, aes(mid, pct)) +
     title = str_wrap(paste0("Month by month, the gap peaked in ", format(top$month, "%B"), " 2022 (",
                             k(key_of(top$month), sign = TRUE), "%) and was lowest in ",
                             format(low$month, "%B"), " (", k(key_of(low$month), sign = TRUE), "%)"), 55),
-    subtitle = "Retail cooking oil vs the level implied by world palm oil, by month, % with 95% intervals",
+    subtitle = str_wrap("Shift of retail cooking oil vs the level implied by world palm oil, by month, % with 95% intervals; baseline Nov 2020 - Sep 2021, when retail sat below that level", 90),
     x = NULL, y = "Gap, %",
     caption = source_caption(paste0(src, "; policy dates: FAO FAPDA, press reports"), accessed = accessed,
                              note = "\nAR(1) regression with one dummy per month, Oct 2021 - Dec 2022; Oct-Dec 2021 precede any measure.")
@@ -142,7 +142,7 @@ p3 <- ggplot(grid, aes(beta, pct, colour = series, fill = series)) +
     caption = source_caption(src, accessed = accessed,
                              note = paste0("\nDashed lines: estimated pass-through, all months (", k("passthrough_sum"),
                                            ") and without 2022 (", k("passthrough_ex2022"), ").",
-                                           " Above 0.7 the AR(1) term nears 1 and the intervals are less reliable."))
+                                           "\nAbove 0.7 the AR(1) term nears 1 and the intervals are less reliable."))
   ) +
   theme_ac() +
   theme(legend.position = "bottom")

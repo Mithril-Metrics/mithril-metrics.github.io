@@ -102,28 +102,27 @@ why_now <- paste0(
   "a transition from June to December 2026, and the state exporter as sole exporter of record from 1 January 2027. ",
   "**The last time the government administered export flows was 2022**, when a one-price policy, a domestic supply ",
   "obligation, retail caps, an export quota, higher export levies and a four-week export ban followed each other ",
-  "within five months. The 2027 scheme changes export channels rather than banning exports, so 2022 is a partial ",
-  "analogue, but it is the closest record of how domestic cooking-oil prices respond when export flows are managed."
+  "within five months. The 2027 scheme changes export channels rather than banning exports, so 2022 is only a partial analogue."
 )
 
 method_plain <- paste0(
   "**We ask how far the national retail price moved away from the level its usual relationship with world palm oil ",
   "would predict, in each phase of the 2022 measures, allowing for the fact that price gaps carry over from month to month.** ",
-  "We use ", k("n_months"), " months of BPS national average retail prices (November 2020 to July 2026) and the world ",
-  "crude palm oil price in rupiah, both from FAO's food price monitoring database. Retail cooking oil normally passes on ",
-  "about a third of a world-price change within three months (elasticity ", k("passthrough_sum"), "), so the comparison is ",
-  "with that link, not with world prices themselves: in January-May 2022 world palm oil in rupiah was ",
+  "We use ", k("n_months"), " months of BPS national retail prices (November 2020 to July 2026) and world crude palm oil ",
+  "prices in rupiah, from FAO's price monitoring database. Retail cooking oil normally passes on about a third of a ",
+  "world-price change within three months (elasticity ", k("passthrough_sum"), "), so we compare with that link, not with ",
+  "world prices: in January-May 2022 world palm oil in rupiah was ",
   pct("cpo_window_vs_2021_pct"), " above its 2021 average and retail cooking oil ", pct("vegoil_window_vs_2021_pct"),
-  ". The test for January-May and the split into January-March and April-May were fixed before we saw results; ",
-  "checks added afterwards are labelled exploratory."
+  ". The January-May test and its split into January-March and April-May were fixed before we saw results; ",
+  "later checks are labelled exploratory."
 )
 
 implications <- c(
   paste0("If the aim of administering exports is lower domestic prices, **the 2022 record gives no evidence that national ",
-         "average retail prices fall relative to their usual world-price link.** Producers may bear part of the cost: ",
-         "farmers reported fresh-fruit-bunch prices roughly halving during the 2022 ban ",
+         "average retail prices fall relative to their usual world-price link.** Farmers reported fresh-fruit-bunch prices ",
+         "roughly halving during the ban ",
          "([Al Jazeera, 16 May 2022](https://www.aljazeera.com/economy/2022/5/16/indonesian-farmers-decry-palm-oil-export-ban-as-prices-plummet)); ",
-         "we do not measure this."),
+         "we do not measure producer effects."),
   paste0("If retail caps are the instrument, the recorded gap narrowed only while caps applied and widened within weeks ",
          "of lifting them. The trade-off is availability: in February 2022 the national average was ",
          pct("vegoil_feb2022_vs_cap_pct"), " above the highest cap in force, consistent with the shortages the ",
@@ -140,9 +139,7 @@ caveats <- c(
          "Rp14,250 to Rp29,250 per kg across provinces in May 2022, ",
          "[Katadata](https://katadata.co.id/berita/industri/6285dba47b70b/tiga-pekan-larangan-ekspor-cpo-harga-minyak-goreng-curah-dekati-het))."),
   "Indonesia's own measures moved the world palm oil price used as the benchmark, so in 2022 the predicted level is not a policy-free comparison.",
-  paste0("The January-May estimate depends on how months are weighted and where the phase boundaries fall (",
-         pct("main_window_pct", sign = TRUE), " pre-specified, ", pct("main_window_ols_pct", sign = TRUE),
-         " with equal weights, ", pct("s7_lag1_window_pct", sign = TRUE), " with phases moved by one month)."),
+  "The January-May estimate depends on how months are weighted and where the phase boundaries fall, so it cannot rule out a shift in either direction.",
   "One country and one episode; the result does not predict the effect of the 2027 state-exporter scheme."
 )
 
@@ -205,13 +202,13 @@ cat('</div>\n')
 
 ![](output/figB_phase_effects.png){fig-alt="Point estimates with 95 percent intervals: January to May 2022 (pre-specified), January to March and April to May 2022 (planned split), from June 2022, and the wheat flour placebo. Only April to May lies clearly above zero." width="100%"}
 
-**The pre-specified estimate is `r pct("main_window_pct", sign = TRUE)` (`r ci("main_window_lo", "main_window_hi")`), but it mainly compares January 2022 with December 2021.** Because price gaps carry over from month to month, the model weights January by `r k("w_window_jan2022")` and December 2021 by `r k("w_window_dec2021")`; no other month gets more than `r k("w_window_other_max")`. By December the gap had already widened by about `r pct("s4_pre3_pct")` (`r ci("s4_pre3_lo", "s4_pre3_hi")`, exploratory), before any of the 2022 measures. Weighting the five months equally gives `r pct("main_window_ols_pct", sign = TRUE)`, and moving the phase boundaries by one month gives `r pct("s7_lag1_window_pct", sign = TRUE)` (both exploratory). We therefore read the pre-specified result as "not clear", not as "no effect".
+**The pre-specified estimate is `r pct("main_window_pct", sign = TRUE)` (`r ci("main_window_lo", "main_window_hi")`), but it mainly compares January 2022 with December 2021.** Because price gaps carry over from month to month, the model weights January by `r k("w_window_jan2022")` and December 2021 by `r k("w_window_dec2021")`, and no other month by more than `r k("w_window_other_max")`. By December the gap had already widened by about `r pct("s4_pre3_pct")` (`r ci("s4_pre3_lo", "s4_pre3_hi")`, exploratory), before any of the 2022 measures. Weighting the five months equally gives `r pct("main_window_ols_pct", sign = TRUE)`, and moving the phase boundaries by one month gives `r pct("s7_lag1_window_pct", sign = TRUE)` (both exploratory). We therefore read the pre-specified result as "not clear", not as "no effect".
 
 ### Month by month, the moves line up with the caps
 
 ![](output/fig2_event_months.png){fig-alt="Monthly estimates with 95 percent intervals from October 2021 to December 2022. The estimate drops in February 2022, jumps in April 2022 and declines gradually from June onwards." width="100%"}
 
-**In an exploratory month-by-month check, the gap fell `r k("s6_feb_minus_jan_pp", abs = TRUE)` points in February 2022, the first full month of retail caps, and rose `r k("s6_apr_minus_mar_pp")` points in April.** In May, when the export ban fell, it changed by `r k("s6_may_minus_apr_pp", sign = TRUE)` points. The timing matches the caps; it does not show that the caps caused the moves, and a four-week ban may not be visible in monthly averages.
+**In an exploratory month-by-month check, the gap fell `r k("s6_feb_minus_jan_pp", abs = TRUE)` points in February 2022, the first full month of retail caps, and rose `r k("s6_apr_minus_mar_pp")` points in April.** In May, when the export ban fell, it moved `r k("s6_may_minus_apr_pp", sign = TRUE)` points. The timing matches the caps but does not show that they caused the moves, and a four-week ban may not show in monthly averages.
 
 ## What this means for policy
 

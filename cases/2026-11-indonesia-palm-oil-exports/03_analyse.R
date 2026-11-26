@@ -105,6 +105,24 @@ cat(sprintf("Wheat flour: pass-through %.3f (SE %.3f), AR(1) %.2f\n", lr_flour["
 if (lr["sum"] <= 0 || lr["sum"] >= 1.2) message("Check: pass-through outside the expected range (0, 1).")
 if (ar1 > 0.95) message("Check: AR(1) coefficient above 0.95; level effects are hard to separate from drift.")
 
+# Effective weights of the window estimate (P7 round 2). Under AR(1) errors the GLS estimate is a
+# weighted sum of the log retail prices; the window dummy loads mostly on its first month and,
+# negatively, on the month before it.
+rho <- coef(main_ar)["ar1"]
+X <- cbind(intercept = 1, as.matrix(df[, x_oil]))
+n <- nrow(X)
+P <- diag(n)
+P[cbind(2:n, 1:(n - 1))] <- -rho
+P[1, 1] <- sqrt(1 - rho^2)
+Xs <- P %*% X
+w_win <- solve(crossprod(Xs), t(Xs) %*% P)["window", ]
+w_tab <- tibble(date = df$date, weight = w_win)
+write.csv(w_tab, "output/tab_window_weights.csv", row.names = FALSE)
+w_at <- function(d) w_win[df$date == as.Date(d)]
+w_other <- max(abs(w_win[!df$date %in% as.Date(c("2021-12-01", "2022-01-01"))]))
+cat(sprintf("Window weights: Dec 2021 %.2f, Jan 2022 %.2f, largest other %.2f\n",
+            w_at("2021-12-01"), w_at("2022-01-01"), w_other))
+
 # Level implied by the world price alone (phase dummies and AR term switched off)
 b <- coef(main_ar)
 x_cf <- c(x_lags, "eid", "bps2023")
@@ -228,6 +246,11 @@ for (i in seq_len(nrow(gap_tab))) {
 }
 add("gap_aprmay_minus_febmar_pp", gap_tab$gap_main[gap_tab$period == "aprmay"] - gap_tab$gap_main[gap_tab$period == "febmar"],
     "points", 1, "Gap in Apr-May 2022 minus gap in Feb-Mar 2022, percentage points (main link)", src_gap)
+add("gap_aprmay_minus_janmar_pp", gap_tab$gap_main[gap_tab$period == "aprmay"] - gap_tab$gap_main[gap_tab$period == "janmar"],
+    "points", 1, "Gap in Apr-May 2022 minus gap in Jan-Mar 2022 (R1 periods), percentage points (main link)", src_gap)
+add("w_window_dec2021", w_at("2021-12-01"), "", 2, "Weight of Dec 2021 in the pre-specified window estimate (AR(1) GLS)")
+add("w_window_jan2022", w_at("2022-01-01"), "", 2, "Weight of Jan 2022 in the pre-specified window estimate (AR(1) GLS)")
+add("w_window_other_max", w_other, "", 2, "Largest absolute weight of any other month in the window estimate")
 add("passthrough_ex2022", lr_ex["sum"], "", 2, "S2: sum of CPO elasticities, link estimated without 2022")
 add("passthrough_ex2022_se", lr_ex["se"], "", 2, "S2: SE of that sum")
 

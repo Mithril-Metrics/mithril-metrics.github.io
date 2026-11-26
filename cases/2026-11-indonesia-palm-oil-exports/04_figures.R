@@ -24,8 +24,14 @@ grid <- read.csv("output/tab_slope_grid.csv")
 accessed <- max(as.Date(access_log()$accessed))
 cols <- ac_palette(3)
 win <- as.Date(meta$decisions$phases$window)
-events <- bind_rows(lapply(meta$events_2022, as_tibble)) |>
-  mutate(date = as.Date(date), y = c(1.54, 1.43, 1.32, 1.21, 1.10))
+ev_all <- bind_rows(lapply(meta$events_2022, as_tibble)) |>
+  mutate(date = as.Date(date))
+events <- ev_all |>
+  filter(marked) |>
+  mutate(y = seq(1.80, by = -0.17, length.out = n()))
+unmarked <- ev_all |>
+  filter(!marked) |>
+  mutate(txt = paste0(label, " (", format(date, "%d %b"), ")"))
 src <- "FAO GIEWS FPMA"
 
 gap_words <- function(key) paste0(k(key, abs = TRUE), "% ", if (v(key) < 0) "below" else "above")
@@ -37,8 +43,8 @@ p1 <- ggplot(gaps, aes(date)) +
   annotate("rect", xmin = win[1] - 15, xmax = win[2] + 15, ymin = -Inf, ymax = Inf,
            fill = "grey85", alpha = 0.6) +
   geom_hline(yintercept = 0, colour = "grey40", linewidth = 0.4) +
-  geom_col(aes(y = gap_pct, fill = "Gap, main model"), width = 25) +
-  geom_line(aes(y = gap_ex2022_pct, colour = "Gap, link estimated without 2022"), linewidth = 0.8) +
+  geom_col(aes(y = gap_pct, fill = "Gap, pre-specified model"), width = 25) +
+  geom_line(aes(y = gap_ex2022_pct, colour = "Gap, link estimated without 2022 (check)"), linewidth = 0.8) +
   geom_segment(data = events, aes(x = date, xend = date, y = 0, yend = y_pos),
                linetype = "dotted", colour = "grey25", linewidth = 0.4) +
   geom_text(data = events, aes(x = date + 20, y = y_pos, label = label),
@@ -46,13 +52,14 @@ p1 <- ggplot(gaps, aes(date)) +
   scale_fill_manual(values = cols[1], name = NULL) +
   scale_colour_manual(values = "grey15", name = NULL) +
   labs(
-    title = str_wrap(paste0("The gap was ", k("gap_aprmay_minus_febmar_pp", abs = TRUE), " points ",
-                            if (v("gap_aprmay_minus_febmar_pp") >= 0) "wider" else "narrower",
-                            " in Apr-May 2022 than in Feb-Mar, the first full months of retail caps"), 55),
+    title = str_wrap(paste0("Retail cooking oil was ", gap_words("gap_aprmay_pct"),
+                            " its usual link to world palm oil in Apr-May 2022, against ",
+                            gap_words("gap_janmar_pct"), " in Jan-Mar"), 55),
     subtitle = str_wrap("Indonesia, national retail price vs the price predicted from world palm oil prices (fitted relationship, not a parity price), %", 85),
     x = NULL, y = "Gap, %",
     caption = source_caption(paste0(src, "; policy dates: FAO FAPDA, press reports"), accessed = accessed,
-                             note = "\nGrey band: Jan-May 2022. Implied level: AR(1) link to world CPO, lags 0-2.")
+                             note = paste0("\nGrey band: Jan-May 2022. Predicted price: AR(1) link to world CPO, lags 0-2. Level after 2022 is less reliable.",
+                                           "\nNot marked: ", paste(unmarked$txt, collapse = "; "), "."))
   ) +
   theme_ac() +
   theme(legend.position = "bottom")
@@ -65,7 +72,7 @@ rows <- tribble(
   "r1_split", "window_a", "Jan-Mar 2022 (split)",
   "r1_split", "window_b", "Apr-May 2022 (split)",
   "main", "post", "From Jun 2022",
-  "placebo_flour", "window", "Wheat flour, Jan-May 2022 (placebo)"
+  "placebo_flour", "window", "Wheat flour, Jan-May 2022 (weak placebo)"
 )
 eff <- rows |>
   left_join(tab, by = c("model", "term")) |>
@@ -73,8 +80,8 @@ eff <- rows |>
          kind = if_else(model == "placebo_flour", "Wheat flour (placebo)", "Cooking oil"))
 
 primary_zero <- v("main_window_lo") < 0 & v("main_window_hi") > 0
-lead <- if (primary_zero) "Over Jan-May 2022 as a whole, the shift is not clearly different from zero; " else
-  paste0("Over Jan-May 2022, retail cooking oil shifted ", k("main_window_pct", sign = TRUE), "%; ")
+lead <- if (primary_zero) "The pre-specified estimate, driven mainly by January vs December 2021, is not clearly different from zero; " else
+  paste0("The pre-specified estimate, driven mainly by January vs December 2021, is ", k("main_window_pct", sign = TRUE), "%; ")
 p2 <- ggplot(eff, aes(pct, label, colour = kind)) +
   geom_vline(xintercept = 0, colour = "grey40", linewidth = 0.4) +
   geom_pointrange(aes(xmin = pct_lo, xmax = pct_hi), size = 0.6, linewidth = 0.9) +
@@ -103,18 +110,19 @@ bands <- tibble(
 p2 <- ggplot(ev, aes(mid, pct)) +
   geom_rect(data = bands, aes(xmin = from, xmax = to, ymin = -Inf, ymax = Inf), inherit.aes = FALSE,
             fill = "grey85", alpha = 0.7) +
-  geom_text(data = bands, aes(x = from + 3, y = -Inf, label = label), inherit.aes = FALSE,
-            hjust = 0, vjust = -0.6, size = 3.2, colour = "grey25") +
+  geom_text(data = bands, aes(x = from + 3, y = Inf, label = label), inherit.aes = FALSE,
+            hjust = 0, vjust = 1.4, size = 3.2, colour = "grey25") +
   geom_hline(yintercept = 0, colour = "grey40", linewidth = 0.4) +
   geom_pointrange(aes(ymin = pct_lo, ymax = pct_hi), colour = cols[1], size = 0.5, linewidth = 0.8) +
   scale_x_date(date_breaks = "2 months", date_labels = "%b\n%Y") +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.18))) +
   labs(
     title = str_wrap(paste0("Month by month, the gap ", chg("s6_feb_minus_jan_pp"), " in February 2022 and ",
                             chg("s6_apr_minus_mar_pp"), " in April"), 55),
     subtitle = str_wrap("Shift by month relative to Nov 2020 - Sep 2021, allowing for persistence, % with 95% intervals; compare months with each other, not with Fig 1", 90),
-    x = NULL, y = "Gap, %",
+    x = NULL, y = "Shift vs Nov 2020 - Sep 2021, %",
     caption = source_caption(paste0(src, "; policy dates: FAO FAPDA, press reports"), accessed = accessed,
-                             note = "\nAR(1) regression with one dummy per month, Oct 2021 - Dec 2022; Oct-Dec 2021 precede any measure.\nCheck added after first results.")
+                             note = "\nAR(1) regression with one dummy per month, Oct 2021 - Dec 2022; Oct-Dec 2021 precede the 2022 measures.\nCheck added after first results.")
   ) +
   theme_ac()
 save_fig(p2, "fig2_event_months")
@@ -129,6 +137,8 @@ p3 <- ggplot(grid, aes(beta, pct, colour = series, fill = series)) +
   geom_ribbon(aes(ymin = pct_lo, ymax = pct_hi), alpha = 0.15, colour = NA) +
   geom_line(linewidth = 0.9) +
   geom_vline(data = est_pt, aes(xintercept = x), linetype = "dashed", colour = "grey40") +
+  geom_text(data = est_pt, aes(x = x, y = Inf, label = sprintf("%.2f", x), hjust = c(1.2, -0.2)[rank(x)]),
+            inherit.aes = FALSE, vjust = 1.5, size = 3.1, colour = "grey30") +
   scale_colour_manual(values = cols[1:2], name = NULL) +
   scale_fill_manual(values = cols[1:2], name = NULL) +
   labs(
@@ -160,17 +170,17 @@ pA <- ggplot() +
   geom_segment(data = caps, aes(x = from, xend = to, y = idr_per_litre, yend = idr_per_litre),
                linetype = "dashed", colour = "grey40", linewidth = 0.5) +
   annotate("text", x = as.Date("2024-09-01"), y = max(caps$idr_per_litre), vjust = 1.5, hjust = 0,
-           size = 3.2, colour = "grey30", label = "Price caps (one price, packaged, bulk / MinyaKita)") +
+           size = 3.2, colour = "grey30", label = "Price caps (see note)") +
   geom_line(data = lines, aes(date, idr, colour = series), linewidth = 1) +
   scale_colour_manual(values = cols[1:2], name = NULL) +
   scale_y_continuous(labels = scales::label_comma()) +
   labs(
-    title = "Retail cooking oil and the price predicted from world palm oil prices",
+    title = "Retail cooking oil vs the price predicted from world palm oil",
     subtitle = "Indonesia, national retail price, IDR per litre",
     x = NULL, y = "IDR per litre",
     caption = source_caption(paste0(src, "; price caps: Trade Ministry rules (press reports)"),
                              accessed = accessed,
-                             note = "\nCaps apply to specific oil types, not to the whole BPS series.")
+                             note = "\nCaps apply to specific oil types, not to the whole BPS series. Short dashes in Jan-Mar 2022: one-price and\npackaged-oil caps; long dashes: bulk / MinyaKita caps.")
   ) +
   theme_ac() +
   theme(legend.position = "bottom")

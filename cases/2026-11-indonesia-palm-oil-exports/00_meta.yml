@@ -11,8 +11,8 @@ question: >
   How far did Indonesia's national retail cooking-oil price shift relative to the level implied by
   the world crude palm oil price in rupiah during the January-May 2022 policy bundle (domestic
   market obligation, retail price caps, a four-week export ban), and after it?
-bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: red-teamed                      # plan | code | results | red-teamed | draft | published
+bottom_line: "see report.qmd (bottom_line, built from key_numbers.csv)"
+status: draft                     # plan | code | results | red-teamed | draft | published
 publish_at: null                  # set only after both authors approve
 
 hook:

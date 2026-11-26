@@ -450,7 +450,7 @@ hooks <- c(
                   "where they are: Mediterranean member states abstract ", k("m3ha_ratio"), " times more ",
                   "per hectare than the rest.")
 )
-hook_choice <- "question"   # set at P9 by the case author
+hook_choice <- "extremes"   # chosen at P9 by JPH (2026-11-26)
 hook <- hooks[[hook_choice]]
 writeLines(sprintf("[%s] %d characters: %s", names(hooks), nchar(hooks), hooks), "output/linkedin_hooks.txt",
            useBytes = TRUE)

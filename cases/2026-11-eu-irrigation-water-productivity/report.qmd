@@ -457,10 +457,15 @@ writeLines(sprintf("[%s] %d characters: %s", names(hooks), nchar(hooks), hooks),
 li_why <- paste0("On 22 October France and Portugal asked EU ministers to cut water use per irrigated ",
                  "hectare; the EU targets ", k("ref_wrs_target"), "% better water efficiency by 2030. We asked ",
                  "whether that indicator can compare countries.")
+findings_li <- findings
+if (hook_choice == "extremes") {   # the hook already names Greece and Germany
+  findings_li[2] <- paste0("Each of the ", k("n_main_med"), " Mediterranean countries with Eurostat data ",
+                           "abstracts more per hectare than each of the ", k("n_main_other"), " others")
+}
 li <- paste0(
   hook, "\n\n",
   li_why, "\n\n",
-  "What we found:\n", paste0("→ ", findings, collapse = "\n"), "\n\n",
+  "What we found:\n", paste0("→ ", findings_li, collapse = "\n"), "\n\n",
   "What it means: ", implications[2], "\n\n",
   method_tag, "\n",
   "Full analysis and code: link in the first comment\n\n",

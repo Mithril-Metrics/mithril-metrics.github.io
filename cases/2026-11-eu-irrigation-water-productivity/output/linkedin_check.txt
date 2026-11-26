@@ -1,3 +1,3 @@
-LinkedIn post: 1273 characters (limit 1300) OK
+LinkedIn post: 1224 characters (limit 1300) OK
 Hook: 172 characters (aim <= 210, approx. visible before 'see more') OK
 Placeholders left: none

@@ -380,16 +380,16 @@ bullets(robustness)
 sp <- read.csv("output/tab_specs.csv")
 min_n <- ifelse(sp$land == "total", k("rot_a"), k("rot_b"))
 tb <- data.frame(
-  Model = unname(c(A = "A", A_crs = "A with CRS", B_vrs = "B with VRS", B = "B")[sp$spec]),
-  `Returns to scale` = toupper(sp$rts),
+  Model = unname(c(A = "A", A_crs = "A, CRS", B_vrs = "B, VRS", B = "B")[sp$spec]),
+  `Returns` = toupper(sp$rts),
   `Land input` = ifelse(sp$land == "total", "cropland", "rainfed + irrigated"),
-  `Minimum n` = min_n,
-  `Saving potential (%)` = round(sp$saving_share_eurostat),
-  `On the frontier` = sp$n_frontier_eurostat,
+  `Min. n` = min_n,
+  `Saving (%)` = round(sp$saving_share_eurostat),
+  `Frontier` = sp$n_frontier_eurostat,
   check.names = FALSE)
 cat(knitr::kable(tb, format = "pipe", align = c("l", "l", "l", "r", "r", "r")), sep = "\n")
-cat("\n\n*Water-directional DEA, ", k("n_main"), " countries with Eurostat irrigation data. Minimum n: ",
-    "rule of thumb of Cooper, Seiford and Tone (2007).*\n\n", sep = "")
+cat("\n\n*Water-directional DEA, ", k("n_main"), " countries with Eurostat irrigation data. Min. n: ",
+    "rule-of-thumb minimum sample size of Cooper, Seiford and Tone (2007). Saving: share of sample water. Frontier: countries on it.*\n\n", sep = "")
 ```
 
 ![](output/fig_note_dea.png){width="55%"}

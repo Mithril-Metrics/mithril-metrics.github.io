@@ -3,13 +3,13 @@ Should the EU compare countries on irrigation water per hectare? Mediterranean m
 On 22 October France and Portugal asked EU ministers to cut water use per irrigated hectare; the EU targets 10% better water efficiency by 2030. We asked whether that indicator can compare countries.
 
 What we found:
-→ Mediterranean member states abstract 3.8 to 6.0 times more irrigation water per irrigated hectare (median 6,561 vs 1,202 m³/ha)
-→ Two common frontier models put the 'saving potential' at 6% or 93% of irrigation water
-→ Almost all of that gap comes from one modelling choice, returns to scale (87 points on average)
+→ Mediterranean member states abstract 5.5 times more irrigation water per irrigated hectare than the rest (median 6,561 vs 1,202 m³/ha)
+→ Each of the 4 Mediterranean countries with Eurostat data abstracts more per hectare than each of the 6 others, from Greece (8,680 m³/ha) down to Germany (581)
+→ The gap stays between 3.8 and 6.0 times whichever sample or survey year we use
 
 What it means: If a per-hectare indicator were used to compare countries, set eligibility or allocate EU funds, then it would need to account for crop water requirements, crop mix and infrastructure, for example through climate-adjusted or river-basin benchmarks. The trade-off is more data and less simplicity.
 
-Method: water per irrigated hectare and water-directional DEA (2 × 2 specifications), 14 EU member states, 2020–2022.
+Method: water per irrigated hectare and an exact rank test, 14 EU member states, 2020–2022.
 Full analysis and code: link in the first comment
 
 #AgriculturalEconomics #WaterPolicy #CAP #EU

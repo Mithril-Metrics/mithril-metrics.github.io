@@ -1,15 +1,15 @@
-Country,Climate,Abstraction per irrigated ha (m3),WEI+ (%),Model A (%),"Model A, leave-one-out (%)",Model B (%),"Model B, leave-one-out (%)"
-Greece,Mediterranean climate,8680,12.3,0,0-0,96,0-96
-Malta,Mediterranean climate,6670,34.5,0,0-0,96,0-96
-Cyprus,Mediterranean climate,6460,71.1,86,0-86,99,97-99
-Spain,Mediterranean climate,6120,7.2,0,0-0,96,25-93
-Italy*,Mediterranean climate,4120,12.6,,,,
-Romania,Other,3490,21.4,88,0-88,89,71-89
-Portugal*,Mediterranean climate,3460,8.7,,,,
-Hungary,Other,1970,1,66,37-66,71,0-71
-Austria*,Other,1490,2,,,,
-Denmark,Other,1370,4.7,71,50-71,78,50-78
-France*,Other,1080,3.6,,,,
-Sweden,Other,1030,0.3,35,0-35,59,0-59
-Netherlands,Other,590,3.1,0,0-0,0,0-0
-Germany,Other,580,4.2,0,0-0,0,0-0
+Country,Climate,Abstraction per irrigated ha (m3),Irrigated area 2016 survey (m3/ha),Irrigated area 2023 survey (m3/ha),WEI+ (%)
+Greece,Mediterranean climate,8680,7170,9480,12.3
+Malta,Mediterranean climate,6670,5790,7090,34.5
+Cyprus,Mediterranean climate,6460,6770,6340,71.1
+Spain,Mediterranean climate,6120,5650,6340,7.2
+Italy*,Mediterranean climate,4120,3750,4300,12.6
+Romania,Other,3490,5610,3040,21.4
+Portugal*,Mediterranean climate,3460,4040,3270,8.7
+Hungary,Other,1970,2290,1870,1
+Austria*,Other,1490,2310,1300,2
+Denmark,Other,1370,1600,1300,4.7
+France*,Other,1080,1160,1050,3.6
+Sweden,Other,1030,1410,930,0.3
+Netherlands,Other,590,890,520,3.1
+Germany,Other,580,680,550,4.2

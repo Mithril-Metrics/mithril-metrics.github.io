@@ -8,8 +8,13 @@
 # Red-team fixes (2026-11-20): Eurostat-only headline sample, 2 x 2 specifications,
 # ratio range and exact rank-sum test, leave-one-out for both headline models with counts
 # of infeasible runs.
+# P4 revisited (2026-11-26, JPH): step 1 is the whole post; step 2 moves to the technical
+# note as a diagnostic ("why a national frontier gives no answer here"). No new models:
+# added the six variant ratios, the group-separation check, the DEA rule-of-thumb sample
+# sizes and crop value per m3 at the extremes as key numbers.
 # Input: output/cache/panel.rds. Output: output/key_numbers.csv, output/tab_results.csv,
-# output/tab_specs.csv, output/tab_robustness.csv, output/cache/results.rds,
+# output/tab_specs.csv, output/tab_robustness.csv, output/tab_variants.csv,
+# output/cache/results.rds,
 # output/sessionInfo.txt
 
 stopifnot("Run this script from the issue folder (AgEcon/Issue 3)" = file.exists("00_meta.yml"))
@@ -86,6 +91,18 @@ variants <- c(main = g["ratio"], main_2016 = gap(main, "m3_per_ha_2016")["ratio"
               all_2016 = gap(full, "m3_per_ha_2016")["ratio"],
               all_2023 = gap(full, "m3_per_ha_2023")["ratio"])
 print(round(variants, 2))
+names(variants) <- sub("\\.ratio$", "", names(variants))
+# Separation: is every Mediterranean country above every other one?
+sep_main <- min(main$m3_per_ha[main$group == "Mediterranean climate"]) >
+  max(main$m3_per_ha[main$group == "Other"])
+stopifnot("Text claims full separation of the groups in the headline sample" = sep_main)
+tab_variants <- tibble::tibble(
+  variant = names(variants),
+  sample = if_else(grepl("^main", variant), "Eurostat only", "All, incl. AQUASTAT estimates"),
+  irrigated_area = case_when(grepl("2016", variant) ~ "2016 survey",
+                             grepl("2023", variant) ~ "2023 survey",
+                             TRUE ~ "Interpolated to 2021"),
+  ratio = unname(variants))
 rs_main <- wilcox.test(m3_per_ha ~ group, data = main, exact = TRUE)
 rs_all <- wilcox.test(m3_per_ha ~ group, data = full, exact = TRUE)
 st <- filter(main, !is.na(wei))
@@ -94,7 +111,13 @@ cat("m3/ha (Eurostat-only): Mediterranean median", round(g["med"]), "| other", r
     "| ratio", round(g["ratio"], 1), "| range over variants", round(min(variants), 1), "-",
     round(max(variants), 1), "| exact rank-sum p", signif(rs_main$p.value, 2), "\n")
 
-# ---- Step 2: what the frontier picks up ----
+# ---- Step 2 (technical note): what the frontier picks up ----
+# Rule of thumb for DEA sample size (Cooper, Seiford and Tone): n >= max(m * s, 3 * (m + s)),
+# m inputs, s outputs. A: 2 inputs, B: 3 inputs, both 1 output.
+rot <- function(m, s = 1) max(m * s, 3 * (m + s))
+rot_a <- rot(2)
+rot_b <- rot(3)
+ppm <- arrange(main, desc(out_per_m3))
 sh <- sapply(paste0("saving_", specs$spec), function(s) share(main, s))
 sh_all <- sapply(paste0("saving_", specs$spec), function(s) share(full, s))
 tab_specs <- specs |>
@@ -174,6 +197,10 @@ kn_add("m3ha_other", g["other"], "m3/ha", 0, "Median abstraction per irrigated h
 kn_add("m3ha_ratio", g["ratio"], "x", 1, "Mediterranean median / other median (headline)", src)
 kn_add("ratio_min", min(variants), "x", 1, "Lowest ratio over samples and survey years", src)
 kn_add("ratio_max", max(variants), "x", 1, "Highest ratio over samples and survey years", src)
+for (v in names(variants)) {
+  kn_add(paste0("ratio_", v), variants[[v]], "x", 1,
+         paste("Ratio of medians, variant", v, "(sample _ irrigated-area year)"), src)
+}
 kn_add("p_ranksum", rs_main$p.value, "", 3, "Exact Wilcoxon rank-sum p, headline sample", src)
 kn_add("p_ranksum_all", rs_all$p.value, "", 4, "Exact Wilcoxon rank-sum p, all 14", src)
 kn_add("m3ha_max", hi$m3_per_ha, "m3/ha", 0, paste("Highest, headline sample:", hi$name), src)
@@ -186,6 +213,14 @@ for (i in seq_len(nrow(specs))) {
   kn_add(paste0("nfront_", tolower(specs$spec[i])), tab_specs$n_frontier_eurostat[i], "countries", 0,
          paste0("Frontier, ", specs$label[i], ": ", tab_specs$frontier_eurostat[i]), src)
 }
+kn_add("rot_a", rot_a, "countries", 0, "DEA rule of thumb, model A (2 inputs, 1 output)",
+       "Cooper, Seiford and Tone (2007), Data Envelopment Analysis, 2nd ed.")
+kn_add("rot_b", rot_b, "countries", 0, "DEA rule of thumb, model B (3 inputs, 1 output)",
+       "Cooper, Seiford and Tone (2007), Data Envelopment Analysis, 2nd ed.")
+kn_add("ppm_max", ppm$out_per_m3[1], "int. $/m3", 1,
+       paste("Highest crop value per m3 irrigation water, headline sample:", ppm$name[1]), src)
+kn_add("ppm_min", ppm$out_per_m3[nrow(ppm)], "int. $/m3", 1,
+       paste("Lowest crop value per m3 irrigation water, headline sample:", ppm$name[nrow(ppm)]), src)
 kn_add("share_b_all", sh_all["saving_B"], "%", 0, "Model B saving share, all 14", src)
 kn_add("share_a_all", sh_all["saving_A"], "%", 0, "Model A saving share, all 14", src)
 kn_add("d_rts", d_rts, "pp", 0, "Average change in saving share from VRS to CRS", src)
@@ -205,6 +240,8 @@ kn_add("ref_fr_m3ha", 1902, "m3/ha", 0, "France, irrigation abstraction per irri
 readr::write_csv(out, "output/tab_results.csv")
 readr::write_csv(tab_specs, "output/tab_specs.csv")
 readr::write_csv(loo, "output/tab_robustness.csv")
-saveRDS(list(res = out, main = main, specs = tab_specs), "output/cache/results.rds")
+readr::write_csv(tab_variants, "output/tab_variants.csv")
+saveRDS(list(res = out, main = main, specs = tab_specs, variants = tab_variants),
+        "output/cache/results.rds")
 write_session_info()
 print(kn_read(), n = 60)

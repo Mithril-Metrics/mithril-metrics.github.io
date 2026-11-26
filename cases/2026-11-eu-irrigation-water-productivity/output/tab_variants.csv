@@ -1,0 +1,7 @@
+variant,sample,irrigated_area,ratio
+main,Eurostat only,Interpolated to 2021,5.46072669905111
+main_2016,Eurostat only,2016 survey,4.176438044457488
+main_2023,Eurostat only,2023 survey,6.024127735913572
+all,"All, incl. AQUASTAT estimates",Interpolated to 2021,5.124569735389653
+all_2016,"All, incl. AQUASTAT estimates",2016 survey,3.801937380354579
+all_2023,"All, incl. AQUASTAT estimates",2023 survey,5.3886880995534705

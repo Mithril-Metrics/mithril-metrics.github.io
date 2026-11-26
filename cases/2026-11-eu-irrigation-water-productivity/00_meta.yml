@@ -31,7 +31,7 @@ hook:
 
 tags:
   region: ["EU"]
-  method: ["DEA"]
+  method: ["Descriptive comparison", "DEA (diagnostic, technical note only)"]
   employer_theme: ["OECD", "JRC", "IIASA", "FAO"]
   skills: ["DEA / network DEA, SFA, optimisation", "Water pricing, cost recovery, economic instruments"]
 
@@ -97,10 +97,11 @@ sources:
 manual_steps: []
 
 identification: >
-  Descriptive benchmarking, not causal. The frontier is the best observed combination of
-  cropland, irrigation water and crop output among the countries in the sample, so a gap is
-  distance to best practice under a common-technology assumption. Gaps also reflect climate
-  (evaporative demand), crop mix and the share of rainfed output, not only water management.
+  Descriptive, not causal (revised 2026-11-26, see p4_revisit). The post compares irrigation
+  abstraction per irrigated hectare between climate groups; the gap mixes climate (evaporative
+  demand), crop mix, infrastructure and reporting practice, and we do not separate them. The DEA
+  frontier is reported in the technical note only, as a diagnostic: with 10 countries it does not
+  identify efficiency (see p4_revisit).
 
 decisions:                        # fixed in the PLAN stage (P4, 2026-11-20), before seeing results
   years: [2020, 2022]             # means of available years; ES and SE report 2020 only
@@ -176,6 +177,25 @@ red_team:                         # P7, 2026-11-20: two independent reviews (EC 
     mix and infrastructure, comparing countries on a per-hectare indicator would mostly show where a
     country is, not how well it irrigates; current EU texts avoid this by measuring each country
     against its own baseline.
+
+p4_revisit:                       # 2026-11-26, chosen by JPH after results (post-results change, disclosed)
+  trigger: >
+    JPH questioned the DEA: which model, how many observations, whether the sample meets the
+    rule of thumb, why VRS vs CRS, and whether a 6% vs 93% gap is credible.
+  diagnosis:
+    - "Model B (3 inputs, 1 output) needs n >= 12 under the Cooper, Seiford and Tone rule of thumb; n = 10. Model A needs 9 and passes only just."
+    - "Under VRS, 5 of 10 countries are on the frontier; under CRS, 2 (Germany, Netherlands)."
+    - "Returns to scale moves the saving share by 87 pp on average; splitting land by 0 pp."
+    - "Model B's saving share is a near-monotone function of crop value per m3 (Spearman -0.997), and crop value includes rainfed output (0.9 int. $/m3 Cyprus to 63.8 Germany)."
+    - "Leave-one-out moves a single share by up to 88 pp (A) and 96 pp (B)."
+  decision: >
+    Option 1: the descriptive gap (abstraction per irrigated hectare, exact rank-sum test,
+    six sample and survey-year variants) is the whole post. The DEA moves to the technical note
+    as Section 4, "Why a national frontier gives no answer here" (2 x 2 table with rule-of-thumb
+    minimum n, the two-model chart, conclusion). No new models were run; only key numbers were
+    added (six variant ratios, rule-of-thumb n, crop value per m3 at the extremes).
+  changes: ["Fig 2 = ratio under six variants (fig2_robustness)", "two-model chart -> fig_note_dea (note only)", "key figure '6% or 93%' -> '4 of 4 above all 6 others'", "bottom line, method, findings, caveat 3, method tag and category rewritten", "tab_main descriptive only; per-country DEA in tab_dea.csv"]
+  follow_up: "Option 2, regional DEA with a climate input (growing-season water deficit): Q020 in pending_questions."
 
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-eu-irrigation-water-productivity/report.html"

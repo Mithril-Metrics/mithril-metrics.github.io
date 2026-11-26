@@ -1,0 +1,142 @@
+# 00_meta.yml — single source of truth for this case's metadata.
+# report.qmd reads this file for the hook, the "Data & code" section and the footer.
+# 02_clean.R reads the policy dates, Eid months and price caps from here.
+
+id: "2026-11-indonesia-palm-oil-exports"
+issue: 6
+local_folder: "Issue 6"
+author: "Pietro Sala"
+title: "How far did Indonesia's cooking-oil price drift from world palm oil prices during the 2022 export curbs?"
+question: >
+  How far did Indonesia's national retail cooking-oil price shift relative to the level implied by
+  the world crude palm oil price in rupiah during the January-May 2022 policy bundle (domestic
+  market obligation, retail price caps, a four-week export ban), and after it?
+bottom_line: null                 # written at the WRITE stage from key_numbers.csv
+status: code                      # plan | code | results | red-teamed | draft | published
+publish_at: null                  # set only after both authors approve
+
+hook:
+  debate: >
+    Indonesia's Trade Regulation 16/2026 routes palm oil exports through designated state-owned
+    exporters from 1 January 2027, after a transition to 31 December 2026; the CPO export levy
+    rose to 12.5% on 1 March 2026. The last time export channels were administered was 2022.
+  date: "2026-06-10"
+  primary_source:
+    title: "Indonesia's Future of Palm Oil Exports after New Ministerial Regulation (RRI, 10 Jun 2026)"
+    url: "https://rri.co.id/en/national/2480326/indonesias-future-of-palm-oil-exports-after-new-ministerial-regulation"
+
+tags:
+  region: ["SE Asia"]
+  method: ["Causal"]
+  employer_theme: ["WB", "FAO", "IFPRI"]
+  skills: ["Panel econometrics (FE, IV, RDD, selection)", "Food security and palm oil (SEA)"]
+
+dates:
+  created: "2026-11-26"
+  published: null
+
+hours:
+  planned: 4.5                    # budget option (a) at P4: ~25 min over the 2 h coding budget
+  actual: null
+
+sources:
+  - name: "FAO GIEWS Food Price Monitoring and Analysis (FPMA), domestic prices"
+    provider: "FAO GIEWS; Indonesia data from Badan Pusat Statistik (BPS)"
+    table: >
+      FpmaSeriePrice, monthly: Indonesia, retail, national average, Vegetable oil, IDR/litre
+      (uuid c0b2e88d-8010-4f45-b989-fdf1eb126c10); Wheat (flour), IDR/kg
+      (uuid 7819292a-caeb-4e2b-8d8a-2fbf4eeadd02)
+    url: "https://fpma.fao.org/giews/fpmat4/#/dashboard/tool/domestic"
+    version: "Data to September 2026"
+    accessed: null                # filled from data_raw/_access_log.csv
+    licence: "CC BY-NC-SA 3.0 IGO (FAO statistical database terms)"
+  - name: "FAO GIEWS FPMA, international prices"
+    provider: "FAO GIEWS; Oil World; US wheat via the FPMA tool"
+    table: >
+      Palm oil (Crude, c.i.f. Rotterdam), USD/t (uuid fb4e1fc4-965d-4bc9-8092-6ccfb4923cbc);
+      Wheat (US No. 2, Hard Red Winter), USD/t (uuid 8a111fb0-79f8-4237-bde5-504373d20dfc)
+    url: "https://fpma.fao.org/giews/fpmat4/#/dashboard/tool/international"
+    version: "Palm oil to July 2026; wheat to October 2026"
+    accessed: null
+    licence: "CC BY-NC-SA 3.0 IGO (FAO statistical database terms)"
+  - name: "FAO GIEWS FPMA exchange rates"
+    provider: "FAO GIEWS"
+    table: "FxRate, IDR per USD, monthly"
+    url: "https://fpma.fao.org/giews/v4/global/price_module/api/v1/FxRate/"
+    version: "Data to October 2026"
+    accessed: null
+    licence: "CC BY-NC-SA 3.0 IGO (FAO statistical database terms)"
+  - name: "FAO Food and Agriculture Policy Decision Analysis (FAPDA)"
+    provider: "FAO"
+    table: "Indonesia, palm oil and derived products: export ban 28/04/2022; export quota 09/03/2022"
+    url: "https://fapda.apps.fao.org/"
+    version: "Explorer interface of 12 June 2026"
+    accessed: "2026-11-25"
+    licence: "FAO terms of use"
+
+manual_steps: []                  # all prices come from the FPMA API; policy dates are below with their sources
+
+identification: >
+  Conditional on how the retail price normally follows the world palm oil price in rupiah (lags 0-2),
+  nothing other than the 2022 policy bundle shifted Indonesian retail cooking-oil prices in January-May
+  2022; wheat flour, which the palm oil rules did not touch, tests for shocks common to both.
+
+method_track:
+  choice: "E"
+  reason: "Track M infeasible: 69 monthly observations, one unit, no high-dimensional controls or heterogeneity question."
+  ml_settings: null
+
+# ---- Fixed at P4 (2026-11-25), before any results ----
+decisions:
+  budget_option: "a"
+  sample: ["2020-11-01", "2026-07-01"]
+  world_price_lags: [0, 1, 2]
+  phases:
+    window: ["2022-01-01", "2022-05-01"]        # DMO, price caps, export ban 28 Apr - 23 May 2022
+    window_a: ["2022-01-01", "2022-03-01"]      # R1: DMO + full retail caps (March mixes both regimes)
+    window_b: ["2022-04-01", "2022-05-01"]      # R1: bulk-only cap + export ban
+    post_start: "2022-06-01"                    # DMO regime continues
+    bps_change: "2023-01-01"                    # BPS sample 90 -> 150 districts
+  eid_al_fitr_months: ["2021-05-01", "2022-05-01", "2023-04-01", "2024-04-01", "2025-03-01", "2026-03-01"]
+  inference: >
+    Regression with AR(1) errors (stats::arima, ML) gives the primary standard errors; OLS with
+    Newey-West HAC (lag 3, prewhitened) is the check. gamma_window is the single primary test; Holm
+    adjustment across gamma_window, gamma_post and delta_bps. Placebo outside the family. No bootstrap.
+  placebo: "wheat flour vs US HRW wheat in rupiah, same specification"
+  robustness:
+    R1: "Window split into Jan-Mar 2022 and Apr-May 2022"
+    R2: "Difference of log gaps (cooking oil minus wheat flour) on the same phase dummies"
+  units: "Phase effects in % (100*(exp(b)-1)) and IDR/litre at the 2021 mean retail price"
+  footnote_only: "World Bank Pink Sheet palm oil (same market as Oil World c.i.f. Rotterdam)"
+
+# Retail price caps (HET) drawn in Fig 1. They apply to bulk / 'people's' cooking oil, not to the
+# whole BPS series, which mixes bulk and packaged oil.
+price_caps:
+  - {from: "2022-02-01", to: "2022-03-15", idr_per_litre: 11500, label: "Bulk oil cap",
+     source: "Jakarta Post, 18 Mar 2022, https://www.thejakartapost.com/business/2022/03/18/govt-removes-price-cap-on-cooking-oil.html"}
+  - {from: "2022-03-16", to: "2024-08-13", idr_per_litre: 14000, label: "Bulk oil / MinyaKita cap",
+     source: "Jakarta Post, 18 Mar 2022 (bulk cap); Bisnis.com, 17 Aug 2024 (MinyaKita cap raised from 14,000)"}
+  - {from: "2024-08-14", to: "2026-07-31", idr_per_litre: 15700, label: "MinyaKita cap",
+     source: "Antara, Aug 2024, https://makassar.antaranews.com/berita/553303/kemendag-menetapkan-het-minyakita-sebesar-rp15700-per-liter"}
+
+known_limitations:
+  - "The estimate covers the whole 2022 policy bundle; monthly data cannot isolate the export ban from the price caps and supply obligations."
+  - "The window spans five months, so its estimate is close to a five-month average and its confidence interval is wide."
+  - "The measures followed a price spike in late 2021, so part of any fall during the window may be prices returning to normal."
+  - "BPS widened its price sample from 90 to 150 districts in January 2023; the 2023 shift mixes that change with any policy drift."
+  - "The series mixes bulk and packaged cooking oil, and posted prices under a cap can understate what households paid when oil was scarce."
+  - "Lower consumer prices were paid partly by producers; farm-gate fresh-fruit-bunch prices are not analysed here."
+  - "One country and one episode; the result does not predict the effect of the 2027 state-exporter scheme."
+  - "March 2022 mixes both regimes and is assigned to the first sub-phase in R1."
+
+pre_results_review: >
+  2026-11-25. World Bank policy analyst and field-journal econometrician, both PROCEED WITH CHANGES.
+  Adopted: pass-through model with phase dummies instead of a one-for-one gap; one Post phase plus a
+  BPS 2023 dummy; AR(1) errors with Newey-West check and Holm; Eid dummy; R1 window split; R2
+  difference of gaps; price caps and IDR/litre units; non-causal wording. Not adopted: dropping
+  March (would be a third robustness check).
+
+links:
+  blog: "https://mithril-metrics.github.io/cases/2026-11-indonesia-palm-oil-exports/report.html"
+  linkedin: null
+  code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-indonesia-palm-oil-exports"

@@ -218,6 +218,17 @@ add("main_window_lo_t", g("main", "window", "pct_lo_t"), "%", 1, "Check: lower 9
 add("main_window_hi_t", g("main", "window", "pct_hi_t"), "%", 1, "Check: upper 95% bound with t critical values, window")
 add("main_window_p_t", g("main", "window", "p_t"), "", 3, "Check: p-value with t critical values, window")
 add("r1_window_b_p_t", g("r1_split", "window_b", "p_t"), "", 3, "Check: p-value with t critical values, Apr-May 2022")
+add("r1_window_b_idr", g("r1_split", "window_b", "idr_l"), "IDR/litre", 0, "R1 split: Apr-May 2022 shift in IDR/litre at the 2021 mean price")
+feb22 <- df$vegoil[df$date == as.Date("2022-02-01")]
+caps <- yaml::read_yaml("00_meta.yml", fileEncoding = "UTF-8")$price_caps
+# Highest cap in force in mid-February 2022 (bulk 11,500; packaged 13,500 and 14,000)
+in_force <- vapply(caps, function(cp) {
+  as.Date(cp$from) <= as.Date("2022-02-15") && as.Date(cp$to) >= as.Date("2022-02-15")
+}, logical(1))
+cap_in_force <- max(vapply(caps[in_force], function(cp) cp$idr_per_litre, numeric(1)))
+add("vegoil_feb2022", feb22, "IDR/litre", 0, "National retail cooking-oil price, Feb 2022", src_fpma)
+add("cap_feb2022_max", cap_in_force, "IDR/litre", 0, "Highest retail price cap in force in Feb 2022 (00_meta.yml price_caps)", "Setkab, 28 Jan 2022")
+add("vegoil_feb2022_vs_cap_pct", 100 * (feb22 / cap_in_force - 1), "%", 0, "Feb 2022 national retail price vs the highest cap in force", src_fpma)
 add("main_window_idr", g("main", "window", "idr_l"), "IDR/litre", 0, "Main model: window shift in IDR/litre at the 2021 mean price")
 add("main_post_idr", g("main", "post", "idr_l"), "IDR/litre", 0, "Main model: shift from Jun 2022 in IDR/litre at the 2021 mean price")
 add("passthrough_sum", lr["sum"], "", 2, "Sum of CPO elasticities, lags 0-2 (main model)")

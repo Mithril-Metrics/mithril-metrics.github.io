@@ -4,11 +4,11 @@
 #   (2) LinkedIn post        output/linkedin_post.txt + output/linkedin_check.txt (section B)
 #   (3) technical note, 2-3 pages A4, brief.pdf (format: typst, section C): the place for more detail
 # Every number comes from output/key_numbers.csv through kn(); an unknown key stops the render.
-title: "How far did Indonesia's cooking-oil price drift from world palm oil prices during the 2022 export curbs?"
-description: "One-sentence teaser shown in the listing and in LinkedIn link previews."
+title: "How far did Indonesia's cooking-oil price move away from its usual link to world palm oil prices during the 2022 export curbs?"
+description: "Over January-May 2022 as a whole, the data show no clear shift; the gap narrowed while retail caps applied and widened once packaged-oil caps were lifted."
 author: "Pietro Sala"
 date: "2026-11-26"
-categories: ["Region: SE Asia", "Method: Causal", "Theme: WB"]
+categories: ["Region: SE Asia", "Method: Time series", "Theme: WB"]
 image: output/fig1_hero.png           # listing thumbnail + open-graph image
 draft: true                           # set to false to publish
 title-block-banner: true
@@ -85,50 +85,85 @@ references <- c("PLACEHOLDER: Author, A. (year). Title. *Outlet*. [link text](ht
 # Use k("key") for every number (k("key", unit = TRUE) adds the unit, abs = TRUE drops sign).
 # ---------------------------------------------------------------------------------
 question <- meta$question
+pct <- function(key, ...) paste0(k(key, ...), "%")
+ci <- function(lo, hi) paste0("95% CI ", pct(lo), " to ", pct(hi))
 
 bottom_line <- paste0(
-  "Placeholder answer: X changed by ", k("example_change_pct", unit = TRUE),
-  " between ", k("example_period_start"), " and ", k("example_period_end"),
-  " across ", k("example_n_units", unit = TRUE), ". ",
-  "Second sentence: who is most affected, or how large this is in interpretable units."
+  "Over January-May 2022 as a whole, our pre-specified test finds no clear shift in Indonesia's retail ",
+  "cooking-oil price relative to its usual link with world palm oil (", pct("main_window_pct", sign = TRUE), ", ",
+  ci("main_window_lo", "main_window_hi"), "). Split as planned, January-March shows no clear shift (",
+  pct("r1_window_a_pct", sign = TRUE), ") and April-May ", pct("r1_window_b_pct", sign = TRUE),
+  " (about Rp", k("r1_window_b_idr"), " per litre at 2021 prices), after the caps on packaged oil were lifted ",
+  "in mid-March; monthly data cannot separate this from other shocks."
 )
 
 why_now <- paste0(
-  "Placeholder: the debate in one paragraph, with the date and the primary source ",
-  "(", meta$hook$primary_source$title %||% "primary source", ")."
+  "Indonesia's Trade Regulation 16/2026 routes crude palm oil exports through a single state-owned exporter: ",
+  "a transition from June to December 2026, and the state exporter as sole exporter of record from 1 January 2027. ",
+  "**The last time the government administered export flows was 2022**, when a one-price policy, a domestic supply ",
+  "obligation, retail caps, an export quota, higher export levies and a four-week export ban followed each other ",
+  "within five months. The 2027 scheme changes export channels rather than banning exports, so 2022 is a partial ",
+  "analogue, but it is the closest record of how domestic cooking-oil prices respond when export flows are managed."
 )
 
 method_plain <- paste0(
-  "Placeholder: we estimate a production frontier, which measures how far each country is ",
-  "from the best practice of comparable countries, using ... data for ... ."
+  "**We ask how far the national retail price moved away from the level its usual relationship with world palm oil ",
+  "would predict, in each phase of the 2022 measures, allowing for the fact that price gaps carry over from month to month.** ",
+  "We use ", k("n_months"), " months of BPS national average retail prices (November 2020 to July 2026) and the world ",
+  "crude palm oil price in rupiah, both from FAO's food price monitoring database. Retail cooking oil normally passes on ",
+  "about a third of a world-price change within three months (elasticity ", k("passthrough_sum"), "), so the comparison is ",
+  "with that link, not with world prices themselves: in January-May 2022 world palm oil in rupiah was ",
+  pct("cpo_window_vs_2021_pct"), " above its 2021 average and retail cooking oil ", pct("vegoil_window_vs_2021_pct"),
+  ". The test for January-May and the split into January-March and April-May were fixed before we saw results; ",
+  "checks added afterwards are labelled exploratory."
 )
 
-findings <- c(                                   # 3 short findings, each with a number
-  paste0("Finding 1 with a number: ", k("example_change_pct", unit = TRUE)),
-  "Finding 2 with a number",
-  "Finding 3: heterogeneity (who/where)"
+implications <- c(
+  paste0("If the aim of administering exports is lower domestic prices, **the 2022 record gives no evidence that national ",
+         "average retail prices fall relative to their usual world-price link.** Producers may bear part of the cost: ",
+         "farmers reported fresh-fruit-bunch prices roughly halving during the 2022 ban ",
+         "([Al Jazeera, 16 May 2022](https://www.aljazeera.com/economy/2022/5/16/indonesian-farmers-decry-palm-oil-export-ban-as-prices-plummet)); ",
+         "we do not measure this."),
+  paste0("If retail caps are the instrument, the recorded gap narrowed only while caps applied and widened within weeks ",
+         "of lifting them. The trade-off is availability: in February 2022 the national average was ",
+         pct("vegoil_feb2022_vs_cap_pct"), " above the highest cap in force, consistent with the shortages the ",
+         "[Ombudsman reported](https://ombudsman.go.id/news/download/temuan-ombudsman-soal-minyak-goreng-penimbunan-hingga-pengalihan-ke-pasar-tradisional) ",
+         "in February, though we do not test this."),
+  paste0("If the aim is to monitor the 2027 scheme, national monthly averages cannot separate measures that are weeks ",
+         "apart; weekly prices by province and by product type (bulk vs packaged) would.")
 )
 
-implications <- c(                               # conditional, neutral: if aim X, then Y; trade-off Z
-  "If the aim is X, then Y; the trade-off is Z.",
-  "If the aim is A, then B; the trade-off is C."
+caveats <- c(
+  "The 2022 measures came within weeks of each other; **monthly data cannot isolate any one of them**, and January is partly treated.",
+  paste0("The series is a national average that sat well above every cap (Rp", k("vegoil_feb2022"), " per litre in February 2022); ",
+         "it does not show the price of capped oil, how much households could buy or regional differences (bulk oil cost ",
+         "Rp14,250 to Rp29,250 per kg across provinces in May 2022, ",
+         "[Katadata](https://katadata.co.id/berita/industri/6285dba47b70b/tiga-pekan-larangan-ekspor-cpo-harga-minyak-goreng-curah-dekati-het))."),
+  "Indonesia's own measures moved the world palm oil price used as the benchmark, so in 2022 the predicted level is not a policy-free comparison.",
+  paste0("The January-May estimate depends on how months are weighted and where the phase boundaries fall (",
+         pct("main_window_pct", sign = TRUE), " pre-specified, ", pct("main_window_ols_pct", sign = TRUE),
+         " with equal weights, ", pct("s7_lag1_window_pct", sign = TRUE), " with phases moved by one month)."),
+  "One country and one episode; the result does not predict the effect of the 2027 state-exporter scheme."
 )
 
-caveats <- c(                                    # 3 honest, specific caveats
-  "Caveat 1 (identification).",
-  "Caveat 2 (measurement or aggregation).",
-  "Caveat 3 (external validity or data vintage)."
+findings <- c(                                   # LinkedIn arrows; finalised at P9
+  paste0("Jan-May 2022 as a whole: ", pct("main_window_pct", sign = TRUE), ", not clearly different from zero"),
+  paste0("Apr-May 2022, after packaged-oil caps were lifted: ", pct("r1_window_b_pct", sign = TRUE),
+         ", about Rp", k("r1_window_b_idr"), " per litre"),
+  paste0("Late 2021, before the 2022 measures: the gap had already widened by about ", pct("s4_pre3_pct"))
 )
 
-key_figures <- list(                             # 2-4 headline numbers shown as tiles under the bottom line
-  c(value = k("example_change_pct", unit = TRUE), label = "Placeholder: what this number measures"),
-  c(value = k("example_n_units"), label = "Placeholder: units covered")
+key_figures <- list(
+  c(value = pct("main_window_pct", sign = TRUE), label = "Jan-May 2022, pre-specified test (not clear)"),
+  c(value = pct("r1_window_b_pct", sign = TRUE), label = "Apr-May 2022, planned split"),
+  c(value = paste0("Rp", k("r1_window_b_idr")), label = "Apr-May shift per litre, 2021 prices"),
+  c(value = pct("s4_pre3_pct", sign = TRUE), label = "Oct-Dec 2021, before the 2022 measures (exploratory)")
 )
 
 author_slug <- gsub("[^a-z]+", "-", tolower(iconv(rmarkdown::metadata$author %||% "", to = "ASCII//TRANSLIT")))
 
-method_tag <- "Method: [e.g. stochastic frontier on a FAOSTAT country panel, 1995-2023]"
-hashtags   <- "#AgriculturalEconomics #FoodPolicy #[Topic] #[Region]"
+method_tag <- "Method: interrupted time series with AR(1) errors on FAO GIEWS monthly prices, Nov 2020 - Jul 2026"
+hashtags   <- "#FoodPolicy #PalmOil #Indonesia #AgriculturalEconomics"
 ```
 
 ::: {.content-visible when-format="html"}
@@ -150,7 +185,7 @@ cat('</div>\n')
 
 ## Why this matters now
 
-`r why_now` [Primary source](`r meta$hook$primary_source$url %||% "#"`).
+`r why_now` Sources: [RRI, June 2026](`r meta$hook$primary_source$url %||% "#"`); [PwC Indonesia legal alert, August 2026](`r meta$hook$second_source$url %||% "#"`).
 
 ## What we did
 
@@ -160,18 +195,23 @@ cat('</div>\n')
 
 ## What the data show
 
-### Section 1: finding-style subheading
+### The gap widened sharply after packaged-oil caps were lifted
 
-![](output/fig1_hero.png){fig-alt="ALT TEXT: describe what the hero chart shows and its main number, for screen readers." width="100%"}
+![](output/fig1_hero.png){fig-alt="Bar chart of the monthly gap between Indonesia's national retail cooking-oil price and the price predicted from world palm oil, November 2020 to July 2026. The gap is negative in early 2021, turns positive in late 2021, falls close to zero in February and March 2022 and peaks in April and May 2022 before settling at a smaller positive level." width="100%"}
 
-**One bolded key sentence: the main result of this section, with its number from kn().** Then two
-or three short sentences: the interval, one robustness check, and what remains uncertain.
-<!-- Style (07_report_and_post_templates.md): concise and scientific; claim only what an estimate
-shows ("not clear" if the interval includes zero); label untested mechanisms ("we hypothesise",
-"untested here"); at most one bolded sentence per paragraph; no bold in the LinkedIn text. -->
+**Split as planned, January-March 2022 shows no clear shift (`r pct("r1_window_a_pct", sign = TRUE)`), while April-May shows `r pct("r1_window_b_pct", sign = TRUE)` (`r ci("r1_window_b_lo", "r1_window_b_hi")`), about Rp`r k("r1_window_b_idr")` per litre at 2021 prices.** April came after the caps on packaged oil were lifted on 16 March and mostly before the export ban of 28 April. In an exploratory check, no two-month window elsewhere in the series shows a shift above `r pct("s5_max2")`.
 
+### Over January-May as a whole, the answer depends on how months are weighted
 
-<!-- ### Section 2 ... (max 3 figures in total) -->
+![](output/figB_phase_effects.png){fig-alt="Point estimates with 95 percent intervals: January to May 2022 (pre-specified), January to March and April to May 2022 (planned split), from June 2022, and the wheat flour placebo. Only April to May lies clearly above zero." width="100%"}
+
+**The pre-specified estimate is `r pct("main_window_pct", sign = TRUE)` (`r ci("main_window_lo", "main_window_hi")`), but it mainly compares January 2022 with December 2021.** Because price gaps carry over from month to month, the model weights January by `r k("w_window_jan2022")` and December 2021 by `r k("w_window_dec2021")`; no other month gets more than `r k("w_window_other_max")`. By December the gap had already widened by about `r pct("s4_pre3_pct")` (`r ci("s4_pre3_lo", "s4_pre3_hi")`, exploratory), before any of the 2022 measures. Weighting the five months equally gives `r pct("main_window_ols_pct", sign = TRUE)`, and moving the phase boundaries by one month gives `r pct("s7_lag1_window_pct", sign = TRUE)` (both exploratory). We therefore read the pre-specified result as "not clear", not as "no effect".
+
+### Month by month, the moves line up with the caps
+
+![](output/fig2_event_months.png){fig-alt="Monthly estimates with 95 percent intervals from October 2021 to December 2022. The estimate drops in February 2022, jumps in April 2022 and declines gradually from June onwards." width="100%"}
+
+**In an exploratory month-by-month check, the gap fell `r k("s6_feb_minus_jan_pp", abs = TRUE)` points in February 2022, the first full month of retail caps, and rose `r k("s6_apr_minus_mar_pp")` points in April.** In May, when the export ban fell, it changed by `r k("s6_may_minus_apr_pp", sign = TRUE)` points. The timing matches the caps; it does not show that the caps caused the moves, and a four-week ban may not be visible in monthly averages.
 
 ## What this means for policy
 
@@ -305,8 +345,8 @@ bullets(c(src_brief, paste0("Code: [GitHub, Mithril-Metrics](", code_url, ")")))
 #| label: linkedin
 #| include: false
 # Section B: LinkedIn post, built from the same strings and key numbers.
-hook <- paste0("Placeholder hook with the surprising number: ",
-               k("example_change_pct", unit = TRUE), ".")
+hook <- paste0("Indonesia's 2022 cooking-oil price measures: the retail price moved with the caps, ",
+               "not clearly over the whole period (", pct("main_window_pct", sign = TRUE), ").")
 li <- paste0(
   hook, "\n\n",
   why_now, "\n\n",

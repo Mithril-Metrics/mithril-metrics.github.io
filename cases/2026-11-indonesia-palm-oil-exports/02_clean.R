@@ -53,6 +53,9 @@ df <- prices |>
     ln_wheat = log(wheat_idr),
     ln_cpo_l1 = lag(ln_cpo, 1),
     ln_cpo_l2 = lag(ln_cpo, 2),
+    ln_cpo_l3 = lag(ln_cpo, 3),
+    ln_cpo_l4 = lag(ln_cpo, 4),
+    ln_cpo_l5 = lag(ln_cpo, 5),
     ln_wheat_l1 = lag(ln_wheat, 1),
     ln_wheat_l2 = lag(ln_wheat, 2)
   )
@@ -68,6 +71,7 @@ df <- df |>
     window_b = as.integer(date >= d(ph$window_b[1]) & date <= d(ph$window_b[2])),
     post = as.integer(date >= d(ph$post_start)),
     bps2023 = as.integer(date >= d(ph$bps_change)),
+    pre3 = as.integer(date >= d(ph$pre3[1]) & date <= d(ph$pre3[2])),    # P6 check: three months before the window
     eid = as.integer(date %in% d(unlist(dec$eid_al_fitr_months))),
     phase = case_when(
       window == 1 ~ "Policy window (Jan-May 2022)",
@@ -93,8 +97,9 @@ print(summary(df[, c("vegoil", "flour", "cpo_usd", "fx")]))
 expected <- length(seq(d(dec$sample[1]), d(dec$sample[2]), by = "month"))
 stopifnot(
   "Months missing in the sample" = nrow(df) == expected,
-  "Missing values in model variables" = !anyNA(df[, c("ln_vegoil", "ln_flour", "ln_cpo_l2", "ln_wheat_l2")]),
-  "Window must have 5 months" = sum(df$window) == 5
+  "Missing values in model variables" = !anyNA(df[, c("ln_vegoil", "ln_flour", "ln_cpo_l5", "ln_wheat_l2")]),
+  "Window must have 5 months" = sum(df$window) == 5,
+  "Pre-window dummy must have 3 months" = sum(df$pre3) == 3
 )
 
 saveRDS(df, "output/cache/analysis_data.rds")

@@ -94,7 +94,8 @@ decisions:
   phases:
     window: ["2022-01-01", "2022-05-01"]        # DMO, price caps, export ban 28 Apr - 23 May 2022
     window_a: ["2022-01-01", "2022-03-01"]      # R1: DMO + full retail caps (March mixes both regimes)
-    window_b: ["2022-04-01", "2022-05-01"]      # R1: bulk-only cap + export ban
+    window_b: ["2022-04-01", "2022-05-01"]      # R1: packaged caps lifted 16 Mar, bulk cap 14,000; export ban from 28 Apr
+    pre3: ["2021-10-01", "2021-12-01"]          # P6 check: the three months before the window
     post_start: "2022-06-01"                    # DMO regime continues
     bps_change: "2023-01-01"                    # BPS sample 90 -> 150 districts
   eid_al_fitr_months: ["2021-05-01", "2022-05-01", "2023-04-01", "2024-04-01", "2025-03-01", "2026-03-01"]
@@ -105,9 +106,25 @@ decisions:
   placebo: "wheat flour vs US HRW wheat in rupiah, same specification"
   robustness:
     R1: "Window split into Jan-Mar 2022 and Apr-May 2022"
-    R2: "Difference of log gaps (cooking oil minus wheat flour) on the same phase dummies"
+    R2: "Dropped at P6: one-for-one gaps move with the world price cycle, the reason they were rejected at P4"
   units: "Phase effects in % (100*(exp(b)-1)) and IDR/litre at the 2021 mean retail price"
   footnote_only: "World Bank Pink Sheet palm oil (same market as Oil World c.i.f. Rotterdam)"
+
+# ---- Added at P6 (2026-11-26), after the first results ----
+# Checks only: the primary test (gamma_window, AR(1) SE, Holm) is unchanged.
+p6_checks:
+  S1: "World-price lags 0-5 instead of 0-2"
+  S2: "World-price link estimated without 2022 (2022 months set to missing in the AR(1) likelihood); gap = retail minus that link"
+  S3: "Pass-through imposed on a grid from 0.1 to 0.9 (equal weights on lags 0-2); window and Apr-May shifts re-estimated"
+  S4: "Dummy for the three months before the window (Oct-Dec 2021): does the gap move before any measure?"
+  S5: "Placebo in time: the same model with a fake 5-month (and 2-month) window at every position outside Jan-May 2022"
+  newey_west: "Reported with its own OLS estimate; it is not a p-value for the AR(1) estimate"
+  placebo_note: "Wheat flour does not follow world wheat in this sample (pass-through near zero, AR(1) near 1), so the placebo is weak"
+
+events_2022:
+  - {date: "2022-02-01", label: "Bulk cap Rp11,500", source: "Jakarta Post, 18 Mar 2022"}
+  - {date: "2022-03-16", label: "Packaged caps lifted", source: "Jakarta Post, 18 Mar 2022"}
+  - {date: "2022-04-28", label: "Export ban (to 23 May)", source: "FAO FAPDA; Trade Regulation 30/2022"}
 
 # Retail price caps (HET) drawn in Fig 1. They apply to bulk / 'people's' cooking oil, not to the
 # whole BPS series, which mixes bulk and packaged oil.
@@ -128,6 +145,8 @@ known_limitations:
   - "Lower consumer prices were paid partly by producers; farm-gate fresh-fruit-bunch prices are not analysed here."
   - "One country and one episode; the result does not predict the effect of the 2027 state-exporter scheme."
   - "March 2022 mixes both regimes and is assigned to the first sub-phase in R1."
+  - "The world-price link is estimated in months that had caps or supply obligations (2022 onward), which may flatten it; S2 and S3 show how much this matters."
+  - "The Jan-Mar / Apr-May split (R1) was a planned check, not the primary test; April 2022 is mostly before the export ban."
 
 pre_results_review: >
   2026-11-25. World Bank policy analyst and field-journal econometrician, both PROCEED WITH CHANGES.

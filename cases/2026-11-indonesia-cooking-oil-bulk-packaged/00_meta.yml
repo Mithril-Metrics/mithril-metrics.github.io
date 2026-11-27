@@ -1,0 +1,190 @@
+# 00_meta.yml - single source of truth for this case's metadata.
+# report.qmd reads this file for the hook, the "Data & code" section and the footer.
+# 02_clean.R and 03_analyse.R read the policy dates, caps, windows and producer table from here.
+
+id: "2026-11-indonesia-cooking-oil-bulk-packaged"
+issue: 7
+local_folder: "Issue 7"
+author: "Pietro Sala"
+title: "When Indonesia freed packaged cooking oil from its price cap in March 2022, how far did it drift from capped bulk oil, and did bulk oil stay at its cap?"
+question: >
+  After Indonesia removed the retail price cap on packaged cooking oil on 16 March 2022 and kept a
+  higher cap on bulk oil, how far did the two prices drift apart in traditional markets, did bulk oil
+  stay at its cap, and did this differ in palm-oil-producing provinces?
+bottom_line: null                 # written at the WRITE stage from key_numbers.csv
+status: code                      # plan | code | results | red-teamed | draft | published
+publish_at: null                  # set only after both authors approve
+
+hook:
+  debate: >
+    Indonesia's Trade Regulation 16/2026 routes crude palm oil exports through a single state-owned
+    exporter from 1 January 2027. Domestic cooking-oil supply rules are again in play; the last time
+    retail prices were administered product by product was 2022.
+  date: "2026-06-10"
+  primary_source:
+    title: "Indonesia's Future of Palm Oil Exports after New Ministerial Regulation (RRI, 10 Jun 2026)"
+    url: "https://rri.co.id/en/national/2480326/indonesias-future-of-palm-oil-exports-after-new-ministerial-regulation"
+  second_source:
+    title: "PwC Indonesia Legal Alert 2026-67 (August 2026)"
+    url: "https://www.pwc.com/id/en/pwc-publications/services-publications/legal-publications/legal-alert-2026-67.html"
+
+tags:
+  region: ["SE Asia"]
+  method: ["Causal"]
+  employer_theme: ["WB", "FAO", "IFPRI"]
+  skills: ["Panel econometrics (FE, IV, RDD, selection)", "Food security and palm oil (SEA)"]
+
+dates:
+  created: "2026-11-27"
+  published: null
+
+hours:
+  planned: 4.75                   # budget option (a) at P4: about 45 min over the 2 h coding budget
+  actual: null
+
+sources:
+  - name: "Bank Indonesia, Pusat Informasi Harga Pangan Strategis (PIHPS) Nasional"
+    provider: "Bank Indonesia"
+    table: >
+      Traditional markets (price_type_id 1). Minyak Goreng Curah (bulk, com_17), Minyak Goreng
+      Kemasan Bermerk 1 and 2 (branded refill pouches, com_18, com_19). Weekly by province and
+      monthly national. Rp per litre (PIHPS FAQ).
+    url: "https://www.bi.go.id/hargapangan/TabelHarga/PasarTradisionalKomoditas"
+    version: "Live database; daily survey of 2 traders in 2 markets in each of 82 CPI cities"
+    accessed: null                # filled from data_raw/_access_log.csv
+    licence: "Terms of use not found; cited as source, only derived numbers published"
+  - name: "Statistik Perkebunan Unggulan Nasional 2021-2023, Kelapa Sawit, Table 1.6"
+    provider: "Direktorat Jenderal Perkebunan, Kementerian Pertanian"
+    table: "Area and production by province and farming category, 2021; production in tonnes of CPO"
+    url: "https://ditjenbun-ppid.pertanian.go.id/pemberitahuan_attachment/15/14617/STATISTIK%20KELAPA%20SAWIT%202021%20-%202023.pdf"
+    version: "2021 figures, Table 1.6, pp. 13-14"
+    accessed: "2026-11-27"
+    licence: "Government publication"
+  - name: "Permendag 6/2022 and 11/2022 (retail price caps, HET)"
+    provider: "Kementerian Perdagangan; Berita Negara 2022 No. 283"
+    table: "Permendag 11/2022 signed and in force 16 March 2022"
+    url: "https://peraturan.go.id/files/bn283-2022.pdf"
+    version: "As published"
+    accessed: "2026-11-27"
+    licence: "Public law"
+
+manual_steps:
+  - >
+    Province palm oil production 2021 (producer_2021 below) typed from Ditjenbun, Statistik
+    Perkebunan Unggulan Nasional 2021-2023, Table 1.6 "Jumlah/Total" column (tonnes CPO).
+    Checked 2026-11-27: provinces add up to the printed regional subtotals and to the national total
+    45,121,480 t. Provinces shown as "-" are entered as 0.
+
+identification: >
+  Absent the 16 March 2022 switch, the log price gap between branded packaged and bulk cooking oil in
+  the same province would have stayed where it was in the last capped week; shocks that hit both oils
+  alike (world palm oil, the rupiah, local demand) cancel in the gap. All provinces switched in the
+  same week, so the result is the response to the whole switch, compared against 2017-2021 changes,
+  not a causal effect of the cap removal alone.
+
+method_track:
+  choice: "E"
+  reason: "Track M not used: 31 provinces leave about 15 units per fold for cross-fitting; one pre-specified moderator answers the policy question more transparently."
+  ml_settings: null
+
+# ---- Fixed at P4 (2026-11-27), before any results ----
+decisions:
+  api: "https://www.bi.go.id/hargapangan/WebSite/TabelHarga/GetGridDataKomoditas"
+  commodities: {bulk: "com_17", pkg1: "com_18", pkg2: "com_19"}
+  weekly_start: "2021-10-04"      # a Monday: PIHPS counts weeks from the start date
+  weekly_end: "2022-08-29"
+  window_end: "2022-06-27"        # last week used; Minyakita launched 6 Jul 2022
+  monthly_start: "2017-01-01"
+  monthly_end: "2022-12-31"
+  event_week: "2022-03-14"        # k = 0, contains the switch on Wed 16 Mar (partly treated)
+  ref_k: -1                       # week of 7 Mar 2022, last full capped week
+  precap_k: [-23, -9]             # weeks 4 Oct 2021 - 10 Jan 2022, before any cap
+  cap_k: [-6, -2]                 # weeks 31 Jan - 28 Feb 2022, descriptive joint test
+  post_preban_k: [1, 6]           # 21 Mar - 25 Apr 2022
+  ban_k: [7, 10]                  # 2 - 23 May 2022, shown, not summarised
+  post_ban_k: [11, 15]            # 30 May - 27 Jun 2022
+  outlier_jump: 0.40              # drop province-weeks with a week-on-week change above 40%
+  producer_threshold: 0.02        # share of 2021 national production
+  placebo_months: ["2017-03", "2021-12"]
+  placebo_base: "2022-02"         # last full capped month
+  placebo_targets: ["2022-03", "2022-04", "2022-05", "2022-06"]
+  ramadan_months: ["2017-05", "2017-06", "2018-05", "2018-06", "2019-05", "2019-06",
+                   "2020-04", "2020-05", "2021-04", "2021-05"]
+  inference: "CR2 by province, Satterthwaite df (clubSandwich); HTZ Wald for joint tests"
+  confirmatory: ["beta post_preban", "beta post_ban", "gamma post_preban"]
+
+events_2022:
+  - {date: "2022-01-19", label: "One price, Rp14,000/l"}
+  - {date: "2022-02-01", label: "Caps: bulk 11,500, packaged 13,500-14,000"}
+  - {date: "2022-03-16", label: "Packaged cap removed; bulk cap 14,000"}
+  - {date: "2022-04-02", label: "Ramadan begins (about)"}
+  - {date: "2022-04-28", label: "Export ban"}
+  - {date: "2022-05-23", label: "Export ban lifted"}
+
+price_caps:                       # Rp per litre
+  - {from: "2022-02-01", to: "2022-03-15", bulk: 11500, simple_pkg: 13500, premium_pkg: 14000}
+  - {from: "2022-03-16", to: "2022-07-05", bulk: 14000, simple_pkg: null, premium_pkg: null}
+
+eastern_provinces: ["Maluku", "Maluku Utara", "Papua", "Papua Barat", "Nusa Tenggara Timur"]
+
+producer_2021:                    # tonnes CPO, Ditjenbun Table 1.6
+  Aceh: 966044
+  Sumatera Utara: 5264734
+  Sumatera Barat: 1396812
+  Riau: 8961940
+  Kepulauan Riau: 15823
+  Jambi: 2431643
+  Sumatera Selatan: 3691701
+  Kepulauan Bangka Belitung: 866051
+  Bengkulu: 994583
+  Lampung: 449999
+  DKI Jakarta: 0
+  Jawa Barat: 29016
+  Banten: 30429
+  Jawa Tengah: 0
+  DI Yogyakarta: 0
+  Jawa Timur: 0
+  Bali: 0
+  Nusa Tenggara Barat: 0
+  Nusa Tenggara Timur: 0
+  Kalimantan Barat: 5332338
+  Kalimantan Tengah: 7280743
+  Kalimantan Selatan: 1187281
+  Kalimantan Timur: 3750607
+  Kalimantan Utara: 590659
+  Sulawesi Utara: 0
+  Gorontalo: 14120
+  Sulawesi Tengah: 445317
+  Sulawesi Selatan: 113599
+  Sulawesi Barat: 379094
+  Sulawesi Tenggara: 60867
+  Maluku: 20918
+  Maluku Utara: 0
+  Papua: 728314
+  Papua Barat: 118848
+
+known_limitations:
+  - "On 16 March packaged oil lost its cap, but bulk oil's cap also rose by about a fifth and its supply was subsidised, so the gap measures the switch as a whole, not the cap removal alone."
+  - "Bulk oil was itself regulated and often short, so it is a comparison product, not an untouched control."
+  - "Every province switched in the same week, so we cannot separate the switch from other nationwide shocks that week; the comparison with 2017-2021 shows how unusual the change was, not what caused it."
+  - "Ramadan began in early April 2022 and the export ban ran from 28 April to 23 May; both fall inside the post period."
+  - "The week before the switch was already capped and short of supply; we also report the gap against the months before any cap."
+  - "PIHPS records prices where oil was found; it cannot show shortages."
+  - "Bulk oil in traditional markets is usually the cheaper option bought by poorer households [source needed at P8, otherwise stated as an assumption]; we do not estimate incidence."
+  - "With about 10 producing provinces against about 20 others, only a large difference between the groups would show up."
+  - "PIHPS prices are per litre, the same unit as the caps; the packaged series are branded refill pouches, so they compare with the premium-packaging cap."
+  - "PIHPS is an undocumented public interface; we publish only derived numbers."
+
+pre_results_review: >
+  P4 review 2026-11-27 by a policy analyst (World Bank lens) and an econometrician (field-journal
+  referee), both PROCEED WITH CHANGES. Adopted: estimand as the whole switch with a packaged/bulk
+  decomposition and bulk-vs-cap co-headline; 2017-2021 time placebo as headline inference; CR2 with
+  Satterthwaite df and three confirmatory tests; fixed outlier rule, window and threshold; wording
+  rules for titles. Implementation note (P5): the heterogeneity model interacts every event week
+  (not only k >= 0) with Producer, so producer and other provinces each keep their own pre-switch
+  path and gamma is measured against the same reference week.
+
+links:
+  blog: "https://mithril-metrics.github.io/cases/2026-11-indonesia-cooking-oil-bulk-packaged/report.html"
+  linkedin: null
+  code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-indonesia-cooking-oil-bulk-packaged"

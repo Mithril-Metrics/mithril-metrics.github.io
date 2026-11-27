@@ -1,0 +1,133 @@
+key,value,unit,digits,big_mark,description,source,updated
+n_provinces,31,,0,",",Provinces in the event study,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+n_producer,11,,0,",",Producer provinces (>= 2% of 2021 palm oil output) in the event study,Ditjenbun 2021,2026-11-27 16:26
+n_obs,1106,,0,",",Province-weeks in the event study,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+n_weeks,37,,0,",",Weeks with data in the event study,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+n_outliers_jump,12,,0,",",Province-weeks the P4 jump rule drops (check only),"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+n_no_bulk,3,,0,",",Provinces without a bulk series,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_gap_ref_pct,17.888563049853467,%,1,",","National packaged-bulk gap, week of 7 Mar 2022 (latest recorded week up to then)","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_gap_precap_pct,8.509834331942013,%,1,",","National gap, mean of weeks 4 Oct 2021 - 10 Jan 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_gap_post_preban_pct,31.220373825365733,%,1,",","National gap, mean of weeks 21 Mar - 25 Apr 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_gap_k6_pct,36.802030456852954,%,1,",","National gap, week of 25 Apr 2022 (latest recorded week up to then)","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_gap_post_ban_pct,45.865610796196066,%,1,",","National gap, mean of weeks 30 May - 27 Jun 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_gap_end_pct,47.45762711864416,%,1,",","National gap, last week in the window","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_preban_pct,10.183280735643097,%,1,",","Window average, beta_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_preban_lo,2.2349737573012396,%,1,",","95% CI low (CR2), beta_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_preban_hi,18.74953264515824,%,1,",","95% CI high (CR2), beta_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_preban_p,0.01296676436593699,,3,",","p-value (CR2, Satterthwaite), beta_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_ban_pct,24.278931562112447,%,1,",","Window average, beta_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_ban_lo,15.213360864047498,%,1,",","95% CI low (CR2), beta_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_ban_hi,34.0578272727043,%,1,",","95% CI high (CR2), beta_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_ban_p,2.411342442207038e-6,,3,",","p-value (CR2, Satterthwaite), beta_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_preban_pct,11.8820513489702,%,1,",","Window average, gamma_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_preban_lo,-2.693488907462638,%,1,",","95% CI low (CR2), gamma_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_preban_hi,28.64086147482481,%,1,",","95% CI high (CR2), gamma_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_preban_p,0.10856053376462509,,3,",","p-value (CR2, Satterthwaite), gamma_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_ban_pct,6.048210092763862,%,1,",","Window average, gamma_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_ban_lo,-7.997400728153581,%,1,",","95% CI low (CR2), gamma_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_ban_hi,22.2380992807496,%,1,",","95% CI high (CR2), gamma_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_ban_p,0.3977437520357239,,3,",","p-value (CR2, Satterthwaite), gamma_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_preban_vs_precap_pct,19.312995839649428,%,1,",","Window average, post_preban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_preban_vs_precap_lo,13.05255567904786,%,1,",","95% CI low (CR2), post_preban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_preban_vs_precap_hi,25.92011645138332,%,1,",","95% CI high (CR2), post_preban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_preban_vs_precap_p,2.067297145043083e-7,,3,",","p-value (CR2, Satterthwaite), post_preban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_ban_vs_precap_pct,34.576603141838305,%,1,",","Window average, post_ban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_ban_vs_precap_lo,27.77613448940841,%,1,",","95% CI low (CR2), post_ban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_ban_vs_precap_hi,41.73900459241926,%,1,",","95% CI high (CR2), post_ban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+post_ban_vs_precap_p,1.2965476910633877e-12,,3,",","p-value (CR2, Satterthwaite), post_ban_vs_precap","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_preban_pct,27.939579648027024,%,1,",","Window average, pkg_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_preban_lo,22.350036989000888,%,1,",","95% CI low (CR2), pkg_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_preban_hi,33.784479705432055,%,1,",","95% CI high (CR2), pkg_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_preban_p,5.197069693885593e-12,,3,",","p-value (CR2, Satterthwaite), pkg_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_preban_pct,16.115238894534013,%,1,",","Window average, bulk_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_preban_lo,9.961246154559175,%,1,",","95% CI low (CR2), bulk_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_preban_hi,22.61364048733716,%,1,",","95% CI high (CR2), bulk_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_preban_p,4.925229605454511e-6,,3,",","p-value (CR2, Satterthwaite), bulk_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_ban_pct,31.631635413242055,%,1,",","Window average, pkg_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_ban_lo,25.960437249067446,%,1,",","95% CI low (CR2), pkg_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_ban_hi,37.55817159719299,%,1,",","95% CI high (CR2), pkg_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg_post_ban_p,2.58861935169652e-13,,3,",","p-value (CR2, Satterthwaite), pkg_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_ban_pct,5.916291489402514,%,1,",","Window average, bulk_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_ban_lo,0.5397111605219385,%,1,",","95% CI low (CR2), bulk_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_ban_hi,11.58039617755593,%,1,",","95% CI high (CR2), bulk_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_post_ban_p,0.03176692660761362,,3,",","p-value (CR2, Satterthwaite), bulk_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_preban_pct,13.737912456391266,%,1,",","Window average, pkg2_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_preban_lo,5.429523035234718,%,1,",","95% CI low (CR2), pkg2_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_preban_hi,22.701045755602877,%,1,",","95% CI high (CR2), pkg2_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_preban_p,0.00163956404078948,,3,",","p-value (CR2, Satterthwaite), pkg2_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_ban_pct,26.18241200636744,%,1,",","Window average, pkg2_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_ban_lo,17.56467476657766,%,1,",","95% CI low (CR2), pkg2_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_ban_hi,35.431847460621,%,1,",","95% CI high (CR2), pkg2_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg2_post_ban_p,2.156133460406093e-7,,3,",","p-value (CR2, Satterthwaite), pkg2_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_preban_pct,11.40524050564775,%,1,",","Window average, jumprule_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_preban_lo,3.7734827503239865,%,1,",","95% CI low (CR2), jumprule_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_preban_hi,19.5982565409512,%,1,",","95% CI high (CR2), jumprule_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_preban_p,0.00421601002666305,,3,",","p-value (CR2, Satterthwaite), jumprule_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_ban_pct,25.53489453864042,%,1,",","Window average, jumprule_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_ban_lo,16.886312207289443,%,1,",","95% CI low (CR2), jumprule_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_ban_hi,34.82339761802138,%,1,",","95% CI high (CR2), jumprule_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+jumprule_post_ban_p,4.69971851028332e-7,,3,",","p-value (CR2, Satterthwaite), jumprule_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_preban_pct,11.424329257975383,%,1,",","Window average, nosultra_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_preban_lo,3.4611927867395087,%,1,",","95% CI low (CR2), nosultra_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_preban_hi,20.00036744386897,%,1,",","95% CI high (CR2), nosultra_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_preban_p,0.00581691423663742,,3,",","p-value (CR2, Satterthwaite), nosultra_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_ban_pct,26.033080971613764,%,1,",","Window average, nosultra_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_ban_lo,17.209637662977094,%,1,",","95% CI low (CR2), nosultra_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_ban_hi,35.52074569900938,%,1,",","95% CI high (CR2), nosultra_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nosultra_post_ban_p,4.800972970704674e-7,,3,",","p-value (CR2, Satterthwaite), nosultra_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_preban_pct,4.845486361710716,%,1,",","Window average, drift_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_preban_lo,-5.832176654361776,%,1,",","95% CI low (CR2), drift_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_preban_hi,16.73388658539947,%,1,",","95% CI high (CR2), drift_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_preban_p,0.3749875184741329,,3,",","p-value (CR2, Satterthwaite), drift_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_ban_pct,5.185836821301026,%,1,",","Window average, drift_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_ban_lo,-12.492595178990872,%,1,",","95% CI low (CR2), drift_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_ban_hi,26.43570324623621,%,1,",","95% CI high (CR2), drift_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+drift_post_ban_p,0.578505383267297,,3,",","p-value (CR2, Satterthwaite), drift_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+cap_joint_p,0.11204395093492382,,3,",",Joint test: gap flat across caps-period weeks,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+het_cap_joint_p,0.45187641563137126,,3,",",Joint test: producer and other provinces move alike in caps-period weeks,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_preban_p_holm,0.02593352873187398,,3,",","Holm-adjusted p across the three confirmatory tests, beta_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+es_post_ban_p_holm,7.234027326621113e-6,,3,",","Holm-adjusted p across the three confirmatory tests, beta_post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+gamma_post_preban_p_holm,0.10856053376462509,,3,",","Holm-adjusted p across the three confirmatory tests, gamma_post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+cap_drift_pp_week,1.2330775510322312,log points/week,2,",",Slope of the gap across caps-period weeks (31 Jan - 7 Mar),"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+n_prov_fig3,29,,0,",",Provinces with a gap in the reference week and the first window,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h1_actual_pp,9.932369556647735,log points,1,",","Change in national monthly gap, Feb 2022 to 2022-03","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h1_max_pp,2.7547552131952813,log points,1,",","Largest 1-month change, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h1_pctile,100,%,1,",","Percentile of the 2022 change among 1-month changes, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h1_p,0,,3,",",Share of 2017-2021 changes at least as large,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h1_p_ramadan,0,,3,",","Same, Ramadan-spanning changes only","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h1_n,57,,0,",",Number of 2017-2021 changes compared,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h2_actual_pp,16.868329581466313,log points,1,",","Change in national monthly gap, Feb 2022 to 2022-04","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h2_max_pp,5.297233476620633,log points,1,",","Largest 2-month change, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h2_pctile,100,%,1,",","Percentile of the 2022 change among 2-month changes, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h2_p,0,,3,",",Share of 2017-2021 changes at least as large,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h2_p_ramadan,0,,3,",","Same, Ramadan-spanning changes only","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h2_n,56,,0,",",Number of 2017-2021 changes compared,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h3_actual_pp,22.208478996596703,log points,1,",","Change in national monthly gap, Feb 2022 to 2022-05","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h3_max_pp,5.381734238832436,log points,1,",","Largest 3-month change, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h3_pctile,100,%,1,",","Percentile of the 2022 change among 3-month changes, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h3_p,0,,3,",",Share of 2017-2021 changes at least as large,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h3_p_ramadan,0,,3,",","Same, Ramadan-spanning changes only","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h3_n,55,,0,",",Number of 2017-2021 changes compared,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h4_actual_pp,26.707988316684705,log points,1,",","Change in national monthly gap, Feb 2022 to 2022-06","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h4_max_pp,7.467834484167923,log points,1,",","Largest 4-month change, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h4_pctile,100,%,1,",","Percentile of the 2022 change among 4-month changes, 2017-2021","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h4_p,0,,3,",",Share of 2017-2021 changes at least as large,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h4_p_ramadan,0,,3,",","Same, Ramadan-spanning changes only","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+plac_h4_n,54,,0,",",Number of 2017-2021 changes compared,"Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_bulk_caps,17610,Rp/l,0,",","National bulk price, caps","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_bulk_excess_caps_pct,53.1304347826087,%,1,",","National bulk price above its cap, caps","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_pkg1_caps,19930,Rp/l,0,",","National packaged 1 price, caps","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_bulk_post_ban,18100,Rp/l,0,",","National bulk price, post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_bulk_excess_post_ban_pct,29.285714285714292,%,1,",","National bulk price above its cap, post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_pkg1_post_ban,26400,Rp/l,0,",","National packaged 1 price, post_ban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_bulk_post_preban,19700,Rp/l,0,",","National bulk price, post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_bulk_excess_post_preban_pct,40.71428571428572,%,1,",","National bulk price above its cap, post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+nat_pkg1_post_preban,25866.666666666668,Rp/l,0,",","National packaged 1 price, post_preban","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+n_prov_bulk_above_cap_post,29,,0,",","Provinces with bulk above Rp14,000/l, 21 Mar - 25 Apr 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+n_prov_bulk_post,31,,0,",","Provinces with bulk prices, 21 Mar - 25 Apr","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_excess_post_median_pct,40.119047619047635,%,1,",","Median province: bulk price above its cap, 21 Mar - 25 Apr 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_excess_post_max_pct,85.41666666666666,%,1,",","Highest province: bulk price above its cap, 21 Mar - 25 Apr 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+bulk_excess_caps_median_pct,54.69565217391303,%,1,",","Median province: bulk price above its cap, 1 Feb - 13 Mar 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+transfer_litres_cap,7.142857142857143,litres,1,",","Litres of bulk oil the monthly cash transfer bought at the Rp14,000 cap","Setkab, 1 Apr 2022 (verify at P8): https://setkab.go.id/keterangan-pers-presiden-ri-terkait-blt-minyak-goreng-di-istana-merdeka-1-april-2022/",2026-11-27 16:26
+transfer_litres_actual,5.0761421319796955,litres,1,",","Litres it bought at the national bulk price, 21 Mar - 25 Apr 2022","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26
+pkg1_vs_premium_cap_caps_pct,42.35714285714285,%,1,",","National packaged 1 price vs Rp14,000 premium cap, caps period","Bank Indonesia PIHPS, traditional markets",2026-11-27 16:26

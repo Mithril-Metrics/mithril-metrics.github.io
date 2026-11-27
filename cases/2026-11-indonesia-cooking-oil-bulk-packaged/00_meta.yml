@@ -11,22 +11,27 @@ question: >
   After Indonesia removed the retail price cap on packaged cooking oil on 16 March 2022 and kept a
   higher cap on bulk oil, how far did the two prices drift apart in traditional markets, did bulk oil
   stay at its cap, and did this differ in palm-oil-producing provinces?
-bottom_line: null                 # written at the WRITE stage from key_numbers.csv
+bottom_line: "see report.qmd (bottom_line, built from key_numbers.csv)"
 status: red-teamed                   # plan | code | results | red-teamed | draft | published
 publish_at: null                  # set only after both authors approve
 
 hook:
   debate: >
-    Indonesia's Trade Regulation 16/2026 routes crude palm oil exports through a single state-owned
-    exporter from 1 January 2027. Domestic cooking-oil supply rules are again in play; the last time
-    retail prices were administered product by product was 2022.
-  date: "2026-06-10"
+    Indonesia still caps the retail price of Minyakita, its cooking oil in simple packaging, at Rp15,700
+    per litre. In June 2025 BPS found it above the cap in 441 of 493 districts; in December 2025
+    Permendag 43/2025 routed 35% of the Minyakita supply obligation through Bulog and ID Food; in
+    June 2026 the national average was still above the cap. March 2022 is the clearest record of
+    traditional-market prices when one type of oil is capped and another is not.
+  date: "2026-06-16"
   primary_source:
-    title: "Indonesia's Future of Palm Oil Exports after New Ministerial Regulation (RRI, 10 Jun 2026)"
-    url: "https://rri.co.id/en/national/2480326/indonesias-future-of-palm-oil-exports-after-new-ministerial-regulation"
+    title: "Harga Minyakita di 441 Daerah Masih Mahal di Atas HET Rp15.700 per Liter (Bisnis, 30 Jun 2025, citing BPS)"
+    url: "https://ekonomi.bisnis.com/read/20250630/12/1889006/harga-minyakita-di-441-daerah-masih-mahal-di-atas-het-rp15700-per-liter"
   second_source:
-    title: "PwC Indonesia Legal Alert 2026-67 (August 2026)"
-    url: "https://www.pwc.com/id/en/pwc-publications/services-publications/legal-publications/legal-alert-2026-67.html"
+    title: "Harga Minyakita melonjak, distribusi hanya lewat BUMN pangan mulai pekan depan (Katadata, 18 Dec 2025)"
+    url: "https://katadata.co.id/berita/industri/6943cb0848985/harga-minyakita-melonjak-distribusi-hanya-lewat-bumn-pangan-mulai-pekan-depan"
+  third_source:
+    title: "BPS: Harga Minyakita turun tapi masih di atas HET (RRI, 16 Jun 2026)"
+    url: "https://rri.co.id/nasional/2496355/bps-harga-minyakita-turun-tapi-masih-di-atas-het"
 
 tags:
   region: ["SE Asia"]
@@ -130,7 +135,7 @@ price_caps:                       # Rp per litre
 cash_transfer:                    # Bantuan Langsung Tunai minyak goreng, Apr-Jun 2022
   rp_month: 100000
   recipients: "20.5 million BPNT/PKH families and 2.5 million fried-food vendors"
-  source: "Setkab, 1 Apr 2022 (verify at P8): https://setkab.go.id/keterangan-pers-presiden-ri-terkait-blt-minyak-goreng-di-istana-merdeka-1-april-2022/"
+  source: "Setkab, 1 Apr 2022 (checked 2026-11-27): https://setkab.go.id/keterangan-pers-presiden-ri-terkait-blt-minyak-goreng-di-istana-merdeka-1-april-2022/"
 
 eastern_provinces: ["Maluku", "Maluku Utara", "Papua", "Papua Barat", "Nusa Tenggara Timur"]
 
@@ -171,7 +176,7 @@ producer_2021:                    # tonnes CPO, Ditjenbun Table 1.6
   Papua Barat: 118848
 
 known_limitations:
-  - "On 16 March packaged oil lost its cap, but bulk oil's cap also rose by about a fifth and its supply was subsidised; in the same week the domestic-supply obligation for palm oil was scrapped and the export levy raised [verify at P8], and world vegetable oil prices were in the Ukraine-war spike. The gap measures this whole bundle, not the cap removal alone."
+  - "On 16 March packaged oil lost its cap, but bulk oil's cap also rose by about a fifth and its supply was subsidised; between 17 and 20 March the domestic market obligation for palm oil was scrapped (Permendag 12/2022, in force 20 March) and the maximum export levy raised from US$175 to US$375 per tonne (PMK 23/PMK.05/2022, from 18 March), and world vegetable oil prices were in the Ukraine-war spike. The gap measures this whole bundle, not the cap removal alone."
   - "Bulk oil was itself regulated and often short, so it is a comparison product, not an untouched control."
   - "Every province switched in the same week, so we cannot separate the switch from other nationwide shocks that week. The 95% intervals show how consistently provinces moved, not uncertainty about what caused the move. The 2022 change exceeds all of the 54-57 overlapping changes of the same length in 2017-2021, which amount to only about 15 independent ones: it was unusual, which says nothing about its cause."
   - "Ramadan began in early April 2022 and the export ban ran from 28 April to 23 May; both fall inside the post period. The June widening mostly reflects bulk prices easing during and after the export ban, while packaged prices stayed high."
@@ -225,4 +230,4 @@ p7_review:
                  "neither cap met in traditional markets even while both applied",
                  "June widening mostly bulk easing",
                  "producer comparison inconclusive"]
-  hook_option: "Minyakita above its Rp15,700 cap in 441 of 493 districts, June 2025 (Bisnis citing BPS); verify at P8"
+  hook_option: "Minyakita above its Rp15,700 cap in 441 of 493 districts, June 2025 (Bisnis citing BPS); checked and adopted at P8"

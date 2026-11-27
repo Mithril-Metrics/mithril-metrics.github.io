@@ -35,13 +35,19 @@ for (k in ks) {
 ev <- kname(ks)
 evp <- kname(ks, "p")
 
-# Weeks with no price in any province (holiday weeks) have all-zero dummies and are left out
+# Weeks with no price in any province (holiday weeks) have all-zero dummies and are left out.
+# In the producer model a week reported only by producer provinces gives two identical dummies:
+# lm flags one as NA, and it is dropped before the clustered errors are computed.
 fit_es <- function(y, terms, data = panel) {
   d <- data[!is.na(data[[y]]), ]
   terms <- terms[vapply(terms, function(t) any(d[[t]] != 0), logical(1))]
-  f <- reformulate(c("factor(province)", terms), response = y)
-  m <- lm(f, data = d)
-  stopifnot("Collinear event dummies" = !anyNA(coef(m)))
+  m <- lm(reformulate(c("factor(province)", terms), response = y), data = d)
+  aliased <- intersect(names(coef(m))[is.na(coef(m))], terms)
+  if (length(aliased)) {
+    message("Dropped collinear dummies: ", paste(aliased, collapse = ", "))
+    terms <- setdiff(terms, aliased)
+    m <- lm(reformulate(c("factor(province)", terms), response = y), data = d)
+  }
   v <- vcovCR(m, cluster = d$province, type = "CR2")
   list(model = m, vcov = v, data = d, terms = terms)
 }
@@ -76,6 +82,7 @@ es_pkg <- fit_es("ln_pkg1", ev, data = filter(panel, !is.na(gap)))
 es_bulk <- fit_es("ln_bulk", ev, data = filter(panel, !is.na(gap)))
 es_gap2 <- fit_es("gap2", ev)
 es_jump <- fit_es("gap_jump", ev)
+es_drop <- fit_es("gap", ev, data = filter(panel, province != dec$drop_province_check))
 
 wk_dates <- tibble(k = c(dec$ref_k, ks)) |>
   mutate(week = as.Date(dec$event_week) + 7 * k)
@@ -106,7 +113,9 @@ extra <- bind_rows(
   window_avg(es_gap2, win$post_preban) |> mutate(test = "pkg2_post_preban"),
   window_avg(es_gap2, win$post_ban) |> mutate(test = "pkg2_post_ban"),
   window_avg(es_jump, win$post_preban) |> mutate(test = "jumprule_post_preban"),
-  window_avg(es_jump, win$post_ban) |> mutate(test = "jumprule_post_ban")
+  window_avg(es_jump, win$post_ban) |> mutate(test = "jumprule_post_ban"),
+  window_avg(es_drop, win$post_preban) |> mutate(test = "nosultra_post_preban"),
+  window_avg(es_drop, win$post_ban) |> mutate(test = "nosultra_post_ban")
 )
 
 # Within the caps period the gap should be flat if the reference week is representative
@@ -190,7 +199,7 @@ cap_level <- c(caps = caps$bulk[1], post_preban = caps$bulk[2], post_ban = caps$
 
 bulk_cap <- panel |>
   mutate(period = period_of(k)) |>
-  filter(!is.na(period), !is.na(bulk), !out_bulk) |>
+  filter(!is.na(period), !is.na(bulk)) |>
   group_by(province, period, producer, eastern) |>
   summarise(bulk = mean(bulk), pkg1 = mean(pkg1, na.rm = TRUE), weeks = n(), .groups = "drop") |>
   mutate(cap = cap_level[period], excess_pct = 100 * (bulk / cap - 1))
@@ -232,10 +241,8 @@ kn_add("n_producer", n_distinct(es_gap$data$province[es_gap$data$producer == 1])
        "Producer provinces (>= 2% of 2021 palm oil output) in the event study", "Ditjenbun 2021")
 kn_add("n_obs", nobs(es_gap$model), "", 0, "Province-weeks in the event study", src)
 kn_add("n_weeks", length(es_gap$terms) + 1, "", 0, "Weeks with data in the event study", src)
-kn_add("n_outliers", sum(panel$out_bulk | panel$out_pkg1), "", 0,
-       "Province-weeks dropped: a price more than 40% from the national price that week", src)
 kn_add("n_outliers_jump", sum(panel$jump_bulk | panel$jump_pkg1), "", 0,
-       "Province-weeks the P4 jump rule would drop (check)", src)
+       "Province-weeks the P4 jump rule drops (check only)", src)
 kn_add("n_no_bulk", length(no_bulk), "", 0, "Provinces without a bulk series", src)
 
 # Holiday weeks can be missing: take the latest recorded week up to two weeks earlier

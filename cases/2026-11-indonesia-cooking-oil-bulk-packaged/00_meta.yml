@@ -103,9 +103,9 @@ decisions:
   post_preban_k: [1, 6]           # 21 Mar - 25 Apr 2022
   ban_k: [7, 10]                  # 2 - 23 May 2022, shown, not summarised
   post_ban_k: [11, 15]            # 30 May - 27 Jun 2022
-  outlier_level: 0.40             # main rule (P6): drop a province-week if a price is more than 40% away
-                                  # from the national price of the same oil that week
-  outlier_jump: 0.40              # P4 rule, kept as a check: week-on-week change above 40%
+  outlier_rule: "none"            # main (P6): all recorded prices are used
+  outlier_jump: 0.40              # check 1, the P4 rule: drop a week-on-week change above 40%
+  drop_province_check: "Sulawesi Tenggara"   # check 2: packaged price about twice national, 7 Mar - Jun 2022
   producer_threshold: 0.02        # share of 2021 national production
   placebo_months: ["2017-03", "2021-12"]
   placebo_base: "2022-02"         # last full capped month
@@ -185,11 +185,14 @@ pre_results_review: >
   rules for titles. Implementation note (P5): the heterogeneity model interacts every event week
   (not only k >= 0) with Producer, so producer and other provinces each keep their own pre-switch
   path and gamma is measured against the same reference week.
-  Deviation at P6 (2026-11-27), before any estimate was seen: the P4 outlier rule (week-on-week jump
-  above 40%) removed 12 province-weeks, 7 of them packaged prices jumping in the two weeks after the
-  16 March switch, i.e. the response being measured. The main rule now drops a province-week only
-  when a price is more than 40% away from the national price of the same oil that week (data errors
-  are level outliers; a policy jump moves the national price too). The P4 rule is reported as a check.
+  Deviation at P6 (2026-11-27): the P4 outlier rule (week-on-week jump above 40%) removed 12
+  province-weeks, 7 of them packaged prices jumping in the two weeks after the 16 March switch, i.e.
+  the response being measured. A level rule (price more than 40% from the national price) was tried
+  and dropped before any summary estimate was read: it removed 90 province-weeks, including prices at
+  the caps (Bengkulu, Nusa Tenggara Timur) and real remote prices (Maluku Utara, Papua). Main estimate
+  uses all recorded prices; checks: the P4 jump rule, and the main model without Sulawesi Tenggara,
+  whose packaged price is about twice the national price from 7 March to June 2022 (likely a
+  2-litre pouch recorded as 1 litre).
 
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-indonesia-cooking-oil-bulk-packaged/report.html"

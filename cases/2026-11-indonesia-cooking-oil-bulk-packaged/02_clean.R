@@ -56,10 +56,6 @@ nat_px <- wk |>
   filter(level == 0) |>
   select(week, nat_bulk = bulk, nat_pkg1 = pkg1, nat_pkg2 = pkg2)
 
-# Main outlier rule (P6): a price more than 40% away from the national price of the same oil
-# that week is treated as a recording error. A policy jump moves the national price as well.
-off <- function(p, nat) (abs(log(p / nat)) > log(1 + dec$outlier_level)) %in% TRUE
-
 prov <- wk |>
   filter(level == 1) |>
   left_join(nat_px, by = "week") |>
@@ -69,16 +65,16 @@ prov <- wk |>
   mutate(
     jump_bulk = jump(bulk) %in% TRUE,
     jump_pkg1 = jump(pkg1) %in% TRUE,
-    out_bulk = off(bulk, nat_bulk),
-    out_pkg1 = off(pkg1, nat_pkg1),
-    out_pkg2 = off(pkg2, nat_pkg2)
+    ratio_bulk = bulk / nat_bulk,
+    ratio_pkg1 = pkg1 / nat_pkg1
   ) |>
   ungroup()
 
-dropped <- prov |>
-  filter(out_bulk | out_pkg1 | jump_bulk | jump_pkg1) |>
-  select(province, week, bulk, nat_bulk, pkg1, nat_pkg1, out_bulk, out_pkg1, jump_bulk, jump_pkg1)
-readr::write_csv(dropped, "output/tab_outliers_dropped.csv")
+# For the record: cells the P4 jump rule would drop, and prices far from the national level
+flagged <- prov |>
+  filter(jump_bulk | jump_pkg1 | abs(log(ratio_bulk)) > log(1.4) | abs(log(ratio_pkg1)) > log(1.4)) |>
+  select(province, week, bulk, nat_bulk, pkg1, nat_pkg1, jump_bulk, jump_pkg1)
+readr::write_csv(flagged, "output/tab_outliers_flagged.csv")
 
 ev0 <- as.Date(dec$event_week)
 prod <- unlist(meta$producer_2021)
@@ -87,9 +83,9 @@ if (length(unknown)) stop("Province names not in producer_2021: ", paste(unknown
 
 panel <- prov |>
   mutate(
-    ln_bulk = if_else(out_bulk, NA_real_, log(bulk)),
-    ln_pkg1 = if_else(out_pkg1, NA_real_, log(pkg1)),
-    ln_pkg2 = if_else(out_pkg2, NA_real_, log(pkg2)),
+    ln_bulk = log(bulk),
+    ln_pkg1 = log(pkg1),
+    ln_pkg2 = log(pkg2),
     gap = ln_pkg1 - ln_bulk,
     gap2 = ln_pkg2 - ln_bulk,
     gap_jump = if_else(jump_bulk | jump_pkg1, NA_real_, log(pkg1) - log(bulk)),
@@ -138,8 +134,8 @@ cat("Provinces without any bulk price:", paste(no_bulk, collapse = ", "), "\n")
 cat("Province-weeks with a usable gap:", sum(!is.na(panel$gap)), "of", nrow(panel), "\n")
 cat("Share missing, bulk / pkg1:", round(mean(is.na(panel$bulk)), 3), "/",
     round(mean(is.na(panel$pkg1)), 3), "\n")
-cat("Level rule (main) drops", sum(prov$out_bulk | prov$out_pkg1), "province-weeks; jump rule (check)",
-    sum(prov$jump_bulk | prov$jump_pkg1), "(see tab_outliers_dropped.csv)\n")
+cat("Main: all recorded prices. P4 jump rule (check) would drop",
+    sum(prov$jump_bulk | prov$jump_pkg1), "province-weeks (see tab_outliers_flagged.csv)\n")
 cat("Producer provinces (>= 2% of 2021 output):",
     paste(sort(unique(panel$province[panel$producer == 1])), collapse = ", "), "\n")
 cat("Event weeks k:", min(panel$k), "to", max(panel$k), "\n")

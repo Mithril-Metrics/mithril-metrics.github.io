@@ -36,7 +36,6 @@ bands <- tibble(
   to = d(c("2022-03-15", "2022-05-23")),
   label = c("Caps on both oils", "Export ban")
 )
-verb <- if (v("nat_gap_k6_pct") > v("nat_gap_ref_pct")) "widened" else "moved"
 p1 <- ggplot(gap, aes(week)) +
   geom_rect(data = bands, aes(xmin = from, xmax = to, ymin = -Inf, ymax = Inf),
             inherit.aes = FALSE, fill = "grey88") +
@@ -57,9 +56,10 @@ p1 <- ggplot(gap, aes(week)) +
   scale_linetype_manual(values = c("Branded packaged price" = "solid", "Bulk price" = "dotted"),
                         name = NULL) +
   labs(
-    title = str_wrap(paste0("In traditional markets, the gap between branded and bulk cooking oil ",
-                            verb, " from ", k("nat_gap_ref_pct"), "% to ", k("nat_gap_k6_pct"),
-                            "% within six weeks of 16 March 2022"), 60),
+    title = str_wrap(paste0("In traditional markets, branded cooking oil's premium over bulk oil was ",
+                            k("nat_gap_ref_pct"), "% in the week of 7 March 2022, ",
+                            k("nat_gap_post_preban_pct"), "% on average over the next six weeks and ",
+                            k("nat_gap_post_ban_pct"), "% in June"), 60),
     subtitle = str_wrap(paste0("Indonesia, ", k("n_provinces"), " provinces, weekly, against the week of ",
                                "7 March. Blue: the gap between the two oils; grey lines: each oil's own ",
                                "price change"), 85),
@@ -67,7 +67,7 @@ p1 <- ggplot(gap, aes(week)) +
     caption = source_caption(src, accessed = accessed,
                              note = paste0("\nDashed line: 16 March, packaged cap removed and bulk cap raised.",
                                            "\nProvince fixed effects; 95% intervals from CR2 errors ",
-                                           "clustered by province. Title: PIHPS national series, Rp per litre."))
+                                           "clustered by province, each province counted equally.\nTitle: PIHPS national series, Rp per litre."))
   ) +
   theme_ac() +
   theme(legend.position = "bottom", legend.box = "horizontal", legend.text = element_text(size = 10))
@@ -82,7 +82,7 @@ bc <- bulk_cap |>
                     post_preban = "21 Mar - 25 Apr (cap Rp14,000/l)"),
     label = if_else(province %in% east, paste0(province, " (east)"), province),
     label = if_else(province == meta$decisions$drop_province_check,
-                    paste0(province, " (likely recording error)"), label)
+                    paste0(province, " (likely recording change)"), label)
   )
 ord <- bc |>
   filter(grepl("^21 Mar", period)) |>
@@ -94,13 +94,15 @@ p2 <- ggplot(bc, aes(excess_pct, label, colour = period)) +
   geom_point(size = 2.2) +
   scale_colour_manual(values = c(cols[3], cols[1]), name = NULL) +
   labs(
-    title = str_wrap(paste0("After 16 March, bulk cooking oil sold ", k("bulk_excess_post_median_pct"),
-                            "% above its Rp14,000-per-litre cap in the median province, and above ",
-                            "the cap in ", k("n_prov_bulk_above_cap_post"), " of ",
-                            k("n_prov_bulk_post"), " provinces"), 60),
-    subtitle = str_wrap(paste0("Average bulk price in traditional markets relative to the bulk cap in ",
-                               "force, %. Under the caps (1 Feb - 13 Mar) the national bulk price was ",
-                               k("nat_bulk_excess_caps_pct"), "% above its cap"), 85),
+    title = str_wrap(paste0("Bulk cooking oil sold above its cap both before and after 16 March 2022: ",
+                            k("bulk_excess_caps_median_pct"), "% above the Rp11,500 cap and then ",
+                            k("bulk_excess_post_median_pct"), "% above the Rp14,000 cap in the ",
+                            "median province"), 60),
+    subtitle = str_wrap(paste0("Average bulk price in traditional markets relative to the cap in force, %. ",
+                               "Nationally, bulk rose from Rp", k("nat_bulk_caps"), " to Rp",
+                               k("nat_bulk_post_preban"), " per litre; above the new cap in ",
+                               k("n_prov_bulk_above_cap_post"), " of ", k("n_prov_bulk_post"),
+                               " provinces"), 85),
     x = "Bulk price above its cap, %", y = "Province",
     caption = source_caption(paste0(src, "; caps: Permendag 6/2022 and 11/2022"), accessed = accessed,
                              note = "\nPIHPS records prices where bulk oil was found; it cannot show shortages.")
@@ -140,7 +142,11 @@ p3 <- ggplot(pc, aes(share, change_pp, colour = group)) +
     y = "Gap change, log points x 100",
     caption = source_caption(c("Bank Indonesia PIHPS", "palm oil output: Ditjenbun, Table 1.6"),
                              accessed = accessed,
-                             note = "\nSuggestive only: about 10 producer provinces against about 20 others.")
+                             note = paste0("\n", k("n_producer"), " producer provinces against ",
+                                           v("n_provinces") - v("n_producer"), " others; ",
+                                           k("n_prov_fig3"), " shown (the rest have no price in the ",
+                                           "week of 7 March). The interval rules out neither no ",
+                                           "difference nor a large one."))
   ) +
   theme_ac() +
   theme(legend.position = "bottom")

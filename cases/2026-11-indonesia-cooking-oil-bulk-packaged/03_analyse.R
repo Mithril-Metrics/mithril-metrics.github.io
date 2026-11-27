@@ -67,6 +67,31 @@ window_avg <- function(fit, k_win, pre = "e", minus = NULL) {
   tibble(est = lc$Est, se = lc$SE, df = lc$df, lo = lc$CI_L, hi = lc$CI_U, p = lc$p_val)
 }
 
+# P7: window average minus a straight line fitted through the caps-period weeks and the reference
+# week (beta = 0), carried forward. The line is linear in the coefficients, so the result is one
+# linear contrast with CR2 errors. It treats the February drift as continuing: a lower bound.
+detrended_avg <- function(fit, k_win, k_trend) {
+  b <- coef(fit$model)
+  kt <- c(k_trend[kname(k_trend) %in% names(b)], dec$ref_k)
+  kbar <- mean(kt)
+  sxx <- sum((kt - kbar)^2)
+  fitted_w <- function(x) {
+    # weight of each beta_j in the fitted line at week x (the reference beta is 0 and drops out)
+    w <- 1 / length(kt) + (x - kbar) * (kt - kbar) / sxx
+    setNames(w, kname(kt))[kname(kt) != kname(dec$ref_k)]
+  }
+  on <- intersect(kname(k_win), names(b))
+  w <- setNames(numeric(length(b)), names(b))
+  w[on] <- 1 / length(on)
+  k_on <- k_win[kname(k_win) %in% on]
+  ft <- Reduce(`+`, lapply(k_on, fitted_w)) / length(k_on)
+  w[names(ft)] <- w[names(ft)] - ft
+  lc <- linear_contrast(fit$model, vcov = fit$vcov, contrasts = matrix(w, nrow = 1),
+                        test = "Satterthwaite", p_values = TRUE)
+  tibble(est = lc$Est, se = lc$SE, df = lc$df, lo = lc$CI_L, hi = lc$CI_U, p = lc$p_val,
+         slope_pp_week = 100 * sum(((kt - kbar) / sxx) * c(b[kname(kt[kt != dec$ref_k])], 0)))
+}
+
 event_table <- function(fit, label, pre = "e") {
   cf <- intersect(kname(ks, pre), fit$terms)
   ct <- conf_int(fit$model, vcov = fit$vcov, coefs = cf, test = "Satterthwaite")
@@ -115,7 +140,9 @@ extra <- bind_rows(
   window_avg(es_jump, win$post_preban) |> mutate(test = "jumprule_post_preban"),
   window_avg(es_jump, win$post_ban) |> mutate(test = "jumprule_post_ban"),
   window_avg(es_drop, win$post_preban) |> mutate(test = "nosultra_post_preban"),
-  window_avg(es_drop, win$post_ban) |> mutate(test = "nosultra_post_ban")
+  window_avg(es_drop, win$post_ban) |> mutate(test = "nosultra_post_ban"),
+  detrended_avg(es_gap, win$post_preban, cap_k) |> mutate(test = "drift_post_preban"),
+  detrended_avg(es_gap, win$post_ban, cap_k) |> mutate(test = "drift_post_ban")
 )
 
 # Within the caps period the gap should be flat if the reference week is representative
@@ -132,7 +159,8 @@ gam <- bind_rows(
 het_terms <- intersect(kname(cap_k, "p"), es_het$terms)
 pre_het <- Wald_test(es_het$model, constraints = constrain_zero(het_terms),
                      vcov = es_het$vcov, test = "HTZ")
-conf <- bind_rows(conf, gam[1, ])
+conf <- bind_rows(conf, gam[1, ]) |>
+  mutate(p_holm = p.adjust(p, method = "holm"))
 
 summary_tab <- bind_rows(conf |> mutate(role = "confirmatory"),
                          gam[2, ] |> mutate(role = "secondary"),
@@ -213,6 +241,8 @@ nat_period <- national |>
   mutate(cap = cap_level[period], excess_pct = 100 * (bulk / cap - 1))
 print(nat_period)
 
+bulk_caps_median <- median(bulk_cap$excess_pct[bulk_cap$period == "caps"])
+
 # ---- Province changes for the heterogeneity figure ----
 prov_change <- panel |>
   group_by(province, producer, prod_share, eastern) |>
@@ -277,6 +307,17 @@ kn_add("cap_joint_p", cap_test$p_val, "", 3, "Joint test: gap flat across caps-p
 kn_add("het_cap_joint_p", pre_het$p_val, "", 3,
        "Joint test: producer and other provinces move alike in caps-period weeks", src)
 
+for (i in seq_len(nrow(conf))) {
+  key <- gsub("^beta_", "es_", conf$test[i])
+  kn_add(paste0(key, "_p_holm"), conf$p_holm[i], "", 3,
+         paste("Holm-adjusted p across the three confirmatory tests,", conf$test[i]), src)
+}
+slope <- extra$slope_pp_week[extra$test == "drift_post_preban"]
+kn_add("cap_drift_pp_week", slope, "log points/week", 2,
+       "Slope of the gap across caps-period weeks (31 Jan - 7 Mar)", src)
+kn_add("n_prov_fig3", nrow(prov_change), "", 0,
+       "Provinces with a gap in the reference week and the first window", src)
+
 for (i in seq_len(nrow(placebo))) {
   r <- placebo[i, ]
   tag <- paste0("plac_h", r$horizon)
@@ -308,6 +349,13 @@ kn_add("bulk_excess_post_median_pct", median(above$excess_pct), "%", 1,
        "Median province: bulk price above its cap, 21 Mar - 25 Apr 2022", src)
 kn_add("bulk_excess_post_max_pct", max(above$excess_pct), "%", 1,
        "Highest province: bulk price above its cap, 21 Mar - 25 Apr 2022", src)
+kn_add("bulk_excess_caps_median_pct", bulk_caps_median, "%", 1,
+       "Median province: bulk price above its cap, 1 Feb - 13 Mar 2022", src)
+ct <- meta$cash_transfer$rp_month
+kn_add("transfer_litres_cap", ct / caps$bulk[2], "litres", 1,
+       "Litres of bulk oil the monthly cash transfer bought at the Rp14,000 cap", meta$cash_transfer$source)
+kn_add("transfer_litres_actual", ct / nat_period$bulk[nat_period$period == "post_preban"], "litres", 1,
+       "Litres it bought at the national bulk price, 21 Mar - 25 Apr 2022", src)
 kn_add("pkg1_vs_premium_cap_caps_pct",
        100 * (nat_period$pkg1[nat_period$period == "caps"] / caps$premium_pkg[1] - 1), "%", 1,
        "National packaged 1 price vs Rp14,000 premium cap, caps period", src)

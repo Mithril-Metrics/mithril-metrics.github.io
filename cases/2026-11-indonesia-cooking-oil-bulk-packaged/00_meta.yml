@@ -30,7 +30,7 @@ hook:
 
 tags:
   region: ["SE Asia"]
-  method: ["Causal"]
+  method: ["Descriptive / event study"]
   employer_theme: ["WB", "FAO", "IFPRI"]
   skills: ["Panel econometrics (FE, IV, RDD, selection)", "Food security and palm oil (SEA)"]
 
@@ -127,6 +127,11 @@ price_caps:                       # Rp per litre
   - {from: "2022-02-01", to: "2022-03-15", bulk: 11500, simple_pkg: 13500, premium_pkg: 14000}
   - {from: "2022-03-16", to: "2022-07-05", bulk: 14000, simple_pkg: null, premium_pkg: null}
 
+cash_transfer:                    # Bantuan Langsung Tunai minyak goreng, Apr-Jun 2022
+  rp_month: 100000
+  recipients: "20.5 million BPNT/PKH families and 2.5 million fried-food vendors"
+  source: "Setkab, 1 Apr 2022 (verify at P8): https://setkab.go.id/keterangan-pers-presiden-ri-terkait-blt-minyak-goreng-di-istana-merdeka-1-april-2022/"
+
 eastern_provinces: ["Maluku", "Maluku Utara", "Papua", "Papua Barat", "Nusa Tenggara Timur"]
 
 producer_2021:                    # tonnes CPO, Ditjenbun Table 1.6
@@ -166,17 +171,19 @@ producer_2021:                    # tonnes CPO, Ditjenbun Table 1.6
   Papua Barat: 118848
 
 known_limitations:
-  - "On 16 March packaged oil lost its cap, but bulk oil's cap also rose by about a fifth and its supply was subsidised, so the gap measures the switch as a whole, not the cap removal alone."
+  - "On 16 March packaged oil lost its cap, but bulk oil's cap also rose by about a fifth and its supply was subsidised; in the same week the domestic-supply obligation for palm oil was scrapped and the export levy raised [verify at P8], and world vegetable oil prices were in the Ukraine-war spike. The gap measures this whole bundle, not the cap removal alone."
   - "Bulk oil was itself regulated and often short, so it is a comparison product, not an untouched control."
-  - "Every province switched in the same week, so we cannot separate the switch from other nationwide shocks that week; the comparison with 2017-2021 shows how unusual the change was, not what caused it."
-  - "Ramadan began in early April 2022 and the export ban ran from 28 April to 23 May; both fall inside the post period."
+  - "Every province switched in the same week, so we cannot separate the switch from other nationwide shocks that week. The 95% intervals show how consistently provinces moved, not uncertainty about what caused the move. The 2022 change exceeds all of the 54-57 overlapping changes of the same length in 2017-2021, which amount to only about 15 independent ones: it was unusual, which says nothing about its cause."
+  - "Ramadan began in early April 2022 and the export ban ran from 28 April to 23 May; both fall inside the post period. The June widening mostly reflects bulk prices easing during and after the export ban, while packaged prices stayed high."
   - "The week before the switch was already capped and short of supply; we also report the gap against the months before any cap."
   - "PIHPS records prices where oil was found; it cannot show shortages."
-  - "Bulk oil in traditional markets is usually the cheaper option bought by poorer households [source needed at P8, otherwise stated as an assumption]; we do not estimate incidence."
-  - "With about 10 producing provinces against about 20 others, only a large difference between the groups would show up."
+  - "We assume bulk oil is the cheaper option mainly bought by lower-income households; we do not observe who buys it and do not estimate incidence."
+  - "With 11 producing provinces against 20 others, the 95% interval for the difference runs from about -3% to +29%: we can rule out neither no difference nor a large one. Two provinces (Bengkulu, Maluku Utara) have no price in the reference week and drop out of the province chart."
   - "PIHPS prices are per litre, the same unit as the caps; the packaged series are branded refill pouches, so they compare with the premium-packaging cap."
   - "In traditional markets neither cap was met even while both applied: in February to mid-March bulk sold about half above its cap and packaged oil about two-fifths above. Lifting the packaged cap removed a rule these markets were not meeting; the change is more likely in supply returning at market prices, which price data cannot show."
-  - "The gap was already widening slowly from October 2021 to January 2022, by about 0.3 percentage points a week; carried forward, that explains about 1 point of the change in the first six weeks after the switch."
+  - "In February, under the caps, the gap was already closing in on its 7 March level by about 1 point a week as bulk prices eased towards their cap. If that drift had simply continued, it would account for about half of the six-week widening across provinces, so that figure lies between the drift-adjusted and the unadjusted estimate. The drift came from the caps themselves and probably stopped once the bulk cap was raised, so the adjusted figure is a lower bound; carried four months forward it is implausible."
+  - "Province averages count each province equally; national PIHPS figures are given alongside (the median province and the national bulk price agree closely)."
+  - "Both Sulawesi Tenggara series roughly double from March 2022, likely a recording change; results without it are similar. Nusa Tenggara Timur's bulk price sits at exactly Rp13,500 for months and may be a stale entry. Kepulauan Bangka Belitung, Maluku and Papua Barat have no bulk series; the weeks of 28 February and 2 May 2022 have no prices in any province."
   - "PIHPS is an undocumented public interface; we publish only derived numbers."
 
 pre_results_review: >
@@ -194,9 +201,28 @@ pre_results_review: >
   the caps (Bengkulu, Nusa Tenggara Timur) and real remote prices (Maluku Utara, Papua). Main estimate
   uses all recorded prices; checks: the P4 jump rule, and the main model without Sulawesi Tenggara,
   whose packaged price is about twice the national price from 7 March to June 2022 (likely a
-  2-litre pouch recorded as 1 litre).
+  2-litre pouch recorded as 1 litre; at P7 both of its series were found to double, so more likely a
+  recording change).
+  P7 (2026-11-27): the time placebo compares each 2022 month (March to June) with all 2017-2021 changes
+  of the same length (1 to 4 months); the plan text listed 1-3 months with targets April-June. A
+  drift-adjusted contrast (caps-period linear trend carried forward) and Holm-adjusted p-values were
+  added after both red-team reviews.
 
 links:
   blog: "https://mithril-metrics.github.io/cases/2026-11-indonesia-cooking-oil-bulk-packaged/report.html"
   linkedin: null
   code: "https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-indonesia-cooking-oil-bulk-packaged"
+
+p7_review:
+  date: "2026-11-27"
+  reviewers: ["senior policy analyst, World Bank (food prices, Indonesia)", "senior econometrician, field-journal referee"]
+  verdicts: ["REVISE (light)", "REVISE (small)"]
+  fixes_applied: ["drift-adjusted lower bound (caps-period trend carried forward)", "headline and Fig 1 title on national levels, six-week mean not peak",
+                  "bulk vs cap shown before and after the switch", "cash-transfer litres line", "Fig 3 counts and wording",
+                  "Holm-adjusted p", "method tag descriptive", "placebo horizons recorded"]
+  caveats_post: ["February drift: province six-week figure between drift-adjusted and unadjusted",
+                 "same-week policy bundle (DMO scrapped, levy raised) and Ukraine shock; placebo shows unusual, not cause",
+                 "neither cap met in traditional markets even while both applied",
+                 "June widening mostly bulk easing",
+                 "producer comparison inconclusive"]
+  hook_option: "Minyakita above its Rp15,700 cap in 441 of 493 districts, June 2025 (Bisnis citing BPS); verify at P8"

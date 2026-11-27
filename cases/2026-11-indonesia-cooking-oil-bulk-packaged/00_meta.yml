@@ -12,7 +12,7 @@ question: >
   higher cap on bulk oil, how far did the two prices drift apart in traditional markets, did bulk oil
   stay at its cap, and did this differ in palm-oil-producing provinces?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: results                    # plan | code | results | red-teamed | draft | published
+status: red-teamed                   # plan | code | results | red-teamed | draft | published
 publish_at: null                  # set only after both authors approve
 
 hook:

@@ -82,7 +82,7 @@ bc <- bulk_cap |>
                     post_preban = "21 Mar - 25 Apr (cap Rp14,000/l)"),
     label = if_else(province %in% east, paste0(province, " (east)"), province),
     label = if_else(province == meta$decisions$drop_province_check,
-                    paste0(province, " (likely recording change)"), label)
+                    paste0(province, " (recording change?)"), label)
   )
 ord <- bc |>
   filter(grepl("^21 Mar", period)) |>
@@ -107,6 +107,7 @@ p2 <- ggplot(bc, aes(excess_pct, label, colour = period)) +
     caption = source_caption(paste0(src, "; caps: Permendag 6/2022 and 11/2022"), accessed = accessed,
                              note = "\nPIHPS records prices where bulk oil was found; it cannot show shortages.")
   ) +
+  guides(colour = guide_legend(nrow = 2)) +
   theme_ac(grid = "x") +
   theme(legend.position = "bottom", axis.text.y = element_text(size = 8))
 save_fig(p2, "fig2_bulk_cap", height_px = 1300)
@@ -145,7 +146,7 @@ p3 <- ggplot(pc, aes(share, change_pp, colour = group)) +
                              note = paste0("\n", k("n_producer"), " producer provinces against ",
                                            v("n_provinces") - v("n_producer"), " others; ",
                                            k("n_prov_fig3"), " shown (the rest have no price in the ",
-                                           "week of 7 March). The interval rules out neither no ",
+                                           "week of 7 March).\nThe interval rules out neither no ",
                                            "difference nor a large one."))
   ) +
   theme_ac() +

@@ -34,7 +34,7 @@ top <- max(c(gap$hi_pct, own$beta_pct), na.rm = TRUE)
 bands <- tibble(
   from = d(c("2022-02-01", "2022-04-28")),
   to = d(c("2022-03-15", "2022-05-23")),
-  label = c("Caps on both oils", "Export ban")
+  label = c("Both capped", "Export ban")
 )
 p1 <- ggplot(gap, aes(week)) +
   geom_rect(data = bands, aes(xmin = from, xmax = to, ymin = -Inf, ymax = Inf),
@@ -61,8 +61,8 @@ p1 <- ggplot(gap, aes(week)) +
                             k("nat_gap_post_preban_pct"), "% on average over the next six weeks and ",
                             k("nat_gap_post_ban_pct"), "% in June"), 60),
     subtitle = str_wrap(paste0("Indonesia, ", k("n_provinces"), " provinces, weekly, against the week of ",
-                               "7 March. Blue: the gap between the two oils; grey lines: each oil's own ",
-                               "price change"), 85),
+                               "7 March. Blue: change in the gap between the two oils; grey lines: each ",
+                               "oil's own price change. Title figures: premium levels, national series"), 85),
     x = "Week (Monday)", y = "Change vs 7 Mar, %",
     caption = source_caption(src, accessed = accessed,
                              note = paste0("\nDashed line: 16 March, packaged cap removed and bulk cap raised.",

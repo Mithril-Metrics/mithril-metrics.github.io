@@ -4,10 +4,10 @@
 title: "Can one EU benchmark rank irrigation water efficiency?"
 description: "Mediterranean member states abstract 3.8 to 6.0 times more irrigation water per irrigated hectare than the rest. Compared across countries, a per-hectare benchmark mostly shows where a country is, not how well it irrigates."
 author: "Juan Pablo Henao"
-date: "2026-11-20"
+date: "2026-11-27"
 categories: ["Region: EU", "Method: Descriptive", "Theme: Water"]
 image: output/fig1_hero.png           # listing thumbnail + open-graph image
-draft: true                           # set to false to publish
+draft: false                           # set to false to publish
 title-block-banner: true
 params:
   linkedin_max_chars: 1300

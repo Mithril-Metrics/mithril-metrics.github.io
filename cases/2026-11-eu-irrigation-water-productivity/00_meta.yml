@@ -11,8 +11,9 @@ question: >
   it mostly reflect climate? (Reframed 2026-11-20 from "Which EU countries could save the most
   irrigation water by matching the best performers?" after two frontier runs; see reframe.)
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: draft                     # plan | code | results | red-teamed | draft | published
+status: published                     # plan | code | results | red-teamed | draft | published
 publish_at: "2026-11-27T11:00+01:00"   # approved by JPH and PS on 2026-11-26; hourly check publishes it
+published_at: "2026-11-27T10:02Z"
 
 hook:
   debate: >

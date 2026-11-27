@@ -1,5 +1,110 @@
 [
   {
+    "objectID": "people/pietro-sala.html",
+    "href": "people/pietro-sala.html",
+    "title": "Pietro Sala",
+    "section": "",
+    "text": "CV (PDF)\n LinkedIn\n ORCID\n Email\n GitHub\nPietro Sala is an applied economist working on agricultural, water and resource economics. He is a PhD candidate (expected April 2027) and research associate at the Chair of Agricultural Production and Resource Economics, TUM School of Management, Technical University of Munich.\nHis research measures how efficiently farms and food systems use natural resources, and how to separate weather-driven losses from managerial shortfalls. Methodologically he works with stochastic frontier analysis, productivity and eco-efficiency measurement, panel econometrics and causal machine learning (double/debiased ML, LASSO). He has worked on two EU research projects: PONDERFUL (ponds as nature-based solutions) and RETOUCH NEXUS (water governance and the water–energy–food–ecosystems nexus), and coordinates the chair’s research partnerships in Southeast Asia (Vietnam, Malaysia, Indonesia, Cambodia)."
+  },
+  {
+    "objectID": "people/pietro-sala.html#selected-publications",
+    "href": "people/pietro-sala.html#selected-publications",
+    "title": "Pietro Sala",
+    "section": "Selected publications",
+    "text": "Selected publications\n\nSala, P. et al. (2025). Evaluating ponds as nature-based solutions: Effectiveness and eco-efficiency. Journal of Environmental Management 393, 126933. doi:10.1016/j.jenvman.2025.126933\nBremer et al. (2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. Water Resources Management 40, 501. doi:10.1007/s11269-026-04848-0\nDinov et al. (2026). Environmental Kuznets Curve applications for water pollution in the EU. Journal of Environmental Management 398, 127942. doi:10.1016/j.jenvman.2025.127942\nBlicharska et al. (2026). Challenges for assessing and implementing nature-based solutions at landscape scale. Hydrobiologia. doi:10.1007/s10750-026-06212-0\nTwohig et al. (2026). Economic implications of water scarcity in the WEFE nexus: the Upper Main basin. SSRN 7307240.\n\nViews expressed on this site are the authors’ own and do not represent TUM or any project consortium."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Mithril Metrics",
+    "section": "",
+    "text": "Between us, we have spent the better part of a decade on our PhDs in agricultural production and resource economics. A PhD teaches you to answer one question very thoroughly over several years. The job market, it turns out, would also like to know whether you can answer a useful question by Friday.\nMithril Metrics is our answer to that: reproducible case studies on agri-food, water, climate and rural policy, each answering one current policy question with public data. We do it because we enjoy it, because it makes our work visible, and because it is the most honest way we know to show what we can do."
+  },
+  {
+    "objectID": "about.html#life-after-the-phd-one-question-at-a-time",
+    "href": "about.html#life-after-the-phd-one-question-at-a-time",
+    "title": "About Mithril Metrics",
+    "section": "",
+    "text": "Between us, we have spent the better part of a decade on our PhDs in agricultural production and resource economics. A PhD teaches you to answer one question very thoroughly over several years. The job market, it turns out, would also like to know whether you can answer a useful question by Friday.\nMithril Metrics is our answer to that: reproducible case studies on agri-food, water, climate and rural policy, each answering one current policy question with public data. We do it because we enjoy it, because it makes our work visible, and because it is the most honest way we know to show what we can do."
+  },
+  {
+    "objectID": "about.html#people",
+    "href": "about.html#people",
+    "title": "About Mithril Metrics",
+    "section": "People",
+    "text": "People\n\n  \n    \n    Juan Pablo Henao\n    Applied environmental economist, TUM; formerly FAO. Water pricing and governance, sustainable productivity, optimisation and efficiency analysis.\n  \n  \n    \n    Pietro Sala\n    Applied economist, TUM. Production and efficiency analysis, eco-efficiency, climate risk, water and the WEFE nexus."
+  },
+  {
+    "objectID": "about.html#how-each-case-is-built",
+    "href": "about.html#how-each-case-is-built",
+    "title": "About Mithril Metrics",
+    "section": "How each case is built",
+    "text": "How each case is built\n\nPublic data only. Every number traces to a named dataset and access date.\nOne question, one answer. The bottom line comes first; caveats are stated plainly.\nMethods from production and resource economics: production frontiers, productivity and efficiency measurement, water economics and governance, risk and fat tails, panel and causal-ML econometrics.\nReproducible. All code is on GitHub and runs end to end in R.\nNeutral. Policy implications are written as trade-offs, not recommendations."
+  },
+  {
+    "objectID": "about.html#use-of-ai-tools",
+    "href": "about.html#use-of-ai-tools",
+    "title": "About Mithril Metrics",
+    "section": "Use of AI tools",
+    "text": "Use of AI tools\nWe use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online."
+  },
+  {
+    "objectID": "about.html#licence",
+    "href": "about.html#licence",
+    "title": "About Mithril Metrics",
+    "section": "Licence",
+    "text": "Licence\nText and figures: CC BY 4.0. Code: MIT. Views are the authors’ own and do not represent their institutions."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mithril Metrics",
+    "section": "",
+    "text": "Mithril Metrics\nPublic data, policy-relevant answers, one question at a time.\nAbout the project Code on GitHub RSS"
+  },
+  {
+    "objectID": "index.html#case-studies",
+    "href": "index.html#case-studies",
+    "title": "Mithril Metrics",
+    "section": "Case Studies",
+    "text": "Case Studies\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nDo fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?\n\n22 min\n\n\nRegion: SSA\n\nMethod: Elasticities\n\nTheme: Food security\n\n\n\nIn 14 Sub-Saharan African countries since 1990, maize yields have been lower when world fertiliser was dear relative to maize, but the link weakens once prices after…\n\n\n\nPietro Sala\n\n\nNov 25, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nDoes El Niño bring unusually severe rice shortfalls in Southeast Asia?\n\n29 min\n\n\nRegion: SE Asia\n\nMethod: Tails and risk\n\nTheme: Food security\n\n\n\nNo detectable rise in deep shortfalls in the year it begins. An exploratory check points to lower production in Indonesia, the Philippines and Malaysia the year after…\n\n\n\nPietro Sala\n\n\nNov 23, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "questions.html",
+    "href": "questions.html",
+    "title": "Questions we could answer next",
+    "section": "",
+    "text": "Preview, not live. Nothing on this page is saved or sent: votes and\n  questions stay in your browser and disappear on reload. The reader questions are examples.\nEach case study starts from one narrow question that public data can answer well. Below are the questions we may take up next, ours and those suggested by readers. Vote for the ones you would like us to answer, or suggest a new one. Votes help us choose between questions of similar quality; they do not decide on their own whether a question is feasible. Reader questions are listed only after we have reviewed them, in our wording, and stay listed for up to 90 days."
+  },
+  {
+    "objectID": "questions.html#suggest-a-question",
+    "href": "questions.html#suggest-a-question",
+    "title": "Questions we could answer next",
+    "section": "Suggest a question",
+    "text": "Suggest a question\nWe take short, specific questions on agri-food, water, climate and rural policy, for example “Do El Niño years cut rice output in Southeast Asia more than an average bad year?” We read every question, but we cannot take up all of them. Those that fit our scope and that public data can answer well may be listed above, in our wording, and some may become case studies, tagged Reader questions.\nWe don’t reply individually, and we don’t collect contact details. To see every new case study, including any answer to your question, follow Mithril Metrics on LinkedIn and turn on notifications, or subscribe to our RSS feed.\n\n  Your question\n  \n  0/300 characters · no links\n  Region (optional)\n  \n    Any or several\n    EUSub-Saharan AfricaSouth Asia\n    Southeast AsiaLatin AmericaGlobal\n  \n  \n    Leave this empty\n    \n  \n  \n    \n    I agree that Mithril Metrics may edit, shorten or reword my question, use it for an\n    analysis, and publish it, in its own wording, on this site and its channels (such as\n    LinkedIn) together with any answer. My question contains no names, personal or confidential\n    information.\n  \n  Send question"
+  },
+  {
+    "objectID": "questions.html#recently-answered",
+    "href": "questions.html#recently-answered",
+    "title": "Questions we could answer next",
+    "section": "Recently answered",
+    "text": "Recently answered\nThe five most recent questions we have answered, ours and readers’.\n\n\nWe store only the question text, the region and vote counts; no names or emails. To limit spam, Cloudflare checks each request, and we keep codes derived from your network address that cannot be turned back into it, for at most 30 days. Details in our privacy policy."
+  },
+  {
+    "objectID": "people/juan-pablo-henao.html",
+    "href": "people/juan-pablo-henao.html",
+    "title": "Juan Pablo Henao",
+    "section": "",
+    "text": "CV (PDF)\n Email\nJuan Pablo Henao is an applied environmental economist working on water economics and water governance. He is a doctoral candidate and research associate at the Chair of Agricultural Production and Resource Economics, Technical University of Munich.\nHis research covers water pricing and cost recovery under the EU Water Framework Directive, environmentally sustainable productivity growth in EU agriculture, and the efficiency of irrigation water management. He combines optimisation, stochastic frontier analysis, data envelopment analysis and econometrics in R. In the Horizon Europe project RETOUCH NEXUS he leads the work on water governance indicators, building on the OECD Principles on Water Governance.\nBefore TUM he worked for three years at FAO in Rome, designing environment and climate projects for Global Environment Facility funding in Latin America and the Caribbean and in Eastern Europe and Central Asia. Earlier, at CEDE, Universidad de los Andes, he valued ecosystem services and coastal nature-based solutions and studied artisanal fisheries in marine protected areas. He holds an M.Sc. in Applied Economics and a B.Sc. in Mathematics from Universidad de los Andes."
+  },
+  {
+    "objectID": "people/juan-pablo-henao.html#selected-publications",
+    "href": "people/juan-pablo-henao.html#selected-publications",
+    "title": "Juan Pablo Henao",
+    "section": "Selected publications",
+    "text": "Selected publications\n\nHenao, J. P., Vrachioli, M., Villalba, R., & Sauer, J. (2026). Optimal water pricing for sustainable agriculture and electricity cooling in the European Union. Journal of Environmental Management 417, 130804. doi:10.1016/j.jenvman.2026.130804\nBremer et al. (2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. Water Resources Management 40, 501. doi:10.1007/s11269-026-04848-0\nDinov et al. (2026). Environmental Kuznets Curve applications for water pollution in the EU. Journal of Environmental Management 398, 127942. doi:10.1016/j.jenvman.2025.127942\nVelez et al. (2025). Small-scale gold miners’ preferences on formalization: First steps toward sustainable supply chains in Colombia. World Development 188, 106899. doi:10.1016/j.worlddev.2024.106899\nMaldonado et al. (2019). Does exclusion matter in conservation agreements? A case of mangrove users in the Ecuadorian coast using participatory choice experiments. World Development 123, 104619. doi:10.1016/j.worlddev.2019.104619\nMaldonado et al. (2020). Innovation in economic analysis and evaluation approaches for coastal protection and restoration investments in the Caribbean. IDB Technical Note IDB-TN-01861. doi:10.18235/0002184"
+  },
+  {
     "objectID": "cases/2026-11-elnino-rice-tails/report.html",
     "href": "cases/2026-11-elnino-rice-tails/report.html",
     "title": "Does El Niño bring unusually severe rice shortfalls in Southeast Asia?",
@@ -47,111 +152,6 @@
     "title": "Does El Niño bring unusually severe rice shortfalls in Southeast Asia?",
     "section": "Data & code",
     "text": "Data & code\n\nFAOSTAT Production: Crops and livestock products (QCL) (QCL; item Rice (27); elements Yield (5412), Area harvested (5312), Production (5510)), version 2025-12-31 (bulk catalogue DateUpdate), data 1961-2024, accessed 2026-11-20. Link\nNOAA CPC Oceanic Niño Index (ONI, ERSSTv5) (oni.ascii.txt (3-month running mean SST anomaly, Niño 3.4)), version monthly update; latest season at access is recorded in key_numbers.csv, accessed 2026-11-20. Link\nUCDP/PRIO Armed Conflict Dataset (ucdp-prio-acd-261 (country-years with intensity_level 2, via gwno_loc)), version 26.1 (1946-2025), accessed 2026-11-20. Link\n\nCode to reproduce every number and figure: GitHub. Technical note with more detail (PDF, 2-3 pages): brief.pdf.\nUse of AI tools. We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online."
-  },
-  {
-    "objectID": "people/juan-pablo-henao.html",
-    "href": "people/juan-pablo-henao.html",
-    "title": "Juan Pablo Henao",
-    "section": "",
-    "text": "CV (PDF)\n Email\nJuan Pablo Henao is an applied environmental economist working on water economics and water governance. He is a doctoral candidate and research associate at the Chair of Agricultural Production and Resource Economics, Technical University of Munich.\nHis research covers water pricing and cost recovery under the EU Water Framework Directive, environmentally sustainable productivity growth in EU agriculture, and the efficiency of irrigation water management. He combines optimisation, stochastic frontier analysis, data envelopment analysis and econometrics in R. In the Horizon Europe project RETOUCH NEXUS he leads the work on water governance indicators, building on the OECD Principles on Water Governance.\nBefore TUM he worked for three years at FAO in Rome, designing environment and climate projects for Global Environment Facility funding in Latin America and the Caribbean and in Eastern Europe and Central Asia. Earlier, at CEDE, Universidad de los Andes, he valued ecosystem services and coastal nature-based solutions and studied artisanal fisheries in marine protected areas. He holds an M.Sc. in Applied Economics and a B.Sc. in Mathematics from Universidad de los Andes."
-  },
-  {
-    "objectID": "people/juan-pablo-henao.html#selected-publications",
-    "href": "people/juan-pablo-henao.html#selected-publications",
-    "title": "Juan Pablo Henao",
-    "section": "Selected publications",
-    "text": "Selected publications\n\nHenao, J. P., Vrachioli, M., Villalba, R., & Sauer, J. (2026). Optimal water pricing for sustainable agriculture and electricity cooling in the European Union. Journal of Environmental Management 417, 130804. doi:10.1016/j.jenvman.2026.130804\nBremer et al. (2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. Water Resources Management 40, 501. doi:10.1007/s11269-026-04848-0\nDinov et al. (2026). Environmental Kuznets Curve applications for water pollution in the EU. Journal of Environmental Management 398, 127942. doi:10.1016/j.jenvman.2025.127942\nVelez et al. (2025). Small-scale gold miners’ preferences on formalization: First steps toward sustainable supply chains in Colombia. World Development 188, 106899. doi:10.1016/j.worlddev.2024.106899\nMaldonado et al. (2019). Does exclusion matter in conservation agreements? A case of mangrove users in the Ecuadorian coast using participatory choice experiments. World Development 123, 104619. doi:10.1016/j.worlddev.2019.104619\nMaldonado et al. (2020). Innovation in economic analysis and evaluation approaches for coastal protection and restoration investments in the Caribbean. IDB Technical Note IDB-TN-01861. doi:10.18235/0002184"
-  },
-  {
-    "objectID": "questions.html",
-    "href": "questions.html",
-    "title": "Questions we could answer next",
-    "section": "",
-    "text": "Preview, not live. Nothing on this page is saved or sent: votes and\n  questions stay in your browser and disappear on reload. The reader questions are examples.\nEach case study starts from one narrow question that public data can answer well. Below are the questions we may take up next, ours and those suggested by readers. Vote for the ones you would like us to answer, or suggest a new one. Votes help us choose between questions of similar quality; they do not decide on their own whether a question is feasible. Reader questions are listed only after we have reviewed them, in our wording, and stay listed for up to 90 days."
-  },
-  {
-    "objectID": "questions.html#suggest-a-question",
-    "href": "questions.html#suggest-a-question",
-    "title": "Questions we could answer next",
-    "section": "Suggest a question",
-    "text": "Suggest a question\nWe take short, specific questions on agri-food, water, climate and rural policy, for example “Do El Niño years cut rice output in Southeast Asia more than an average bad year?” We read every question, but we cannot take up all of them. Those that fit our scope and that public data can answer well may be listed above, in our wording, and some may become case studies, tagged Reader questions.\nWe don’t reply individually, and we don’t collect contact details. To see every new case study, including any answer to your question, follow Mithril Metrics on LinkedIn and turn on notifications, or subscribe to our RSS feed.\n\n  Your question\n  \n  0/300 characters · no links\n  Region (optional)\n  \n    Any or several\n    EUSub-Saharan AfricaSouth Asia\n    Southeast AsiaLatin AmericaGlobal\n  \n  \n    Leave this empty\n    \n  \n  \n    \n    I agree that Mithril Metrics may edit, shorten or reword my question, use it for an\n    analysis, and publish it, in its own wording, on this site and its channels (such as\n    LinkedIn) together with any answer. My question contains no names, personal or confidential\n    information.\n  \n  Send question"
-  },
-  {
-    "objectID": "questions.html#recently-answered",
-    "href": "questions.html#recently-answered",
-    "title": "Questions we could answer next",
-    "section": "Recently answered",
-    "text": "Recently answered\nThe five most recent questions we have answered, ours and readers’.\n\n\nWe store only the question text, the region and vote counts; no names or emails. To limit spam, Cloudflare checks each request, and we keep codes derived from your network address that cannot be turned back into it, for at most 30 days. Details in our privacy policy."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Mithril Metrics",
-    "section": "",
-    "text": "Mithril Metrics\nPublic data, policy-relevant answers, one question at a time.\nAbout the project Code on GitHub RSS"
-  },
-  {
-    "objectID": "index.html#case-studies",
-    "href": "index.html#case-studies",
-    "title": "Mithril Metrics",
-    "section": "Case Studies",
-    "text": "Case Studies\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nDo fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?\n\n22 min\n\n\nRegion: SSA\n\nMethod: Elasticities\n\nTheme: Food security\n\n\n\nIn 14 Sub-Saharan African countries since 1990, maize yields have been lower when world fertiliser was dear relative to maize, but the link weakens once prices after…\n\n\n\nPietro Sala\n\n\nNov 25, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nDoes El Niño bring unusually severe rice shortfalls in Southeast Asia?\n\n29 min\n\n\nRegion: SE Asia\n\nMethod: Tails and risk\n\nTheme: Food security\n\n\n\nNo detectable rise in deep shortfalls in the year it begins. An exploratory check points to lower production in Indonesia, the Philippines and Malaysia the year after…\n\n\n\nPietro Sala\n\n\nNov 23, 2026\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Mithril Metrics",
-    "section": "",
-    "text": "Between us, we have spent the better part of a decade on our PhDs in agricultural production and resource economics. A PhD teaches you to answer one question very thoroughly over several years. The job market, it turns out, would also like to know whether you can answer a useful question by Friday.\nMithril Metrics is our answer to that: reproducible case studies on agri-food, water, climate and rural policy, each answering one current policy question with public data. We do it because we enjoy it, because it makes our work visible, and because it is the most honest way we know to show what we can do."
-  },
-  {
-    "objectID": "about.html#life-after-the-phd-one-question-at-a-time",
-    "href": "about.html#life-after-the-phd-one-question-at-a-time",
-    "title": "About Mithril Metrics",
-    "section": "",
-    "text": "Between us, we have spent the better part of a decade on our PhDs in agricultural production and resource economics. A PhD teaches you to answer one question very thoroughly over several years. The job market, it turns out, would also like to know whether you can answer a useful question by Friday.\nMithril Metrics is our answer to that: reproducible case studies on agri-food, water, climate and rural policy, each answering one current policy question with public data. We do it because we enjoy it, because it makes our work visible, and because it is the most honest way we know to show what we can do."
-  },
-  {
-    "objectID": "about.html#people",
-    "href": "about.html#people",
-    "title": "About Mithril Metrics",
-    "section": "People",
-    "text": "People\n\n  \n    \n    Juan Pablo Henao\n    Applied environmental economist, TUM; formerly FAO. Water pricing and governance, sustainable productivity, optimisation and efficiency analysis.\n  \n  \n    \n    Pietro Sala\n    Applied economist, TUM. Production and efficiency analysis, eco-efficiency, climate risk, water and the WEFE nexus."
-  },
-  {
-    "objectID": "about.html#how-each-case-is-built",
-    "href": "about.html#how-each-case-is-built",
-    "title": "About Mithril Metrics",
-    "section": "How each case is built",
-    "text": "How each case is built\n\nPublic data only. Every number traces to a named dataset and access date.\nOne question, one answer. The bottom line comes first; caveats are stated plainly.\nMethods from production and resource economics: production frontiers, productivity and efficiency measurement, water economics and governance, risk and fat tails, panel and causal-ML econometrics.\nReproducible. All code is on GitHub and runs end to end in R.\nNeutral. Policy implications are written as trade-offs, not recommendations."
-  },
-  {
-    "objectID": "about.html#use-of-ai-tools",
-    "href": "about.html#use-of-ai-tools",
-    "title": "About Mithril Metrics",
-    "section": "Use of AI tools",
-    "text": "Use of AI tools\nWe use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online."
-  },
-  {
-    "objectID": "about.html#licence",
-    "href": "about.html#licence",
-    "title": "About Mithril Metrics",
-    "section": "Licence",
-    "text": "Licence\nText and figures: CC BY 4.0. Code: MIT. Views are the authors’ own and do not represent their institutions."
-  },
-  {
-    "objectID": "people/pietro-sala.html",
-    "href": "people/pietro-sala.html",
-    "title": "Pietro Sala",
-    "section": "",
-    "text": "CV (PDF)\n LinkedIn\n ORCID\n Email\n GitHub\nPietro Sala is an applied economist working on agricultural, water and resource economics. He is a PhD candidate (expected April 2027) and research associate at the Chair of Agricultural Production and Resource Economics, TUM School of Management, Technical University of Munich.\nHis research measures how efficiently farms and food systems use natural resources, and how to separate weather-driven losses from managerial shortfalls. Methodologically he works with stochastic frontier analysis, productivity and eco-efficiency measurement, panel econometrics and causal machine learning (double/debiased ML, LASSO). He has worked on two EU research projects: PONDERFUL (ponds as nature-based solutions) and RETOUCH NEXUS (water governance and the water–energy–food–ecosystems nexus), and coordinates the chair’s research partnerships in Southeast Asia (Vietnam, Malaysia, Indonesia, Cambodia)."
-  },
-  {
-    "objectID": "people/pietro-sala.html#selected-publications",
-    "href": "people/pietro-sala.html#selected-publications",
-    "title": "Pietro Sala",
-    "section": "Selected publications",
-    "text": "Selected publications\n\nSala, P. et al. (2025). Evaluating ponds as nature-based solutions: Effectiveness and eco-efficiency. Journal of Environmental Management 393, 126933. doi:10.1016/j.jenvman.2025.126933\nBremer et al. (2026). Bridging the nexus: Policy and welfare dimensions in hydro-economic models. Water Resources Management 40, 501. doi:10.1007/s11269-026-04848-0\nDinov et al. (2026). Environmental Kuznets Curve applications for water pollution in the EU. Journal of Environmental Management 398, 127942. doi:10.1016/j.jenvman.2025.127942\nBlicharska et al. (2026). Challenges for assessing and implementing nature-based solutions at landscape scale. Hydrobiologia. doi:10.1007/s10750-026-06212-0\nTwohig et al. (2026). Economic implications of water scarcity in the WEFE nexus: the Upper Main basin. SSRN 7307240.\n\nViews expressed on this site are the authors’ own and do not represent TUM or any project consortium."
   },
   {
     "objectID": "cases/2026-11-ssa-fertiliser-response/report.html",

@@ -35,21 +35,26 @@ for (k in ks) {
 ev <- kname(ks)
 evp <- kname(ks, "p")
 
+# Weeks with no price in any province (holiday weeks) have all-zero dummies and are left out
 fit_es <- function(y, terms, data = panel) {
   d <- data[!is.na(data[[y]]), ]
+  terms <- terms[vapply(terms, function(t) any(d[[t]] != 0), logical(1))]
   f <- reformulate(c("factor(province)", terms), response = y)
   m <- lm(f, data = d)
+  stopifnot("Collinear event dummies" = !anyNA(coef(m)))
   v <- vcovCR(m, cluster = d$province, type = "CR2")
-  list(model = m, vcov = v, data = d)
+  list(model = m, vcov = v, data = d, terms = terms)
 }
 
 # Average of event-week coefficients over a window, CR2 + Satterthwaite
 window_avg <- function(fit, k_win, pre = "e", minus = NULL) {
   b <- coef(fit$model)
   w <- setNames(numeric(length(b)), names(b))
-  w[kname(k_win, pre)] <- 1 / length(k_win)
+  on <- intersect(kname(k_win, pre), names(b))
+  w[on] <- 1 / length(on)
   if (!is.null(minus)) {
-    w[kname(minus, pre)] <- w[kname(minus, pre)] - 1 / length(minus)
+    off <- intersect(kname(minus, pre), names(b))
+    w[off] <- w[off] - 1 / length(off)
   }
   lc <- linear_contrast(fit$model, vcov = fit$vcov, contrasts = matrix(w, nrow = 1),
                         test = "Satterthwaite", p_values = TRUE)
@@ -57,8 +62,10 @@ window_avg <- function(fit, k_win, pre = "e", minus = NULL) {
 }
 
 event_table <- function(fit, label, pre = "e") {
-  ct <- conf_int(fit$model, vcov = fit$vcov, coefs = kname(ks, pre), test = "Satterthwaite")
-  tibble(k = ks, outcome = label, beta = ct$beta, lo = ct$CI_L, hi = ct$CI_U) |>
+  cf <- intersect(kname(ks, pre), fit$terms)
+  ct <- conf_int(fit$model, vcov = fit$vcov, coefs = cf, test = "Satterthwaite")
+  tibble(k = ks[kname(ks, pre) %in% cf], outcome = label, beta = ct$beta, lo = ct$CI_L,
+         hi = ct$CI_U) |>
     bind_rows(tibble(k = dec$ref_k, outcome = label, beta = 0, lo = 0, hi = 0)) |>
     arrange(k)
 }
@@ -68,6 +75,7 @@ es_gap <- fit_es("gap", ev)
 es_pkg <- fit_es("ln_pkg1", ev, data = filter(panel, !is.na(gap)))
 es_bulk <- fit_es("ln_bulk", ev, data = filter(panel, !is.na(gap)))
 es_gap2 <- fit_es("gap2", ev)
+es_jump <- fit_es("gap_jump", ev)
 
 wk_dates <- tibble(k = c(dec$ref_k, ks)) |>
   mutate(week = as.Date(dec$event_week) + 7 * k)
@@ -96,11 +104,14 @@ extra <- bind_rows(
   window_avg(es_pkg, win$post_ban) |> mutate(test = "pkg_post_ban"),
   window_avg(es_bulk, win$post_ban) |> mutate(test = "bulk_post_ban"),
   window_avg(es_gap2, win$post_preban) |> mutate(test = "pkg2_post_preban"),
-  window_avg(es_gap2, win$post_ban) |> mutate(test = "pkg2_post_ban")
+  window_avg(es_gap2, win$post_ban) |> mutate(test = "pkg2_post_ban"),
+  window_avg(es_jump, win$post_preban) |> mutate(test = "jumprule_post_preban"),
+  window_avg(es_jump, win$post_ban) |> mutate(test = "jumprule_post_ban")
 )
 
 # Within the caps period the gap should be flat if the reference week is representative
-cap_test <- Wald_test(es_gap$model, constraints = constrain_zero(kname(cap_k)),
+cap_terms <- intersect(kname(cap_k), es_gap$terms)
+cap_test <- Wald_test(es_gap$model, constraints = constrain_zero(cap_terms),
                       vcov = es_gap$vcov, test = "HTZ")
 
 # ---- Heterogeneity: producer provinces ----
@@ -109,7 +120,8 @@ gam <- bind_rows(
   window_avg(es_het, win$post_preban, pre = "p") |> mutate(test = "gamma_post_preban"),
   window_avg(es_het, win$post_ban, pre = "p") |> mutate(test = "gamma_post_ban")
 )
-pre_het <- Wald_test(es_het$model, constraints = constrain_zero(kname(cap_k, "p")),
+het_terms <- intersect(kname(cap_k, "p"), es_het$terms)
+pre_het <- Wald_test(es_het$model, constraints = constrain_zero(het_terms),
                      vcov = es_het$vcov, test = "HTZ")
 conf <- bind_rows(conf, gam[1, ])
 
@@ -206,9 +218,10 @@ prov_change <- panel |>
 readr::write_csv(prov_change, "output/tab_province_change.csv")
 
 # ---- Sanity checks ----
-stopifnot(all(vapply(list(es_gap, es_het), function(f) !anyNA(coef(f$model)[ev]), logical(1))))
 cat("Event study: n =", nobs(es_gap$model), "province-weeks,",
-    n_distinct(es_gap$data$province), "provinces,", length(ks) + 1, "weeks\n")
+    n_distinct(es_gap$data$province), "provinces,", length(es_gap$terms) + 1, "weeks with data\n")
+cat("Weeks without any gap observation:",
+    paste(format(as.Date(dec$event_week) + 7 * ks[!kname(ks) %in% es_gap$terms]), collapse = ", "), "\n")
 cat("Producer provinces in the model:",
     n_distinct(es_gap$data$province[es_gap$data$producer == 1]), "\n")
 
@@ -218,20 +231,28 @@ kn_add("n_provinces", n_distinct(es_gap$data$province), "", 0, "Provinces in the
 kn_add("n_producer", n_distinct(es_gap$data$province[es_gap$data$producer == 1]), "", 0,
        "Producer provinces (>= 2% of 2021 palm oil output) in the event study", "Ditjenbun 2021")
 kn_add("n_obs", nobs(es_gap$model), "", 0, "Province-weeks in the event study", src)
-kn_add("n_weeks", length(ks) + 1, "", 0, "Weeks in the event study", src)
+kn_add("n_weeks", length(es_gap$terms) + 1, "", 0, "Weeks with data in the event study", src)
 kn_add("n_outliers", sum(panel$out_bulk | panel$out_pkg1), "", 0,
-       "Province-weeks dropped by the 40% jump rule", src)
+       "Province-weeks dropped: a price more than 40% from the national price that week", src)
+kn_add("n_outliers_jump", sum(panel$jump_bulk | panel$jump_pkg1), "", 0,
+       "Province-weeks the P4 jump rule would drop (check)", src)
 kn_add("n_no_bulk", length(no_bulk), "", 0, "Provinces without a bulk series", src)
 
-# holiday weeks can be missing: fall back to the week before
-nat_ref <- if (is.na(nat_at(dec$ref_k))) nat_at(dec$ref_k - 1) else nat_at(dec$ref_k)
-kn_add("nat_gap_ref_pct", pct(nat_ref), "%", 1,
-       "National packaged-bulk gap, week of 7 Mar 2022 (28 Feb if missing)", src)
+# Holiday weeks can be missing: take the latest recorded week up to two weeks earlier
+nat_last <- function(kk) {
+  x <- national |>
+    filter(k <= kk, k >= kk - 2, !is.na(gap)) |>
+    arrange(desc(k))
+  x$gap[1]
+}
+kn_add("nat_gap_ref_pct", pct(nat_last(dec$ref_k)), "%", 1,
+       "National packaged-bulk gap, week of 7 Mar 2022 (latest recorded week up to then)", src)
 kn_add("nat_gap_precap_pct", pct(nat_at(pre_k)), "%", 1,
        "National gap, mean of weeks 4 Oct 2021 - 10 Jan 2022", src)
 kn_add("nat_gap_post_preban_pct", pct(nat_at(win$post_preban)), "%", 1,
        "National gap, mean of weeks 21 Mar - 25 Apr 2022", src)
-kn_add("nat_gap_k6_pct", pct(nat_at(6)), "%", 1, "National gap, week of 25 Apr 2022", src)
+kn_add("nat_gap_k6_pct", pct(nat_last(6)), "%", 1,
+       "National gap, week of 25 Apr 2022 (latest recorded week up to then)", src)
 kn_add("nat_gap_post_ban_pct", pct(nat_at(win$post_ban)), "%", 1,
        "National gap, mean of weeks 30 May - 27 Jun 2022", src)
 kn_add("nat_gap_end_pct", pct(nat_at(max(panel$k))), "%", 1,

@@ -110,7 +110,7 @@ p2 <- ggplot(bc, aes(excess_pct, label, colour = period)) +
   guides(colour = guide_legend(nrow = 2)) +
   theme_ac(grid = "x") +
   theme(legend.position = "bottom", axis.text.y = element_text(size = 8))
-save_fig(p2, "fig2_bulk_cap", height_px = 1300)
+save_fig(p2, "fig2_bulk_cap", height_px = 1600)
 
 # ---- Fig 3: producer provinces vs the rest ----
 p_g <- v("gamma_post_preban_p")

@@ -12,7 +12,7 @@ question: >
   higher cap on bulk oil, how far did the two prices drift apart in traditional markets, did bulk oil
   stay at its cap, and did this differ in palm-oil-producing provinces?
 bottom_line: null                 # written at the WRITE stage from key_numbers.csv
-status: code                      # plan | code | results | red-teamed | draft | published
+status: results                    # plan | code | results | red-teamed | draft | published
 publish_at: null                  # set only after both authors approve
 
 hook:
@@ -175,6 +175,8 @@ known_limitations:
   - "Bulk oil in traditional markets is usually the cheaper option bought by poorer households [source needed at P8, otherwise stated as an assumption]; we do not estimate incidence."
   - "With about 10 producing provinces against about 20 others, only a large difference between the groups would show up."
   - "PIHPS prices are per litre, the same unit as the caps; the packaged series are branded refill pouches, so they compare with the premium-packaging cap."
+  - "In traditional markets neither cap was met even while both applied: in February to mid-March bulk sold about half above its cap and packaged oil about two-fifths above. Lifting the packaged cap removed a rule these markets were not meeting; the change is more likely in supply returning at market prices, which price data cannot show."
+  - "The gap was already widening slowly from October 2021 to January 2022, by about 0.3 percentage points a week; carried forward, that explains about 1 point of the change in the first six weeks after the switch."
   - "PIHPS is an undocumented public interface; we publish only derived numbers."
 
 pre_results_review: >

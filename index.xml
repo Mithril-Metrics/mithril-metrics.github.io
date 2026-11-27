@@ -17,7 +17,119 @@
 <width>144</width>
 </image>
 <generator>quarto-1.11.9</generator>
-<lastBuildDate>Wed, 25 Nov 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 27 Nov 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Can one EU benchmark rank irrigation water efficiency?</title>
+  <dc:creator>Juan Pablo Henao</dc:creator>
+  <link>https://mithril-metrics.github.io/cases/2026-11-eu-irrigation-water-productivity/report.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="bottom-line">
+<p><strong>Short answer.</strong> <strong>Not on its own.</strong> In the 10 member states with Eurostat irrigation data, Mediterranean countries abstract 5.5 times more irrigation water per irrigated hectare than the rest (median 6,561 against 1,202 m³/ha, 2020–2022), and the gap stays between 3.8 and 6.0 times across samples and survey years. We cannot separate climate from crop mix and infrastructure in that gap, so we infer that a ranking across countries would mostly show where a country is, not how well it irrigates.</p>
+</div>
+<div class="key-figures">
+<div class="kf">
+<div class="kf-value">
+3.8 to 6.0×
+</div>
+<div class="kf-label">
+Irrigation water per irrigated hectare, Mediterranean vs other member states
+</div>
+</div>
+<div class="kf">
+<div class="kf-value">
+6,561 vs 1,202
+</div>
+<div class="kf-label">
+Median m³ per irrigated hectare, 2020–2022
+</div>
+</div>
+<div class="kf">
+<div class="kf-value">
+4 of 4
+</div>
+<div class="kf-label">
+Mediterranean countries above all 6 others with Eurostat data (exact p = 0.010)
+</div>
+</div>
+</div>
+<section id="why-this-matters-now" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters-now">Why this matters now</h2>
+<p>On 22 October 2026, France and Portugal, backed by Cyprus, Czechia, Hungary and Slovakia, asked EU agriculture ministers for action to reduce average water use per irrigated hectare and to ease EU funding of farm water infrastructure. Ministers discussed the note at the AGRIFISH Council on 26–27 October, and on 27 October the Commission proposed a European Climate Resilience Law that makes water security a mandatory part of national climate-risk plans. Both build on the 2025 Water Resilience Strategy and its target of 10% better water efficiency by 2030. Water per irrigated hectare is the obvious indicator for tracking this. We asked whether it can also be compared across countries. <a href="https://data.consilium.europa.eu/doc/document/ST-14698-2026-INIT/x/pdf">Primary source</a>.</p>
+</section>
+<section id="what-we-did" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-did">What we did</h2>
+<div class="method-note">
+<p>We divided Eurostat’s irrigation abstraction (mean 2020–2022) by the irrigated area from the 2016 and 2023 farm surveys, for the 14 member states where at least 2% of farmland is irrigated, and compared countries with a Mediterranean climate with the rest. An exact rank test asks how likely a split this clean would be if the climate group made no difference. The headline uses the 10 countries with Eurostat irrigation data. We also tried a frontier model (data envelopment analysis) to adjust for land and crop value; with 10 countries it gives no stable answer, so it is in the technical note only. We set out to rank countries; after our first two model runs we changed the question and chose the climate grouping.</p>
+</div>
+</section>
+<section id="what-the-data-show" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-data-show">What the data show</h2>
+<section id="where-eurostat-has-the-data-every-mediterranean-country-abstracts-more-per-hectare-than-every-other" class="level3">
+<h3 class="anchored" data-anchor-id="where-eurostat-has-the-data-every-mediterranean-country-abstracts-more-per-hectare-than-every-other">Where Eurostat has the data, every Mediterranean country abstracts more per hectare than every other</h3>
+<p><img src="https://mithril-metrics.github.io/cases/2026-11-eu-irrigation-water-productivity/output/fig1_hero.png" class="img-fluid" style="width:100.0%" alt="Horizontal bar chart of irrigation water abstracted per irrigated hectare in EU member states, 2020 to 2022. Greece, Malta, Cyprus and Spain are highest; Germany and the Netherlands are lowest. Italy, Portugal, Austria and France are shown as hollow bars because their figures are estimates."></p>
+<p><strong>Among the 10 countries with Eurostat irrigation data, all 4 Mediterranean ones abstract more water per irrigated hectare than all 6 others</strong> (exact rank-sum p = 0.010, the smallest possible with groups this size). Greece abstracts the most, 8,680 m³ per irrigated hectare, and Germany the least, 581. The ratio of the medians is 3.8 to 6.0, depending on the survey year used for irrigated area and on whether the 4 estimated countries are included.</p>
+<p>We infer that a cross-country comparison on this indicator would mainly sort countries by where they are. How much of the gap is climate and how much is crop mix (vegetables, orchards and rice in the south), conveyance losses or reporting practice, we do not test.</p>
+</section>
+<section id="the-gap-holds-whichever-sample-or-survey-year-we-use" class="level3">
+<h3 class="anchored" data-anchor-id="the-gap-holds-whichever-sample-or-survey-year-we-use">The gap holds whichever sample or survey year we use</h3>
+<p><img src="https://mithril-metrics.github.io/cases/2026-11-eu-irrigation-water-productivity/output/fig2_robustness.png" class="img-fluid" style="width:100.0%" alt="Dot chart of the ratio between the Mediterranean and the other member states' median water per irrigated hectare under six variants: with only the 10 countries with Eurostat data or all 14, and irrigated area from the 2016 survey, the 2023 survey or interpolated to 2021. All six ratios lie between 3.8 and 6.0."></p>
+<p><strong>The ratio of the medians stays between 3.8 and 6.0</strong>, whether we use the 10 countries with Eurostat data or all 14, and whichever farm survey we take irrigated area from. Adding the 4 estimated countries lowers it slightly in each case.</p>
+<p>Could a frontier model adjust for climate and crop mix? We tried data envelopment analysis, which compares each country with the best observed mix of land, water and crop value. With 10 countries, two common versions put the “saving potential” at 6% or 93% of irrigation water, depending mainly on one modelling choice. The technical note explains why we use neither.</p>
+</section>
+</section>
+<section id="what-this-means-for-policy" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-means-for-policy">What this means for policy</h2>
+<ul>
+<li>If the aim is to track progress towards the 10% efficiency target, then measuring each country against its own baseline, as current EU texts do, sidesteps the climate gap. The trade-off is that it says nothing about where the room for improvement is largest.</li>
+<li>If a per-hectare indicator were used to compare countries, set eligibility or allocate EU funds, then it would need to account for crop water requirements, crop mix and infrastructure, for example through climate-adjusted or river-basin benchmarks. The trade-off is more data and less simplicity.</li>
+<li>If a common per-hectare threshold were applied, most of the adjustment would fall on Mediterranean irrigators. Whether that is justified depends on basin-level and seasonal scarcity, which national annual averages do not show.</li>
+</ul>
+<p>Current EU texts already lean towards the first option: the Commission’s recommendation leaves each member state to set its own efficiency target based on national circumstances (<a href="https://cyprus.representation.ec.europa.eu/news/commission-launches-strategy-enhance-water-security-people-economy-and-environment-2025-06-04_en">European Commission, June 2025</a>), and the Council note asks for lower water use per hectare without a cross-country yardstick.</p>
+</section>
+<section id="caveats" class="level2 caveats">
+<h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
+<ul>
+<li>We do not separate climate from crop mix, irrigation infrastructure and national reporting practice. The Mediterranean grouping and this framing were chosen after our first two model runs, so the rank test is exploratory.</li>
+<li>The data measure water abstracted, not water applied at the field, as national annual averages that hide basin and seasonal stress. Italy, Portugal, France and Austria have no Eurostat irrigation figures; their scaled AQUASTAT estimates are shown but not used (France’s national statistics give 1,902 m³/ha for 2020, well above our estimate).</li>
+<li>With 10 countries and national averages, we cannot adjust the gap for climate. A frontier model on this sample does not help: two common versions put the ‘saving potential’ at 6% or 93% of irrigation water (see the technical note).</li>
+</ul>
+</section>
+<section id="data-code" class="level2 data-code">
+<h2 class="anchored" data-anchor-id="data-code">Data &amp; code</h2>
+<ul>
+<li><strong>Eurostat annual freshwater abstraction by source and sector</strong> (env_wat_abs; wat_proc ABS_AGR_IR (irrigation), ABS_AGR; wat_src FRW; unit MIO_M3), version 16.09.2026 (data to 2024), accessed 2026-11-26. <a href="https://ec.europa.eu/eurostat/databrowser/view/env_wat_abs">Link</a></li>
+<li><strong>FAOSTAT Value of Agricultural Production (QV), used for crop output</strong> (QV; item Crops; element Gross Production Value (constant 2014-2016 thousand I$)), version 2026-05-11 (bulk catalogue DateUpdate), data to 2024, accessed 2026-11-26. <a href="https://www.fao.org/faostat/en/#data/QV">Link</a></li>
+<li><strong>Eurostat economic accounts for agriculture (downloaded, not used)</strong> (aact_eaa01; bulk dimensions am_item, indic_agr (PRD_BP, PRD_PP, SUB, TAX), unit (MIO_EUR, MIO_NAC, MIO_PPS); crop-output code not identified), version 24.11.2026, accessed 2026-11-26. <a href="https://ec.europa.eu/eurostat/databrowser/view/aact_eaa01">Link</a></li>
+<li><strong>Eurostat irrigable and irrigated area</strong> (ef_fsi_irri; irr_area UAA_IT; unit PC), version 17.06.2026 (survey years to 2023), accessed 2026-11-26. <a href="https://ec.europa.eu/eurostat/databrowser/view/ef_fsi_irri">Link</a></li>
+<li><strong>Eurostat water exploitation index plus (WEI+)</strong> (sdg_06_60; statinfo VAL_A; unit PC), version 28.04.2026 (data to 2023), accessed 2026-11-26. <a href="https://ec.europa.eu/eurostat/databrowser/view/sdg_06_60">Link</a></li>
+<li><strong>FAOSTAT Land use (RL)</strong> (RL; item Cropland; element Area (1000 ha)), version 2026-10-02 (bulk catalogue DateUpdate), data to 2024, accessed 2026-11-26. <a href="https://www.fao.org/faostat/en/#data/RL">Link</a></li>
+<li><strong>FAO AQUASTAT via World Bank WDI (gap fill)</strong> (ER.H2O.FWAG.ZS (agriculture, % of withdrawals); ER.H2O.FWTL.K3 (total, bn m3)), version data to 2022, accessed 2026-11-26. <a href="https://api.worldbank.org/v2/">Link</a></li>
+</ul>
+<p>Code to reproduce every number and figure: <a href="https://github.com/Mithril-Metrics/mithril-metrics.github.io/tree/main/cases/2026-11-eu-irrigation-water-productivity">GitHub</a>. Technical note with more detail (PDF, 2-3 pages): <a href="brief.pdf">brief.pdf</a>.</p>
+<p><strong>Use of AI tools.</strong> We use Claude, an AI assistant by Anthropic, as a working tool: to help with coding, data retrieval scripts and first drafts of text. Questions, methods, robustness checks and conclusions are our own, every number is reproducible from the published code, and we review all text before it goes online.</p>
+</section>
+<div class="post-footer">
+<img src="https://mithril-metrics.github.io/images/people/juan-pablo-henao.jpg" alt="">
+<p>
+Written by <a href="../../people/juan-pablo-henao.html">Juan Pablo Henao</a>. Views are the authors’ own. Part of <em>Mithril Metrics</em>: reproducible analyses of current agri-food, water and climate policy questions.
+</p>
+</div>
+
+
+
+ ]]></description>
+  <category>Region: EU</category>
+  <category>Method: Descriptive</category>
+  <category>Theme: Water</category>
+  <guid>https://mithril-metrics.github.io/cases/2026-11-eu-irrigation-water-productivity/report.html</guid>
+  <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://mithril-metrics.github.io/cases/2026-11-eu-irrigation-water-productivity/output/fig1_hero.png" medium="image" type="image/png" height="122" width="144"/>
+</item>
 <item>
   <title>Do fertiliser price spikes shrink maize harvests in Sub-Saharan Africa?</title>
   <dc:creator>Pietro Sala</dc:creator>
